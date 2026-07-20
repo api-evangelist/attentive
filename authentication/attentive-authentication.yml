@@ -1,0 +1,33 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/attentive-v1-openapi.yaml, openapi/attentive-v2-openapi.yaml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  - openapi/attentive-v2-openapi.yaml
+- name: OAuthFlow
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+    tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+    scopes: 6
+  description: This API uses OAuth 2 with the authorization code grant flow. [More
+    info](https://docs.attentivemobile.com/pages/authentication/)
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  - openapi/attentive-v2-openapi.yaml
+docs: https://docs.attentive.com/docs/authentication
+notes: Bearer token in Authorization header. Private apps use a token generated in
+  the Attentive product; public apps use OAuth 2.0 authorization code grant (code
+  expires in 2 minutes) with install at ui.attentivemobile.com.
