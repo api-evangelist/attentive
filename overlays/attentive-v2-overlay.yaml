@@ -1,0 +1,16 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Attentive API V2
+  version: 1.0.0
+extends: openapi/attentive-v2-openapi.yaml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-18'
+    x-apievangelist-artifacts:
+    - authentication/attentive-authentication.yml
+    - scopes/attentive-scopes.yml
+    - errors/attentive-problem-types.yml
+    - conventions/attentive-conventions.yml
+    - rate-limits/attentive-rate-limits.yml
+    - asyncapi/attentive-webhooks.yml

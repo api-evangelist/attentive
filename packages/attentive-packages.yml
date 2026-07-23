@@ -1,0 +1,29 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/attentive-mobile
+packages:
+- language: javascript
+  registry: npm
+  name: "@attentive-mobile/attentive-react-native-sdk"
+  version: 2.1.0
+  url: https://www.npmjs.com/package/@attentive-mobile/attentive-react-native-sdk
+  install: npm install @attentive-mobile/attentive-react-native-sdk
+  repository: https://github.com/attentive-mobile/attentive-react-native-sdk
+  official: true
+  notes: Render Attentive creative units and collect Attentive events in React Native apps.
+- language: swift
+  registry: cocoapods
+  name: attentive-ios-sdk
+  url: https://github.com/attentive-mobile/attentive-ios-sdk
+  install: "pod 'attentive-ios-sdk'"
+  repository: https://github.com/attentive-mobile/attentive-ios-sdk
+  official: true
+  notes: Also distributed via Swift Package Manager (Package.swift in repo). Identity, data collection, creative rendering, APNs push.
+- language: kotlin
+  registry: maven-central
+  name: com.attentive:attentive-android-sdk
+  url: https://central.sonatype.com/artifact/com.attentive/attentive-android-sdk
+  install: "implementation 'com.attentive:attentive-android-sdk:VERSION_NUMBER'"
+  repository: https://github.com/attentive-mobile/attentive-android-sdk
+  official: true
+  notes: Android API level 26+. Ships an AGENTS.md agent integration guide. Identity, events, creative rendering, FCM push.

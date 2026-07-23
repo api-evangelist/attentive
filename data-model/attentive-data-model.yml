@@ -1,0 +1,42 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/attentive-v1-openapi.yaml, openapi/attentive-v2-openapi.yaml
+note: Core externally-facing entities derived from OpenAPI request/response schemas and id-reference fields. The V1 spec also carries internal app/token-management schemas that are not modeled here.
+entities:
+- name: Subscriber
+  aka: [User]
+  identity: [phone (E.164), email, clientUserId, custom identifiers, Shopify id, Klaviyo id]
+  description: A person who can be subscribed, attributed, and messaged.
+- name: Subscription
+  belongs_to: {entity: Subscriber, via: subscriber}
+  fields: [channel (TEXT/EMAIL), subscriptionType, signUpSourceId, locale]
+- name: CustomAttribute
+  belongs_to: {entity: Subscriber, via: user}
+  fields: [name, value]
+- name: CustomEvent
+  belongs_to: {entity: Subscriber, via: user}
+  fields: [type, properties]
+- name: EcommerceEvent
+  belongs_to: {entity: Subscriber, via: user}
+  variants: [product-view, add-to-cart, purchase]
+- name: Webhook
+  fields: [webhookId, url, "events[]"]
+- name: Offer
+  aka: [CouponPool]
+  has_many: {entity: Coupon, via: coupon-pool-id}
+- name: ProductCatalogUpload
+  fields: [uploadId, status, expires]
+- name: Segment
+  identity: [externalId]
+  has_many: {entity: SegmentMember, via: segment}
+- name: DeleteRequest
+  belongs_to: {entity: Subscriber, via: user}
+  fields: [id, status]
+relationships:
+- {from: Subscription, to: Subscriber, type: belongs_to, via: subscriber}
+- {from: CustomAttribute, to: Subscriber, type: belongs_to, via: user}
+- {from: CustomEvent, to: Subscriber, type: belongs_to, via: user}
+- {from: EcommerceEvent, to: Subscriber, type: belongs_to, via: user}
+- {from: Coupon, to: Offer, type: belongs_to, via: coupon-pool-id}
+- {from: SegmentMember, to: Segment, type: belongs_to, via: segment}
+- {from: DeleteRequest, to: Subscriber, type: belongs_to, via: user}

@@ -1,0 +1,97 @@
+openapi: 3.0.3
+info:
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
+  title: Attentive Access Token Bulk Status API
+  version: ''
+servers:
+- url: https://api.attentivemobile.com/v1
+  description: Attentive API
+security:
+- bearerAuth: []
+tags:
+- name: Bulk Status
+  description: 'Endpoints for managing bulk data ingestion jobs. Use these endpoints to monitor the processing status asynchronously.
+
+    '
+  x-beta: true
+paths:
+  /v2/bulk/job/{bulkJobId}:
+    x-external: hidden
+    x-requires-auth: true
+    get:
+      operationId: getBulkJobStatus
+      x-external: true
+      x-emits-event: true
+      summary: Retrieve the status of a bulk ingestion job
+      description: 'Checks the status of a bulk ingestion job identified by bulkJobId. This endpoint returns the current state of the job (e.g. `PENDING`, `IN_PROGRESS`, `COMPLETED`, `FAILED`) along with metadata such as timestamps and error messages if applicable.
+
+
+        If the job has completed successfully, the response includes a downloadable link to a `.jsonl` (JSON Lines) file containing a record of each request and its corresponding response. User''s can audit results or process downstream outcomes of the bulk operation. You can fetch requests up to 2 weeks old.
+
+
+        Scopes Required: No Additional scopes required.
+
+
+        Default Rate Limit: 100 requests per second
+
+        '
+      tags:
+      - Bulk Status
+      parameters:
+      - name: bulkJobId
+        description: id of the bulk job
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns the status of the bulk job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkJobStatusResponse'
+components:
+  schemas:
+    BulkJobStatusResponse:
+      type: object
+      properties:
+        bulkJobId:
+          type: string
+          description: 'A unique identifier representing the submitted batch job. Use this ID to query the job''s status, retrieve results, or diagnose any errors related to the job. This ID is returned upon successful job submission and required for all follow-up actions related to the batch.
+
+            '
+        status:
+          type: string
+          description: "The current state of the batch job. Common values include:\n\n  - `IN_PROGRESS` – The job has been accepted and is waiting to be processed.\n\n  - `COMPLETED` – The job finished successfully.\n"
+        totalRecords:
+          type: integer
+          description: 'The total number of records included in the batch job. This represents the full count of items submitted for processing, regardless of whether they ultimately succeeded or failed.
+
+            '
+        url:
+          type: string
+          description: 'A direct URL to download the results of the batch job, when available. This field is typically populated once the job has completed successfully. The file will contain per-record results in a JSON Lines (.jsonl) file.
+
+            '
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    OAuthFlow:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow. [More info](https://docs.attentivemobile.com/pages/authentication/)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+          tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+          scopes:
+            attributes:write: read and write custom attributes
+            subscriptions:write: read and write subscriptions
+            events:write: read and write custom events
+            ecommerce:write: read and write ecommerce events
+            segments:write: read and write segments
+            segments:read: read segments
+x-readme:
+  explorer-enabled: false

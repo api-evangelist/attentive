@@ -1,0 +1,226 @@
+openapi: 3.0.3
+info:
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
+  title: Attentive Access Token Custom Attributes API
+  version: ''
+servers:
+- url: https://api.attentivemobile.com/v1
+  description: Attentive API
+security:
+- bearerAuth: []
+tags:
+- name: Custom Attributes
+  description: 'Use the Custom Attributes API to apply customizable data or characteristics to each of your subscribers. This API will either create a new custom attribute if it doesn''t already exist or update an existing one with the new value provided. You can then build segments based on that information to send targeted campaigns and journeys. This data cannot contain any sensitive or special categories of information as defined in applicable data protection and privacy laws, including the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA). See a list of specific categories of data you cannot share with Attentive [here](https://docs.attentivemobile.com/pages/legal-docs/pi-disclaimer/).
+
+    '
+  x-beta: false
+paths:
+  /attributes/custom:
+    description: 'Custom Attributes
+
+      '
+    post:
+      x-external: true
+      x-emits-event: true
+      security:
+      - OAuthFlow:
+        - attributes:write
+      summary: Custom Attributes
+      description: 'Make a call to this endpoint for any attribute-based data. There are no limits to the amount of custom attributes that can be created. Note that you can create net-new properties with this API, however, it cannot be used to create new values for an existing UI-created property name. If a property name is created through the Attentive platform, all possible property values must also be defined in the platform. For example, if a property has possible values of "Adult, Teen, Children''s", those are the only values that will be accepted through the API. This does not apply for properties with the type "Custom input", for example: Full Name. Also, please note that the API does not support arrays. For example, attempting to pass an array such as ''["chicago", "new york"]'' for an attribute like ''favorite_city'' will result in a 400 error.
+
+
+        **Note : The maximum length for an attribute name is 200 characters.**
+
+        '
+      operationId: postCustomAttributes
+      tags:
+      - Custom Attributes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomAttributesRequest'
+      responses:
+        '200':
+          description: Ok
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    get:
+      summary: Get Custom Attributes for a User
+      description: 'Make a call to this endpoint to retrieve all custom attribute data associated with a user. You can query this endpoint by either phone or email.
+
+
+        **Note: You must include a single query parameter, phone or email. Including both will result in a 400 error.**
+
+        '
+      operationId: getCustomAttributes
+      x-external: true
+      x-emits-event: true
+      security:
+      - OAuthFlow:
+        - attributes:write
+      tags:
+      - Custom Attributes
+      parameters:
+      - in: query
+        name: phone
+        schema:
+          type: string
+          example: '+13115552368'
+        description: 'A user’s phone number in E.164 format. The ''+'' sign in the phone number must be encoded in the URL query parameter as ''%2B''
+
+          '
+      - in: query
+        name: email
+        schema:
+          type: string
+          example: test@gmail.com
+        description: 'A user''s email
+
+          '
+      responses:
+        '200':
+          description: Successfully accepted get custom attributes request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCustomAttributesResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  schemas:
+    ExternalIdentifiers:
+      type: object
+      description: 'clientUserId or another custom identifier.  This field is required if either phone or email is not provided.
+
+
+        If using an external identifier instead of phone or email, the external identifier must first be associated with a phone or email using the Identity API.
+
+        '
+      properties:
+        clientUserId:
+          type: string
+          description: (optional) Your primary ID for a user
+        customIdentifiers:
+          type: array
+          description: (optional) Namespaced custom identifiers and their values.
+          items:
+            type: object
+            title: ExternalIdentifiersCustomIdentifiers
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+    GetCustomAttributesResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Name of the custom attribute
+            example: favoriteColor
+          value:
+            anyOf:
+            - type: string
+            description: Value of the custom attribute
+            example: blue
+        required:
+        - attribute
+        - value
+    CustomAttributesRequest:
+      type: object
+      properties:
+        properties:
+          type: object
+          description: 'Any metadata associated with the attribute. Object keys are expected to be strings. Object values can be any type. The key will be assigned a type corresponding to the type seen of the first value. For example, if ''Age'' is passed with the first value of ''24'', ''Age'' will be typed as a ''Number''. There is no need to pass strings in double quotes. Both object keys and object values are case sensitive. "Favorite color" and "Favorite Color" would be considered different custom attributes.
+
+            '
+          example:
+            age: '24'
+            birthday: '1986-11-16'
+            sign up: '2021-04-23T16:04:33Z'
+            favorite team: Minnesota Vikings
+            Gift card balance: '50.89'
+            VIP: 'TRUE'
+        user:
+          $ref: '#/components/schemas/EventUser'
+      required:
+      - properties
+      - user
+    EventUser:
+      type: object
+      description: 'User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
+
+        Phone, email, or an external identifier (clientUserId or another custom identifier) are required
+
+        '
+      properties:
+        phone:
+          type: string
+          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if either email or an externalIdentifier is not provided.
+          example: '+13115552368'
+        email:
+          type: string
+          description: Email of the user associated with the action. This field is required if either phone or an externalIdentifier is not provided.
+          example: test@gmail.com
+        externalIdentifiers:
+          $ref: '#/components/schemas/ExternalIdentifiers'
+      additionalProperties: false
+      minProperties: 1
+  responses:
+    InternalError:
+      description: Internal Server Error
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
+    NotFound:
+      description: The specified resource was not found
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    OAuthFlow:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow. [More info](https://docs.attentivemobile.com/pages/authentication/)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+          tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+          scopes:
+            attributes:write: read and write custom attributes
+            subscriptions:write: read and write subscriptions
+            events:write: read and write custom events
+            ecommerce:write: read and write ecommerce events
+            segments:write: read and write segments
+            segments:read: read segments
+x-readme:
+  explorer-enabled: false

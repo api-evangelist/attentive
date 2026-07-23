@@ -1,0 +1,41 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/attentive-v1-openapi.yaml, openapi/attentive-v2-openapi.yaml
+format: http-status
+envelope: JSON body with a human-readable message; standard HTTP status codes (Attentive does not use application/problem+json).
+notes: Derived from the shared components.responses declared across both OpenAPI specs. Titles/descriptions are the provider's own response descriptions.
+problems:
+- status: 400
+  key: InvalidParameter
+  title: Invalid parameter in request query or body
+  remediation: Validate request query/body against the operation schema before retrying.
+- status: 400
+  key: DetailedBadRequest
+  title: Bad Request (offer/coupon distribution window validation)
+  detail: Returned by createCoupons when distributionStart/distributionStop dates overlap prior ranges, are omitted for a custom-window offer, are supplied for a never-expire/TTL offer, or start is after stop.
+  source_operation: openapi/attentive-v1-openapi.yaml#createCoupons
+- status: 401
+  key: Unauthorized
+  title: Unauthorized
+  remediation: Supply a valid bearer token via the Authorization header.
+- status: 403
+  key: AccessDenied
+  title: Access Denied
+  remediation: The token lacks the required scope for this operation; request the scope during OAuth install.
+- status: 403
+  key: Forbidden
+  title: Forbidden
+- status: 404
+  key: NotFound
+  title: The specified resource was not found
+- status: 409
+  key: Conflict
+  title: Subscription already exists for user
+  source_operation: openapi/attentive-v1-openapi.yaml#addSubscriptions
+- status: 429
+  key: TooManyRequests
+  title: The user has sent too many requests in a given amount of time
+  remediation: Back off using the x-ratelimit-remaining header; retry with exponential backoff + jitter.
+- status: 500
+  key: InternalError
+  title: Internal Server Error

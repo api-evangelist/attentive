@@ -1,0 +1,19 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.attentive.com/, https://status.attentivemobile.com/
+versioning:
+  scheme: uri-path
+  versions: [v1, v2]
+  current: v2
+  notes: V1 (https://api.attentivemobile.com/v1) is the mature surface; V2 (https://api.attentivemobile.com/v2) adds bulk user attributes, segments, and improved throughput. Both are actively supported.
+  docs: https://docs.attentive.com/openapi/reference-v2/overview/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No published formal deprecation/Sunset (RFC 8594) policy located; no operations flagged deprecated in either OpenAPI spec.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.attentivemobile.com/
+release_notes: https://help.attentivemobile.com/hc/en-us/sections/41724068404500-Release-Notes
+deprecated_operations: []

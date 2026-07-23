@@ -1,0 +1,96 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/attentive-v1-openapi.yaml, openapi/attentive-v2-openapi.yaml
+docs: https://docs.attentive.com/docs/authentication
+schemes:
+- name: OAuthFlow
+  source: openapi/attentive-v1-openapi.yaml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+    tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+  description: This API uses OAuth 2 with the authorization code grant flow. [More
+    info](https://docs.attentivemobile.com/pages/authentication/)
+- name: OAuthFlow
+  source: openapi/attentive-v2-openapi.yaml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+    tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+  description: This API uses OAuth 2 with the authorization code grant flow. [More
+    info](https://docs.attentivemobile.com/pages/authentication/)
+scopes:
+- scope: attributes:write
+  description: read and write custom attributes
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  - openapi/attentive-v2-openapi.yaml
+- scope: ecommerce:write
+  description: read and write ecommerce events
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  - openapi/attentive-v2-openapi.yaml
+- scope: events:write
+  description: read and write custom events
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  - openapi/attentive-v2-openapi.yaml
+- scope: identity:write
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  description: read and write identity resolution (client/custom user identifiers)
+- scope: offers:write
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  description: read and write offers / coupon-pool discount codes
+- scope: privacy_requests:read
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  description: read privacy (CCPA) deletion requests
+- scope: privacy_requests:write
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  description: create privacy (CCPA) deletion requests
+- scope: product_catalogs:read
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  description: read product catalog uploads
+- scope: product_catalogs:write
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  description: upload and manage the product catalog
+- scope: segments:read
+  description: read segments
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  - openapi/attentive-v2-openapi.yaml
+- scope: segments:write
+  description: read and write segments
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  - openapi/attentive-v2-openapi.yaml
+- scope: subscriptions:read
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  description: read subscriptions and subscription eligibility
+- scope: subscriptions:write
+  description: read and write subscriptions
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  - openapi/attentive-v2-openapi.yaml
+- scope: webhooks:write
+  sources:
+  - openapi/attentive-v1-openapi.yaml
+  description: create and manage webhook subscriptions

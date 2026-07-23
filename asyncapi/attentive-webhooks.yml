@@ -1,0 +1,32 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.attentive.com/docs/webhook-payloads, https://docs.attentive.com/reference/createwebhook
+type: Webhooks
+spec_type: none
+note: Attentive documents an HTTP webhook subscription surface but publishes no AsyncAPI document. Webhooks are created/managed via the REST API (createWebhook / getWebhooks / updateWebhook / deleteWebhook) and via a GraphQL API. Event strings are case-sensitive.
+management:
+  rest_operations:
+  - openapi/attentive-v1-openapi.yaml#createWebhook
+  - openapi/attentive-v1-openapi.yaml#getWebhooks
+  - openapi/attentive-v1-openapi.yaml#updateWebhook
+  - openapi/attentive-v1-openapi.yaml#deleteWebhook
+  authentication_docs: https://docs.attentive.com/docs/webhook-authentication
+delivery:
+  transport: HTTP POST to subscriber URL
+  timestamp_format: Unix timestamp in milliseconds
+common_payload_fields:
+- type
+- timestamp
+- company (name + id)
+- subscriber (externalId, phone, email, third-party ids)
+events:
+- sms.subscribed
+- sms.sent
+- sms.message_link_click
+- sms.inbound_message
+- email.subscribed
+- email.unsubscribed
+- email.sent
+- email.opened
+- email.message_link_click
+- custom_attribute.set

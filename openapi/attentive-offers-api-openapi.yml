@@ -1,0 +1,166 @@
+openapi: 3.0.3
+info:
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
+  title: Attentive Access Token Offers API
+  version: ''
+servers:
+- url: https://api.attentivemobile.com/v1
+  description: Attentive API
+security:
+- bearerAuth: []
+tags:
+- name: Offers
+  description: 'You can use the Offers API to add discount codes to an existing offer. <br> <h2> Create an offer </h2>  <ol> <li> Navigate to the [Offers](https://ui.attentivemobile.com/offers) page. </li> <li> Click **+ Create offer** in the top-right corner. </li> <li> On the **Choose an offer type** window, select **Unique discount codes** </li> <li> Enter a unique name for your offer in the **Discount name** field. </li> <li> Choose the **Distribution window**. <br> **Note**: If you include start and end dates in your API call, the distribution window automatically updates to **Custom time period**. </li> <li> **Click Create.** </li> <li> Click back into the offer and retrieve the numeric ID at the end of the URL string. This is the ID you will need for the POST </li> </ol>'
+  x-beta: true
+paths:
+  /coupons/coupon-pool/{coupon-pool-id}/create:
+    post:
+      tags:
+      - Offers
+      summary: Add discount codes
+      description: 'Note: Once the offer(s) has been created, please reach out to an Attentive team member to enable this API feature for you
+
+
+        Make a call to this asynchronous endpoint to create new discount codes in an existing offer.
+
+        <h2>Validation rules</h2>
+
+        <ul>
+
+        <li>Maximum of 200,000 discount codes per request.</li>
+
+        <li><code>distributionStart</code> must be before <code>distributionStop</code>, in UTC ISO format (e.g., <code>2023-02-14T21:29:25Z</code>).</li>
+
+        <li>Date ranges must not overlap with ranges from previous uploads to the same offer. Uploading to an existing range is allowed.</li>
+
+        <li>All uploads in an offer must use the same distribution type. If previous uploads include expiration dates, new uploads must also include them, and vice versa.</li>
+
+        <li>The offer (coupon pool) must exist and belong to your account.</li>
+
+        </ul>
+
+        <h2>Sync behavior</h2>
+
+        Check the status on the offer to monitor progress. If it still says <strong>SYNCING</strong>, the uploads may not be ready yet.'
+      operationId: createCoupons
+      x-external: true
+      security:
+      - OAuthFlow:
+        - offers:write
+      parameters:
+      - in: path
+        name: coupon-pool-id
+        description: The ID created under "Create an Offer"
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCouponsDto'
+        required: true
+      responses:
+        '202':
+          description: Accepted. Check the Attentive [Offers](https://ui.attentivemobile.com/offers) page to make sure that there are no errors and the remaining code count is accurate.
+        '400':
+          $ref: '#/components/responses/InvalidParameter1'
+        '403':
+          $ref: '#/components/responses/AccessDenied1'
+        '404':
+          $ref: '#/components/responses/DetailedBadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError1'
+components:
+  schemas:
+    ErrorDto:
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique error id, mapping to service logs
+        message:
+          type: string
+          description: API response error message
+    CreateCouponsDto:
+      type: object
+      required:
+      - codes
+      properties:
+        codes:
+          type: array
+          items:
+            type: string
+          description: List of the discount code values. Number of discount codes must be between 0 and 200,000.
+          example:
+          - code1
+          - code2
+          - code3
+          - code4
+          - code5
+        distributionStart:
+          type: string
+          description: Timestamp at which point the discount codes become valid for distribution within Attentive messages. Must be in valid UTC ISO format e.g. 2023-03-04T21:29:25Z. If null, the discount codes never expire.
+          example: '2023-02-14T21:29:25Z'
+        distributionStop:
+          type: string
+          description: Timestamp at which point the discount codes become invalid for distribution within Attentive messages. Must be in valid UTC ISO format.
+          example: '2023-02-15T21:29:25Z'
+    ErrorResponseDto:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDto'
+  responses:
+    AccessDenied1:
+      description: Access Denied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    InternalError1:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    InvalidParameter1:
+      description: Invalid parameter in request query or body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    DetailedBadRequest:
+      description: "Bad Request. Invalid parameter in request query or body. The following scenarios will cause a 400 response: \nA) Including distributionStart and distributionStop dates that overlap with the distributionStart and distributionStop dates from a previous call, \nB) Including distributionStart and distributionStop dates in an offer that has a distribution window of “Never expire” or “Time to live”, \nC) Excluding distributionStart and distributionStop dates in an offer that has a distribution window of “Custom time period”, D) Including a distributionStart value that is after the distributionStop value\n"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    OAuthFlow:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow. [More info](https://docs.attentivemobile.com/pages/authentication/)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+          tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+          scopes:
+            attributes:write: read and write custom attributes
+            subscriptions:write: read and write subscriptions
+            events:write: read and write custom events
+            ecommerce:write: read and write ecommerce events
+            segments:write: read and write segments
+            segments:read: read segments
+x-readme:
+  explorer-enabled: false

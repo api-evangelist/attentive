@@ -1,0 +1,34 @@
+generated: '2026-07-18'
+method: searched
+source: https://www.attentive.com/release-notes, https://help.attentivemobile.com/hc/en-us/categories/41723953371028-Release-Notes-Betas
+scheme: quarterly
+cadence: Quarterly product release notes (with monthly betas); no dedicated per-endpoint API changelog is published.
+current: Q1 2026
+docs: https://help.attentivemobile.com/hc/en-us/sections/41724068404500-Release-Notes
+entries:
+- version: Q1 2026
+  date: '2026-01'
+  breaking: false
+  highlights:
+  - Q1 2026 release notes published (product-level).
+  url: https://help.attentivemobile.com/hc/en-us/articles/46618601874836-Release-Notes-Q1-2026
+- version: Q4 2025
+  date: '2025-10'
+  breaking: false
+  highlights:
+  - Two-tap sign-up extended to desktop via QR-code scan with iOS 26 inbox placement.
+  - Campaigns/Journeys list view sorting and filtering that persists across navigation.
+  - Preview subscriber-specific SMS before sending to validate personalization.
+  url: https://help.attentivemobile.com/hc/en-us/articles/43322009548180-Release-Notes-Q4-2025
+- version: Q3 2025
+  date: '2025-07'
+  breaking: false
+  highlights:
+  - Send Enhanced Attentive Tag + Identity data to Meta via CAPI in real time.
+  url: https://help.attentivemobile.com/hc/en-us/articles/41821718724884-Release-Notes-Q3-2025
+- version: Q2 2025
+  date: '2025-04'
+  breaking: false
+  highlights:
+  - Q2 2025 product release notes.
+  url: https://www.attentive.com/release-notes/release-notes-q2-2025

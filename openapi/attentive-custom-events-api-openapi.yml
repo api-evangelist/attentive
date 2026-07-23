@@ -1,0 +1,227 @@
+openapi: 3.0.3
+info:
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
+  title: Attentive Access Token Custom Events API
+  version: ''
+servers:
+- url: https://api.attentivemobile.com/v1
+  description: Attentive API
+security:
+- bearerAuth: []
+tags:
+- name: Custom Events
+  description: Use the Custom Events API to send user actions to use in the Attentive Segment Builder and Journey Builder for both email and text messages. This data cannot contain any sensitive or special categories of information as defined in applicable data protection and privacy laws, including the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA). See a list of specific categories of data you cannot share with Attentive [here](https://docs.attentivemobile.com/pages/legal-docs/pi-disclaimer/).
+  x-beta: false
+paths:
+  /events/custom:
+    x-external: true
+    description: 'Custom Events
+
+      '
+    post:
+      x-external: true
+      x-emits-event: true
+      security:
+      - OAuthFlow:
+        - events:write
+      summary: Custom Events
+      description: Make a call to this endpoint for any event-based data representing user actions.
+      operationId: postCustomEvents
+      tags:
+      - Custom Events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomEventsRequest'
+      responses:
+        '200':
+          description: Ok
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  schemas:
+    ExternalIdentifiers:
+      type: object
+      description: 'clientUserId or another custom identifier.  This field is required if either phone or email is not provided.
+
+
+        If using an external identifier instead of phone or email, the external identifier must first be associated with a phone or email using the Identity API.
+
+        '
+      properties:
+        clientUserId:
+          type: string
+          description: (optional) Your primary ID for a user
+        customIdentifiers:
+          type: array
+          description: (optional) Namespaced custom identifiers and their values.
+          items:
+            type: object
+            title: ExternalIdentifiersCustomIdentifiers
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+    CustomEventsRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'The type of event. This name is case sensitive.
+
+            "Order shipped" and "Order Shipped" would be considered different event types.
+
+
+            The Custom Event type cannot any of the following special characters:
+
+            * double quote "
+
+            * single quote ''
+
+            * parentheses ( )
+
+            * curly braces { }
+
+            * square brackets [ ]
+
+            * backslash \
+
+            * vertical bar |
+
+            * commas ,
+
+            '
+          example: Order Shipped
+        properties:
+          type: object
+          description: 'Any metadata associated with the event.
+
+
+            Object keys are expected to be strings, and cannot contain any of the following special characters:
+
+            * double quote "
+
+            * curly braces { }
+
+            * square brackets [ ]
+
+            * backslash \
+
+            * vertical bar |
+
+
+            Object values can be any type. Note that both object keys and object values are case sensitive. For example, "deliverydate" and
+
+            "DeliveryDate" would be considered different event properties.
+
+
+            Notes:
+
+            * When you’re creating journeys that use custom events data, you can only use lists and nested objects can only be used with email messages. Lists and nested objects are not currently supported for SMS.
+
+            * For URLs that are provided as a value, Attentive will automatically shorten the link with your brand''s link shortener. For example, https://mysite.com/. Note that Attentive can only shorten URLs that are 1,024 characters or fewer.
+
+            * Custom events must be triggered using the same custom app that originally created them.
+
+            * There is a maximum of 200 object keys per custom event type. While payloads larger than this will be saved, not all keys will be available for use in Journeys and macros.
+
+            '
+          example:
+            mediaUrl: https://cdn.example.com/images/sample-image.jpg
+            orderStatusURL: https://example.com/orderstatus/54321
+            delivery_date: May 10
+            Order Id: '54321'
+            products:
+            - productId1
+            - productId2
+            shipment:
+              carrier: fedex
+              trackingNumber: '12345'
+          properties:
+            mediaUrl:
+              type: string
+              description: URL of the image that accompanies MMS. Be sure to add a dynamic product image in the message composer in the Attentive UI when adding a text message step to a journey triggered by the custom event.
+          additionalProperties: true
+        externalEventId:
+          type: string
+          description: A unique identifier representing this specific event. A UUID is recommended.
+          example: 37fb97a9-6cfd-4983-bd65-68d104d53b70
+        occurredAt:
+          type: string
+          format: date-time
+          description: 'Timestamp of when the action occurred in [RFC 3339 format](https://datatracker.ietf.org/doc/html/rfc3339#section-5.8) with required UTC offset. If the timestamp is older than 12 hours, it will not trigger any relevant Journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
+
+            '
+          example: '2021-03-30T14:38:29.000Z'
+        user:
+          $ref: '#/components/schemas/EventUser'
+      required:
+      - type
+      - user
+    EventUser:
+      type: object
+      description: 'User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
+
+        Phone, email, or an external identifier (clientUserId or another custom identifier) are required
+
+        '
+      properties:
+        phone:
+          type: string
+          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if either email or an externalIdentifier is not provided.
+          example: '+13115552368'
+        email:
+          type: string
+          description: Email of the user associated with the action. This field is required if either phone or an externalIdentifier is not provided.
+          example: test@gmail.com
+        externalIdentifiers:
+          $ref: '#/components/schemas/ExternalIdentifiers'
+      additionalProperties: false
+      minProperties: 1
+  responses:
+    InternalError:
+      description: Internal Server Error
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
+    NotFound:
+      description: The specified resource was not found
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    OAuthFlow:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow. [More info](https://docs.attentivemobile.com/pages/authentication/)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+          tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+          scopes:
+            attributes:write: read and write custom attributes
+            subscriptions:write: read and write subscriptions
+            events:write: read and write custom events
+            ecommerce:write: read and write ecommerce events
+            segments:write: read and write segments
+            segments:read: read segments
+x-readme:
+  explorer-enabled: false

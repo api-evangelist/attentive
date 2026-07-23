@@ -1,0 +1,32 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/attentive-v1-openapi.yaml, openapi/attentive-v2-openapi.yaml, https://docs.attentive.com/
+authentication:
+  style: "Bearer token (Authorization: Bearer <token>)"
+  schemes: [http-bearer-jwt, oauth2-authorization-code]
+  ref: authentication/attentive-authentication.yml
+idempotency:
+  supported: false
+  notes: No Idempotency-Key header or parameter is documented or present in either OpenAPI spec. Bulk ingestion returns a batch/bulkJobId for status tracking rather than idempotent replay.
+pagination:
+  style: cursor
+  applies_to: V2 list endpoints (e.g. listSegments)
+  request_params: [cursor, limit]
+  notes: V1 endpoints are largely single-resource or event-ingest and are not paginated.
+versioning:
+  style: uri-path
+  values: [v1, v2]
+  ref: lifecycle/attentive-lifecycle.yml
+rate_limiting:
+  signal_headers: [x-ratelimit-limit, x-ratelimit-remaining]
+  exceeded_status: 429
+  ref: rate-limits/attentive-rate-limits.yml
+error_envelope:
+  format: http-status
+  problem_json: false
+  ref: errors/attentive-problem-types.yml
+async_jobs:
+  pattern: 202 Accepted with a job/batch id; poll status endpoint (e.g. GET /v2/bulk/job/{bulkJobId}, GET /product-catalog/uploads/{uploadId}).
+identifiers:
+  subscriber_lookup: phone (E.164) or email; either may be used as the query key on subscriber endpoints.
+  external_ids: Shopify id, Klaviyo id, client user identifier, custom identifiers via Identity API.

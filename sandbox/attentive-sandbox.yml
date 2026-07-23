@@ -1,0 +1,22 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.attentive.com/docs/api-testing-console, https://docs.attentive.com/docs/authentication
+note: Attentive does not publish a separate sandbox host or magic test values. Testing is done against production with a scoped token generated in the Attentive product, using the built-in API Testing Console and the token-verification endpoints. No test credentials are reproduced here.
+test_environment:
+  separate_host: false
+  approach: Generate a private-app API token in the Attentive platform; validate it before use.
+tools:
+- name: API Testing Console
+  url: https://docs.attentive.com/docs/api-testing-console
+  description: In-docs console for sending authenticated requests.
+- name: Test Authentication (V1)
+  operation: openapi/attentive-v1-openapi.yaml#getMe
+  path: GET /v1/me
+  description: Confirms a token is valid and returns company/application info.
+- name: Test Authentication (V2)
+  operation: openapi/attentive-v2-openapi.yaml#getMeV2
+  path: GET /v2/me
+  description: V2 token-verification endpoint.
+- name: Product catalog validateOnly
+  operation: openapi/attentive-v1-openapi.yaml#postUpload
+  description: Set validateOnly=true on catalog uploads to check a file for validation errors without persisting data.

@@ -1,0 +1,109 @@
+generated: '2026-07-18'
+method: derived
+status: candidate
+source: openapi/attentive-v1-openapi.yaml, openapi/attentive-v2-openapi.yaml
+note: 'No official Attentive MCP server was found. Candidate tool list derived from
+  externally-documented OpenAPI operations (x-external) so an MCP wrapper can be forged.
+  status: candidate.'
+server:
+  name: attentive
+  transport: http
+  url: null
+tools:
+- name: getMe
+  description: Me
+  source_operation: openapi/attentive-v1-openapi.yaml#getMe
+- name: getWebhooks
+  description: List webhooks
+  source_operation: openapi/attentive-v1-openapi.yaml#getWebhooks
+- name: createWebhook
+  description: Create webhook
+  source_operation: openapi/attentive-v1-openapi.yaml#createWebhook
+- name: deleteWebhook
+  description: Delete webhook
+  source_operation: openapi/attentive-v1-openapi.yaml#deleteWebhook
+- name: updateWebhook
+  description: Update webhook
+  source_operation: openapi/attentive-v1-openapi.yaml#updateWebhook
+- name: createTokenViaAuthorizationCode
+  description: Access Token
+  source_operation: openapi/attentive-v1-openapi.yaml#createTokenViaAuthorizationCode
+- name: postProductViewEvents
+  description: Product view
+  source_operation: openapi/attentive-v1-openapi.yaml#postProductViewEvents
+- name: postAddToCartEvents
+  description: Add to cart
+  source_operation: openapi/attentive-v1-openapi.yaml#postAddToCartEvents
+- name: postPurchaseEvents
+  description: Purchase
+  source_operation: openapi/attentive-v1-openapi.yaml#postPurchaseEvents
+- name: createCoupons
+  description: Add discount codes
+  source_operation: openapi/attentive-v1-openapi.yaml#createCoupons
+- name: postCustomEvents
+  description: Custom Events
+  source_operation: openapi/attentive-v1-openapi.yaml#postCustomEvents
+- name: postCustomAttributes
+  description: Custom Attributes
+  source_operation: openapi/attentive-v1-openapi.yaml#postCustomAttributes
+- name: getCustomAttributes
+  description: Get Custom Attributes for a User
+  source_operation: openapi/attentive-v1-openapi.yaml#getCustomAttributes
+- name: addSubscriptions
+  description: Subscribe user
+  source_operation: openapi/attentive-v1-openapi.yaml#addSubscriptions
+- name: getSubscriptions
+  description: Get subscription eligibility for a user
+  source_operation: openapi/attentive-v1-openapi.yaml#getSubscriptions
+- name: unsubscribeSubscriptions
+  description: Unsubscribe subscriptions for a user
+  source_operation: openapi/attentive-v1-openapi.yaml#unsubscribeSubscriptions
+- name: postUpload
+  description: Upload Product Catalog
+  source_operation: openapi/attentive-v1-openapi.yaml#postUpload
+- name: getUploads
+  description: View Recent Catalog Uploads
+  source_operation: openapi/attentive-v1-openapi.yaml#getUploads
+- name: addDeleteRequest
+  description: Add a deletion request
+  source_operation: openapi/attentive-v1-openapi.yaml#addDeleteRequest
+- name: getDeleteRequest
+  description: Get a CCPA delete request by Id
+  source_operation: openapi/attentive-v1-openapi.yaml#getDeleteRequest
+- name: identify
+  description: Add a client user identifier or custom identifier(s) to a user
+  source_operation: openapi/attentive-v1-openapi.yaml#identify
+- name: getMeV2
+  description: Me
+  source_operation: openapi/attentive-v2-openapi.yaml#getMeV2
+- name: postUserAttributes
+  description: Create or update a single user with attributes, subscriptions, and
+    identifiers
+  source_operation: openapi/attentive-v2-openapi.yaml#postUserAttributes
+- name: getBulkJobStatus
+  description: Retrieve the status of a bulk ingestion job
+  source_operation: openapi/attentive-v2-openapi.yaml#getBulkJobStatus
+- name: postBulkUserAttributes
+  description: Bulk User Attributes
+  source_operation: openapi/attentive-v2-openapi.yaml#postBulkUserAttributes
+- name: postBulkSegmentMembers
+  description: Add Bulk Segment Members
+  source_operation: openapi/attentive-v2-openapi.yaml#postBulkSegmentMembers
+- name: deleteBulkSegmentMembers
+  description: Remove Bulk Segment Members
+  source_operation: openapi/attentive-v2-openapi.yaml#deleteBulkSegmentMembers
+- name: createSegment
+  description: Create new segment
+  source_operation: openapi/attentive-v2-openapi.yaml#createSegment
+- name: listSegments
+  description: List segments
+  source_operation: openapi/attentive-v2-openapi.yaml#listSegments
+- name: getSegmentByExternalId
+  description: Get segment by external ID
+  source_operation: openapi/attentive-v2-openapi.yaml#getSegmentByExternalId
+- name: patchSegmentByExternalId
+  description: Partial update segment by external ID
+  source_operation: openapi/attentive-v2-openapi.yaml#patchSegmentByExternalId
+- name: deleteSegmentByExternalId
+  description: Archive segment by external ID
+  source_operation: openapi/attentive-v2-openapi.yaml#deleteSegmentByExternalId

@@ -1,0 +1,98 @@
+openapi: 3.0.3
+info:
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
+  title: Attentive Access Token API
+  version: ''
+servers:
+- url: https://api.attentivemobile.com/v1
+  description: Attentive API
+security:
+- bearerAuth: []
+tags:
+- name: Access Token
+  description: 'Public applications must authenticate using the OAuth 2.0 specification to use Attentive’s API resources. Attentive uses OAuth 2.0’s authorization code grant flow to issue access tokens on behalf of users. When an application is installed on our platform, an authorization code is generated automatically. This authorization code must be exchanged for an access token to authenticate grant and control permissions for your application.
+
+    '
+paths:
+  /authorization-codes/tokens:
+    x-external: true
+    x-requires-auth: false
+    x-sensitive: true
+    post:
+      x-external: true
+      summary: Access Token
+      description: Make a call to this endpoint to exchange a temporary authorization code for an access token.
+      operationId: createTokenViaAuthorizationCode
+      tags:
+      - Access Token
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  description: Type of grant. Currently, authorization_code is the only accepted type.
+                  example: authorization_code
+                code:
+                  type: string
+                  description: Authorization code provided after the user authorizes the scopes during the application install process.
+                  example: MTQ0NjJkZmQ5OTM2NDE1ZTZjNGZmZjI3
+                redirect_uri:
+                  type: string
+                  description: The same redirect URI that was used when requesting the authorization code.
+                  example: https://test.com
+                client_id:
+                  type: string
+                  description: The application’s client ID which can be found on the Manage Distribution tab for the application.
+                  example: 9f7a2f11a4f849f59268869ec766111c
+                client_secret:
+                  type: string
+                  description: The application’s client secret which can be found on the Manage Distribution tab for the application.
+                  example: 0FvaRpPi5KBC4Izj9ALA0AG8J2WdcBhU
+      responses:
+        '200':
+          description: Token generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTokenResponseDto'
+components:
+  schemas:
+    CreateTokenResponseDto:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: a provisioned token associated with the company application
+          example: riSm9jz2Tq2XKO8ZqS1+CJg8tOJ8cALn19zRlQc9s1
+        id_token:
+          type: string
+          description: a provisioned id token associated with the company application
+          example: riSm9jz2Tq2XKO8ZqS1+CJg8tOJ8cALn19zRlQc9s1
+        token_type:
+          type: string
+          description: a type of the token
+          example: Bearer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    OAuthFlow:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow. [More info](https://docs.attentivemobile.com/pages/authentication/)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+          tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+          scopes:
+            attributes:write: read and write custom attributes
+            subscriptions:write: read and write subscriptions
+            events:write: read and write custom events
+            ecommerce:write: read and write ecommerce events
+            segments:write: read and write segments
+            segments:read: read segments
+x-readme:
+  explorer-enabled: false

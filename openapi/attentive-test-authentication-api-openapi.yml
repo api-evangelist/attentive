@@ -1,0 +1,104 @@
+openapi: 3.0.3
+info:
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
+  title: Attentive Access Token Test Authentication API
+  version: ''
+servers:
+- url: https://api.attentivemobile.com/v1
+  description: Attentive API
+security:
+- bearerAuth: []
+tags:
+- name: Test Authentication
+  description: 'Use the Test Authentication endpoint to test your unique token that you received from Attentive. Make sure to save your token because all API requests are authenticated using bearer tokens. The response should include information specific to your company.
+
+    '
+paths:
+  /me:
+    x-external: true
+    get:
+      x-external: true
+      x-emits-event: true
+      summary: Me
+      description: Make a call to this endpoint to test your unique token that you generate in the Attentive product.
+      operationId: getMe
+      tags:
+      - Test Authentication
+      responses:
+        '200':
+          description: Get information about the authenticated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMeResponseDto'
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  responses:
+    InternalError:
+      description: Internal Server Error
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
+    NotFound:
+      description: The specified resource was not found
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+  schemas:
+    GetMeResponseDto:
+      type: object
+      properties:
+        applicationName:
+          type: string
+          description: The application name.
+          example: Pillow Api
+        attentiveDomainName:
+          type: string
+          description: The Attentive domain name.
+          example: hudsonivy.attn.tv
+        companyName:
+          type: string
+          description: The company name in the Attentive platform.
+          example: Hudson & Ivy
+        contactEmail:
+          type: string
+          description: The contact email associated with the application.
+          example: name@company.com
+        companyId:
+          type: string
+          description: The installer company ID
+          example: MDc6Q29tcGFueTI
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    OAuthFlow:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow. [More info](https://docs.attentivemobile.com/pages/authentication/)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+          tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+          scopes:
+            attributes:write: read and write custom attributes
+            subscriptions:write: read and write subscriptions
+            events:write: read and write custom events
+            ecommerce:write: read and write ecommerce events
+            segments:write: read and write segments
+            segments:read: read segments
+x-readme:
+  explorer-enabled: false

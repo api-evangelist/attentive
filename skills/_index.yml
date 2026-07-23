@@ -1,0 +1,25 @@
+generated: '2026-07-18'
+method: generated
+skills:
+- file: attentive-android-sdk-AGENTS.md
+  name: Attentive Android SDK - Agent Integration Guide
+  method: searched
+  source: https://github.com/attentive-mobile/attentive-android-sdk/blob/main/AGENTS.md
+  api: packages/attentive-packages.yml
+  operations: []
+  note: Provider-published AGENTS.md for AI coding agents integrating the Attentive Android SDK. Saved verbatim.
+- file: attentive-subscribe-user.md
+  name: Subscribe and manage a user's marketing subscriptions
+  method: generated
+  api: openapi/attentive-v1-openapi.yaml
+  operations: [addSubscriptions, getSubscriptions, unsubscribeSubscriptions]
+- file: attentive-ecommerce-events.md
+  name: Send ecommerce events to Attentive
+  method: generated
+  api: openapi/attentive-v1-openapi.yaml
+  operations: [postProductViewEvents, postAddToCartEvents, postPurchaseEvents]
+- file: attentive-manage-webhooks.md
+  name: Subscribe to and manage Attentive webhooks
+  method: generated
+  api: openapi/attentive-v1-openapi.yaml
+  operations: [getWebhooks, createWebhook, updateWebhook, deleteWebhook]

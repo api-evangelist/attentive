@@ -1,0 +1,37 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/attentive-v1-openapi.yaml, openapi/attentive-v2-openapi.yaml, https://security.attentive.com/
+standards:
+- id: oauth2
+  conforms: true
+  evidence: OpenAPI securitySchemes declare oauth2 authorizationCode flow (OAuthFlow) with scopes.
+- id: oauth2-bearer
+  conforms: true
+  evidence: http bearer (JWT) securityScheme (bearerAuth) applied globally.
+- id: oidc
+  conforms: false
+  evidence: No openIdConnect scheme; no /.well-known/openid-configuration served.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Error responses use plain HTTP status + JSON message, not application/problem+json.
+- id: rfc6749-authorization-code
+  conforms: true
+  evidence: Documented OAuth 2.0 authorization code grant with 2-minute code exchange.
+- id: webhooks
+  conforms: true
+  evidence: Documented webhook subscription surface (sms.*, email.*, custom_attribute.set events).
+- id: pagination-cursor
+  conforms: true
+  evidence: V2 list endpoints expose cursor + limit query parameters.
+- id: rate-limit-headers
+  conforms: true
+  evidence: x-ratelimit-limit / x-ratelimit-remaining headers on responses.
+- id: soc2-type2
+  conforms: true
+  evidence: SOC 2 Type 2 report published at security.attentive.com (period Nov 2024 - Oct 2025).
+- id: gdpr
+  conforms: true
+  evidence: GDPR listed in Attentive trust/security center; privacy deletion request API provided.
+- id: ccpa
+  conforms: true
+  evidence: CCPA listed in trust center; CCPA delete-request endpoints in the API.

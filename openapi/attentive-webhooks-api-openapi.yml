@@ -1,0 +1,331 @@
+openapi: 3.0.3
+info:
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
+  title: Attentive Access Token Webhooks API
+  version: ''
+servers:
+- url: https://api.attentivemobile.com/v1
+  description: Attentive API
+security:
+- bearerAuth: []
+tags:
+- name: Webhooks
+  description: Create and manage webhooks
+paths:
+  /webhooks:
+    x-external: true
+    get:
+      x-external: true
+      x-emits-event: true
+      security:
+      - OAuthFlow:
+        - webhooks:write
+      summary: List webhooks
+      description: Make an API call to this endpoint to list existing webhooks.
+      operationId: getWebhooks
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: existing webhooks.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWebhooksResponseDto'
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      x-external: true
+      x-emits-event: true
+      security:
+      - OAuthFlow:
+        - webhooks:write
+      summary: Create webhook
+      description: 'Make an API call to this endpoint to subscribe to a webhook.
+
+
+        Events are a collection of strings of the following types:
+
+        * `sms.subscribed`
+
+        * `sms.sent`
+
+        * `sms.message_link_click`
+
+        * `email.subscribed`
+
+        * `email.unsubscribed`
+
+        * `email.message_link_click`
+
+        * `email.opened`
+
+        * `custom_attribute.set`
+
+
+        Event types are case sensitive.
+
+
+        All events included will be sent to the URL.
+
+        '
+      operationId: createWebhook
+      tags:
+      - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookRequestDto'
+      responses:
+        '201':
+          description: Webhook has been created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWebhookResponseDto'
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /webhooks/{webhookId}:
+    delete:
+      x-external: true
+      x-emits-event: true
+      security:
+      - OAuthFlow:
+        - webhooks:write
+      summary: Delete webhook
+      description: Make an API call to this endpoint to remove a webhook.
+      operationId: deleteWebhook
+      parameters:
+      - name: webhookId
+        in: path
+        description: id of the webhook to delete
+        required: true
+        schema:
+          type: string
+      tags:
+      - Webhooks
+      responses:
+        '204':
+          description: Webhook has been deleted
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    put:
+      x-external: true
+      x-emits-event: true
+      security:
+      - OAuthFlow:
+        - webhooks:write
+      summary: Update webhook
+      description: Make an API call to this endpoint to update a webhook
+      operationId: updateWebhook
+      parameters:
+      - name: webhookId
+        in: path
+        description: The id of the webhook to update
+        required: true
+        schema:
+          type: string
+      tags:
+      - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWebhookRequestDto'
+      responses:
+        '200':
+          description: Webhook has been updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWebhookResponseDto'
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  schemas:
+    UpdateWebhookRequestDto:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The destination url of the webhook
+          example: https://example.com/webhooks
+        events:
+          type: array
+          items:
+            type: string
+          description: The list of events this webhook is subscribed to
+          example:
+          - sms.sent
+          - phone.subscribed
+        disabled:
+          type: boolean
+          description: (optional) Disable the webhook endpoint if set to true.
+    GetWebhooksResponseDto:
+      type: object
+      properties:
+        webhooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetWebhookResponseDto'
+    CreateWebhookRequestDto:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The destination url of the webhook
+          example: https://example.com/webhooks
+        events:
+          type: array
+          items:
+            type: string
+          description: The list of events this webhook is subscribed to
+          example:
+          - sms.sent
+          - phone.subscribed
+    CreateWebhookResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the installed webhook
+          example: MjU6Q29tcGFueUFwcGxpY2F0aW9uV2ViaG9vazIy
+        url:
+          type: string
+          description: The destination url of the webhook
+          example: https://example.com/webhooks
+        events:
+          type: array
+          items:
+            type: string
+          description: The list of events this webhook is subscribed to
+          example:
+          - sms.sent
+          - phone.subscribed
+        type:
+          type: string
+          description: The type of webhook; can be either `INSTALLED` or `CREATOR`
+        disabledAt:
+          type: string
+          description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
+    UpdateWebhookResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the installed webhook
+          example: MjU6Q29tcGFueUFwcGxpY2F0aW9uV2ViaG9vazIy
+        url:
+          type: string
+          description: The destination url of the webhook
+          example: https://example.com/webhooks
+        events:
+          type: array
+          items:
+            type: string
+          description: The list of events this webhook is subscribed to
+          example:
+          - sms.sent
+          - phone.subscribed
+        type:
+          type: string
+          description: The type of webhook; can be either `INSTALLED` or `CREATOR`
+        disabledAt:
+          type: string
+          description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
+    GetWebhookResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the installed webhook
+          example: MjU6Q29tcGFueUFwcGxpY2F0aW9uV2ViaG9vazIy
+        url:
+          type: string
+          description: The destination url of the webhook
+          example: https://example.com/webhooks
+        type:
+          type: string
+          description: The type of webhook; can be either `SUBSCRIPTION` or `STATIC`
+        events:
+          type: array
+          items:
+            type: string
+          description: The list of events this webhook is subscribed to
+          example:
+          - sms.sent
+          - phone.subscribed
+        companyId:
+          type: string
+          description: The installer company ID
+          example: MDc6Q29tcGFueTI
+        disabledAt:
+          type: string
+          description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
+  responses:
+    InternalError:
+      description: Internal Server Error
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
+    NotFound:
+      description: The specified resource was not found
+    AccessDenied:
+      description: Access Denied
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    OAuthFlow:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow. [More info](https://docs.attentivemobile.com/pages/authentication/)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+          tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+          scopes:
+            attributes:write: read and write custom attributes
+            subscriptions:write: read and write subscriptions
+            events:write: read and write custom events
+            ecommerce:write: read and write ecommerce events
+            segments:write: read and write segments
+            segments:read: read segments
+x-readme:
+  explorer-enabled: false

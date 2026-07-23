@@ -1,0 +1,201 @@
+openapi: 3.0.3
+info:
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
+  title: Attentive Access Token Privacy Request API
+  version: ''
+servers:
+- url: https://api.attentivemobile.com/v1
+  description: Attentive API
+security:
+- bearerAuth: []
+tags:
+- name: Privacy Request
+  description: 'You can use the Privacy Request API in order to comply with [California Consumer Privacy Act](https://epic.org/california-consumer-privacy-act-ccpa/)
+
+    deletion requests through Attentive. For more information, you can review [Attentive’s FAQs for CCPA](https://attentivemobile.atlassian.net/wiki/download/attachments/629309474/Attentive%20FAQs%20for%20CCPA.pdf?version=4&modificationDate=1585845052142&cacheVersion=1&api=v2)
+
+    or the [Important Notice Regarding the CCPA of 2018](https://attentivemobile.atlassian.net/wiki/download/attachments/629309474/Important%20Notice%20Regarding%20the%20California%20Consumer%20Privacy%20Act%20of%202018%20(CCPA).pdf?version=1&modificationDate=1579115568586&cacheVersion=1&api=v2).
+
+
+    If you submit an email address or phone number that matches a user for the identified Company or Brand, Attentive will process your deletion request for the matching user(s) only. A user''s data may not be deleted if it does not match at least one of the data elements you submitted in the request (email address or phone number). Attentive may reach out to you if we require additional instructions to process your request.
+
+    '
+  x-beta: false
+paths:
+  /privacy/delete-request:
+    post:
+      x-external: true
+      x-emits-event: true
+      summary: Add a deletion request
+      description: 'Make a call to this endpoint to create a new privacy deletion request. This will delete a subscriber within thirty days, provided the call was successful. Use the GET endpoint with the id returned to confirm deletion.
+
+        '
+      security:
+      - OAuthFlow:
+        - privacy_requests:write
+      tags:
+      - Privacy Request
+      operationId: addDeleteRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrivacyRequestAddDeleteEventDto'
+      responses:
+        '200':
+          description: Delete request added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrivacyRequestDto'
+              example:
+                id: 123abc
+        '400':
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrivacyRequestErrorDto'
+              example:
+                error: Must either specify subscriberPhone or subscriberEmail
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /privacy/delete-request/{id}:
+    get:
+      x-external: true
+      x-emits-event: true
+      summary: Get a CCPA delete request by Id
+      security:
+      - OAuthFlow:
+        - privacy_requests:read
+      tags:
+      - Privacy Request
+      operationId: getDeleteRequest
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: Alphanumeric ID of the request to get
+      responses:
+        '200':
+          description: Delete request fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrivacyRequestDto'
+              example:
+                id: 123abc
+                processed: true
+                type: DELETE
+                subjectPhone: +*****5555
+                subjectEmail: a**@website.com
+                requestMsg: The subscriber requested to be removed
+                requestDateTime: 2020-09-02T17:44:23.875+0000
+                processingStartDateTime: 2020-09-02T17:45:23.875+0000
+                processingEndDateTime: 2020-09-02T17:46:23.875+0000
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  responses:
+    InternalError:
+      description: Internal Server Error
+    Unauthorized:
+      description: Unauthorized
+    NotFound:
+      description: The specified resource was not found
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+  schemas:
+    PrivacyRequestErrorDto:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error Message
+    PrivacyRequestDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the privacy request.
+        processed:
+          type: boolean
+          description: Status of the request.
+        type:
+          type: string
+          description: Type of the request.
+        subjectEmail:
+          type: string
+          description: Email of a subscriber.
+        subjectPhone:
+          type: string
+          description: Phone of a subscriber.
+        requestMsg:
+          type: string
+          description: An optional message for an audit trail.
+        requestDateTime:
+          type: string
+          description: Timestamp of when the request was made.
+        processingStartDateTime:
+          type: string
+          description: Timestamp of when processing of the request began.
+        processingEndDateTime:
+          type: string
+          description: Timestamp of when processing of the request completed.
+    PrivacyRequestAddDeleteEventDto:
+      type: object
+      properties:
+        subjectEmail:
+          type: string
+          description: Email of a subscriber. Only required if __subjectPhone__ is empty.
+        subjectPhone:
+          type: string
+          description: Phone of a subscriber. Only required if __subjectEmail__ is empty.
+        requestMsg:
+          type: string
+          description: An optional message for an audit trail.
+        clientUserId:
+          type: string
+          description: ClientUserId of a subscriber. Only required if __subjectEmail__ and __subjectPhone__ is empty.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    OAuthFlow:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow. [More info](https://docs.attentivemobile.com/pages/authentication/)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+          tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+          scopes:
+            attributes:write: read and write custom attributes
+            subscriptions:write: read and write subscriptions
+            events:write: read and write custom events
+            ecommerce:write: read and write ecommerce events
+            segments:write: read and write segments
+            segments:read: read segments
+x-readme:
+  explorer-enabled: false

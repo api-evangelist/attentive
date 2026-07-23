@@ -1,0 +1,226 @@
+openapi: 3.0.3
+info:
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
+  title: Attentive Access Token Product Catalog API
+  version: ''
+servers:
+- url: https://api.attentivemobile.com/v1
+  description: Attentive API
+security:
+- bearerAuth: []
+tags:
+- name: Product Catalog
+  description: "Our product catalog API unlocks the ability to send high-performing journeys such as back in stock, low inventory, and price drop. It also lets you segment your customers and branch journeys using product data.\n- **Create high performing journeys**, such as back in stock, low inventory, and price drop.\n- **Segment customers** based on their past browsing, add to cart, and purchasing activity using product data such as name, category, tag, price, and other attributes.\n- **Branch journeys** based on product attributes or inventory, such as only sending a message if the product is in stock.\n\nAttentive also has several integrations with popular e-commerce platforms that sync product data to Attentive.  These are available in the Integrations tab.\n\n## Important note for testing/QA\n\nWhen you're testing journeys that use product catalog data (like price drop, back in stock, or low inventory), *we strongly recommend adding a **[Wait step](https://help.attentivemobile.com/hc/en-us/articles/360056415972-Add-steps-to-a-journey#h_01EY4TST8MRRG9GDZP2AT0EV9E)** of at least one hour as the very first step in the journey.* This initial wait step allows sufficient time for our system to process changes to your product catalog. \n\nAn initial wait step is generally *not* necessary for your actual live journeys. In most non-testing scenarios, subscribers will enter the journey after catalog updates have already been processed.\n\nWhen testing back in stock journeys specifically, keep in mind that back in stock journeys are triggered when `availableForPurchase` is `false`, not when `inventoryQuantity` is `0` (or less than the threshold amount if you're using [inventory thresholds](https://help.attentivemobile.com/hc/en-us/articles/4404286271380-Create-a-back-in-stock-journey)).\n\n## How to Get Started\n1. [Create an Attentive app to get an api key](https://docs.attentivemobile.com/pages/create-and-manage-custom-apps/)\n2. [Review the authentication workflow](https://docs.attentivemobile.com/pages/authentication/)\n3. Read through the product catalog file format you'll need to generate to send us your product catalog.\n4. Either use the sample script below to send us the file(s) you've generated, or implement something similar.\n5. By default, `validateOnly` will be set to `true` when initiating the upload, in order for you to develop without \nsaving the catalog Attentive side. Once you're ready for production, go ahead and set `validateOnly` to `false`.\n6. Once the file has been uploaded, contact your CSM to confirm that the data quality is high enough for the Attentive product data features to be enabled.\n\n### Sample CLI Utility Script\nFeel free to reuse and adapt this Python3 script to send Attentive the catalog files you've generated.\n```python\nimport argparse\nimport requests  # you may need to install this https://docs.python-requests.org/en/latest/user/install/\nimport json\nimport time\n\nfrom distutils.util import strtobool\n\n\nAPI_KEY = ''  # Set this\nAPI_BASE_URL = 'https://api.attentivemobile.com'\nSTATUS_INTERVAL = 10\n\n\ndef initiate_catalog_upload(validate_only, api_key):\n    post_url = API_BASE_URL + '/v1/product-catalog/uploads'\n    r = requests.post(\n        post_url,\n        json={'validateOnly': validate_only},\n        headers={'Authorization': 'Bearer ' + api_key},\n    )\n    assert r.status_code == 200, \"Are you sure your api key is correct?\"\n    resp = r.json()\n    return resp['uploadId'], resp['uploadUrl']\n\n\ndef print_errors(errors):\n    print(\"Validation Errors:\")\n    for error in errors:\n        print(json.dumps(error))\n\n\ndef wait_for_validation(upload_id, validate_only, api_key, counter):\n    \"\"\"\n    The file at this point should now be queued up and we are awaiting validation. If there are any\n    validation errors, we'll print them out from here. You may want to integrate your own more\n    advanced monitoring.\n    \"\"\"\n    time.sleep(STATUS_INTERVAL)\n    get_url = API_BASE_URL + '/v1/product-catalog/uploads/' + upload_id\n    r = requests.get(get_url, headers={'Authorization': 'Bearer ' + api_key}).json()\n    if r['errors']:\n        # Consider implementing alerting over here\n        print_errors(r['errors'])\n    if r['status'] == 'validated':\n        return\n    # waiting approximately an hour before giving up. Totally up to you how long, but Attentive should\n    # rarely be behind an hour behind in processing\n    if counter == 360:\n        print(\"Giving up on waiting for validation for \" + upload_id)\n        return\n\n    wait_for_validation(upload_id, validate_only, api_key, counter + 1)\n\n\ndef upload_catalog(filepath, validate_only, api_key):\n    upload_id, upload_url = initiate_catalog_upload(validate_only, api_key)\n    with open(filepath, 'rb') as f:\n        r = requests.put(upload_url, data=f)\n        assert r.status_code == 200, 'Unexpected issue uploading'\n    wait_for_validation(upload_id, validate_only, api_key, 0)\n    return upload_id\n\n\nif __name__ == '__main__':\n    parser = argparse.ArgumentParser(\n        description='CLI utility script to demonstrate and assist in sending your generated product catalog to Attentive via its API'\n    )\n    parser.add_argument('filepath', help='Path to your catalog file')\n    parser.add_argument(\n        '--validateOnly',\n        default=True,\n        dest='validate_only',\n        type=lambda x: bool(strtobool(x)),\n        help='Boolean flag to choose whether or not Attentive should only validate the file for correctness only or not. '\n        'Defaults to True to prevent saving invalid data during development. Set to False when everything passes without errors.',\n    )\n    parser.add_argument(\n        '--apiKey',\n        dest='api_key',\n        help='You can pass the API Key in here as an argument or set it in the API_KEY variable at the top of this file',\n    )\n    args = parser.parse_args()\n\n    key = args.api_key or API_KEY\n    assert key, (\n        'Please either pass in the apiKey argument to this script, or '\n        'update the API_KEY variable at the top of this file to authenticate to Attentive'\n    )\n    id = upload_catalog(args.filepath, args.validate_only, key)\n```\n## Product catalog file format\nYou can use the Product Catalog API to provide Attentive with your entire product catalog\nprogrammatically in order to segment or branch on different product attributes to send more\ntargeted SMS messages. It also unlocks other unique product features (e.g. Back In-Stock Journeys).\n\nIn order to use the Product Catalog API, you must first provide Attentive with your full or\npartial product catalog as a **ndjson format file** to be HTTP file uploaded to a specified URL. *Each\nline in the file represents a full product, as described in the sample below*. This article\noutlines the structure of each product/row, as well as the definitions of each object and field.\n\n```\nTop-level product\n{\n   \"name\": string, *\n   \"id\": string, *\n   \"description\": string,\n   \"brand\": string,\n   \"link\": string, *\n   \"lastUpdated\": timestamp, *\n   \"categories\": Array<string>,\n   \"tags\": Array<string>,\n   \"productOptions\": Array<ProductOption>,\n   \"images\": Array<Image>,\n   \"attributes\": Array<Attribute>\n   \"variants\": Array<Variant> *,\n   \"collections\": Array<String>\n}\n\nProduct Option\n{\n   \"name\": string, *\n   \"position\": int, *\n   \"values\": Array<string> *\n}\n\nImage\n{\n   \"position\": int,\n   \"alt\": string,\n   \"src\": string, *\n   \"width\": int,\n   \"height\": int,\n   \"variantIds\": Array<string>\n}\n\nAttribute\n{\n   \"name\": string, *\n   \"value\": string *\n}\n\nVariant\n{\n   \"name\": string, * full name\n   \"id\": string, *\n   \"position\": int,\n   \"prices\": Array<Price>,\n   \"availableForPurchase\": boolean, *\n   \"inventoryQuantity\": int, *\n   \"productOptionValues\": Array<ProductOptionValue>,\n   \"link\": string, *\n   \"lastUpdated\": timestamp, *\n   \"attributes\": Array<Attribute>\n}\n\nProduct Option Value\n{\n   \"productOptionName\": string, *\n   \"value\": string *\n}\n\nPrice\n{\n   \"currencyCode\": string, *\n   \"amount\": string, *\n   \"compareAtPrice\": string,\n}\n```\n\n### Definition of terms\n\n#### Product\nProducts are the goods that you are selling on your website. For example, it can be a t-shirt\nor a pair of shoes. This is the root JSON object on each line and is inherently required.\n\n| Field | Description | Type | Required |\n| ----- | ----- | -------- | ---- |\n| id | This is your product ID and the field we key off of. It must be unique across your catalog. You need this unique ID to make any updates to the product by uploading your product with the same id. The maximum length of the ID is 256 characters. | string | Required |\n| name | The name of your product. Note that this is how it appears in messages. The maximum length of the name is 256 characters. | string | Required |\n| description | A short description of your product. The maximum length of the description is 1024 characters. | string | Optional |\n| brand | Brand for your product. Maximum length of brand is 256 characters. | string | Optional |\n| link | The link to your product's detail page online. Maximum length of link is 2048 characters. (http(s) required) | string | Required |\n| lastUpdated | The date and time (in UTC) of when your product was last updated. | [timestamp](https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC) | Required |\n| categories | One or more categories in your taxonomy associated with this product. You can specify up to 100 categories per product and each category can be up to 750 characters long. | Array&lt;string&gt; | Optional |\n| tags | One or more tags that are associated with and used to categorize this product. You can specify up to 250 tags per product and each tag can be up to 64 characters long. | Array&lt;string&gt; | Optional |\n| productOptions | See [Product Option](#product-option). Up to 25 ProductOptions are allowed per product and up to 200 values are allowed per option. | Array&lt;ProductOption&gt; | Optional |\n| images | See [Image](#image). Up to 250 images are allowed per product. | Array&lt;Image&gt; | Optional |\n| attributes | See [Attribute](#attribute). Up to 100 attributes are allowed per product. | Array&lt;Attribute&gt; | Optional |\n| variants | See [Variant](#variant). Up to 200 variants are allowed per product. | Array&lt;Variant&gt; | Required |\n| collections | The grouping of products that this product belongs to. Up to 50 collections per product are allowed. | Array&lt;string&gt; | Optional |\n\n\n#### Variant\nA variant can be added to a Product to represent one version of a product with several options.\nThe Product has a variant for every possible combination of its options. Following the example\nin [Product](#product), a variant is a size small and color black. An order can begin fulfillment once a\nvariant is selected. Each product must have at least one variant\n\n| Field | Description | Type | Required |\n| ----- | ----- | -------- | ---- |\n| id | This is your variant ID and the field we key off of. It must be unique across your catalog. You need this unique ID to make any updates to the product by uploading your variant with the same id. The maximum length of the ID is 256 characters. | string | Required |\n| name | The name of this variant. Note that this is how it appears in messages to your subscribers. The maximum length of the name is 256 characters. | string | Required |\n| position | The order in which this variant appears among all the other variants that belong to this product. The variant with the lowest number is the default variant. This value must be greater than or equal to 0.  | int | Optional |\n| link | The link to your variant's detail page online. If there is no link for your variant, you can use your product link. The maximum length of the link is 2048 characters. (http(s) required) | string | Required |\n| prices | See [Price](#price) | Array&lt;Price&gt; | Required\n| availableForPurchase | Is this variant still being sold? | boolean | Required |\n| inventoryQuantity | The current inventory count for this variant. Required for Low Inventory and Back in Stock journeys to function correctly. | int | Required |\n| productOptionValues | The combination of options that this variant represents for the product. See [Product Options](#product-option) section for details. | Array&lt;ProductOption&gt; | Optional |\n| attributes | See [Attribute](#attribute). Up to 100 Variants allowed. | Array&lt;Attribute&gt; | Optional |\n| lastUpdated | The date and time (in UTC) of when your product or variant was last updated. | [timestamp](https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC) | Required |\n\n\n#### Product Option\nProduct options are the dimensions or choices that a customer has to select to add a variant\nto their cart. Following our previous [Product](#product) example above with the t-shirt, the\ncustomer needs to select the size and color they want. In this example, size and color are the\nproduct options.\n\n| Field | Description | Type | Required |\n| ----- | ----- | -------- | ---- |\n| name | The name/title of this product option. Up to 256 characters long | string | Required |\n| position | The order in which this option appears among all the other options. The option with the lowest number is first in the order. This value must be greater than or equal to 0. | int | Required |\n| values | The different possible values for this product option. Up to 256 characters long for each value. | Array&lt;string&gt; | Required |\n\n\n#### Product Option Value\nProduct option values are the unique product option selections associated with a given variant.\nThese are contextualized within the Variant object.\n\n| Field | Description | Type | Required |\n| ----- | ----- | -------- | ---- |\n| productOptionName | The product option name | string | Required |\n| value | The selection or value for this variant | string | Required |\n\n\n#### Attribute\nGeneric key/value data for products/variants that can be used for categorizing.\n\n| Field | Description | Type | Required |\n| ----- | ----- | -------- | ---- |\n| name | The attribute name. Up to 64 characters long. | string | Required |\n| value | The attribute value.  Up to 256 characters long. | string | Required |\n\n\n#### Image\nData for the images associated with your products and variants that can be used for Attentive product\nmessaging and experiences.\n\n| Field | Description | Type | Required |\n| ----- | ----- | -------- | ---- |\n| src | The URL to the image (http(s) required). | string | Required |\n| alt | The alt text for the image. This is used as a back up in case an image can't be displayed and standard on the web. Up to 512 characters allowed. | string | Optional |\n| width | The width of the image in pixels | int | Optional |\n| height | The height of the image in pixels | int | Optional |\n| variantIds | The list of variant IDs this image applies to. Each id must match the ID of the field of one of the variants. | Array&lt;string&gt; | Optional |\n| position | The order in which images are considered for a product or variant. The image with the lowest position will be the default image. In other words, ascending order. Defaults to 0. | int | Optional |\n\n\n#### Price\nA price associated with the variant. You may have more than one price and currency associated\nwith a variant. In those cases, Attentive will likely choose the lowest available price in\nmessaging experiences.\n\n| Field | Description | Type | Required |\n| ----- | ----- | -------- | ---- |\n| currencyCode | This follows the three letter currency codes (e.g. USD). For more info, see [ISO-4217](https://www.iso.org/iso-4217-currency-codes.html). | string | Required |\n| amount | The price amount | string | Required |\n| compareAtPrice | This is another price field, and use of this field implies the variant is on sale. This is the price buyers compare against to evaluate how good a sale is. Example: \"The price was <compareAtPrice> but now is <amount>! Get it while it lasts\" | string | Optional |\n\n\n### Formatted example of one product\nThe below example is formatted in json to clearly show the object schema.  The file you pass to the API should be in **ndjson format**.\n```\n{\n  \"name\": \"Nasa T-Shirt\",\n  \"id\": \"PD-123\",\n  \"description\": \"A very popular T-Shirt\",\n  \"brand\": \"NASA\",\n  \"link\": \"https://www.google.com\",\n  \"lastUpdated\": \"2021-10-05T18:08:28+00:00\",\n  \"categories\": [\"Shirts\"],\n  \"tags\": [\"Summer Sale\", \"Space\"],\n  \"productOptions\": [\n    {\"name\": \"Color\", \"position\": 0, \"values\": [\"Blue\", \"Black\"]},\n    {\"name\": \"Size\", \"position\": 1, \"values\": [\"Small\", \"Medium\", \"Large\"]}\n  ],\n  \"images\": [\n    {\"src\": \"https://www.google.com\", \"alt\": \"Picture of Nasa T-Shirt in Blue\", \"position\": 0, \"height\": 250, \"width\": 400, \"variantIds\": [\"VD-234\"]},\n    {\"src\": \"https://www.google.com\", \"alt\": \"Another Picture of Nasa T-Shirt in Black\", \"position\": 0, \"height\": 250, \"width\": 400, \"variantIds\": [\"VD-235\", \"VD-236\"]}\n  ],\n  \"attributes\": [{\"name\": \"Fabric\", \"value\": \"Cotton\"}],\n  \"variants\": [\n    {\n      \"name\": \"Nasa T-Shirt - Blue - Small\",\n      \"id\": \"VD-234\",\n      \"position\": 0,\n      \"prices\": [\n        {\"currencyCode\": \"USD\", \"amount\": \"10.00\"}\n      ],\n      \"availableForPurchase\": true,\n      \"inventoryQuantity\": 10,\n      \"productOptionValues\": [\n        {\"productOptionName\": \"Color\", \"value\": \"Blue\"},\n        {\"productOptionName\": \"Size\", \"value\": \"Small\"}\n      ],\n      \"link\": \"https://www.google.com\",\n      \"lastUpdated\": \"2021-10-05T18:08:28+00:00\"\n    },\n    {\n      \"name\": \"Nasa T-Shirt - Black - Medium\",\n      \"id\": \"VD-235\",\n      \"position\": 1,\n      \"prices\": [\n        {\"currencyCode\": \"USD\", \"amount\": \"10.00\"}\n      ],\n      \"availableForPurchase\": true,\n      \"inventoryQuantity\": 5,\n      \"productOptionValues\": [\n        {\"productOptionName\": \"Color\", \"value\": \"Black\"},\n        {\"productOptionName\": \"Size\", \"value\": \"Medium\"}\n      ],\n      \"link\": \"https://www.google.com\",\n      \"lastUpdated\": \"2021-10-05T18:08:28+00:00\"\n    },\n    {\n      \"name\": \"Nasa T-Shirt - Black - Large\",\n      \"id\": \"VD-236\",\n      \"position\": 2,\n      \"prices\": [\n        {\"currencyCode\": \"USD\", \"amount\": \"10.00\"}\n      ],\n      \"availableForPurchase\": true,\n      \"inventoryQuantity\": 0,\n      \"productOptionValues\": [\n        {\"productOptionName\": \"Color\", \"value\": \"Black\"},\n        {\"productOptionName\": \"Size\", \"value\": \"Large\"}\n      ],\n      \"link\": \"https://www.google.com\",\n      \"lastUpdated\": \"2021-10-05T18:08:28+00:00\"\n    }\n  ]\n}\n  ```\n### Development Workflow Tips\n- As you're developing your code to generate this catalog file for Attentive, it's helpful to\nvalidate your generated files without any side effects on Attentive. To do that, please set\nthe `validateOnly` boolean to `true` when calling `/product-catalog/uploads`. Please note\nyour file is not immediately processed once the upload compeletes, but you can check the\nstatus of your upload with the same endpoint.\n- The cadence of uploading your catalog to Attentive is up to you. A daily job works great for most\nof our users, but we'd prefer we limit it to no more than every few hours if you're sending us\nyour entire catalog on every upload. However, if you would like to send us \"delta uploads\"\n(only products/variants which have changed since your last upload), please feel free to be more\nliberal with your cadence. If we find there are upload frequency issues, we'll be sure to reach\nout.\n-  If you have any questions as to how to map your catalog to the Attentive format above,\nplease reach out to your client strategy partner at Attentive.\n\n### File Upload Limits\n- All files need to be UTF-8 encoded.\n- 2GB maximum file size\n- 4mb maximum line/product size\n- 500k line/product limit per file"
+  x-beta: false
+paths:
+  /product-catalog/uploads:
+    x-external: true
+    description: 'Upload Product Catalog
+
+      '
+    post:
+      x-external: true
+      x-emits-event: true
+      security:
+      - OAuthFlow:
+        - product_catalogs:write
+      summary: Upload Product Catalog
+      description: "Make a call to this endpoint to start sending Attentive your full or partial product catalog.\nThe process starts with a POST to this endpoint, where you will receive a pre-signed AWS S3 URL. You can\nuse any language's http request libraries for uploading a file via HTTP. Here's how to do it with `curl` as an example\n\n\n```\ncurl --upload-file ${fileNameLocally} ${presignedURL}\n```\n\n\nand here's an example in Python\n```python\nimport requests\nwith open(filepath, 'rb') as f:\n    r = requests.put(upload_url, data=f)\n```\n\n[Here are examples from AWS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/PresignedUrlUploadObject.html) on how to send the file over in popular programming languages. Note that you aren't interested in\nthe portion of these examples where they are generating the pre-signed URL, but simply the http call to upload the file to the URL.\n\nOnce your full or partial product catalog begins to upload, the status is updated to\n`validating` while it's processing and the file is checked for errors. After the upload is\nvalidated, the status is updated to `validated`. Once the catalog is saved, \nthe status is updated to `completed`. In cases where there are errors saving\nthe data, Attentive Engineering is notified and will contact you.\n\n\nTo ensure there are no validation errors in the file, you can set `validateOnly` parameter\nto `true` to avoid saving any data. We highly recommend this during your development to get a\nfaster feedback loop on any validation errors as you generate files.\n\n\nIf there are no errors returned in the upload response, your product catalog uploaded\nsuccessfully.\n"
+      operationId: postUpload
+      tags:
+      - Product Catalog
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogUploadRequest'
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogUploadResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    get:
+      x-external: true
+      security:
+      - OAuthFlow:
+        - product_catalogs:read
+      tags:
+      - Product Catalog
+      summary: View Recent Catalog Uploads
+      description: 'Make a call to this endpoint to list recent catalog uploads with their statuses to gain visibility into the ingestion workflow in order of creation. See the POST of this endpoint for details.
+
+        `Expires` indicates how long you can wait before uploading the product catalog file. If the catalog upload expires, then we will no longer process the file that you upload and you will need to initiate  a new catalog upload.
+
+        '
+      operationId: getUploads
+      responses:
+        '200':
+          description: returns the list of uploads
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CatalogUploadResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /product-catalog/uploads/{uploadId}:
+    x-external: true
+    description: 'Making a GET request with the uploadID from your original catalog upload POST will give you the updated information on how the upload is progressing. You can also use the list endpoint as well to retrieve the same data. Please see the POST of `/product-catalog/uploads` for more detail.
+
+      '
+    get:
+      security:
+      - OAuthFlow:
+        - product_catalogs:read
+      summary: Lookup Product Catalog Ingestion
+      tags:
+      - Product Catalog
+      operationId: lookupUpload
+      parameters:
+      - name: uploadId
+        in: path
+        description: The upload ID returned from a previous call
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns the provided upload status update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogUploadResponse'
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  responses:
+    InternalError:
+      description: Internal Server Error
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
+    NotFound:
+      description: The specified resource was not found
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+  schemas:
+    CatalogUploadErrorResponse:
+      type: object
+      properties:
+        errorType:
+          type: string
+          description: The class of validation error
+        errorMessage:
+          type: string
+          description: Detailed validation error message
+        lineNum:
+          type: integer
+          format: int64
+          description: The line number for the given validation error in your file/catalog upload
+    CatalogUploadRequest:
+      type: object
+      properties:
+        validateOnly:
+          type: boolean
+          description: If set to true, then data will not ingest and only validate the file.
+          default: false
+    CatalogUploadResponse:
+      type: object
+      properties:
+        uploadId:
+          type: string
+          description: The identifier for this product catalog upload
+        status:
+          type: string
+          description: 'The workflow state the product catalog upload is in. Workflow is `initialized` -> `validating` -> `validated` -> `completed`. The ideal end state is to reach `completed` without any validation errors. This indicates Attentive ingested everything in your upload.
+
+            '
+        errors:
+          type: array
+          description: 'The format validation errors that were thrown. We show up to 10 errors for every validation type to reduce noise.
+
+            '
+          items:
+            $ref: '#/components/schemas/CatalogUploadErrorResponse'
+        productsReceived:
+          type: integer
+          format: int64
+          description: The number of products we've so far seen for validation in your upload
+        productsProcessed:
+          type: integer
+          format: int64
+          description: The number of products we've successfully validated in your upload
+        lastUpdated:
+          type: string
+          description: When Attentive has last updated the status and stats
+        expires:
+          type: string
+          description: When this catalog upload will no longer be available
+        uploadUrl:
+          type: string
+          description: The pre-signed URL to upload your product catalog to
+        validateOnly:
+          type: boolean
+          description: 'Flag for avoiding saving the data. If set to `true`, the data will not be saved by Attentive. Useful for testing the validation
+
+            '
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    OAuthFlow:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow. [More info](https://docs.attentivemobile.com/pages/authentication/)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+          tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+          scopes:
+            attributes:write: read and write custom attributes
+            subscriptions:write: read and write subscriptions
+            events:write: read and write custom events
+            ecommerce:write: read and write ecommerce events
+            segments:write: read and write segments
+            segments:read: read segments
+x-readme:
+  explorer-enabled: false

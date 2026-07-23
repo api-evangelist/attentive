@@ -1,0 +1,717 @@
+openapi: 3.0.3
+info:
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
+  title: Attentive Access Token Segments API
+  version: ''
+servers:
+- url: https://api.attentivemobile.com/v1
+  description: Attentive API
+security:
+- bearerAuth: []
+tags:
+- name: Segments
+  description: 'Endpoints for submitting bulk segment member additions and removals. Use these endpoints to manage segment memberships in bulk and monitor the processing status asynchronously.
+
+
+    ## Processing Times
+
+
+    The Bulk API processes jobs with the following targets:
+
+    - **Standard Processing**: The first 10,000 records per day per customer typically complete within 4 hours of request acceptance.
+
+    - **High-Volume Processing**: Additional records beyond 10,000 per day typically complete within 12 hours.
+
+
+    **Note**: For jobs with more than 1 million records, processing times may vary.
+
+    '
+  x-beta: true
+paths:
+  /v2/bulk/segments/members:
+    x-external: hidden
+    x-requires-auth: false
+    post:
+      x-external: true
+      x-emits-event: true
+      security:
+      - bearerAuth: []
+      - OAuthFlow:
+        - segments:write
+      summary: Add Bulk Segment Members
+      description: 'Add members to a segment in bulk. This endpoint accepts 1 to 10,000 members per request. Members are identified by email, phone number, and/or client user ID. The request is validated, queued for asynchronous processing, and a unique batch job ID is returned for tracking the status.
+
+
+        **Request Limits:**
+
+        - Minimum: 1 member per request
+
+        - Maximum: 10,000 members per request
+
+        - At least one identifier (email, phone, or clientUserId) required per member
+
+
+        **Processing:**
+
+        - Jobs are processed asynchronously
+
+        - Use the batch job ID to check status via `GET /v2/bulk/job/{bulkJobId}`
+
+        - Results available as downloadable `.jsonl` file when completed
+
+
+        Scopes Required: [segments:all]
+
+
+        Default Rate Limit: 100 requests per second
+
+        '
+      operationId: postBulkSegmentMembers
+      parameters:
+      - name: Authorization
+        in: header
+        description: Authorization for the request
+        required: true
+        schema:
+          type: string
+      tags:
+      - Segments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentMembers'
+            examples:
+              addThreeMembers:
+                summary: Add three members to loyalty segment
+                description: Example showing adding members with different identifier combinations
+                value:
+                  externalId: loyalty_gold_2025
+                  members:
+                  - email: customer1@example.com
+                    phone: '+14155551234'
+                  - email: customer2@example.com
+                    clientUserId: user-abc-123
+                  - phone: '+14155555678'
+                    clientUserId: user-xyz-789
+              addByEmailOnly:
+                summary: Add members by email only
+                description: Example showing members identified by email address
+                value:
+                  externalId: newsletter_subscribers
+                  members:
+                  - email: subscriber1@example.com
+                  - email: subscriber2@example.com
+                  - email: subscriber3@example.com
+      responses:
+        '202':
+          description: 'The bulk job request was successfully received and accepted for asynchronous processing. The response includes a batchJobId to track the status of the job, along with a confirmation message. Processing has not yet completed, please use the job status endpoint to monitor progress and retrieve results once available.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkSuccessResponse'
+              examples:
+                successResponse:
+                  summary: Successful job submission
+                  description: The job was accepted and queued for processing
+                  value:
+                    message: Bulk segment member add job successfully submitted
+                    batchJobId: 550e8400-e29b-41d4-a716-446655440000
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    delete:
+      x-external: true
+      x-emits-event: true
+      security:
+      - bearerAuth: []
+      - OAuthFlow:
+        - segments:write
+      summary: Remove Bulk Segment Members
+      description: 'Remove members from a segment in bulk. This endpoint accepts 1 to 10,000 members per request. Members are identified by email, phone number, and/or client user ID. The request is validated, queued for asynchronous processing, and a unique batch job ID is returned for tracking the status.
+
+
+        **Request Limits:**
+
+        - Minimum: 1 member per request
+
+        - Maximum: 10,000 members per request
+
+        - At least one identifier (email, phone, or clientUserId) required per member
+
+
+        **Processing:**
+
+        - Jobs are processed asynchronously
+
+        - Use the batch job ID to check status via `GET /v2/bulk/job/{bulkJobId}`
+
+        - Results available as downloadable `.jsonl` file when completed
+
+
+        Scopes Required: [segments:all]
+
+
+        Default Rate Limit: 100 requests per second
+
+        '
+      operationId: deleteBulkSegmentMembers
+      parameters:
+      - name: Authorization
+        in: header
+        description: Authorization for the request
+        required: true
+        schema:
+          type: string
+      tags:
+      - Segments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentMembers'
+            examples:
+              removeThreeMembers:
+                summary: Remove three members from loyalty segment
+                description: Example showing removing members with different identifier combinations
+                value:
+                  externalId: loyalty_gold_2025
+                  members:
+                  - email: former.customer1@example.com
+                    phone: '+14155551234'
+                  - email: former.customer2@example.com
+                    clientUserId: user-def-456
+                  - phone: '+14155559999'
+                    clientUserId: user-ghi-789
+              removeByPhoneOnly:
+                summary: Remove members by phone only
+                description: Example showing members identified by phone number
+                value:
+                  externalId: unsubscribed_users
+                  members:
+                  - phone: '+14155551111'
+                  - phone: '+14155552222'
+                  - phone: '+14155553333'
+      responses:
+        '202':
+          description: 'The bulk job request was successfully received and accepted for asynchronous processing. The response includes a batchJobId to track the status of the job, along with a confirmation message. Processing has not yet completed, please use the job status endpoint to monitor progress and retrieve results once available.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkSuccessResponse'
+              examples:
+                successResponse:
+                  summary: Successful job submission
+                  description: The job was accepted and queued for processing
+                  value:
+                    message: Bulk segment member removal job successfully submitted
+                    batchJobId: 660f9511-f3ac-52e5-b827-557766551111
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v2/segments:
+    x-external: hidden
+    x-requires-auth: true
+    post:
+      x-external: true
+      x-emits-event: true
+      security:
+      - bearerAuth: []
+      - OAuthFlow:
+        - segments:write
+      summary: Create new segment
+      description: 'Creates a new empty segment with the specified name and optional description.
+
+
+        Scopes Required: [segments:Write]
+
+
+        Default Rate Limit: 100 requests per second
+
+        '
+      operationId: createSegment
+      tags:
+      - Segments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSegmentRequest'
+      responses:
+        '201':
+          description: Segment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSegmentResponse'
+        '400':
+          description: Bad request - invalid parameters
+        '401':
+          description: Unauthorized - invalid or missing token
+        '403':
+          description: Access denied - insufficient permissions
+        '429':
+          description: Too many requests - rate limit exceeded
+        '500':
+          description: Internal server error
+    get:
+      x-external: true
+      x-requires-auth: true
+      security:
+      - bearerAuth: []
+      - OAuthFlow:
+        - segments:read
+      summary: List segments
+      description: 'Lists segments with optional filtering by name, external ID, or update timestamp.
+
+
+        Scopes Required: [segments:Read OR segments:Write]
+
+
+        Default Rate Limit: 100 requests per second
+
+        '
+      operationId: listSegments
+      tags:
+      - Segments
+      parameters:
+      - name: name
+        in: query
+        description: Filter by segment name (partial match). Cannot be empty or whitespace only.
+        required: false
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 240
+      - name: externalId
+        in: query
+        description: Filter by external ID. Cannot be empty or whitespace only.
+        required: false
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 255
+      - name: updatedSince
+        in: query
+        description: Filter by segments updated since this timestamp (ISO 8601 format)
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: cursor
+        in: query
+        description: Pagination cursor from previous response. Cannot be empty or whitespace only.
+        required: false
+        schema:
+          type: string
+          minLength: 1
+      - name: limit
+        in: query
+        description: Maximum number of results to return (default 20, max 1000)
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 20
+      responses:
+        '200':
+          description: List of segments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSegmentsResponse'
+        '400':
+          description: Bad request - invalid parameters
+        '401':
+          description: Unauthorized - invalid or missing token
+        '403':
+          description: Access denied - insufficient permissions
+        '429':
+          description: Too many requests - rate limit exceeded
+        '500':
+          description: Internal server error
+  /v2/segments/external/{externalId}:
+    x-external: hidden
+    x-requires-auth: true
+    get:
+      x-external: true
+      x-requires-auth: true
+      security:
+      - bearerAuth: []
+      - OAuthFlow:
+        - segments:read
+      summary: Get segment by external ID
+      description: 'Retrieves segment details by external ID.
+
+
+        Scopes Required: [segments:Read OR segments:Write]
+
+
+        Default Rate Limit: 100 requests per second
+
+        '
+      operationId: getSegmentByExternalId
+      tags:
+      - Segments
+      parameters:
+      - name: externalId
+        in: path
+        description: External ID of the segment
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 255
+      responses:
+        '200':
+          description: Segment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentResponse'
+        '401':
+          description: Unauthorized - invalid or missing token
+        '403':
+          description: Access denied - insufficient permissions
+        '404':
+          description: Segment not found
+        '429':
+          description: Too many requests - rate limit exceeded
+        '500':
+          description: Internal server error
+    patch:
+      x-external: true
+      x-requires-auth: true
+      x-emits-event: true
+      security:
+      - bearerAuth: []
+      - OAuthFlow:
+        - segments:write
+      summary: Partial update segment by external ID
+      description: 'Partially updates an existing segment. Only provided fields will be updated.
+
+
+        Scopes Required: [segments:Write]
+
+
+        Default Rate Limit: 100 requests per second
+
+        '
+      operationId: patchSegmentByExternalId
+      tags:
+      - Segments
+      parameters:
+      - name: externalId
+        in: path
+        description: External ID of the segment
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchSegmentRequest'
+      responses:
+        '200':
+          description: Segment updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentResponse'
+        '400':
+          description: Bad request - invalid parameters
+        '401':
+          description: Unauthorized - invalid or missing token
+        '403':
+          description: Access denied - insufficient permissions
+        '404':
+          description: Segment not found
+        '429':
+          description: Too many requests - rate limit exceeded
+        '500':
+          description: Internal server error
+    delete:
+      x-external: true
+      x-requires-auth: true
+      x-emits-event: true
+      security:
+      - bearerAuth: []
+      - OAuthFlow:
+        - segments:write
+      summary: Archive segment by external ID
+      description: 'Archives (soft deletes) a segment by external ID. The segment will no longer be visible in list operations but can be restored if needed.
+
+
+        Scopes Required: [segments:Write]
+
+
+        Default Rate Limit: 100 requests per second
+
+        '
+      operationId: deleteSegmentByExternalId
+      tags:
+      - Segments
+      parameters:
+      - name: externalId
+        in: path
+        description: External ID of the segment to archive
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 255
+      responses:
+        '204':
+          description: Segment archived successfully
+        '401':
+          description: Unauthorized - invalid or missing token
+        '403':
+          description: Access denied - insufficient permissions
+        '404':
+          description: Segment not found
+        '429':
+          description: Too many requests - rate limit exceeded
+        '500':
+          description: Internal server error
+components:
+  responses:
+    InternalError:
+      description: Internal Server Error
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
+    NotFound:
+      description: The specified resource was not found
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+  schemas:
+    SegmentResponse:
+      type: object
+      properties:
+        externalId:
+          type: string
+          description: The external segment ID (client-facing identifier)
+          example: loyalty_gold_2025
+        name:
+          type: string
+          description: The name of the segment
+          example: Loyalty Gold Members
+        description:
+          type: string
+          description: The description of the segment
+          example: Customers with gold loyalty status
+        created:
+          type: string
+          format: date-time
+          description: When the segment was created (ISO 8601 format)
+          example: '2025-01-30T12:00:00Z'
+        updated:
+          type: string
+          format: date-time
+          description: When the segment was last updated (ISO 8601 format)
+          example: '2025-01-30T12:00:00Z'
+    SegmentMembers:
+      type: object
+      required:
+      - externalId
+      - members
+      properties:
+        externalId:
+          type: string
+          description: 'The external ID of the segment. This is the client-provided unique identifier for the segment, as defined when creating the segment via the Segment API.
+
+            '
+          example: loyalty_gold_2025
+        members:
+          type: array
+          description: 'Array of segment members to add or remove. Each member must have at least one identifier (email, phone, or clientUserId). Minimum 1 member, maximum 10,000 members per request.
+
+            '
+          minItems: 1
+          maxItems: 10000
+          items:
+            $ref: '#/components/schemas/SegmentMember'
+      example:
+        externalId: loyalty_gold_2025
+        members:
+        - email: customer1@example.com
+          phone: '+14155551234'
+        - email: customer2@example.com
+          clientUserId: user-abc-123
+        - phone: '+14155555678'
+          clientUserId: user-xyz-789
+    BulkSuccessResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: 'A human-readable message confirming that the bulk job was successfully submitted.
+
+            '
+        batchJobId:
+          type: string
+          description: 'A unique identifier representing the submitted batch job. Use this ID to query the job''s status, retrieve results, or diagnose any errors related to the job. This ID is returned upon successful job submission and required for all follow-up actions related to the batch.
+
+            '
+    PatchSegmentRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the segment. If provided, cannot be empty or whitespace only and must be at most 240 characters. Leading and trailing whitespace will be trimmed. At least one field (name or description) must be provided for PATCH.
+          example: Loyalty Gold Members Updated
+          minLength: 1
+          maxLength: 240
+        description:
+          type: string
+          description: The description of the segment. If provided, cannot be empty or whitespace only, must be at least 2 characters, and at most 500 characters. Leading and trailing whitespace will be trimmed. At least one field (name or description) must be provided for PATCH.
+          example: Updated description
+          minLength: 2
+          maxLength: 500
+    CreateSegmentResponse:
+      type: object
+      properties:
+        externalId:
+          type: string
+          description: The external segment ID (client-facing identifier)
+          example: loyalty_gold_2025
+        name:
+          type: string
+          description: The name of the segment
+          example: Loyalty Gold Members
+        description:
+          type: string
+          description: The description of the segment
+          example: Customers with gold loyalty status
+    CreateSegmentRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The name of the segment. Cannot be empty or whitespace only. Leading and trailing whitespace will be trimmed.
+          example: Loyalty Gold Members
+          minLength: 1
+          maxLength: 240
+        description:
+          type: string
+          description: Optional description of the segment. If not provided, defaults to "Manual Segment Upload Public API V2". When provided, cannot be empty or whitespace only and must be at least 2 characters. Leading and trailing whitespace will be trimmed.
+          example: Customers with gold loyalty status
+          minLength: 2
+          maxLength: 500
+        externalId:
+          type: string
+          description: Auto generated if not supplied. Optional externalId set on the segment. Cannot be empty or whitespace only. Leading and trailing whitespace will be trimmed.
+          example: SEG_abc123def456
+          minLength: 1
+          maxLength: 255
+    SegmentMember:
+      type: object
+      description: 'A segment member identified by one or more of: email, phone, or clientUserId. At least one identifier must be provided. Multiple identifiers can be provided to increase matching accuracy.
+
+        '
+      properties:
+        email:
+          type: string
+          format: email
+          description: 'The member''s email address. Use this to identify users by their email. At least one of email, phone, or clientUserId must be provided.
+
+            '
+          example: user1@example.com
+        phone:
+          type: string
+          description: 'The member''s phone number in E.164 format (e.g., +14155551234). At least one of email, phone, or clientUserId must be provided.
+
+
+            **E.164 Format Requirements:**
+
+            - Must start with ''+''
+
+            - Include country code
+
+            - No spaces, dashes, or parentheses
+
+            '
+          example: '+14155551234'
+        clientUserId:
+          type: string
+          description: 'Your system''s unique identifier for this user. Use this when you want to identify users by your own internal ID system. At least one of email, phone, or clientUserId must be provided. Maximum 100 characters.
+
+            '
+          maxLength: 100
+          example: client-user-123
+      example:
+        email: loyalty.member@example.com
+        phone: '+14155551234'
+        clientUserId: cust-789-xyz
+    ListSegmentsResponse:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SegmentResponse'
+        cursor:
+          type: string
+          description: Cursor for pagination (null if no more results)
+          nullable: true
+          example: eyJpZCI6MTIzNDU2fQ==
+        hasMore:
+          type: boolean
+          description: Whether there are more results available
+          example: false
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    OAuthFlow:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow. [More info](https://docs.attentivemobile.com/pages/authentication/)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+          tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+          scopes:
+            attributes:write: read and write custom attributes
+            subscriptions:write: read and write subscriptions
+            events:write: read and write custom events
+            ecommerce:write: read and write ecommerce events
+            segments:write: read and write segments
+            segments:read: read segments
+x-readme:
+  explorer-enabled: false

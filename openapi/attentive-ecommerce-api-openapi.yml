@@ -1,0 +1,332 @@
+openapi: 3.0.3
+info:
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
+  title: Attentive Access Token eCommerce API
+  version: ''
+servers:
+- url: https://api.attentivemobile.com/v1
+  description: Attentive API
+security:
+- bearerAuth: []
+tags:
+- name: eCommerce
+  description: Use the eCommerce API to trigger an event when a user views a product, adds a product to their shopping cart, or makes a purchase.
+  x-beta: false
+paths:
+  /events/ecommerce/product-view:
+    x-external: true
+    post:
+      x-external: true
+      x-emits-event: true
+      security:
+      - OAuthFlow:
+        - ecommerce:write
+      summary: Product view
+      description: Make a call to this endpoint when a user views a product.
+      operationId: postProductViewEvents
+      tags:
+      - eCommerce
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductViewRequest'
+      responses:
+        '200':
+          description: Ok
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /events/ecommerce/add-to-cart:
+    x-external: true
+    post:
+      x-external: true
+      x-emits-event: true
+      security:
+      - OAuthFlow:
+        - ecommerce:write
+      summary: Add to cart
+      description: Make a call to this endpoint when a user adds a product to their shopping cart.
+      operationId: postAddToCartEvents
+      tags:
+      - eCommerce
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddToCartRequest'
+      responses:
+        '200':
+          description: Ok
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /events/ecommerce/purchase:
+    x-external: true
+    post:
+      x-external: true
+      x-emits-event: true
+      security:
+      - OAuthFlow:
+        - ecommerce:write
+      summary: Purchase
+      description: Make a call to this endpoint when a user generates an order or purchase.
+      operationId: postPurchaseEvents
+      tags:
+      - eCommerce
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseRequest'
+      responses:
+        '200':
+          description: Ok
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  schemas:
+    AddToCartRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          description: List of items added to cart.
+          items:
+            $ref: '#/components/schemas/ProductRequest'
+        occurredAt:
+          type: string
+          format: date-time
+          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
+
+            '
+          example: 2021-03-30T14:38:29+0000
+        user:
+          $ref: '#/components/schemas/EventUser'
+      required:
+      - items
+      - user
+    ExternalIdentifiers:
+      type: object
+      description: 'clientUserId or another custom identifier.  This field is required if either phone or email is not provided.
+
+
+        If using an external identifier instead of phone or email, the external identifier must first be associated with a phone or email using the Identity API.
+
+        '
+      properties:
+        clientUserId:
+          type: string
+          description: (optional) Your primary ID for a user
+        customIdentifiers:
+          type: array
+          description: (optional) Namespaced custom identifiers and their values.
+          items:
+            type: object
+            title: ExternalIdentifiersCustomIdentifiers
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+    SalesChannel:
+      type: object
+      properties:
+        channelType:
+          type: string
+          enum:
+          - WEB
+          - IOS_APP
+          - ANDROID_APP
+          - IN_STORE
+          - PHONE
+          - OTHER
+          - ''
+          description: The type of sales channel.
+    PurchaseRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          description: List of items purchased.
+          items:
+            $ref: '#/components/schemas/ProductRequest'
+        orderId:
+          type: string
+        salesChannel:
+          $ref: '#/components/schemas/SalesChannel'
+        occurredAt:
+          type: string
+          format: date-time
+          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
+
+            '
+          example: 2021-03-30T14:38:29+0000
+        user:
+          $ref: '#/components/schemas/EventUser'
+      required:
+      - items
+      - user
+    ProductRequest:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: 'A unique identifier for the product (i.e. "T-Shirt"). If you are providing a [Google Shopping Feed](https://support.google.com/merchants/answer/7052112?hl=en), this should be [item_group_id](https://support.google.com/merchants/answer/6324507). If you don''t have an [item_group_id](https://support.google.com/merchants/answer/6324507) in your feed, use [id](https://support.google.com/merchants/answer/6324405). If you are using [Shopify](https://help.shopify.com/en/manual/products), this should be Shopify product ID.
+
+            '
+          example: AB12345
+        productVariantId:
+          type: string
+          description: 'A unique identifier for the product variant (i.e. "Medium Blue T-Shirt"). If you are providing a [Google Shopping Feed](https://support.google.com/merchants/answer/7052112?hl=en), this should be [id](https://support.google.com/merchants/answer/6324405). If you are using Shopify, this should be Shopify product Variant ID.
+
+            '
+          example: CD12345
+        productImage:
+          type: string
+          description: 'A link to the image of the product. The image should not be larger than 500kb. This image will be used when sending MMS text messages.
+
+            '
+          example: http://my.cdn.com/products/new-product.png
+        productUrl:
+          type: string
+          description: The URL for the product.
+          example: http://my-store.com/products/shirts/my-shirt
+        name:
+          type: string
+          description: The name of the product. This should be in a format that could be used directly in a message.
+          example: T-Shirt
+        price:
+          type: array
+          minItems: 1
+          description: The price and currency of the product.
+          items:
+            $ref: '#/components/schemas/Price'
+        quantity:
+          type: integer
+          description: The number of products.
+          format: int64
+          example: 1
+      required:
+      - productId
+      - productVariantId
+      - price
+    Price:
+      type: object
+      properties:
+        value:
+          type: number
+          description: The price of the product.
+          example: 19.99
+        currency:
+          type: string
+          description: The currency used for the price in [ISO 4217 format](https://www.iso.org/iso-4217-currency-codes.html).
+          example: USD
+          default: USD
+      required:
+      - value
+    EventUser:
+      type: object
+      description: 'User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
+
+        Phone, email, or an external identifier (clientUserId or another custom identifier) are required
+
+        '
+      properties:
+        phone:
+          type: string
+          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if either email or an externalIdentifier is not provided.
+          example: '+13115552368'
+        email:
+          type: string
+          description: Email of the user associated with the action. This field is required if either phone or an externalIdentifier is not provided.
+          example: test@gmail.com
+        externalIdentifiers:
+          $ref: '#/components/schemas/ExternalIdentifiers'
+      additionalProperties: false
+      minProperties: 1
+    ProductViewRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          description: List of items viewed.
+          items:
+            $ref: '#/components/schemas/ProductRequest'
+        occurredAt:
+          type: string
+          format: date-time
+          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
+
+            '
+          example: 2021-03-30T14:38:29+0000
+        user:
+          $ref: '#/components/schemas/EventUser'
+      required:
+      - items
+      - user
+  responses:
+    InternalError:
+      description: Internal Server Error
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    NotFound:
+      description: The specified resource was not found
+    AccessDenied:
+      description: Access Denied
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    OAuthFlow:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow. [More info](https://docs.attentivemobile.com/pages/authentication/)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+          tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+          scopes:
+            attributes:write: read and write custom attributes
+            subscriptions:write: read and write subscriptions
+            events:write: read and write custom events
+            ecommerce:write: read and write ecommerce events
+            segments:write: read and write segments
+            segments:read: read segments
+x-readme:
+  explorer-enabled: false

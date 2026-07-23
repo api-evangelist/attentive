@@ -1,0 +1,35 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.attentive.com/docs/api-rate-limits
+scheme: per-second
+default_limit: 150
+limit_unit: requests per second
+response_status: 429
+headers:
+- name: x-ratelimit-limit
+  description: Total number of requests you can send per second (the current rate limit).
+- name: x-ratelimit-remaining
+  description: Number of requests you can send in the next second without exceeding the limit.
+retry_guidance: Implement retry logic with exponential backoff plus jitter to avoid concurrent retries.
+limits:
+- endpoint: Most endpoints (default)
+  limit_count: 150
+  window: 1s
+- endpoint: Identity (POST /identity-resolution/user-identifiers)
+  limit_count: 10
+  window: 1s
+- endpoint: Subscribe (POST /subscriptions)
+  limit_count: 10
+  window: 1s
+- endpoint: Unsubscribe (POST /subscriptions/unsubscribe)
+  limit_count: 5
+  window: 1s
+- endpoint: Product Catalog Uploads (POST /product-catalog/uploads)
+  limit_count: 1
+  window: 1s
+- endpoint: Bulk User Attributes (POST /v2/bulk/user/attributes)
+  limit_count: 100
+  window: 1s
+- endpoint: Create/update single user (POST /v2/user/attributes)
+  limit_count: 150
+  window: 1s

@@ -1,0 +1,19 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.attentive.com/docs/attentive-tag-sdk, https://docs.attentive.com/docs/mobile-sdks
+note: Client-side / embeddable surfaces that render Attentive creative (sign-up units) and collect on-site/in-app engagement. Distinct from the server-side REST API.
+families:
+- name: Attentive Tag (web)
+  kind: javascript-snippet
+  description: On-site JavaScript tag that renders Attentive creative/sign-up units and collects browsing, cart, and purchase events in the browser.
+  loaders:
+  - Attentive Tag SDK (https://docs.attentive.com/docs/attentive-tag-sdk)
+  - Google Tag Manager SDK (https://docs.attentive.com/docs/google-tag-manager-sdk)
+  - GTM SDK via Attentive Analytics Template (https://docs.attentive.com/docs/gtm-sdk-via-attentive-analytics-template)
+- name: Mobile creative units
+  kind: native-mobile
+  description: Native SDK components that render Attentive sign-up creative units and capture in-app events (product views, add-to-cart, purchase, custom).
+  loaders:
+  - iOS SDK (attentive-ios-sdk)
+  - Android SDK (com.attentive:attentive-android-sdk)
+  - React Native SDK (@attentive-mobile/attentive-react-native-sdk)

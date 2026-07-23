@@ -1,0 +1,112 @@
+openapi: 3.0.3
+info:
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
+  title: Attentive Access Token Identity API
+  version: ''
+servers:
+- url: https://api.attentivemobile.com/v1
+  description: Attentive API
+security:
+- bearerAuth: []
+tags:
+- name: Identity
+  description: "Use the Identity API to manage user identifiers. With this API, you can programmatically add a client user identifier or custom identifier(s) to a user.\nYou should only use clientUserId and customIdentifiers to send Attentive your system-assigned unique identifiers (even when testing).\n\nNotes:\n  - Sending duplicate values could lead to unintentionally bridging users together.\n  - Don't use customIdentifiers to send attributes (e.g., first name, last name). To send those types of attributes,\n    use our [Custom Attributes API](https://docs.attentivemobile.com/openapi/reference/tag/Custom-Attributes/).\n  - Avoid sending null values or empty strings. If you don't have a valid identifier, you should omit the field\n    from the payload.\n"
+  x-beta: true
+paths:
+  /identity-resolution/user-identifiers:
+    post:
+      x-external: true
+      x-emits-event: false
+      security:
+      - OAuthFlow:
+        - identity:write
+      summary: Add a client user identifier or custom identifier(s) to a user
+      description: 'Make a call to this endpoint to associate a client user identifier or custom identifier(s) with other identifiers. A client user or custom identifier needs to be accompanied by at least one other identifier of the following types: phone, email, shopify id, klaviyo id, client user identifier, or custom identifier.
+
+        '
+      operationId: identify
+      tags:
+      - Identity
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IdentifyRequestDto'
+      responses:
+        '202':
+          description: Request processed.
+        '400':
+          $ref: '#/components/responses/InvalidParameter'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  schemas:
+    CustomIdentifierDto1:
+      type: object
+      properties:
+        name:
+          type: string
+          example: loyaltyId
+        value:
+          type: string
+          example: '1122334455'
+      required:
+      - name
+      - value
+    IdentifyRequestDto:
+      type: object
+      properties:
+        phone:
+          type: string
+          description: Phone number used to associate a client user identifier or custom identifier(s) with a user. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required.
+          example: '+13115552368'
+        email:
+          type: string
+          description: Email used to associate a client user identifier or custom identifier(s) with a user. There is a 100 character limit.
+          example: sample-email@attentivemobile.com
+        shopifyId:
+          type: string
+          description: Shopify Id used to associate a client user identifier or custom identifier(s) with a user. There is a 100 character limit.
+          example: 123456789000
+        klaviyoId:
+          type: string
+          description: Klaviyo Id used to associate a client user identifier or custom identifier(s) with a user. There is a 100 character limit.
+          example: 0123456789ABCDEFGHIJKLMNOP
+        clientUserId:
+          type: string
+          description: 'Client user identifier to be associated with a user through a phone, email, shopify id, klaviyo id, or custom identifier. This is a freeform field and can accept any string input. Please do NOT put shopify ids or klaviyo ids here, there are dedicated fields for those identifiers. There is a 100 character limit.
+
+            '
+          example: '123456'
+        customIdentifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomIdentifierDto1'
+          description: Custom identifier(s) to be associated with a user through a phone, email, shopify id, klaviyo id, client user identifier, or another custom identifier. There is a 100 character limit.
+  responses:
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    OAuthFlow:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow. [More info](https://docs.attentivemobile.com/pages/authentication/)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}
+          tokenUrl: https://api.attentivemobile.com/v1/authorization-codes/tokens
+          scopes:
+            attributes:write: read and write custom attributes
+            subscriptions:write: read and write subscriptions
+            events:write: read and write custom events
+            ecommerce:write: read and write ecommerce events
+            segments:write: read and write segments
+            segments:read: read segments
+x-readme:
+  explorer-enabled: false
