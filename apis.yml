@@ -544,6 +544,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/attentive/overview
 - type: Website
   url: https://www.attentive.com
 - type: DeveloperPortal
