@@ -1,0 +1,1308 @@
+{
+  "info": {
+    "_postman_id": "71dcb5de-2547-4ec3-b97f-fa72c57a952e",
+    "name": "Attentive Access Token eCommerce API",
+    "description": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:06:00.000Z",
+    "updatedAt": "2026-07-28T10:06:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-71dcb5de-2547-4ec3-b97f-fa72c57a952e"
+  },
+  "item": [
+    {
+      "name": "events",
+      "item": [
+        {
+          "name": "ecommerce",
+          "item": [
+            {
+              "name": "product-view",
+              "item": [
+                {
+                  "name": "Product view",
+                  "id": "33cc4cd3-76af-449d-a1fb-c7e4d4dcf3aa",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                          "type": "string"
+                        },
+                        {
+                          "key": "authUrl",
+                          "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "authorization_code",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/ecommerce/product-view",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "ecommerce",
+                        "product-view"
+                      ]
+                    },
+                    "description": "Make a call to this endpoint when a user views a product."
+                  },
+                  "response": [
+                    {
+                      "id": "fb190f52-7e39-499e-a115-fb0f034278de",
+                      "name": "Ok",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/product-view",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "product-view"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-fb190f52-7e39-499e-a115-fb0f034278de"
+                    },
+                    {
+                      "id": "ec40af0e-90ce-4cbf-8549-e3fd3dd22ed0",
+                      "name": "Invalid parameter in request query or body",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/product-view",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "product-view"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-ec40af0e-90ce-4cbf-8549-e3fd3dd22ed0"
+                    },
+                    {
+                      "id": "5382c573-82ca-4643-816a-e17ccd8e13ee",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/product-view",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "product-view"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-5382c573-82ca-4643-816a-e17ccd8e13ee"
+                    },
+                    {
+                      "id": "11662b9e-faf0-4d9d-bb87-d8f3a01545e7",
+                      "name": "Access Denied",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/product-view",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "product-view"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-11662b9e-faf0-4d9d-bb87-d8f3a01545e7"
+                    },
+                    {
+                      "id": "587d4181-f897-47ef-ac8d-10e8e67168ce",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/product-view",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "product-view"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-587d4181-f897-47ef-ac8d-10e8e67168ce"
+                    },
+                    {
+                      "id": "b2ba5681-dc6c-42dd-8a55-87363d98aa79",
+                      "name": "The user has sent too many requests in a given amount of time",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/product-view",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "product-view"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-b2ba5681-dc6c-42dd-8a55-87363d98aa79"
+                    },
+                    {
+                      "id": "f1fa7d66-aa9f-489a-b54e-b1d002ae6eea",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/product-view",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "product-view"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-f1fa7d66-aa9f-489a-b54e-b1d002ae6eea"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T10:06:01.000Z",
+                  "updatedAt": "2026-07-28T10:06:01.000Z",
+                  "uid": "35240-33cc4cd3-76af-449d-a1fb-c7e4d4dcf3aa"
+                }
+              ],
+              "id": "66c4e585-2f92-48a3-8606-2168fd8d1bb3",
+              "createdAt": "2026-07-28T10:06:01.000Z",
+              "updatedAt": "2026-07-28T10:06:01.000Z",
+              "uid": "35240-66c4e585-2f92-48a3-8606-2168fd8d1bb3"
+            },
+            {
+              "name": "add-to-cart",
+              "item": [
+                {
+                  "name": "Add to cart",
+                  "id": "699d2189-9cce-418f-aa0d-3a425d751020",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                          "type": "string"
+                        },
+                        {
+                          "key": "authUrl",
+                          "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "authorization_code",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/ecommerce/add-to-cart",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "ecommerce",
+                        "add-to-cart"
+                      ]
+                    },
+                    "description": "Make a call to this endpoint when a user adds a product to their shopping cart."
+                  },
+                  "response": [
+                    {
+                      "id": "4c2a2890-2d0d-40a8-bd98-4e09203419c0",
+                      "name": "Ok",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/add-to-cart",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "add-to-cart"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-4c2a2890-2d0d-40a8-bd98-4e09203419c0"
+                    },
+                    {
+                      "id": "f6b26f8b-c7bc-4133-b509-3d0b79dc7e6b",
+                      "name": "Invalid parameter in request query or body",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/add-to-cart",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "add-to-cart"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-f6b26f8b-c7bc-4133-b509-3d0b79dc7e6b"
+                    },
+                    {
+                      "id": "71093314-8a0c-4d15-a873-21aa5907c6f8",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/add-to-cart",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "add-to-cart"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-71093314-8a0c-4d15-a873-21aa5907c6f8"
+                    },
+                    {
+                      "id": "740f2949-bd4b-4236-8d2d-44cc1086249b",
+                      "name": "Access Denied",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/add-to-cart",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "add-to-cart"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-740f2949-bd4b-4236-8d2d-44cc1086249b"
+                    },
+                    {
+                      "id": "7d64512a-d5f8-470c-bd87-cb924e694f51",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/add-to-cart",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "add-to-cart"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-7d64512a-d5f8-470c-bd87-cb924e694f51"
+                    },
+                    {
+                      "id": "7ee63985-14b1-459d-be90-0ba15aa7f120",
+                      "name": "The user has sent too many requests in a given amount of time",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/add-to-cart",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "add-to-cart"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-7ee63985-14b1-459d-be90-0ba15aa7f120"
+                    },
+                    {
+                      "id": "5b5015bb-2b7c-40d2-8371-d54acd404830",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/add-to-cart",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "add-to-cart"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-5b5015bb-2b7c-40d2-8371-d54acd404830"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T10:06:01.000Z",
+                  "updatedAt": "2026-07-28T10:06:01.000Z",
+                  "uid": "35240-699d2189-9cce-418f-aa0d-3a425d751020"
+                }
+              ],
+              "id": "6d45d298-324d-4088-9998-ea84abf7dd41",
+              "createdAt": "2026-07-28T10:06:01.000Z",
+              "updatedAt": "2026-07-28T10:06:01.000Z",
+              "uid": "35240-6d45d298-324d-4088-9998-ea84abf7dd41"
+            },
+            {
+              "name": "purchase",
+              "item": [
+                {
+                  "name": "Purchase",
+                  "id": "24608a22-116f-4d68-89e5-de101628ccfb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                          "type": "string"
+                        },
+                        {
+                          "key": "authUrl",
+                          "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "authorization_code",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"orderId\": \"<string>\",\n  \"salesChannel\": {\n    \"channelType\": \"WEB\"\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/ecommerce/purchase",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "ecommerce",
+                        "purchase"
+                      ]
+                    },
+                    "description": "Make a call to this endpoint when a user generates an order or purchase."
+                  },
+                  "response": [
+                    {
+                      "id": "dc05fe9b-2526-4594-bdbe-1113a3253899",
+                      "name": "Ok",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"orderId\": \"<string>\",\n  \"salesChannel\": {\n    \"channelType\": \"WEB\"\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/purchase",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "purchase"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-dc05fe9b-2526-4594-bdbe-1113a3253899"
+                    },
+                    {
+                      "id": "eb80eaa8-f585-479e-ad44-27ae900b4ca4",
+                      "name": "Invalid parameter in request query or body",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"orderId\": \"<string>\",\n  \"salesChannel\": {\n    \"channelType\": \"WEB\"\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/purchase",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "purchase"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-eb80eaa8-f585-479e-ad44-27ae900b4ca4"
+                    },
+                    {
+                      "id": "ba27fdbd-cdb3-45e4-8b31-40e68211d560",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"orderId\": \"<string>\",\n  \"salesChannel\": {\n    \"channelType\": \"WEB\"\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/purchase",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "purchase"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-ba27fdbd-cdb3-45e4-8b31-40e68211d560"
+                    },
+                    {
+                      "id": "6813ff73-1cce-4ecc-ba88-ddada0eea498",
+                      "name": "Access Denied",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"orderId\": \"<string>\",\n  \"salesChannel\": {\n    \"channelType\": \"WEB\"\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/purchase",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "purchase"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-6813ff73-1cce-4ecc-ba88-ddada0eea498"
+                    },
+                    {
+                      "id": "db43149b-4f8a-49d8-bda9-868efa46bce5",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"orderId\": \"<string>\",\n  \"salesChannel\": {\n    \"channelType\": \"WEB\"\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/purchase",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "purchase"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-db43149b-4f8a-49d8-bda9-868efa46bce5"
+                    },
+                    {
+                      "id": "491d5b39-9992-4307-91b6-22d838599340",
+                      "name": "The user has sent too many requests in a given amount of time",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"orderId\": \"<string>\",\n  \"salesChannel\": {\n    \"channelType\": \"WEB\"\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/purchase",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "purchase"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-491d5b39-9992-4307-91b6-22d838599340"
+                    },
+                    {
+                      "id": "e5d0219b-9055-41a7-a778-60426571a2e1",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    },\n    {\n      \"productId\": \"<string>\",\n      \"productVariantId\": \"<string>\",\n      \"price\": [\n        {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        }\n      ],\n      \"productImage\": \"<string>\",\n      \"productUrl\": \"<string>\",\n      \"name\": \"<string>\",\n      \"quantity\": \"<long>\"\n    }\n  ],\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"orderId\": \"<string>\",\n  \"salesChannel\": {\n    \"channelType\": \"WEB\"\n  },\n  \"occurredAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/events/ecommerce/purchase",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "ecommerce",
+                            "purchase"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:01.000Z",
+                      "updatedAt": "2026-07-28T10:06:01.000Z",
+                      "uid": "35240-e5d0219b-9055-41a7-a778-60426571a2e1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T10:06:01.000Z",
+                  "updatedAt": "2026-07-28T10:06:01.000Z",
+                  "uid": "35240-24608a22-116f-4d68-89e5-de101628ccfb"
+                }
+              ],
+              "id": "391f2927-35a8-4200-b62a-b342e502f229",
+              "createdAt": "2026-07-28T10:06:01.000Z",
+              "updatedAt": "2026-07-28T10:06:01.000Z",
+              "uid": "35240-391f2927-35a8-4200-b62a-b342e502f229"
+            }
+          ],
+          "id": "7d80ed5d-d767-48bb-b372-30c9a61f1499",
+          "createdAt": "2026-07-28T10:06:01.000Z",
+          "updatedAt": "2026-07-28T10:06:01.000Z",
+          "uid": "35240-7d80ed5d-d767-48bb-b372-30c9a61f1499"
+        }
+      ],
+      "id": "f21d3549-5995-4a11-a9a2-9c3e76060f57",
+      "createdAt": "2026-07-28T10:06:01.000Z",
+      "updatedAt": "2026-07-28T10:06:01.000Z",
+      "uid": "35240-f21d3549-5995-4a11-a9a2-9c3e76060f57"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.attentivemobile.com/v1"
+    }
+  ]
+}

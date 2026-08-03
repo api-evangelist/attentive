@@ -1,0 +1,851 @@
+{
+  "info": {
+    "_postman_id": "eeb57e5b-7175-4f4e-83ff-ffe6e97f917c",
+    "name": "Attentive Access Token Custom Attributes API",
+    "description": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:05:52.000Z",
+    "updatedAt": "2026-07-28T10:05:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-eeb57e5b-7175-4f4e-83ff-ffe6e97f917c"
+  },
+  "item": [
+    {
+      "name": "attributes",
+      "item": [
+        {
+          "name": "custom",
+          "item": [
+            {
+              "name": "Custom Attributes",
+              "id": "fd483bae-f687-4cdc-8223-ecda1e50ff29",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "authUrl",
+                      "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "authorization_code",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {},\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/attributes/custom",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ]
+                },
+                "description": "Make a call to this endpoint for any attribute-based data. There are no limits to the amount of custom attributes that can be created. Note that you can create net-new properties with this API, however, it cannot be used to create new values for an existing UI-created property name. If a property name is created through the Attentive platform, all possible property values must also be defined in the platform. For example, if a property has possible values of \"Adult, Teen, Children's\", those are the only values that will be accepted through the API. This does not apply for properties with the type \"Custom input\", for example: Full Name. Also, please note that the API does not support arrays. For example, attempting to pass an array such as '[\"chicago\", \"new york\"]' for an attribute like 'favorite_city' will result in a 400 error.\n\n**Note : The maximum length for an attribute name is 200 characters.**\n"
+              },
+              "response": [
+                {
+                  "id": "71a2ac8b-2243-47df-94f1-fe364f5a9653",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"properties\": {},\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/attributes/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attributes",
+                        "custom"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:53.000Z",
+                  "updatedAt": "2026-07-28T10:05:53.000Z",
+                  "uid": "35240-71a2ac8b-2243-47df-94f1-fe364f5a9653"
+                },
+                {
+                  "id": "2319292d-78e8-46d5-8803-d2ed9a885ac1",
+                  "name": "Invalid parameter in request query or body",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"properties\": {},\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/attributes/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attributes",
+                        "custom"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:53.000Z",
+                  "updatedAt": "2026-07-28T10:05:53.000Z",
+                  "uid": "35240-2319292d-78e8-46d5-8803-d2ed9a885ac1"
+                },
+                {
+                  "id": "332df4c0-cd48-477b-a012-cf02c568323b",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"properties\": {},\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/attributes/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attributes",
+                        "custom"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:53.000Z",
+                  "updatedAt": "2026-07-28T10:05:53.000Z",
+                  "uid": "35240-332df4c0-cd48-477b-a012-cf02c568323b"
+                },
+                {
+                  "id": "bfdc3ee0-bfd0-43d7-96df-398f4d638521",
+                  "name": "Access Denied",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"properties\": {},\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/attributes/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attributes",
+                        "custom"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:53.000Z",
+                  "updatedAt": "2026-07-28T10:05:53.000Z",
+                  "uid": "35240-bfdc3ee0-bfd0-43d7-96df-398f4d638521"
+                },
+                {
+                  "id": "0c797221-5bf4-4f6f-ade4-3c9ce23cb858",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"properties\": {},\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/attributes/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attributes",
+                        "custom"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:53.000Z",
+                  "updatedAt": "2026-07-28T10:05:53.000Z",
+                  "uid": "35240-0c797221-5bf4-4f6f-ade4-3c9ce23cb858"
+                },
+                {
+                  "id": "723cf7b3-841c-466c-9d70-3b26cee56712",
+                  "name": "The user has sent too many requests in a given amount of time",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"properties\": {},\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/attributes/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attributes",
+                        "custom"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:53.000Z",
+                  "updatedAt": "2026-07-28T10:05:53.000Z",
+                  "uid": "35240-723cf7b3-841c-466c-9d70-3b26cee56712"
+                },
+                {
+                  "id": "8aca0252-19af-41f5-a9a7-c565d5510406",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"properties\": {},\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/attributes/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attributes",
+                        "custom"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:53.000Z",
+                  "updatedAt": "2026-07-28T10:05:53.000Z",
+                  "uid": "35240-8aca0252-19af-41f5-a9a7-c565d5510406"
+                }
+              ],
+              "createdAt": "2026-07-28T10:05:53.000Z",
+              "updatedAt": "2026-07-28T10:05:53.000Z",
+              "uid": "35240-fd483bae-f687-4cdc-8223-ecda1e50ff29"
+            },
+            {
+              "name": "Get Custom Attributes for a User",
+              "id": "89eabc07-3bdb-4640-bbdc-dcb2cf04703e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "authUrl",
+                      "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "authorization_code",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/attributes/custom?phone=<string>&email=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "query": [
+                    {
+                      "description": "A user\u2019s phone number in E.164 format. The '+' sign in the phone number must be encoded in the URL query parameter as '%2B'\n",
+                      "key": "phone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A user's email\n",
+                      "key": "email",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Make a call to this endpoint to retrieve all custom attribute data associated with a user. You can query this endpoint by either phone or email.\n\n**Note: You must include a single query parameter, phone or email. Including both will result in a 400 error.**\n"
+              },
+              "response": [
+                {
+                  "id": "15782254-0060-4cd1-8e90-a471aa070a0e",
+                  "name": "Successfully accepted get custom attributes request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attributes/custom?phone=<string>&email=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attributes",
+                        "custom"
+                      ],
+                      "query": [
+                        {
+                          "description": "A user\u2019s phone number in E.164 format. The '+' sign in the phone number must be encoded in the URL query parameter as '%2B'\n",
+                          "key": "phone",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A user's email\n",
+                          "key": "email",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"value\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  {\n    \"value\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-07-28T10:05:53.000Z",
+                  "updatedAt": "2026-07-28T10:05:53.000Z",
+                  "uid": "35240-15782254-0060-4cd1-8e90-a471aa070a0e"
+                },
+                {
+                  "id": "d029509a-076d-4852-9399-b9f7002cf968",
+                  "name": "Invalid parameter in request query or body",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attributes/custom?phone=<string>&email=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attributes",
+                        "custom"
+                      ],
+                      "query": [
+                        {
+                          "description": "A user\u2019s phone number in E.164 format. The '+' sign in the phone number must be encoded in the URL query parameter as '%2B'\n",
+                          "key": "phone",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A user's email\n",
+                          "key": "email",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:53.000Z",
+                  "updatedAt": "2026-07-28T10:05:53.000Z",
+                  "uid": "35240-d029509a-076d-4852-9399-b9f7002cf968"
+                },
+                {
+                  "id": "90b92b75-c1bb-4f88-afc1-787f084a4333",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attributes/custom?phone=<string>&email=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attributes",
+                        "custom"
+                      ],
+                      "query": [
+                        {
+                          "description": "A user\u2019s phone number in E.164 format. The '+' sign in the phone number must be encoded in the URL query parameter as '%2B'\n",
+                          "key": "phone",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A user's email\n",
+                          "key": "email",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:53.000Z",
+                  "updatedAt": "2026-07-28T10:05:53.000Z",
+                  "uid": "35240-90b92b75-c1bb-4f88-afc1-787f084a4333"
+                },
+                {
+                  "id": "09c9fad3-dfe7-4f27-ad29-6acbb89c9eb8",
+                  "name": "Access Denied",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attributes/custom?phone=<string>&email=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attributes",
+                        "custom"
+                      ],
+                      "query": [
+                        {
+                          "description": "A user\u2019s phone number in E.164 format. The '+' sign in the phone number must be encoded in the URL query parameter as '%2B'\n",
+                          "key": "phone",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A user's email\n",
+                          "key": "email",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:53.000Z",
+                  "updatedAt": "2026-07-28T10:05:53.000Z",
+                  "uid": "35240-09c9fad3-dfe7-4f27-ad29-6acbb89c9eb8"
+                },
+                {
+                  "id": "c14a3dc5-a3d7-4929-8da6-edd014e1e72e",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attributes/custom?phone=<string>&email=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attributes",
+                        "custom"
+                      ],
+                      "query": [
+                        {
+                          "description": "A user\u2019s phone number in E.164 format. The '+' sign in the phone number must be encoded in the URL query parameter as '%2B'\n",
+                          "key": "phone",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A user's email\n",
+                          "key": "email",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:53.000Z",
+                  "updatedAt": "2026-07-28T10:05:53.000Z",
+                  "uid": "35240-c14a3dc5-a3d7-4929-8da6-edd014e1e72e"
+                },
+                {
+                  "id": "8b9efc73-5c64-4c38-a038-bfa10b635350",
+                  "name": "The user has sent too many requests in a given amount of time",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attributes/custom?phone=<string>&email=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attributes",
+                        "custom"
+                      ],
+                      "query": [
+                        {
+                          "description": "A user\u2019s phone number in E.164 format. The '+' sign in the phone number must be encoded in the URL query parameter as '%2B'\n",
+                          "key": "phone",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A user's email\n",
+                          "key": "email",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:53.000Z",
+                  "updatedAt": "2026-07-28T10:05:53.000Z",
+                  "uid": "35240-8b9efc73-5c64-4c38-a038-bfa10b635350"
+                },
+                {
+                  "id": "a40313fe-663e-4242-82ff-867be80717fb",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attributes/custom?phone=<string>&email=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attributes",
+                        "custom"
+                      ],
+                      "query": [
+                        {
+                          "description": "A user\u2019s phone number in E.164 format. The '+' sign in the phone number must be encoded in the URL query parameter as '%2B'\n",
+                          "key": "phone",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A user's email\n",
+                          "key": "email",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:53.000Z",
+                  "updatedAt": "2026-07-28T10:05:53.000Z",
+                  "uid": "35240-a40313fe-663e-4242-82ff-867be80717fb"
+                }
+              ],
+              "createdAt": "2026-07-28T10:05:53.000Z",
+              "updatedAt": "2026-07-28T10:05:53.000Z",
+              "uid": "35240-89eabc07-3bdb-4640-bbdc-dcb2cf04703e"
+            }
+          ],
+          "id": "84038af8-cf0d-4015-9d3d-7e598efa81bf",
+          "createdAt": "2026-07-28T10:05:53.000Z",
+          "updatedAt": "2026-07-28T10:05:53.000Z",
+          "uid": "35240-84038af8-cf0d-4015-9d3d-7e598efa81bf"
+        }
+      ],
+      "id": "b8af3ab0-1719-4862-b049-069c2d72c634",
+      "createdAt": "2026-07-28T10:05:53.000Z",
+      "updatedAt": "2026-07-28T10:05:53.000Z",
+      "uid": "35240-b8af3ab0-1719-4862-b049-069c2d72c634"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.attentivemobile.com/v1"
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
+  version: "1.0"
   description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
   title: Attentive Access Token Test Authentication API
-  version: ''
 servers:
 - url: https://api.attentivemobile.com/v1
   description: Attentive API

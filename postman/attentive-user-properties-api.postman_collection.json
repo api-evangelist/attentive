@@ -1,0 +1,466 @@
+{
+  "info": {
+    "_postman_id": "32f3d1cd-3f39-4102-8a3f-cf50350ab438",
+    "name": "Attentive Access Token User Properties API",
+    "description": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:06:40.000Z",
+    "updatedAt": "2026-07-28T10:06:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-32f3d1cd-3f39-4102-8a3f-cf50350ab438"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "user",
+          "item": [
+            {
+              "name": "attributes",
+              "item": [
+                {
+                  "name": "Create or update a single user with attributes, subscriptions, and identifiers",
+                  "id": "99e3da06-5f37-43e3-8074-ac8b0e657aae",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"attributes\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"demographic\": {\n      \"language\": \"<string>\",\n      \"dateOfBirth\": \"<date>\",\n      \"age\": \"<integer>\",\n      \"organization\": \"<string>\",\n      \"title\": \"<string>\",\n      \"website\": \"<string>\"\n    },\n    \"location\": {\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"timezone\": \"<string>\"\n    },\n    \"locale\": {\n      \"language\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"custom\": {\n      \"labore_4ae\": {}\n    }\n  },\n  \"subscriptions\": [\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"TEXT\",\n      \"singleOptIn\": \"<boolean>\"\n    },\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"EMAIL\",\n      \"singleOptIn\": \"<boolean>\"\n    }\n  ],\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"clientUserId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/user/attributes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "user",
+                        "attributes"
+                      ]
+                    },
+                    "description": "Creates or updates a single user record, including associated attributes, subscriptions, and identifiers. If a user with the provided identifiers already exists, their information will be updated; otherwise, a new user will be created.\n\nThere is a limit of 100 of custom attributes that can be created. If intending to update an existing attribute, the name of the key must match the name of the existing attribute. If an existing attribute does not exist, a new attribute will be created with the given key as the name. Attributes with enumerated values must have a value that matches an existing enum value; new enum values will not be created.  Attempting to pass custom attributes as an array or a map such as `[\"New York City]` or `{\"favorite city\": \"Boston\"}` will result in a 400 error.\n\nDefault Rate Limit: 150 requests per second\n"
+                  },
+                  "response": [
+                    {
+                      "id": "1e98dd22-1a02-414c-8bed-efe7389ac687",
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"attributes\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"demographic\": {\n      \"language\": \"<string>\",\n      \"dateOfBirth\": \"<date>\",\n      \"age\": \"<integer>\",\n      \"organization\": \"<string>\",\n      \"title\": \"<string>\",\n      \"website\": \"<string>\"\n    },\n    \"location\": {\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"timezone\": \"<string>\"\n    },\n    \"locale\": {\n      \"language\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"custom\": {\n      \"labore_4ae\": {}\n    }\n  },\n  \"subscriptions\": [\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"TEXT\",\n      \"singleOptIn\": \"<boolean>\"\n    },\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"EMAIL\",\n      \"singleOptIn\": \"<boolean>\"\n    }\n  ],\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"clientUserId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/attributes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "attributes"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": \"<boolean>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T10:06:40.000Z",
+                      "updatedAt": "2026-07-28T10:06:40.000Z",
+                      "uid": "35240-1e98dd22-1a02-414c-8bed-efe7389ac687"
+                    },
+                    {
+                      "id": "357a4d7c-2e8f-4ab3-a654-09811f78f804",
+                      "name": "Invalid parameter in request query or body",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"attributes\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"demographic\": {\n      \"language\": \"<string>\",\n      \"dateOfBirth\": \"<date>\",\n      \"age\": \"<integer>\",\n      \"organization\": \"<string>\",\n      \"title\": \"<string>\",\n      \"website\": \"<string>\"\n    },\n    \"location\": {\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"timezone\": \"<string>\"\n    },\n    \"locale\": {\n      \"language\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"custom\": {\n      \"labore_4ae\": {}\n    }\n  },\n  \"subscriptions\": [\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"TEXT\",\n      \"singleOptIn\": \"<boolean>\"\n    },\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"EMAIL\",\n      \"singleOptIn\": \"<boolean>\"\n    }\n  ],\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"clientUserId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/attributes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "attributes"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:40.000Z",
+                      "updatedAt": "2026-07-28T10:06:40.000Z",
+                      "uid": "35240-357a4d7c-2e8f-4ab3-a654-09811f78f804"
+                    },
+                    {
+                      "id": "a3e1020f-ff11-4612-ae39-61212e133043",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"attributes\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"demographic\": {\n      \"language\": \"<string>\",\n      \"dateOfBirth\": \"<date>\",\n      \"age\": \"<integer>\",\n      \"organization\": \"<string>\",\n      \"title\": \"<string>\",\n      \"website\": \"<string>\"\n    },\n    \"location\": {\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"timezone\": \"<string>\"\n    },\n    \"locale\": {\n      \"language\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"custom\": {\n      \"labore_4ae\": {}\n    }\n  },\n  \"subscriptions\": [\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"TEXT\",\n      \"singleOptIn\": \"<boolean>\"\n    },\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"EMAIL\",\n      \"singleOptIn\": \"<boolean>\"\n    }\n  ],\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"clientUserId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/attributes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "attributes"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:40.000Z",
+                      "updatedAt": "2026-07-28T10:06:40.000Z",
+                      "uid": "35240-a3e1020f-ff11-4612-ae39-61212e133043"
+                    },
+                    {
+                      "id": "f95a6dfd-ff85-4f4d-98ac-f447e7ff325a",
+                      "name": "Access Denied",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"attributes\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"demographic\": {\n      \"language\": \"<string>\",\n      \"dateOfBirth\": \"<date>\",\n      \"age\": \"<integer>\",\n      \"organization\": \"<string>\",\n      \"title\": \"<string>\",\n      \"website\": \"<string>\"\n    },\n    \"location\": {\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"timezone\": \"<string>\"\n    },\n    \"locale\": {\n      \"language\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"custom\": {\n      \"labore_4ae\": {}\n    }\n  },\n  \"subscriptions\": [\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"TEXT\",\n      \"singleOptIn\": \"<boolean>\"\n    },\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"EMAIL\",\n      \"singleOptIn\": \"<boolean>\"\n    }\n  ],\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"clientUserId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/attributes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "attributes"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:40.000Z",
+                      "updatedAt": "2026-07-28T10:06:40.000Z",
+                      "uid": "35240-f95a6dfd-ff85-4f4d-98ac-f447e7ff325a"
+                    },
+                    {
+                      "id": "9c0aaa61-e9c6-4911-a78f-1ebc79c0728e",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"attributes\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"demographic\": {\n      \"language\": \"<string>\",\n      \"dateOfBirth\": \"<date>\",\n      \"age\": \"<integer>\",\n      \"organization\": \"<string>\",\n      \"title\": \"<string>\",\n      \"website\": \"<string>\"\n    },\n    \"location\": {\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"timezone\": \"<string>\"\n    },\n    \"locale\": {\n      \"language\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"custom\": {\n      \"labore_4ae\": {}\n    }\n  },\n  \"subscriptions\": [\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"TEXT\",\n      \"singleOptIn\": \"<boolean>\"\n    },\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"EMAIL\",\n      \"singleOptIn\": \"<boolean>\"\n    }\n  ],\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"clientUserId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/attributes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "attributes"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:40.000Z",
+                      "updatedAt": "2026-07-28T10:06:40.000Z",
+                      "uid": "35240-9c0aaa61-e9c6-4911-a78f-1ebc79c0728e"
+                    },
+                    {
+                      "id": "81fb2f29-10be-4b52-8aaa-877df9a1d6a3",
+                      "name": "The user has sent too many requests in a given amount of time",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"attributes\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"demographic\": {\n      \"language\": \"<string>\",\n      \"dateOfBirth\": \"<date>\",\n      \"age\": \"<integer>\",\n      \"organization\": \"<string>\",\n      \"title\": \"<string>\",\n      \"website\": \"<string>\"\n    },\n    \"location\": {\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"timezone\": \"<string>\"\n    },\n    \"locale\": {\n      \"language\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"custom\": {\n      \"labore_4ae\": {}\n    }\n  },\n  \"subscriptions\": [\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"TEXT\",\n      \"singleOptIn\": \"<boolean>\"\n    },\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"EMAIL\",\n      \"singleOptIn\": \"<boolean>\"\n    }\n  ],\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"clientUserId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/attributes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "attributes"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:40.000Z",
+                      "updatedAt": "2026-07-28T10:06:40.000Z",
+                      "uid": "35240-81fb2f29-10be-4b52-8aaa-877df9a1d6a3"
+                    },
+                    {
+                      "id": "7047e43d-555b-41d5-befc-7900b9386624",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"attributes\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"demographic\": {\n      \"language\": \"<string>\",\n      \"dateOfBirth\": \"<date>\",\n      \"age\": \"<integer>\",\n      \"organization\": \"<string>\",\n      \"title\": \"<string>\",\n      \"website\": \"<string>\"\n    },\n    \"location\": {\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"timezone\": \"<string>\"\n    },\n    \"locale\": {\n      \"language\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"custom\": {\n      \"labore_4ae\": {}\n    }\n  },\n  \"subscriptions\": [\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"TEXT\",\n      \"singleOptIn\": \"<boolean>\"\n    },\n    {\n      \"signUpSourceId\": \"<string>\",\n      \"channel\": \"EMAIL\",\n      \"singleOptIn\": \"<boolean>\"\n    }\n  ],\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"clientUserId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/attributes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "attributes"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:40.000Z",
+                      "updatedAt": "2026-07-28T10:06:40.000Z",
+                      "uid": "35240-7047e43d-555b-41d5-befc-7900b9386624"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T10:06:40.000Z",
+                  "updatedAt": "2026-07-28T10:06:40.000Z",
+                  "uid": "35240-99e3da06-5f37-43e3-8074-ac8b0e657aae"
+                }
+              ],
+              "id": "9256b504-4b63-428e-9452-1f9f6f4ba302",
+              "createdAt": "2026-07-28T10:06:40.000Z",
+              "updatedAt": "2026-07-28T10:06:40.000Z",
+              "uid": "35240-9256b504-4b63-428e-9452-1f9f6f4ba302"
+            }
+          ],
+          "id": "adf797c3-c900-4249-b4e4-8648473ab9d1",
+          "createdAt": "2026-07-28T10:06:40.000Z",
+          "updatedAt": "2026-07-28T10:06:40.000Z",
+          "uid": "35240-adf797c3-c900-4249-b4e4-8648473ab9d1"
+        }
+      ],
+      "id": "5902f8d2-f611-4186-86a6-41cc67f8d02f",
+      "createdAt": "2026-07-28T10:06:40.000Z",
+      "updatedAt": "2026-07-28T10:06:40.000Z",
+      "uid": "35240-5902f8d2-f611-4186-86a6-41cc67f8d02f"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.attentivemobile.com/v1"
+    }
+  ]
+}

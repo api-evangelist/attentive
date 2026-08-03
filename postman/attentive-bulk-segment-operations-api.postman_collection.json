@@ -1,0 +1,900 @@
+{
+  "info": {
+    "_postman_id": "932c3524-4ee2-48c3-9865-e480e3088c35",
+    "name": "Attentive Access Token Bulk Segment Operations API",
+    "description": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:05:49.000Z",
+    "updatedAt": "2026-07-28T10:05:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-932c3524-4ee2-48c3-9865-e480e3088c35"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "bulk",
+          "item": [
+            {
+              "name": "segments",
+              "item": [
+                {
+                  "name": "members",
+                  "item": [
+                    {
+                      "name": "Add Bulk Segment Members",
+                      "id": "22247608-eb05-4aa7-896e-ccff340b3475",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "bulk",
+                            "segments",
+                            "members"
+                          ]
+                        },
+                        "description": "Add members to a segment in bulk. This endpoint accepts 1 to 10,000 members per request. Members are identified by email, phone number, and/or client user ID. The request is validated, queued for asynchronous processing, and a unique batch job ID is returned for tracking the status.\n\n**Request Limits:**\n- Minimum: 1 member per request\n- Maximum: 10,000 members per request\n- At least one identifier (email, phone, or clientUserId) required per member\n\n**Processing:**\n- Jobs are processed asynchronously\n- Use the batch job ID to check status via `GET /v2/bulk/job/{bulkJobId}`\n- Results available as downloadable `.jsonl` file when completed\n\nScopes Required: [segments:all]\n\nDefault Rate Limit: 100 requests per second\n"
+                      },
+                      "response": [
+                        {
+                          "id": "9f16b79e-7963-4db9-a9a0-0321a459ea0e",
+                          "name": "The bulk job request was successfully received and accepted for asynchronous processing. The response includes a batchJobId to track the status of the job, along with a confirmation message. Processing has not yet completed, please use the job status endp",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "segments",
+                                "members"
+                              ]
+                            }
+                          },
+                          "status": "Accepted",
+                          "code": 202,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"batchJobId\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T10:05:50.000Z",
+                          "updatedAt": "2026-07-28T10:05:50.000Z",
+                          "uid": "35240-9f16b79e-7963-4db9-a9a0-0321a459ea0e"
+                        },
+                        {
+                          "id": "09aa1cbd-4c8f-4c9e-899d-b756af0bdd3a",
+                          "name": "Invalid parameter in request query or body",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "segments",
+                                "members"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:05:50.000Z",
+                          "updatedAt": "2026-07-28T10:05:50.000Z",
+                          "uid": "35240-09aa1cbd-4c8f-4c9e-899d-b756af0bdd3a"
+                        },
+                        {
+                          "id": "343f5be2-f5e1-42bf-b421-6e7fad3a6132",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "segments",
+                                "members"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:05:50.000Z",
+                          "updatedAt": "2026-07-28T10:05:50.000Z",
+                          "uid": "35240-343f5be2-f5e1-42bf-b421-6e7fad3a6132"
+                        },
+                        {
+                          "id": "4202c6b4-2185-4d72-8006-0b5d5bc8052c",
+                          "name": "Access Denied",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "segments",
+                                "members"
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:05:50.000Z",
+                          "updatedAt": "2026-07-28T10:05:50.000Z",
+                          "uid": "35240-4202c6b4-2185-4d72-8006-0b5d5bc8052c"
+                        },
+                        {
+                          "id": "23c72fa6-2c55-438b-9b94-8920a1d22e88",
+                          "name": "The specified resource was not found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "segments",
+                                "members"
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:05:50.000Z",
+                          "updatedAt": "2026-07-28T10:05:50.000Z",
+                          "uid": "35240-23c72fa6-2c55-438b-9b94-8920a1d22e88"
+                        },
+                        {
+                          "id": "8201eb32-f804-492e-b967-78b6de845a34",
+                          "name": "The user has sent too many requests in a given amount of time",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "segments",
+                                "members"
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:05:50.000Z",
+                          "updatedAt": "2026-07-28T10:05:50.000Z",
+                          "uid": "35240-8201eb32-f804-492e-b967-78b6de845a34"
+                        },
+                        {
+                          "id": "a046edbb-9d65-47a1-ad22-59d058ee30b1",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "segments",
+                                "members"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:05:50.000Z",
+                          "updatedAt": "2026-07-28T10:05:50.000Z",
+                          "uid": "35240-a046edbb-9d65-47a1-ad22-59d058ee30b1"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T10:05:50.000Z",
+                      "updatedAt": "2026-07-28T10:05:50.000Z",
+                      "uid": "35240-22247608-eb05-4aa7-896e-ccff340b3475"
+                    },
+                    {
+                      "name": "Remove Bulk Segment Members",
+                      "id": "00acc816-2daf-406d-81f1-3ab3a4caa2e3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "bulk",
+                            "segments",
+                            "members"
+                          ]
+                        },
+                        "description": "Remove members from a segment in bulk. This endpoint accepts 1 to 10,000 members per request. Members are identified by email, phone number, and/or client user ID. The request is validated, queued for asynchronous processing, and a unique batch job ID is returned for tracking the status.\n\n**Request Limits:**\n- Minimum: 1 member per request\n- Maximum: 10,000 members per request\n- At least one identifier (email, phone, or clientUserId) required per member\n\n**Processing:**\n- Jobs are processed asynchronously\n- Use the batch job ID to check status via `GET /v2/bulk/job/{bulkJobId}`\n- Results available as downloadable `.jsonl` file when completed\n\nScopes Required: [segments:all]\n\nDefault Rate Limit: 100 requests per second\n"
+                      },
+                      "response": [
+                        {
+                          "id": "db97b3fd-5851-412c-8a9b-505845388194",
+                          "name": "The bulk job request was successfully received and accepted for asynchronous processing. The response includes a batchJobId to track the status of the job, along with a confirmation message. Processing has not yet completed, please use the job status endp",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "segments",
+                                "members"
+                              ]
+                            }
+                          },
+                          "status": "Accepted",
+                          "code": 202,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"batchJobId\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T10:05:50.000Z",
+                          "updatedAt": "2026-07-28T10:05:50.000Z",
+                          "uid": "35240-db97b3fd-5851-412c-8a9b-505845388194"
+                        },
+                        {
+                          "id": "abbbe535-4330-4c7b-95cc-4d6a1c5f0812",
+                          "name": "Invalid parameter in request query or body",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "segments",
+                                "members"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:05:50.000Z",
+                          "updatedAt": "2026-07-28T10:05:50.000Z",
+                          "uid": "35240-abbbe535-4330-4c7b-95cc-4d6a1c5f0812"
+                        },
+                        {
+                          "id": "c0db44c0-4662-4c9e-91d2-04009f06e886",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "segments",
+                                "members"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:05:50.000Z",
+                          "updatedAt": "2026-07-28T10:05:50.000Z",
+                          "uid": "35240-c0db44c0-4662-4c9e-91d2-04009f06e886"
+                        },
+                        {
+                          "id": "5704bce5-b49e-47ef-88b0-099eeaf7e2dc",
+                          "name": "Access Denied",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "segments",
+                                "members"
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:05:50.000Z",
+                          "updatedAt": "2026-07-28T10:05:50.000Z",
+                          "uid": "35240-5704bce5-b49e-47ef-88b0-099eeaf7e2dc"
+                        },
+                        {
+                          "id": "5e847cc6-0cdd-45cd-9f2d-d098775956e8",
+                          "name": "The specified resource was not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "segments",
+                                "members"
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:05:50.000Z",
+                          "updatedAt": "2026-07-28T10:05:50.000Z",
+                          "uid": "35240-5e847cc6-0cdd-45cd-9f2d-d098775956e8"
+                        },
+                        {
+                          "id": "de0405f7-9f5c-4000-970e-1d52b9ffe489",
+                          "name": "The user has sent too many requests in a given amount of time",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "segments",
+                                "members"
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:05:50.000Z",
+                          "updatedAt": "2026-07-28T10:05:50.000Z",
+                          "uid": "35240-de0405f7-9f5c-4000-970e-1d52b9ffe489"
+                        },
+                        {
+                          "id": "e549fd00-0b4f-40b8-8645-5f7b56a0ae64",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/segments/members",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "segments",
+                                "members"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:05:50.000Z",
+                          "updatedAt": "2026-07-28T10:05:50.000Z",
+                          "uid": "35240-e549fd00-0b4f-40b8-8645-5f7b56a0ae64"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T10:05:50.000Z",
+                      "updatedAt": "2026-07-28T10:05:50.000Z",
+                      "uid": "35240-00acc816-2daf-406d-81f1-3ab3a4caa2e3"
+                    }
+                  ],
+                  "id": "278e32fa-31ea-4df7-b8e6-b0ecc2b92011",
+                  "createdAt": "2026-07-28T10:05:50.000Z",
+                  "updatedAt": "2026-07-28T10:05:50.000Z",
+                  "uid": "35240-278e32fa-31ea-4df7-b8e6-b0ecc2b92011"
+                }
+              ],
+              "id": "db8434d3-16ad-4499-9991-746100c4b5d4",
+              "createdAt": "2026-07-28T10:05:50.000Z",
+              "updatedAt": "2026-07-28T10:05:50.000Z",
+              "uid": "35240-db8434d3-16ad-4499-9991-746100c4b5d4"
+            }
+          ],
+          "id": "3727adcb-2f8a-44cc-9f56-f1bdccb17c3b",
+          "createdAt": "2026-07-28T10:05:50.000Z",
+          "updatedAt": "2026-07-28T10:05:50.000Z",
+          "uid": "35240-3727adcb-2f8a-44cc-9f56-f1bdccb17c3b"
+        }
+      ],
+      "id": "f301f760-2ecf-44f8-8987-270eae3db256",
+      "createdAt": "2026-07-28T10:05:50.000Z",
+      "updatedAt": "2026-07-28T10:05:50.000Z",
+      "uid": "35240-f301f760-2ecf-44f8-8987-270eae3db256"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.attentivemobile.com/v1"
+    }
+  ]
+}

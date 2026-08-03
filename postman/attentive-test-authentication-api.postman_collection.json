@@ -1,0 +1,310 @@
+{
+  "info": {
+    "_postman_id": "e6d69001-a148-4b0d-bc03-31874479fa40",
+    "name": "Attentive Access Token Test Authentication API",
+    "description": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:06:31.000Z",
+    "updatedAt": "2026-07-28T10:06:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e6d69001-a148-4b0d-bc03-31874479fa40"
+  },
+  "item": [
+    {
+      "name": "me",
+      "item": [
+        {
+          "name": "Me",
+          "id": "3bcfe64b-c80a-4fe5-be2e-bfe3309ffbb2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "me"
+              ]
+            },
+            "description": "Make a call to this endpoint to test your unique token that you generate in the Attentive product."
+          },
+          "response": [
+            {
+              "id": "eeb0558d-e5a2-40a8-b7e7-21906599f730",
+              "name": "Get information about the authenticated user",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"applicationName\": \"<string>\",\n  \"attentiveDomainName\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"contactEmail\": \"<string>\",\n  \"companyId\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T10:06:32.000Z",
+              "updatedAt": "2026-07-28T10:06:32.000Z",
+              "uid": "35240-eeb0558d-e5a2-40a8-b7e7-21906599f730"
+            },
+            {
+              "id": "34921b10-a2ae-45e0-ae19-0b63387a1cd3",
+              "name": "Invalid parameter in request query or body",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:32.000Z",
+              "updatedAt": "2026-07-28T10:06:32.000Z",
+              "uid": "35240-34921b10-a2ae-45e0-ae19-0b63387a1cd3"
+            },
+            {
+              "id": "ad5bd548-f0fa-4448-85d7-46fec4a21616",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:32.000Z",
+              "updatedAt": "2026-07-28T10:06:32.000Z",
+              "uid": "35240-ad5bd548-f0fa-4448-85d7-46fec4a21616"
+            },
+            {
+              "id": "69decd45-cc9e-4cbf-b8fd-ef468cb596a3",
+              "name": "Access Denied",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:32.000Z",
+              "updatedAt": "2026-07-28T10:06:32.000Z",
+              "uid": "35240-69decd45-cc9e-4cbf-b8fd-ef468cb596a3"
+            },
+            {
+              "id": "7e48e35c-42ab-438b-95ef-687dd770a451",
+              "name": "The specified resource was not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:32.000Z",
+              "updatedAt": "2026-07-28T10:06:32.000Z",
+              "uid": "35240-7e48e35c-42ab-438b-95ef-687dd770a451"
+            },
+            {
+              "id": "5f59e1bd-10a2-41ae-ad24-ca8c74b62588",
+              "name": "The user has sent too many requests in a given amount of time",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:32.000Z",
+              "updatedAt": "2026-07-28T10:06:32.000Z",
+              "uid": "35240-5f59e1bd-10a2-41ae-ad24-ca8c74b62588"
+            },
+            {
+              "id": "0f4cefd7-b46d-47b9-931d-e8e3773b7ae3",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:32.000Z",
+              "updatedAt": "2026-07-28T10:06:32.000Z",
+              "uid": "35240-0f4cefd7-b46d-47b9-931d-e8e3773b7ae3"
+            }
+          ],
+          "createdAt": "2026-07-28T10:06:32.000Z",
+          "updatedAt": "2026-07-28T10:06:32.000Z",
+          "uid": "35240-3bcfe64b-c80a-4fe5-be2e-bfe3309ffbb2"
+        }
+      ],
+      "id": "85cea47f-ea11-4147-b06e-35616102fe15",
+      "createdAt": "2026-07-28T10:06:32.000Z",
+      "updatedAt": "2026-07-28T10:06:32.000Z",
+      "uid": "35240-85cea47f-ea11-4147-b06e-35616102fe15"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.attentivemobile.com/v1"
+    }
+  ]
+}

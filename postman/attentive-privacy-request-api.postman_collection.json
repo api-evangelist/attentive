@@ -1,0 +1,796 @@
+{
+  "info": {
+    "_postman_id": "549257b0-665e-4a20-a7ce-f2d7280c29db",
+    "name": "Attentive Access Token Privacy Request API",
+    "description": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:06:27.000Z",
+    "updatedAt": "2026-07-28T10:06:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-549257b0-665e-4a20-a7ce-f2d7280c29db"
+  },
+  "item": [
+    {
+      "name": "privacy",
+      "item": [
+        {
+          "name": "delete-request",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Get a CCPA delete request by Id",
+                  "id": "a76038dd-5476-451d-91ec-76a2b9ddcdef",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                          "type": "string"
+                        },
+                        {
+                          "key": "authUrl",
+                          "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "authorization_code",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/privacy/delete-request/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "privacy",
+                        "delete-request",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0a15b3ba-46ae-45d0-b93b-fb105698e833",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Alphanumeric ID of the request to get"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "14f96af1-03df-4ef9-ab27-b857e0e19359",
+                      "name": "Delete request fetched successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/privacy/delete-request/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "privacy",
+                            "delete-request",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"processed\": \"<boolean>\",\n  \"type\": \"<string>\",\n  \"subjectEmail\": \"<string>\",\n  \"subjectPhone\": \"<string>\",\n  \"requestMsg\": \"<string>\",\n  \"requestDateTime\": \"<string>\",\n  \"processingStartDateTime\": \"<string>\",\n  \"processingEndDateTime\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T10:06:27.000Z",
+                      "updatedAt": "2026-07-28T10:06:27.000Z",
+                      "uid": "35240-14f96af1-03df-4ef9-ab27-b857e0e19359"
+                    },
+                    {
+                      "id": "e77756bf-23c6-407a-a4e1-f772a758bcab",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/privacy/delete-request/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "privacy",
+                            "delete-request",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:27.000Z",
+                      "updatedAt": "2026-07-28T10:06:27.000Z",
+                      "uid": "35240-e77756bf-23c6-407a-a4e1-f772a758bcab"
+                    },
+                    {
+                      "id": "750e4b99-5ef8-42bf-904c-0dbfaa30e882",
+                      "name": "Access Denied",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/privacy/delete-request/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "privacy",
+                            "delete-request",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:27.000Z",
+                      "updatedAt": "2026-07-28T10:06:27.000Z",
+                      "uid": "35240-750e4b99-5ef8-42bf-904c-0dbfaa30e882"
+                    },
+                    {
+                      "id": "e607c4bd-ede2-442b-a105-4c7ebd7c49e8",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/privacy/delete-request/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "privacy",
+                            "delete-request",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:27.000Z",
+                      "updatedAt": "2026-07-28T10:06:27.000Z",
+                      "uid": "35240-e607c4bd-ede2-442b-a105-4c7ebd7c49e8"
+                    },
+                    {
+                      "id": "edbaa5a4-f236-4fe2-9137-5e3f5cdda2de",
+                      "name": "The user has sent too many requests in a given amount of time",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/privacy/delete-request/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "privacy",
+                            "delete-request",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:27.000Z",
+                      "updatedAt": "2026-07-28T10:06:27.000Z",
+                      "uid": "35240-edbaa5a4-f236-4fe2-9137-5e3f5cdda2de"
+                    },
+                    {
+                      "id": "59f74c87-423e-4d0c-812a-1b91bcbcdd07",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/privacy/delete-request/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "privacy",
+                            "delete-request",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:27.000Z",
+                      "updatedAt": "2026-07-28T10:06:27.000Z",
+                      "uid": "35240-59f74c87-423e-4d0c-812a-1b91bcbcdd07"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T10:06:27.000Z",
+                  "updatedAt": "2026-07-28T10:06:27.000Z",
+                  "uid": "35240-a76038dd-5476-451d-91ec-76a2b9ddcdef"
+                }
+              ],
+              "id": "152bcf0b-e8c0-48ba-bc15-89220df1a5ca",
+              "createdAt": "2026-07-28T10:06:27.000Z",
+              "updatedAt": "2026-07-28T10:06:27.000Z",
+              "uid": "35240-152bcf0b-e8c0-48ba-bc15-89220df1a5ca"
+            },
+            {
+              "name": "Add a deletion request",
+              "id": "679bb3fe-ed48-453d-b1cf-933be6f92303",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "authUrl",
+                      "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "authorization_code",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subjectEmail\": \"<string>\",\n  \"subjectPhone\": \"<string>\",\n  \"requestMsg\": \"<string>\",\n  \"clientUserId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/privacy/delete-request",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "privacy",
+                    "delete-request"
+                  ]
+                },
+                "description": "Make a call to this endpoint to create a new privacy deletion request. This will delete a subscriber within thirty days, provided the call was successful. Use the GET endpoint with the id returned to confirm deletion.\n"
+              },
+              "response": [
+                {
+                  "id": "f532c9f4-ba95-4933-9a29-3c2672fdbb56",
+                  "name": "Delete request added successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"subjectEmail\": \"<string>\",\n  \"subjectPhone\": \"<string>\",\n  \"requestMsg\": \"<string>\",\n  \"clientUserId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/privacy/delete-request",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "privacy",
+                        "delete-request"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"processed\": \"<boolean>\",\n  \"type\": \"<string>\",\n  \"subjectEmail\": \"<string>\",\n  \"subjectPhone\": \"<string>\",\n  \"requestMsg\": \"<string>\",\n  \"requestDateTime\": \"<string>\",\n  \"processingStartDateTime\": \"<string>\",\n  \"processingEndDateTime\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T10:06:27.000Z",
+                  "updatedAt": "2026-07-28T10:06:27.000Z",
+                  "uid": "35240-f532c9f4-ba95-4933-9a29-3c2672fdbb56"
+                },
+                {
+                  "id": "54b9312b-f57a-47c6-a825-ac2bdaf5c420",
+                  "name": "Invalid request body",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"subjectEmail\": \"<string>\",\n  \"subjectPhone\": \"<string>\",\n  \"requestMsg\": \"<string>\",\n  \"clientUserId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/privacy/delete-request",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "privacy",
+                        "delete-request"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T10:06:27.000Z",
+                  "updatedAt": "2026-07-28T10:06:27.000Z",
+                  "uid": "35240-54b9312b-f57a-47c6-a825-ac2bdaf5c420"
+                },
+                {
+                  "id": "b78b5d5a-f493-41a2-a482-6bdb8d19da4c",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"subjectEmail\": \"<string>\",\n  \"subjectPhone\": \"<string>\",\n  \"requestMsg\": \"<string>\",\n  \"clientUserId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/privacy/delete-request",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "privacy",
+                        "delete-request"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:27.000Z",
+                  "updatedAt": "2026-07-28T10:06:27.000Z",
+                  "uid": "35240-b78b5d5a-f493-41a2-a482-6bdb8d19da4c"
+                },
+                {
+                  "id": "11eda8c1-4ba8-49f7-8aa9-230d883fad05",
+                  "name": "Access Denied",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"subjectEmail\": \"<string>\",\n  \"subjectPhone\": \"<string>\",\n  \"requestMsg\": \"<string>\",\n  \"clientUserId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/privacy/delete-request",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "privacy",
+                        "delete-request"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:27.000Z",
+                  "updatedAt": "2026-07-28T10:06:27.000Z",
+                  "uid": "35240-11eda8c1-4ba8-49f7-8aa9-230d883fad05"
+                },
+                {
+                  "id": "11f6d48a-6707-47ac-9b76-8b6fd1f2aa13",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"subjectEmail\": \"<string>\",\n  \"subjectPhone\": \"<string>\",\n  \"requestMsg\": \"<string>\",\n  \"clientUserId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/privacy/delete-request",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "privacy",
+                        "delete-request"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:27.000Z",
+                  "updatedAt": "2026-07-28T10:06:27.000Z",
+                  "uid": "35240-11f6d48a-6707-47ac-9b76-8b6fd1f2aa13"
+                },
+                {
+                  "id": "92e0dae6-54fe-4b8a-bc50-989dcf9c196a",
+                  "name": "The user has sent too many requests in a given amount of time",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"subjectEmail\": \"<string>\",\n  \"subjectPhone\": \"<string>\",\n  \"requestMsg\": \"<string>\",\n  \"clientUserId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/privacy/delete-request",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "privacy",
+                        "delete-request"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:27.000Z",
+                  "updatedAt": "2026-07-28T10:06:27.000Z",
+                  "uid": "35240-92e0dae6-54fe-4b8a-bc50-989dcf9c196a"
+                },
+                {
+                  "id": "c5a0930a-b029-4a8f-bfed-d6dfd5b4bef5",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"subjectEmail\": \"<string>\",\n  \"subjectPhone\": \"<string>\",\n  \"requestMsg\": \"<string>\",\n  \"clientUserId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/privacy/delete-request",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "privacy",
+                        "delete-request"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:27.000Z",
+                  "updatedAt": "2026-07-28T10:06:27.000Z",
+                  "uid": "35240-c5a0930a-b029-4a8f-bfed-d6dfd5b4bef5"
+                }
+              ],
+              "createdAt": "2026-07-28T10:06:27.000Z",
+              "updatedAt": "2026-07-28T10:06:27.000Z",
+              "uid": "35240-679bb3fe-ed48-453d-b1cf-933be6f92303"
+            }
+          ],
+          "id": "169e85c8-74ef-443c-aca0-638c2739e249",
+          "createdAt": "2026-07-28T10:06:27.000Z",
+          "updatedAt": "2026-07-28T10:06:27.000Z",
+          "uid": "35240-169e85c8-74ef-443c-aca0-638c2739e249"
+        }
+      ],
+      "id": "8c5e1a47-e21f-47db-845a-ad8f8b361118",
+      "createdAt": "2026-07-28T10:06:27.000Z",
+      "updatedAt": "2026-07-28T10:06:27.000Z",
+      "uid": "35240-8c5e1a47-e21f-47db-845a-ad8f8b361118"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.attentivemobile.com/v1"
+    }
+  ]
+}

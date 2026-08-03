@@ -1,0 +1,191 @@
+{
+  "info": {
+    "_postman_id": "dbb3e9d2-82bd-4318-9f8a-004def680793",
+    "name": "Attentive Access Token API",
+    "description": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:05:48.000Z",
+    "updatedAt": "2026-07-28T10:05:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-dbb3e9d2-82bd-4318-9f8a-004def680793"
+  },
+  "item": [
+    {
+      "name": "authorization-codes",
+      "item": [
+        {
+          "name": "tokens",
+          "item": [
+            {
+              "name": "Access Token",
+              "id": "047ce650-1085-4717-a986-5035e68ab613",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "Type of grant. Currently, authorization_code is the only accepted type.",
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Authorization code provided after the user authorizes the scopes during the application install process.",
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The same redirect URI that was used when requesting the authorization code.",
+                      "key": "redirect_uri",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The application\u2019s client ID which can be found on the Manage Distribution tab for the application.",
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The application\u2019s client secret which can be found on the Manage Distribution tab for the application.",
+                      "key": "client_secret",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/authorization-codes/tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "authorization-codes",
+                    "tokens"
+                  ]
+                },
+                "description": "Make a call to this endpoint to exchange a temporary authorization code for an access token."
+              },
+              "response": [
+                {
+                  "id": "81e62fc8-ff96-4ff3-a5d5-03bd0df8bcf8",
+                  "name": "Token generated",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "Type of grant. Currently, authorization_code is the only accepted type.",
+                          "key": "grant_type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Authorization code provided after the user authorizes the scopes during the application install process.",
+                          "key": "code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The same redirect URI that was used when requesting the authorization code.",
+                          "key": "redirect_uri",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The application\u2019s client ID which can be found on the Manage Distribution tab for the application.",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The application\u2019s client secret which can be found on the Manage Distribution tab for the application.",
+                          "key": "client_secret",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/authorization-codes/tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "authorization-codes",
+                        "tokens"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"access_token\": \"<string>\",\n  \"id_token\": \"<string>\",\n  \"token_type\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T10:05:49.000Z",
+                  "updatedAt": "2026-07-28T10:05:49.000Z",
+                  "uid": "35240-81e62fc8-ff96-4ff3-a5d5-03bd0df8bcf8"
+                }
+              ],
+              "createdAt": "2026-07-28T10:05:49.000Z",
+              "updatedAt": "2026-07-28T10:05:49.000Z",
+              "uid": "35240-047ce650-1085-4717-a986-5035e68ab613"
+            }
+          ],
+          "id": "cd28cf79-fdfe-4098-aee1-430d212a7156",
+          "createdAt": "2026-07-28T10:05:49.000Z",
+          "updatedAt": "2026-07-28T10:05:49.000Z",
+          "uid": "35240-cd28cf79-fdfe-4098-aee1-430d212a7156"
+        }
+      ],
+      "id": "8662c494-fe78-47a3-b55f-a46f8749cd0c",
+      "createdAt": "2026-07-28T10:05:49.000Z",
+      "updatedAt": "2026-07-28T10:05:49.000Z",
+      "uid": "35240-8662c494-fe78-47a3-b55f-a46f8749cd0c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.attentivemobile.com/v1"
+    }
+  ]
+}

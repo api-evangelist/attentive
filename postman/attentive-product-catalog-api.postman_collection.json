@@ -1,0 +1,1131 @@
+{
+  "info": {
+    "_postman_id": "0668531f-c490-4bab-8bc5-90115d14b9f9",
+    "name": "Attentive Access Token Product Catalog API",
+    "description": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:06:28.000Z",
+    "updatedAt": "2026-07-28T10:06:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0668531f-c490-4bab-8bc5-90115d14b9f9"
+  },
+  "item": [
+    {
+      "name": "product-catalog",
+      "item": [
+        {
+          "name": "uploads",
+          "item": [
+            {
+              "name": "{uploadId}",
+              "item": [
+                {
+                  "name": "Lookup Product Catalog Ingestion",
+                  "id": "75129c1b-e0b8-4060-a6f7-2600743fd130",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                          "type": "string"
+                        },
+                        {
+                          "key": "authUrl",
+                          "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "authorization_code",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads/:uploadId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads",
+                        ":uploadId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "429537ad-1e65-47c1-b3fc-666f6efd397d",
+                          "key": "uploadId",
+                          "value": "<string>",
+                          "description": "(Required) The upload ID returned from a previous call"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "d49f7373-ffbe-47eb-9903-1f82b4bcb712",
+                      "name": "Returns the provided upload status update",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/product-catalog/uploads/:uploadId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "product-catalog",
+                            "uploads",
+                            ":uploadId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uploadId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"uploadId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"errors\": [\n    {\n      \"errorType\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"lineNum\": \"<long>\"\n    },\n    {\n      \"errorType\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"lineNum\": \"<long>\"\n    }\n  ],\n  \"productsReceived\": \"<long>\",\n  \"productsProcessed\": \"<long>\",\n  \"lastUpdated\": \"<string>\",\n  \"expires\": \"<string>\",\n  \"uploadUrl\": \"<string>\",\n  \"validateOnly\": \"<boolean>\"\n}",
+                      "createdAt": "2026-07-28T10:06:28.000Z",
+                      "updatedAt": "2026-07-28T10:06:28.000Z",
+                      "uid": "35240-d49f7373-ffbe-47eb-9903-1f82b4bcb712"
+                    },
+                    {
+                      "id": "eca6b267-edf7-4cc5-8c10-b6374961061e",
+                      "name": "Invalid parameter in request query or body",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/product-catalog/uploads/:uploadId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "product-catalog",
+                            "uploads",
+                            ":uploadId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uploadId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:28.000Z",
+                      "updatedAt": "2026-07-28T10:06:28.000Z",
+                      "uid": "35240-eca6b267-edf7-4cc5-8c10-b6374961061e"
+                    },
+                    {
+                      "id": "2fa71f3c-585f-4714-8f7f-202c91bc92da",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/product-catalog/uploads/:uploadId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "product-catalog",
+                            "uploads",
+                            ":uploadId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uploadId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:28.000Z",
+                      "updatedAt": "2026-07-28T10:06:28.000Z",
+                      "uid": "35240-2fa71f3c-585f-4714-8f7f-202c91bc92da"
+                    },
+                    {
+                      "id": "33062d63-62c1-48e0-9498-8938ce0b3648",
+                      "name": "Access Denied",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/product-catalog/uploads/:uploadId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "product-catalog",
+                            "uploads",
+                            ":uploadId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uploadId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:28.000Z",
+                      "updatedAt": "2026-07-28T10:06:28.000Z",
+                      "uid": "35240-33062d63-62c1-48e0-9498-8938ce0b3648"
+                    },
+                    {
+                      "id": "362b57fb-006c-48d6-87b9-afe6b1ee90da",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/product-catalog/uploads/:uploadId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "product-catalog",
+                            "uploads",
+                            ":uploadId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uploadId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:28.000Z",
+                      "updatedAt": "2026-07-28T10:06:28.000Z",
+                      "uid": "35240-362b57fb-006c-48d6-87b9-afe6b1ee90da"
+                    },
+                    {
+                      "id": "f18210b3-0fe6-4652-a451-307e7285c213",
+                      "name": "The user has sent too many requests in a given amount of time",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/product-catalog/uploads/:uploadId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "product-catalog",
+                            "uploads",
+                            ":uploadId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uploadId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:28.000Z",
+                      "updatedAt": "2026-07-28T10:06:28.000Z",
+                      "uid": "35240-f18210b3-0fe6-4652-a451-307e7285c213"
+                    },
+                    {
+                      "id": "f5a2b517-5cad-4de7-9475-46ff487dfdf9",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/product-catalog/uploads/:uploadId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "product-catalog",
+                            "uploads",
+                            ":uploadId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "uploadId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T10:06:28.000Z",
+                      "updatedAt": "2026-07-28T10:06:28.000Z",
+                      "uid": "35240-f5a2b517-5cad-4de7-9475-46ff487dfdf9"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-75129c1b-e0b8-4060-a6f7-2600743fd130"
+                }
+              ],
+              "id": "f3f48284-57d1-4f23-9ed5-3dbb9875ce64",
+              "createdAt": "2026-07-28T10:06:28.000Z",
+              "updatedAt": "2026-07-28T10:06:28.000Z",
+              "uid": "35240-f3f48284-57d1-4f23-9ed5-3dbb9875ce64"
+            },
+            {
+              "name": "Upload Product Catalog",
+              "id": "615e681f-eb28-456a-b076-3eaa19f2154b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "authUrl",
+                      "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "authorization_code",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"validateOnly\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/product-catalog/uploads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "product-catalog",
+                    "uploads"
+                  ]
+                },
+                "description": "Make a call to this endpoint to start sending Attentive your full or partial product catalog.\nThe process starts with a POST to this endpoint, where you will receive a pre-signed AWS S3 URL. You can\nuse any language's http request libraries for uploading a file via HTTP. Here's how to do it with `curl` as an example\n\n\n```\ncurl --upload-file ${fileNameLocally} ${presignedURL}\n```\n\n\nand here's an example in Python\n```python\nimport requests\nwith open(filepath, 'rb') as f:\n    r = requests.put(upload_url, data=f)\n```\n\n[Here are examples from AWS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/PresignedUrlUploadObject.html) on how to send the file over in popular programming languages. Note that you aren't interested in\nthe portion of these examples where they are generating the pre-signed URL, but simply the http call to upload the file to the URL.\n\nOnce your full or partial product catalog begins to upload, the status is updated to\n`validating` while it's processing and the file is checked for errors. After the upload is\nvalidated, the status is updated to `validated`. Once the catalog is saved, \nthe status is updated to `completed`. In cases where there are errors saving\nthe data, Attentive Engineering is notified and will contact you.\n\n\nTo ensure there are no validation errors in the file, you can set `validateOnly` parameter\nto `true` to avoid saving any data. We highly recommend this during your development to get a\nfaster feedback loop on any validation errors as you generate files.\n\n\nIf there are no errors returned in the upload response, your product catalog uploaded\nsuccessfully.\n"
+              },
+              "response": [
+                {
+                  "id": "e7e7ba97-37e0-4b8d-a060-fa27435c91c9",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"validateOnly\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"uploadId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"errors\": [\n    {\n      \"errorType\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"lineNum\": \"<long>\"\n    },\n    {\n      \"errorType\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"lineNum\": \"<long>\"\n    }\n  ],\n  \"productsReceived\": \"<long>\",\n  \"productsProcessed\": \"<long>\",\n  \"lastUpdated\": \"<string>\",\n  \"expires\": \"<string>\",\n  \"uploadUrl\": \"<string>\",\n  \"validateOnly\": \"<boolean>\"\n}",
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-e7e7ba97-37e0-4b8d-a060-fa27435c91c9"
+                },
+                {
+                  "id": "126cd682-ca8e-43ec-be86-16d7388cfe01",
+                  "name": "Invalid parameter in request query or body",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"validateOnly\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-126cd682-ca8e-43ec-be86-16d7388cfe01"
+                },
+                {
+                  "id": "4bb04e9f-75e3-49b6-b34d-ecabb7e992b3",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"validateOnly\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-4bb04e9f-75e3-49b6-b34d-ecabb7e992b3"
+                },
+                {
+                  "id": "081e6603-aad4-4acb-af0e-23391fc96688",
+                  "name": "Access Denied",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"validateOnly\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-081e6603-aad4-4acb-af0e-23391fc96688"
+                },
+                {
+                  "id": "63573d0f-3572-4437-970b-a5d2f53eec82",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"validateOnly\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-63573d0f-3572-4437-970b-a5d2f53eec82"
+                },
+                {
+                  "id": "3538c7b5-a7a5-4eba-878a-ecdec6d37967",
+                  "name": "The user has sent too many requests in a given amount of time",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"validateOnly\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-3538c7b5-a7a5-4eba-878a-ecdec6d37967"
+                },
+                {
+                  "id": "656ff2ee-398c-4728-b78f-0f97ff8889ee",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"validateOnly\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-656ff2ee-398c-4728-b78f-0f97ff8889ee"
+                }
+              ],
+              "createdAt": "2026-07-28T10:06:28.000Z",
+              "updatedAt": "2026-07-28T10:06:28.000Z",
+              "uid": "35240-615e681f-eb28-456a-b076-3eaa19f2154b"
+            },
+            {
+              "name": "View Recent Catalog Uploads",
+              "id": "41126a0d-1599-400d-a44d-11f57fb1a18d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "authUrl",
+                      "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "authorization_code",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/product-catalog/uploads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "product-catalog",
+                    "uploads"
+                  ]
+                },
+                "description": "Make a call to this endpoint to list recent catalog uploads with their statuses to gain visibility into the ingestion workflow in order of creation. See the POST of this endpoint for details.\n`Expires` indicates how long you can wait before uploading the product catalog file. If the catalog upload expires, then we will no longer process the file that you upload and you will need to initiate  a new catalog upload.\n"
+              },
+              "response": [
+                {
+                  "id": "c21901ab-d35e-4586-9d65-0eb3d2ca79b3",
+                  "name": "returns the list of uploads",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"uploadId\": \"<string>\",\n    \"status\": \"<string>\",\n    \"errors\": [\n      {\n        \"errorType\": \"<string>\",\n        \"errorMessage\": \"<string>\",\n        \"lineNum\": \"<long>\"\n      },\n      {\n        \"errorType\": \"<string>\",\n        \"errorMessage\": \"<string>\",\n        \"lineNum\": \"<long>\"\n      }\n    ],\n    \"productsReceived\": \"<long>\",\n    \"productsProcessed\": \"<long>\",\n    \"lastUpdated\": \"<string>\",\n    \"expires\": \"<string>\",\n    \"uploadUrl\": \"<string>\",\n    \"validateOnly\": \"<boolean>\"\n  },\n  {\n    \"uploadId\": \"<string>\",\n    \"status\": \"<string>\",\n    \"errors\": [\n      {\n        \"errorType\": \"<string>\",\n        \"errorMessage\": \"<string>\",\n        \"lineNum\": \"<long>\"\n      },\n      {\n        \"errorType\": \"<string>\",\n        \"errorMessage\": \"<string>\",\n        \"lineNum\": \"<long>\"\n      }\n    ],\n    \"productsReceived\": \"<long>\",\n    \"productsProcessed\": \"<long>\",\n    \"lastUpdated\": \"<string>\",\n    \"expires\": \"<string>\",\n    \"uploadUrl\": \"<string>\",\n    \"validateOnly\": \"<boolean>\"\n  }\n]",
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-c21901ab-d35e-4586-9d65-0eb3d2ca79b3"
+                },
+                {
+                  "id": "ad29e77b-b448-4b92-b842-4b19983855fd",
+                  "name": "Invalid parameter in request query or body",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-ad29e77b-b448-4b92-b842-4b19983855fd"
+                },
+                {
+                  "id": "cf12adc5-ac2a-4f31-96cb-c130e25c0839",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-cf12adc5-ac2a-4f31-96cb-c130e25c0839"
+                },
+                {
+                  "id": "2f721249-e403-4232-a7a5-e1ec36bbfd5e",
+                  "name": "Access Denied",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-2f721249-e403-4232-a7a5-e1ec36bbfd5e"
+                },
+                {
+                  "id": "c4ced276-13c3-4437-a685-08cff3b36737",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-c4ced276-13c3-4437-a685-08cff3b36737"
+                },
+                {
+                  "id": "a184a4e3-08de-46a0-b462-6e6bff80f762",
+                  "name": "The user has sent too many requests in a given amount of time",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-a184a4e3-08de-46a0-b462-6e6bff80f762"
+                },
+                {
+                  "id": "e01d06bb-f143-4594-95f2-fbee450e2931",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/product-catalog/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "product-catalog",
+                        "uploads"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:28.000Z",
+                  "updatedAt": "2026-07-28T10:06:28.000Z",
+                  "uid": "35240-e01d06bb-f143-4594-95f2-fbee450e2931"
+                }
+              ],
+              "createdAt": "2026-07-28T10:06:28.000Z",
+              "updatedAt": "2026-07-28T10:06:28.000Z",
+              "uid": "35240-41126a0d-1599-400d-a44d-11f57fb1a18d"
+            }
+          ],
+          "id": "9265d7ef-38ff-483d-b72b-c8d15455b27a",
+          "createdAt": "2026-07-28T10:06:28.000Z",
+          "updatedAt": "2026-07-28T10:06:28.000Z",
+          "uid": "35240-9265d7ef-38ff-483d-b72b-c8d15455b27a"
+        }
+      ],
+      "id": "c6a5a538-8afd-44fb-ae44-47d8c1453e9c",
+      "createdAt": "2026-07-28T10:06:28.000Z",
+      "updatedAt": "2026-07-28T10:06:28.000Z",
+      "uid": "35240-c6a5a538-8afd-44fb-ae44-47d8c1453e9c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.attentivemobile.com/v1"
+    }
+  ]
+}

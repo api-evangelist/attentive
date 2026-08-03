@@ -1,0 +1,259 @@
+{
+  "info": {
+    "_postman_id": "a62734a8-0d66-4800-98e1-f1ff2e855a0c",
+    "name": "Attentive Access Token Identity API",
+    "description": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:06:17.000Z",
+    "updatedAt": "2026-07-28T10:06:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a62734a8-0d66-4800-98e1-f1ff2e855a0c"
+  },
+  "item": [
+    {
+      "name": "identity-resolution",
+      "item": [
+        {
+          "name": "user-identifiers",
+          "item": [
+            {
+              "name": "Add a client user identifier or custom identifier(s) to a user",
+              "id": "c513c800-61c9-4341-8c65-260e3ba4a45a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "authUrl",
+                      "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "authorization_code",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"shopifyId\": \"<string>\",\n  \"klaviyoId\": \"<string>\",\n  \"clientUserId\": \"<string>\",\n  \"customIdentifiers\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/identity-resolution/user-identifiers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identity-resolution",
+                    "user-identifiers"
+                  ]
+                },
+                "description": "Make a call to this endpoint to associate a client user identifier or custom identifier(s) with other identifiers. A client user or custom identifier needs to be accompanied by at least one other identifier of the following types: phone, email, shopify id, klaviyo id, client user identifier, or custom identifier.\n"
+              },
+              "response": [
+                {
+                  "id": "d6580cec-f9d9-41b6-9cef-db52f8578863",
+                  "name": "Request processed.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"shopifyId\": \"<string>\",\n  \"klaviyoId\": \"<string>\",\n  \"clientUserId\": \"<string>\",\n  \"customIdentifiers\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-resolution/user-identifiers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-resolution",
+                        "user-identifiers"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:17.000Z",
+                  "updatedAt": "2026-07-28T10:06:17.000Z",
+                  "uid": "35240-d6580cec-f9d9-41b6-9cef-db52f8578863"
+                },
+                {
+                  "id": "9975f165-7b00-4448-9f31-e0887a691fbf",
+                  "name": "Invalid parameter in request query or body",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"shopifyId\": \"<string>\",\n  \"klaviyoId\": \"<string>\",\n  \"clientUserId\": \"<string>\",\n  \"customIdentifiers\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-resolution/user-identifiers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-resolution",
+                        "user-identifiers"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:17.000Z",
+                  "updatedAt": "2026-07-28T10:06:17.000Z",
+                  "uid": "35240-9975f165-7b00-4448-9f31-e0887a691fbf"
+                },
+                {
+                  "id": "e2cd9cb9-c798-4bef-bcd9-33c1011ee451",
+                  "name": "The user has sent too many requests in a given amount of time",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"shopifyId\": \"<string>\",\n  \"klaviyoId\": \"<string>\",\n  \"clientUserId\": \"<string>\",\n  \"customIdentifiers\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/identity-resolution/user-identifiers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "identity-resolution",
+                        "user-identifiers"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:17.000Z",
+                  "updatedAt": "2026-07-28T10:06:17.000Z",
+                  "uid": "35240-e2cd9cb9-c798-4bef-bcd9-33c1011ee451"
+                }
+              ],
+              "createdAt": "2026-07-28T10:06:17.000Z",
+              "updatedAt": "2026-07-28T10:06:17.000Z",
+              "uid": "35240-c513c800-61c9-4341-8c65-260e3ba4a45a"
+            }
+          ],
+          "id": "660fcc4b-0a8f-4055-b98c-cb7b6df78490",
+          "createdAt": "2026-07-28T10:06:17.000Z",
+          "updatedAt": "2026-07-28T10:06:17.000Z",
+          "uid": "35240-660fcc4b-0a8f-4055-b98c-cb7b6df78490"
+        }
+      ],
+      "id": "4572ab11-77ba-42dc-bce7-86d138124738",
+      "createdAt": "2026-07-28T10:06:17.000Z",
+      "updatedAt": "2026-07-28T10:06:17.000Z",
+      "uid": "35240-4572ab11-77ba-42dc-bce7-86d138124738"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.attentivemobile.com/v1"
+    }
+  ]
+}

@@ -1,0 +1,1372 @@
+{
+  "info": {
+    "_postman_id": "171ba0bc-5b3d-411c-a82b-46c828e291a5",
+    "name": "Attentive Access Token Webhooks API",
+    "description": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:06:43.000Z",
+    "updatedAt": "2026-07-28T10:06:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-171ba0bc-5b3d-411c-a82b-46c828e291a5"
+  },
+  "item": [
+    {
+      "name": "webhooks",
+      "item": [
+        {
+          "name": "{webhookId}",
+          "item": [
+            {
+              "name": "Delete webhook",
+              "id": "27133be8-5452-487a-9efe-1b2f7d70e18d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "authUrl",
+                      "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "authorization_code",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks/:webhookId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    ":webhookId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "72c56c6b-6822-4c84-ae12-98adf28f95ec",
+                      "key": "webhookId",
+                      "value": "<string>",
+                      "description": "(Required) id of the webhook to delete"
+                    }
+                  ]
+                },
+                "description": "Make an API call to this endpoint to remove a webhook."
+              },
+              "response": [
+                {
+                  "id": "b187906b-7042-4dd7-9f24-d9c83784cba3",
+                  "name": "Webhook has been deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:webhookId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":webhookId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhookId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:43.000Z",
+                  "updatedAt": "2026-07-28T10:06:43.000Z",
+                  "uid": "35240-b187906b-7042-4dd7-9f24-d9c83784cba3"
+                },
+                {
+                  "id": "4f821e9c-da77-401e-8ede-6f707b97184e",
+                  "name": "Invalid parameter in request query or body",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:webhookId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":webhookId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhookId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:43.000Z",
+                  "updatedAt": "2026-07-28T10:06:43.000Z",
+                  "uid": "35240-4f821e9c-da77-401e-8ede-6f707b97184e"
+                },
+                {
+                  "id": "1ed48f3d-a156-4ed8-b7d6-f8ab1b759d4e",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:webhookId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":webhookId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhookId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:43.000Z",
+                  "updatedAt": "2026-07-28T10:06:43.000Z",
+                  "uid": "35240-1ed48f3d-a156-4ed8-b7d6-f8ab1b759d4e"
+                },
+                {
+                  "id": "6aaa4970-266d-42d3-b243-0e290d18d5cd",
+                  "name": "Access Denied",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:webhookId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":webhookId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhookId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:43.000Z",
+                  "updatedAt": "2026-07-28T10:06:43.000Z",
+                  "uid": "35240-6aaa4970-266d-42d3-b243-0e290d18d5cd"
+                },
+                {
+                  "id": "c44cba64-2208-4273-9f1b-4ad423aac2af",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:webhookId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":webhookId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhookId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:43.000Z",
+                  "updatedAt": "2026-07-28T10:06:43.000Z",
+                  "uid": "35240-c44cba64-2208-4273-9f1b-4ad423aac2af"
+                },
+                {
+                  "id": "b2dc9a32-f091-43d7-91d0-3eed3fe9cc42",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:webhookId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":webhookId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhookId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:43.000Z",
+                  "updatedAt": "2026-07-28T10:06:43.000Z",
+                  "uid": "35240-b2dc9a32-f091-43d7-91d0-3eed3fe9cc42"
+                }
+              ],
+              "createdAt": "2026-07-28T10:06:43.000Z",
+              "updatedAt": "2026-07-28T10:06:43.000Z",
+              "uid": "35240-27133be8-5452-487a-9efe-1b2f7d70e18d"
+            },
+            {
+              "name": "Update webhook",
+              "id": "d8761189-7d2a-4db2-a8a2-0df56a160c9d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "authUrl",
+                      "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "authorization_code",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"disabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks/:webhookId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    ":webhookId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "4b0a71dc-c32a-4fe0-81db-2e0dfc71a171",
+                      "key": "webhookId",
+                      "value": "<string>",
+                      "description": "(Required) The id of the webhook to update"
+                    }
+                  ]
+                },
+                "description": "Make an API call to this endpoint to update a webhook"
+              },
+              "response": [
+                {
+                  "id": "e5764161-e5e9-45d2-934e-f24fa5fc65ee",
+                  "name": "Webhook has been updated",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"disabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:webhookId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":webhookId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhookId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"type\": \"<string>\",\n  \"disabledAt\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T10:06:43.000Z",
+                  "updatedAt": "2026-07-28T10:06:43.000Z",
+                  "uid": "35240-e5764161-e5e9-45d2-934e-f24fa5fc65ee"
+                },
+                {
+                  "id": "76a5aa36-e92a-48ee-8331-97313402f46f",
+                  "name": "Invalid parameter in request query or body",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"disabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:webhookId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":webhookId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhookId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:43.000Z",
+                  "updatedAt": "2026-07-28T10:06:43.000Z",
+                  "uid": "35240-76a5aa36-e92a-48ee-8331-97313402f46f"
+                },
+                {
+                  "id": "141fba1b-65e1-4ca7-8a1c-ddbdcdea6de9",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"disabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:webhookId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":webhookId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhookId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:43.000Z",
+                  "updatedAt": "2026-07-28T10:06:43.000Z",
+                  "uid": "35240-141fba1b-65e1-4ca7-8a1c-ddbdcdea6de9"
+                },
+                {
+                  "id": "a71ba702-0df3-4ce6-94bb-f961a3b4abd4",
+                  "name": "Access Denied",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"disabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:webhookId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":webhookId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhookId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:43.000Z",
+                  "updatedAt": "2026-07-28T10:06:43.000Z",
+                  "uid": "35240-a71ba702-0df3-4ce6-94bb-f961a3b4abd4"
+                },
+                {
+                  "id": "db04a9ec-84a6-4303-81b3-ab0b3b0971cc",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"disabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:webhookId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":webhookId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhookId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:43.000Z",
+                  "updatedAt": "2026-07-28T10:06:43.000Z",
+                  "uid": "35240-db04a9ec-84a6-4303-81b3-ab0b3b0971cc"
+                },
+                {
+                  "id": "a4a6601b-e131-449e-a644-5faba9d87577",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"disabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:webhookId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":webhookId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "webhookId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:06:43.000Z",
+                  "updatedAt": "2026-07-28T10:06:43.000Z",
+                  "uid": "35240-a4a6601b-e131-449e-a644-5faba9d87577"
+                }
+              ],
+              "createdAt": "2026-07-28T10:06:43.000Z",
+              "updatedAt": "2026-07-28T10:06:43.000Z",
+              "uid": "35240-d8761189-7d2a-4db2-a8a2-0df56a160c9d"
+            }
+          ],
+          "id": "b1765227-e3b7-431a-80f7-586299fa894c",
+          "createdAt": "2026-07-28T10:06:43.000Z",
+          "updatedAt": "2026-07-28T10:06:43.000Z",
+          "uid": "35240-b1765227-e3b7-431a-80f7-586299fa894c"
+        },
+        {
+          "name": "List webhooks",
+          "id": "e5caa026-1a37-4a6c-be76-99cb2e4e1f41",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webhooks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhooks"
+              ]
+            },
+            "description": "Make an API call to this endpoint to list existing webhooks."
+          },
+          "response": [
+            {
+              "id": "a5c25253-9d95-46d9-85b8-145d107fc089",
+              "name": "existing webhooks.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"webhooks\": [\n    {\n      \"id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"events\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"companyId\": \"<string>\",\n      \"disabledAt\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"events\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"companyId\": \"<string>\",\n      \"disabledAt\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T10:06:43.000Z",
+              "updatedAt": "2026-07-28T10:06:43.000Z",
+              "uid": "35240-a5c25253-9d95-46d9-85b8-145d107fc089"
+            },
+            {
+              "id": "6d47a4fb-ab86-4b64-81f1-6c7bc0b0ceb0",
+              "name": "Invalid parameter in request query or body",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:43.000Z",
+              "updatedAt": "2026-07-28T10:06:43.000Z",
+              "uid": "35240-6d47a4fb-ab86-4b64-81f1-6c7bc0b0ceb0"
+            },
+            {
+              "id": "b912e492-8681-448d-a3cc-3aef46400fac",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:43.000Z",
+              "updatedAt": "2026-07-28T10:06:43.000Z",
+              "uid": "35240-b912e492-8681-448d-a3cc-3aef46400fac"
+            },
+            {
+              "id": "b85c1abb-789b-470a-b6ef-68f702ba6e67",
+              "name": "Access Denied",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:43.000Z",
+              "updatedAt": "2026-07-28T10:06:43.000Z",
+              "uid": "35240-b85c1abb-789b-470a-b6ef-68f702ba6e67"
+            },
+            {
+              "id": "5e0af096-3416-4c0b-8ff0-79236d19bc3c",
+              "name": "The specified resource was not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:43.000Z",
+              "updatedAt": "2026-07-28T10:06:43.000Z",
+              "uid": "35240-5e0af096-3416-4c0b-8ff0-79236d19bc3c"
+            },
+            {
+              "id": "cdb8ccb8-de90-46f7-a8a3-afb26e139de2",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:43.000Z",
+              "updatedAt": "2026-07-28T10:06:43.000Z",
+              "uid": "35240-cdb8ccb8-de90-46f7-a8a3-afb26e139de2"
+            }
+          ],
+          "createdAt": "2026-07-28T10:06:43.000Z",
+          "updatedAt": "2026-07-28T10:06:43.000Z",
+          "uid": "35240-e5caa026-1a37-4a6c-be76-99cb2e4e1f41"
+        },
+        {
+          "name": "Create webhook",
+          "id": "7c5c5a4d-d91a-45d2-89c4-d051b6f6dbba",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/webhooks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhooks"
+              ]
+            },
+            "description": "Make an API call to this endpoint to subscribe to a webhook.\n\nEvents are a collection of strings of the following types:\n* `sms.subscribed`\n* `sms.sent`\n* `sms.message_link_click`\n* `email.subscribed`\n* `email.unsubscribed`\n* `email.message_link_click`\n* `email.opened`\n* `custom_attribute.set`\n\nEvent types are case sensitive.\n\nAll events included will be sent to the URL.\n"
+          },
+          "response": [
+            {
+              "id": "5fa52aef-48b8-4fb7-988d-d20e4e5dc7b1",
+              "name": "Webhook has been created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"type\": \"<string>\",\n  \"disabledAt\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T10:06:43.000Z",
+              "updatedAt": "2026-07-28T10:06:43.000Z",
+              "uid": "35240-5fa52aef-48b8-4fb7-988d-d20e4e5dc7b1"
+            },
+            {
+              "id": "af5e67e8-80f8-4fea-8759-e046eb0d5f92",
+              "name": "Invalid parameter in request query or body",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:43.000Z",
+              "updatedAt": "2026-07-28T10:06:43.000Z",
+              "uid": "35240-af5e67e8-80f8-4fea-8759-e046eb0d5f92"
+            },
+            {
+              "id": "eb1b9982-82fb-4194-a9d0-797be726f551",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:43.000Z",
+              "updatedAt": "2026-07-28T10:06:43.000Z",
+              "uid": "35240-eb1b9982-82fb-4194-a9d0-797be726f551"
+            },
+            {
+              "id": "070e0d00-d67d-4e0e-99a3-9fe33ebbf61e",
+              "name": "Access Denied",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:43.000Z",
+              "updatedAt": "2026-07-28T10:06:43.000Z",
+              "uid": "35240-070e0d00-d67d-4e0e-99a3-9fe33ebbf61e"
+            },
+            {
+              "id": "6deee258-ca84-482c-9ecf-d1dba6ef9d85",
+              "name": "The specified resource was not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:43.000Z",
+              "updatedAt": "2026-07-28T10:06:43.000Z",
+              "uid": "35240-6deee258-ca84-482c-9ecf-d1dba6ef9d85"
+            },
+            {
+              "id": "532f0519-a948-4f9f-8ffc-3d34ac129b37",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<string>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T10:06:43.000Z",
+              "updatedAt": "2026-07-28T10:06:43.000Z",
+              "uid": "35240-532f0519-a948-4f9f-8ffc-3d34ac129b37"
+            }
+          ],
+          "createdAt": "2026-07-28T10:06:43.000Z",
+          "updatedAt": "2026-07-28T10:06:43.000Z",
+          "uid": "35240-7c5c5a4d-d91a-45d2-89c4-d051b6f6dbba"
+        }
+      ],
+      "id": "87469e8f-d80f-48d9-b2e3-56e511c836c1",
+      "createdAt": "2026-07-28T10:06:43.000Z",
+      "updatedAt": "2026-07-28T10:06:43.000Z",
+      "uid": "35240-87469e8f-d80f-48d9-b2e3-56e511c836c1"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.attentivemobile.com/v1"
+    }
+  ]
+}

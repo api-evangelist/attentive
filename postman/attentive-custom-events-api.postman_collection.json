@@ -1,0 +1,451 @@
+{
+  "info": {
+    "_postman_id": "5b79ec8b-8ae5-4030-8f9f-694775f14cfd",
+    "name": "Attentive Access Token Custom Events API",
+    "description": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:05:53.000Z",
+    "updatedAt": "2026-07-28T10:05:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5b79ec8b-8ae5-4030-8f9f-694775f14cfd"
+  },
+  "item": [
+    {
+      "name": "events",
+      "item": [
+        {
+          "name": "custom",
+          "item": [
+            {
+              "name": "Custom Events",
+              "id": "9739fa7a-a6d1-4df0-adbb-44818de96e72",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "authUrl",
+                      "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "authorization_code",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"<string>\",\n    \"nisi_f\": 17083407,\n    \"adipisicing5\": \"est tempor Lorem\",\n    \"adipisicing_9\": true\n  },\n  \"externalEventId\": \"<string>\",\n  \"occurredAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/events/custom",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events",
+                    "custom"
+                  ]
+                },
+                "description": "Make a call to this endpoint for any event-based data representing user actions."
+              },
+              "response": [
+                {
+                  "id": "e353b22a-7f9d-4f8c-9fab-b134d2b39faa",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"<string>\",\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"<string>\",\n    \"nisi_f\": 17083407,\n    \"adipisicing5\": \"est tempor Lorem\",\n    \"adipisicing_9\": true\n  },\n  \"externalEventId\": \"<string>\",\n  \"occurredAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "custom"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:54.000Z",
+                  "updatedAt": "2026-07-28T10:05:54.000Z",
+                  "uid": "35240-e353b22a-7f9d-4f8c-9fab-b134d2b39faa"
+                },
+                {
+                  "id": "1f9f874b-2a85-4556-8367-41f1f7fa2bee",
+                  "name": "Invalid parameter in request query or body",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"<string>\",\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"<string>\",\n    \"nisi_f\": 17083407,\n    \"adipisicing5\": \"est tempor Lorem\",\n    \"adipisicing_9\": true\n  },\n  \"externalEventId\": \"<string>\",\n  \"occurredAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "custom"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:54.000Z",
+                  "updatedAt": "2026-07-28T10:05:54.000Z",
+                  "uid": "35240-1f9f874b-2a85-4556-8367-41f1f7fa2bee"
+                },
+                {
+                  "id": "c1244ee8-b30b-4790-88e5-cb0f7b5a3a40",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"<string>\",\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"<string>\",\n    \"nisi_f\": 17083407,\n    \"adipisicing5\": \"est tempor Lorem\",\n    \"adipisicing_9\": true\n  },\n  \"externalEventId\": \"<string>\",\n  \"occurredAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "custom"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:54.000Z",
+                  "updatedAt": "2026-07-28T10:05:54.000Z",
+                  "uid": "35240-c1244ee8-b30b-4790-88e5-cb0f7b5a3a40"
+                },
+                {
+                  "id": "9713f208-0ed0-4388-9a7d-057565042b56",
+                  "name": "Access Denied",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"<string>\",\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"<string>\",\n    \"nisi_f\": 17083407,\n    \"adipisicing5\": \"est tempor Lorem\",\n    \"adipisicing_9\": true\n  },\n  \"externalEventId\": \"<string>\",\n  \"occurredAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "custom"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:54.000Z",
+                  "updatedAt": "2026-07-28T10:05:54.000Z",
+                  "uid": "35240-9713f208-0ed0-4388-9a7d-057565042b56"
+                },
+                {
+                  "id": "78f227a1-254c-4c3f-969d-9566895db434",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"<string>\",\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"<string>\",\n    \"nisi_f\": 17083407,\n    \"adipisicing5\": \"est tempor Lorem\",\n    \"adipisicing_9\": true\n  },\n  \"externalEventId\": \"<string>\",\n  \"occurredAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "custom"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:54.000Z",
+                  "updatedAt": "2026-07-28T10:05:54.000Z",
+                  "uid": "35240-78f227a1-254c-4c3f-969d-9566895db434"
+                },
+                {
+                  "id": "c20550cf-9d0b-4dae-861d-ec49311faea6",
+                  "name": "The user has sent too many requests in a given amount of time",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"<string>\",\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"<string>\",\n    \"nisi_f\": 17083407,\n    \"adipisicing5\": \"est tempor Lorem\",\n    \"adipisicing_9\": true\n  },\n  \"externalEventId\": \"<string>\",\n  \"occurredAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "custom"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:54.000Z",
+                  "updatedAt": "2026-07-28T10:05:54.000Z",
+                  "uid": "35240-c20550cf-9d0b-4dae-861d-ec49311faea6"
+                },
+                {
+                  "id": "50f53ceb-7f41-4b37-88ea-3e6382b2cb40",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"<string>\",\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"<string>\",\n    \"nisi_f\": 17083407,\n    \"adipisicing5\": \"est tempor Lorem\",\n    \"adipisicing_9\": true\n  },\n  \"externalEventId\": \"<string>\",\n  \"occurredAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/custom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "custom"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T10:05:54.000Z",
+                  "updatedAt": "2026-07-28T10:05:54.000Z",
+                  "uid": "35240-50f53ceb-7f41-4b37-88ea-3e6382b2cb40"
+                }
+              ],
+              "createdAt": "2026-07-28T10:05:54.000Z",
+              "updatedAt": "2026-07-28T10:05:54.000Z",
+              "uid": "35240-9739fa7a-a6d1-4df0-adbb-44818de96e72"
+            }
+          ],
+          "id": "90eca91b-76b5-4e6d-ad05-9e1923bb65b2",
+          "createdAt": "2026-07-28T10:05:54.000Z",
+          "updatedAt": "2026-07-28T10:05:54.000Z",
+          "uid": "35240-90eca91b-76b5-4e6d-ad05-9e1923bb65b2"
+        }
+      ],
+      "id": "7a9cb886-f617-4fed-860e-b5e9cb91a1c8",
+      "createdAt": "2026-07-28T10:05:54.000Z",
+      "updatedAt": "2026-07-28T10:05:54.000Z",
+      "uid": "35240-7a9cb886-f617-4fed-860e-b5e9cb91a1c8"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.attentivemobile.com/v1"
+    }
+  ]
+}

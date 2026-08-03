@@ -1,0 +1,458 @@
+{
+  "info": {
+    "_postman_id": "0cb998ba-553f-49db-a557-61250a6612cf",
+    "name": "Attentive Access Token Offers API",
+    "description": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:06:18.000Z",
+    "updatedAt": "2026-07-28T10:06:18.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0cb998ba-553f-49db-a557-61250a6612cf"
+  },
+  "item": [
+    {
+      "name": "coupons",
+      "item": [
+        {
+          "name": "coupon-pool",
+          "item": [
+            {
+              "name": "{coupon-pool-id}",
+              "item": [
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Add discount codes",
+                      "id": "1bac863e-34d9-4732-8597-8207a8256c67",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+                              "type": "string"
+                            },
+                            {
+                              "key": "authUrl",
+                              "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "authorization_code",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"distributionStart\": \"<string>\",\n  \"distributionStop\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/coupons/coupon-pool/:coupon-pool-id/create",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "coupons",
+                            "coupon-pool",
+                            ":coupon-pool-id",
+                            "create"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3d307cc2-5f72-4eb2-ba18-ee4752bc22fc",
+                              "key": "coupon-pool-id",
+                              "value": "<long>",
+                              "description": "(Required) The ID created under \"Create an Offer\""
+                            }
+                          ]
+                        },
+                        "description": "Note: Once the offer(s) has been created, please reach out to an Attentive team member to enable this API feature for you\n\nMake a call to this asynchronous endpoint to create new discount codes in an existing offer.\n<h2>Validation rules</h2>\n<ul>\n<li>Maximum of 200,000 discount codes per request.</li>\n<li><code>distributionStart</code> must be before <code>distributionStop</code>, in UTC ISO format (e.g., <code>2023-02-14T21:29:25Z</code>).</li>\n<li>Date ranges must not overlap with ranges from previous uploads to the same offer. Uploading to an existing range is allowed.</li>\n<li>All uploads in an offer must use the same distribution type. If previous uploads include expiration dates, new uploads must also include them, and vice versa.</li>\n<li>The offer (coupon pool) must exist and belong to your account.</li>\n</ul>\n<h2>Sync behavior</h2>\nCheck the status on the offer to monitor progress. If it still says <strong>SYNCING</strong>, the uploads may not be ready yet."
+                      },
+                      "response": [
+                        {
+                          "id": "3392dca5-6c17-4096-8422-5fc19262fa93",
+                          "name": "Accepted. Check the Attentive [Offers](https://ui.attentivemobile.com/offers) page to make sure that there are no errors and the remaining code count is accurate.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"distributionStart\": \"<string>\",\n  \"distributionStop\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/coupons/coupon-pool/:coupon-pool-id/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "coupons",
+                                "coupon-pool",
+                                ":coupon-pool-id",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "coupon-pool-id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Accepted",
+                          "code": 202,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:06:18.000Z",
+                          "updatedAt": "2026-07-28T10:06:18.000Z",
+                          "uid": "35240-3392dca5-6c17-4096-8422-5fc19262fa93"
+                        },
+                        {
+                          "id": "8d4276ff-3db8-4386-886f-aa93c13371fa",
+                          "name": "Invalid parameter in request query or body",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"distributionStart\": \"<string>\",\n  \"distributionStop\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/coupons/coupon-pool/:coupon-pool-id/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "coupons",
+                                "coupon-pool",
+                                ":coupon-pool-id",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "coupon-pool-id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"id\": \"<long>\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T10:06:18.000Z",
+                          "updatedAt": "2026-07-28T10:06:18.000Z",
+                          "uid": "35240-8d4276ff-3db8-4386-886f-aa93c13371fa"
+                        },
+                        {
+                          "id": "cfec40f1-ab28-47ea-a6e2-9b8bb951711b",
+                          "name": "Access Denied",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"distributionStart\": \"<string>\",\n  \"distributionStop\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/coupons/coupon-pool/:coupon-pool-id/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "coupons",
+                                "coupon-pool",
+                                ":coupon-pool-id",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "coupon-pool-id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"id\": \"<long>\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T10:06:18.000Z",
+                          "updatedAt": "2026-07-28T10:06:18.000Z",
+                          "uid": "35240-cfec40f1-ab28-47ea-a6e2-9b8bb951711b"
+                        },
+                        {
+                          "id": "e4524b50-e923-4663-be27-8def1f631e33",
+                          "name": "Bad Request. Invalid parameter in request query or body. The following scenarios will cause a 400 response: \nA) Including distributionStart and distributionStop dates that overlap with the distributionStart and distributionStop dates from a previous call,",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"distributionStart\": \"<string>\",\n  \"distributionStop\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/coupons/coupon-pool/:coupon-pool-id/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "coupons",
+                                "coupon-pool",
+                                ":coupon-pool-id",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "coupon-pool-id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"id\": \"<long>\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T10:06:18.000Z",
+                          "updatedAt": "2026-07-28T10:06:18.000Z",
+                          "uid": "35240-e4524b50-e923-4663-be27-8def1f631e33"
+                        },
+                        {
+                          "id": "8dd27203-eb47-423b-a912-2db4b182a8b5",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"distributionStart\": \"<string>\",\n  \"distributionStop\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/coupons/coupon-pool/:coupon-pool-id/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "coupons",
+                                "coupon-pool",
+                                ":coupon-pool-id",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "coupon-pool-id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"id\": \"<long>\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T10:06:18.000Z",
+                          "updatedAt": "2026-07-28T10:06:18.000Z",
+                          "uid": "35240-8dd27203-eb47-423b-a912-2db4b182a8b5"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T10:06:18.000Z",
+                      "updatedAt": "2026-07-28T10:06:18.000Z",
+                      "uid": "35240-1bac863e-34d9-4732-8597-8207a8256c67"
+                    }
+                  ],
+                  "id": "86a57c1d-80cd-4b26-b166-e8abcefde407",
+                  "createdAt": "2026-07-28T10:06:18.000Z",
+                  "updatedAt": "2026-07-28T10:06:18.000Z",
+                  "uid": "35240-86a57c1d-80cd-4b26-b166-e8abcefde407"
+                }
+              ],
+              "id": "b752f475-3cee-43e7-bf88-4397d11d64bd",
+              "createdAt": "2026-07-28T10:06:18.000Z",
+              "updatedAt": "2026-07-28T10:06:18.000Z",
+              "uid": "35240-b752f475-3cee-43e7-bf88-4397d11d64bd"
+            }
+          ],
+          "id": "a69b6f2c-f0f7-411b-a53f-fb3b58543b26",
+          "createdAt": "2026-07-28T10:06:18.000Z",
+          "updatedAt": "2026-07-28T10:06:18.000Z",
+          "uid": "35240-a69b6f2c-f0f7-411b-a53f-fb3b58543b26"
+        }
+      ],
+      "id": "e3c5c371-5370-41df-9633-6a4ac576f4b9",
+      "createdAt": "2026-07-28T10:06:18.000Z",
+      "updatedAt": "2026-07-28T10:06:18.000Z",
+      "uid": "35240-e3c5c371-5370-41df-9633-6a4ac576f4b9"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.attentivemobile.com/v1"
+    }
+  ]
+}

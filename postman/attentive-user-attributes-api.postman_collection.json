@@ -1,0 +1,483 @@
+{
+  "info": {
+    "_postman_id": "aeeaec81-c72e-401d-8533-8011a075c921",
+    "name": "Attentive Access Token User Attributes API",
+    "description": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T10:06:39.000Z",
+    "updatedAt": "2026-07-28T10:06:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-aeeaec81-c72e-401d-8533-8011a075c921"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "bulk",
+          "item": [
+            {
+              "name": "user",
+              "item": [
+                {
+                  "name": "attributes",
+                  "item": [
+                    {
+                      "name": "Bulk User Attributes",
+                      "id": "1ef7071b-889f-4b65-9f26-73adf5c7dc7d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"demographic\": {\n          \"language\": \"<string>\",\n          \"dateOfBirth\": \"<date>\",\n          \"age\": \"<integer>\",\n          \"organization\": \"<string>\",\n          \"title\": \"<string>\",\n          \"website\": \"<string>\"\n        },\n        \"location\": {\n          \"address1\": \"<string>\",\n          \"address2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\",\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\",\n          \"country\": \"<string>\",\n          \"region\": \"<string>\",\n          \"timezone\": \"<string>\"\n        },\n        \"locale\": {\n          \"language\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"custom\": {\n          \"velitd3\": {},\n          \"adipisicing_298\": {},\n          \"occaecat_d68\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"EMAIL\",\n          \"singleOptIn\": \"<boolean>\"\n        },\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": \"<boolean>\"\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"shopifyId\": \"<string>\",\n        \"klaviyoId\": \"<string>\",\n        \"clientUserId\": \"<string>\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/bulk/user/attributes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "bulk",
+                            "user",
+                            "attributes"
+                          ]
+                        },
+                        "description": "This endpoint allows clients to submit multiple user attribute updates in bulk, accepting up to 256 payloads per request. Each request is validated, and a unique batch ID is returned for tracking the status of the batch.\n\nScopes Required: [attributes:all, subscriptions:all]\n\nDefault Rate Limit: 100 requests per second\n"
+                      },
+                      "response": [
+                        {
+                          "id": "514ca87c-2e0e-4c88-9ae8-648250499332",
+                          "name": "The bulk job request was successfully received and accepted for asynchronous processing. The response includes a batchJobId to track the status of the job, along with a confirmation message. Processing has not yet completed, please use the job status endp",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"demographic\": {\n          \"language\": \"<string>\",\n          \"dateOfBirth\": \"<date>\",\n          \"age\": \"<integer>\",\n          \"organization\": \"<string>\",\n          \"title\": \"<string>\",\n          \"website\": \"<string>\"\n        },\n        \"location\": {\n          \"address1\": \"<string>\",\n          \"address2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\",\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\",\n          \"country\": \"<string>\",\n          \"region\": \"<string>\",\n          \"timezone\": \"<string>\"\n        },\n        \"locale\": {\n          \"language\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"custom\": {\n          \"velitd3\": {},\n          \"adipisicing_298\": {},\n          \"occaecat_d68\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"EMAIL\",\n          \"singleOptIn\": \"<boolean>\"\n        },\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": \"<boolean>\"\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"shopifyId\": \"<string>\",\n        \"klaviyoId\": \"<string>\",\n        \"clientUserId\": \"<string>\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/user/attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "user",
+                                "attributes"
+                              ]
+                            }
+                          },
+                          "status": "Accepted",
+                          "code": 202,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"batchJobId\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T10:06:39.000Z",
+                          "updatedAt": "2026-07-28T10:06:39.000Z",
+                          "uid": "35240-514ca87c-2e0e-4c88-9ae8-648250499332"
+                        },
+                        {
+                          "id": "3fcb0ce0-1fd2-420e-9285-118774fc1593",
+                          "name": "Invalid parameter in request query or body",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"demographic\": {\n          \"language\": \"<string>\",\n          \"dateOfBirth\": \"<date>\",\n          \"age\": \"<integer>\",\n          \"organization\": \"<string>\",\n          \"title\": \"<string>\",\n          \"website\": \"<string>\"\n        },\n        \"location\": {\n          \"address1\": \"<string>\",\n          \"address2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\",\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\",\n          \"country\": \"<string>\",\n          \"region\": \"<string>\",\n          \"timezone\": \"<string>\"\n        },\n        \"locale\": {\n          \"language\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"custom\": {\n          \"velitd3\": {},\n          \"adipisicing_298\": {},\n          \"occaecat_d68\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"EMAIL\",\n          \"singleOptIn\": \"<boolean>\"\n        },\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": \"<boolean>\"\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"shopifyId\": \"<string>\",\n        \"klaviyoId\": \"<string>\",\n        \"clientUserId\": \"<string>\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/user/attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "user",
+                                "attributes"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:06:39.000Z",
+                          "updatedAt": "2026-07-28T10:06:39.000Z",
+                          "uid": "35240-3fcb0ce0-1fd2-420e-9285-118774fc1593"
+                        },
+                        {
+                          "id": "bd8ca725-93c7-4789-9d0f-8bc715c6418b",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"demographic\": {\n          \"language\": \"<string>\",\n          \"dateOfBirth\": \"<date>\",\n          \"age\": \"<integer>\",\n          \"organization\": \"<string>\",\n          \"title\": \"<string>\",\n          \"website\": \"<string>\"\n        },\n        \"location\": {\n          \"address1\": \"<string>\",\n          \"address2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\",\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\",\n          \"country\": \"<string>\",\n          \"region\": \"<string>\",\n          \"timezone\": \"<string>\"\n        },\n        \"locale\": {\n          \"language\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"custom\": {\n          \"velitd3\": {},\n          \"adipisicing_298\": {},\n          \"occaecat_d68\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"EMAIL\",\n          \"singleOptIn\": \"<boolean>\"\n        },\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": \"<boolean>\"\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"shopifyId\": \"<string>\",\n        \"klaviyoId\": \"<string>\",\n        \"clientUserId\": \"<string>\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/user/attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "user",
+                                "attributes"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:06:39.000Z",
+                          "updatedAt": "2026-07-28T10:06:39.000Z",
+                          "uid": "35240-bd8ca725-93c7-4789-9d0f-8bc715c6418b"
+                        },
+                        {
+                          "id": "c4247e89-473d-4369-b7ac-8796e9f67a5f",
+                          "name": "Access Denied",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"demographic\": {\n          \"language\": \"<string>\",\n          \"dateOfBirth\": \"<date>\",\n          \"age\": \"<integer>\",\n          \"organization\": \"<string>\",\n          \"title\": \"<string>\",\n          \"website\": \"<string>\"\n        },\n        \"location\": {\n          \"address1\": \"<string>\",\n          \"address2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\",\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\",\n          \"country\": \"<string>\",\n          \"region\": \"<string>\",\n          \"timezone\": \"<string>\"\n        },\n        \"locale\": {\n          \"language\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"custom\": {\n          \"velitd3\": {},\n          \"adipisicing_298\": {},\n          \"occaecat_d68\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"EMAIL\",\n          \"singleOptIn\": \"<boolean>\"\n        },\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": \"<boolean>\"\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"shopifyId\": \"<string>\",\n        \"klaviyoId\": \"<string>\",\n        \"clientUserId\": \"<string>\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/user/attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "user",
+                                "attributes"
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:06:39.000Z",
+                          "updatedAt": "2026-07-28T10:06:39.000Z",
+                          "uid": "35240-c4247e89-473d-4369-b7ac-8796e9f67a5f"
+                        },
+                        {
+                          "id": "116b2ff3-5e9f-465c-b406-d76da8d58e33",
+                          "name": "The specified resource was not found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"demographic\": {\n          \"language\": \"<string>\",\n          \"dateOfBirth\": \"<date>\",\n          \"age\": \"<integer>\",\n          \"organization\": \"<string>\",\n          \"title\": \"<string>\",\n          \"website\": \"<string>\"\n        },\n        \"location\": {\n          \"address1\": \"<string>\",\n          \"address2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\",\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\",\n          \"country\": \"<string>\",\n          \"region\": \"<string>\",\n          \"timezone\": \"<string>\"\n        },\n        \"locale\": {\n          \"language\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"custom\": {\n          \"velitd3\": {},\n          \"adipisicing_298\": {},\n          \"occaecat_d68\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"EMAIL\",\n          \"singleOptIn\": \"<boolean>\"\n        },\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": \"<boolean>\"\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"shopifyId\": \"<string>\",\n        \"klaviyoId\": \"<string>\",\n        \"clientUserId\": \"<string>\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/user/attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "user",
+                                "attributes"
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:06:39.000Z",
+                          "updatedAt": "2026-07-28T10:06:39.000Z",
+                          "uid": "35240-116b2ff3-5e9f-465c-b406-d76da8d58e33"
+                        },
+                        {
+                          "id": "8d8a2206-794e-47f6-a7d4-da12b4479188",
+                          "name": "The user has sent too many requests in a given amount of time",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"demographic\": {\n          \"language\": \"<string>\",\n          \"dateOfBirth\": \"<date>\",\n          \"age\": \"<integer>\",\n          \"organization\": \"<string>\",\n          \"title\": \"<string>\",\n          \"website\": \"<string>\"\n        },\n        \"location\": {\n          \"address1\": \"<string>\",\n          \"address2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\",\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\",\n          \"country\": \"<string>\",\n          \"region\": \"<string>\",\n          \"timezone\": \"<string>\"\n        },\n        \"locale\": {\n          \"language\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"custom\": {\n          \"velitd3\": {},\n          \"adipisicing_298\": {},\n          \"occaecat_d68\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"EMAIL\",\n          \"singleOptIn\": \"<boolean>\"\n        },\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": \"<boolean>\"\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"shopifyId\": \"<string>\",\n        \"klaviyoId\": \"<string>\",\n        \"clientUserId\": \"<string>\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/user/attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "user",
+                                "attributes"
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:06:39.000Z",
+                          "updatedAt": "2026-07-28T10:06:39.000Z",
+                          "uid": "35240-8d8a2206-794e-47f6-a7d4-da12b4479188"
+                        },
+                        {
+                          "id": "0252a56c-bc8e-4c1a-9fd6-f4483f14145c",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"demographic\": {\n          \"language\": \"<string>\",\n          \"dateOfBirth\": \"<date>\",\n          \"age\": \"<integer>\",\n          \"organization\": \"<string>\",\n          \"title\": \"<string>\",\n          \"website\": \"<string>\"\n        },\n        \"location\": {\n          \"address1\": \"<string>\",\n          \"address2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\",\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\",\n          \"country\": \"<string>\",\n          \"region\": \"<string>\",\n          \"timezone\": \"<string>\"\n        },\n        \"locale\": {\n          \"language\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"custom\": {\n          \"velitd3\": {},\n          \"adipisicing_298\": {},\n          \"occaecat_d68\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"EMAIL\",\n          \"singleOptIn\": \"<boolean>\"\n        },\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": \"<boolean>\"\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"shopifyId\": \"<string>\",\n        \"klaviyoId\": \"<string>\",\n        \"clientUserId\": \"<string>\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/bulk/user/attributes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "bulk",
+                                "user",
+                                "attributes"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T10:06:39.000Z",
+                          "updatedAt": "2026-07-28T10:06:39.000Z",
+                          "uid": "35240-0252a56c-bc8e-4c1a-9fd6-f4483f14145c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T10:06:39.000Z",
+                      "updatedAt": "2026-07-28T10:06:39.000Z",
+                      "uid": "35240-1ef7071b-889f-4b65-9f26-73adf5c7dc7d"
+                    }
+                  ],
+                  "id": "f0fb6dee-b382-4d02-9af8-aff83594fe25",
+                  "createdAt": "2026-07-28T10:06:39.000Z",
+                  "updatedAt": "2026-07-28T10:06:39.000Z",
+                  "uid": "35240-f0fb6dee-b382-4d02-9af8-aff83594fe25"
+                }
+              ],
+              "id": "1fc20dd5-d8ed-4853-9823-daa29ff0341d",
+              "createdAt": "2026-07-28T10:06:39.000Z",
+              "updatedAt": "2026-07-28T10:06:39.000Z",
+              "uid": "35240-1fc20dd5-d8ed-4853-9823-daa29ff0341d"
+            }
+          ],
+          "id": "30787867-5ee9-48b8-adbc-3576717c34cd",
+          "createdAt": "2026-07-28T10:06:39.000Z",
+          "updatedAt": "2026-07-28T10:06:39.000Z",
+          "uid": "35240-30787867-5ee9-48b8-adbc-3576717c34cd"
+        }
+      ],
+      "id": "c423011e-7a0c-4713-8258-e8eae0e7b252",
+      "createdAt": "2026-07-28T10:06:39.000Z",
+      "updatedAt": "2026-07-28T10:06:39.000Z",
+      "uid": "35240-c423011e-7a0c-4713-8258-e8eae0e7b252"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.attentivemobile.com/v1"
+    }
+  ]
+}
