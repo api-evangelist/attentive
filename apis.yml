@@ -37,7 +37,7 @@ x-tier: enriched
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-18'
+modified: '2026-08-13'
 tags:
 - Company
 - Martech
@@ -538,6 +538,29 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/attentive-webhooks-api-openapi.yml
+- aid: attentive:attentive-graphql-api
+  name: Attentive GraphQL API
+  description: >-
+    Attentive's GraphQL API (beta) at POST https://api.attentivemobile.com/v1/graphql, authenticated with
+    the same application token as the REST API and gated by the same app scopes. The graph covers the
+    subscriber and event core - subscribe/unsubscribe, custom attributes, custom events, the three
+    ecommerce events (product view, add to cart, purchase) and full webhook CRUD - plus a Relay-style
+    filtered user search (usersExperimental) that has no REST equivalent. Schema captured from anonymous
+    introspection on 2026-08-13 (104 types, 10 mutations, 3 root query fields).
+  humanURL: https://docs.attentive.com/reference/graphql-introduction
+  baseURL: https://api.attentivemobile.com/v1/graphql
+  tags:
+  - GraphQL
+  - Subscribers
+  - Events
+  - Webhooks
+  properties:
+  - type: GraphQL
+    url: graphql/attentive.graphql
+  - type: GraphQLManifest
+    url: graphql/attentive-graphql.yml
+  - type: ToolCrosswalk
+    url: mcp/attentive-tool-crosswalk.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -620,8 +643,14 @@ common:
   url: https://www.attentive.com/legal/terms
 - type: PrivacyPolicy
   url: https://www.attentive.com/legal/privacy
+- type: GraphQL
+  url: graphql/attentive.graphql
+- type: ToolCrosswalk
+  url: mcp/attentive-tool-crosswalk.yml
+- type: Plans
+  url: plans/attentive-plans-pricing.yml
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 5
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
