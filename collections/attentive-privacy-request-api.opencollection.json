@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Attentive Access Token Privacy Request API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Privacy Request",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add a deletion request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.attentivemobile.com/v1/privacy/delete-request",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+              "accessTokenUrl": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Make a call to this endpoint to create a new privacy deletion request. This will delete a subscriber within thirty days, provided the call was successful. Use the GET endpoint with the id returned to confirm deletion.\n"
+        },
+        {
+          "info": {
+            "name": "Get a CCPA delete request by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.attentivemobile.com/v1/privacy/delete-request/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Alphanumeric ID of the request to get"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+              "accessTokenUrl": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a CCPA delete request by Id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

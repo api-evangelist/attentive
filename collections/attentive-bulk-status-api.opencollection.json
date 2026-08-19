@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Attentive Access Token Bulk Status API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bulk Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the status of a bulk ingestion job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.attentivemobile.com/v1/v2/bulk/job/:bulkJobId",
+            "params": [
+              {
+                "name": "bulkJobId",
+                "value": "",
+                "type": "path",
+                "description": "id of the bulk job"
+              }
+            ]
+          },
+          "docs": "Checks the status of a bulk ingestion job identified by bulkJobId. This endpoint returns the current state of the job (e.g. `PENDING`, `IN_PROGRESS`, `COMPLETED`, `FAILED`) along with metadata such as timestamps and error messages if applicable.\n\nIf the job has completed successfully, the response includes a downloadable link to a `.jsonl` (JSON Lines) file containing a record of each request and its corresponding response. User's can audit results or process downstream outcomes of the bulk oper"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

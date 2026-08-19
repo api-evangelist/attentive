@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Attentive Access Token Offers API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add discount codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.attentivemobile.com/v1/coupons/coupon-pool/:coupon-pool-id/create",
+            "params": [
+              {
+                "name": "coupon-pool-id",
+                "value": "",
+                "type": "path",
+                "description": "The ID created under \"Create an Offer\""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+              "accessTokenUrl": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Note: Once the offer(s) has been created, please reach out to an Attentive team member to enable this API feature for you\n\nMake a call to this asynchronous endpoint to create new discount codes in an existing offer.\n<h2>Validation rules</h2>\n<ul>\n<li>Maximum of 200,000 discount codes per request.</li>\n<li><code>distributionStart</code> must be before <code>distributionStop</code>, in UTC ISO format (e.g., <code>2023-02-14T21:29:25Z</code>).</li>\n<li>Date ranges must not overlap with ranges from "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

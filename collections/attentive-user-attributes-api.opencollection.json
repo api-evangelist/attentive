@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Attentive Access Token User Attributes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Attributes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bulk User Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.attentivemobile.com/v1/v2/bulk/user/attributes",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint allows clients to submit multiple user attribute updates in bulk, accepting up to 256 payloads per request. Each request is validated, and a unique batch ID is returned for tracking the status of the batch.\n\nScopes Required: [attributes:all, subscriptions:all]\n\nDefault Rate Limit: 100 requests per second\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

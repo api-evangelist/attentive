@@ -1,29 +1,73 @@
-generated: '2026-07-18'
+generated: '2026-08-13'
 method: searched
 source: https://github.com/attentive-mobile
+note: >-
+  Versions and publish dates re-read from the registry metadata endpoints on 2026-08-13
+  (registry.npmjs.org, repo1.maven.org maven-metadata.xml, trunk.cocoapods.org, and the GitHub
+  releases API for the SPM/source distribution). Attentive publishes client SDKs for on-device
+  data collection and creative rendering only - there is no first-party server-side SDK for the
+  REST or GraphQL APIs in any language, and no CLI.
 packages:
 - language: javascript
   registry: npm
   name: "@attentive-mobile/attentive-react-native-sdk"
   version: 2.1.0
+  published: '2026-06-26'
   url: https://www.npmjs.com/package/@attentive-mobile/attentive-react-native-sdk
   install: npm install @attentive-mobile/attentive-react-native-sdk
   repository: https://github.com/attentive-mobile/attentive-react-native-sdk
   official: true
-  notes: Render Attentive creative units and collect Attentive events in React Native apps.
+  notes: >-
+    Render Attentive creative units and collect Attentive events in React Native apps. npm
+    dist-tag latest matches the latest GitHub release (2.1.0, 2026-06-26) - in sync.
 - language: swift
   registry: cocoapods
   name: attentive-ios-sdk
-  url: https://github.com/attentive-mobile/attentive-ios-sdk
+  version: 2.0.9
+  published: '2026-01-28'
+  url: https://cocoapods.org/pods/attentive-ios-sdk
   install: "pod 'attentive-ios-sdk'"
   repository: https://github.com/attentive-mobile/attentive-ios-sdk
   official: true
-  notes: Also distributed via Swift Package Manager (Package.swift in repo). Identity, data collection, creative rendering, APNs push.
+  notes: >-
+    CURRENCY GAP: the CocoaPods trunk latest is 2.0.9 (2026-01-28, 68 versions published) while
+    the source repo has shipped through 2.0.17 (GitHub release 2026-08-06). CocoaPods consumers
+    are eight releases and roughly six months behind Swift Package Manager consumers, who pull
+    the tag directly from the repo (Package.swift).
+- language: swift
+  registry: swift-package-manager
+  name: attentive-ios-sdk
+  version: 2.0.17
+  published: '2026-08-06'
+  url: https://github.com/attentive-mobile/attentive-ios-sdk
+  install: ".package(url: \"https://github.com/attentive-mobile/attentive-ios-sdk\", from: \"2.0.17\")"
+  repository: https://github.com/attentive-mobile/attentive-ios-sdk
+  official: true
+  notes: >-
+    SPM has no central registry; version and date read from the GitHub releases API (latest
+    release tag 2.0.17, published 2026-08-06). Identity, data collection, creative rendering,
+    APNs push.
 - language: kotlin
   registry: maven-central
   name: com.attentive:attentive-android-sdk
+  version: 2.2.2-beta.1
+  published: '2026-08-07'
   url: https://central.sonatype.com/artifact/com.attentive/attentive-android-sdk
   install: "implementation 'com.attentive:attentive-android-sdk:VERSION_NUMBER'"
   repository: https://github.com/attentive-mobile/attentive-android-sdk
   official: true
-  notes: Android API level 26+. Ships an AGENTS.md agent integration guide. Identity, events, creative rendering, FCM push.
+  notes: >-
+    Android API level 26+. Ships an AGENTS.md agent integration guide (captured verbatim at
+    skills/attentive-android-sdk-AGENTS.md). Maven Central lists 83 versions; maven-metadata.xml
+    marks 2.2.2-beta.1 as both latest AND release (lastUpdated 2026-08-07), i.e. a pre-release is
+    flagged as the release pointer - the latest stable is 2.2.1 (GitHub release 2026-08-10).
+  latest_stable: 2.2.1
+  latest_stable_published: '2026-08-10'
+server_side_sdks: none
+cli: none
+x-evidence:
+- {url: 'https://registry.npmjs.org/@attentive-mobile/attentive-react-native-sdk', status: 200, checked: '2026-08-13'}
+- {url: 'https://repo1.maven.org/maven2/com/attentive/attentive-android-sdk/maven-metadata.xml', status: 200, checked: '2026-08-13'}
+- {url: 'https://trunk.cocoapods.org/api/v1/pods/attentive-ios-sdk', status: 200, checked: '2026-08-13'}
+- {url: 'https://api.github.com/repos/attentive-mobile/attentive-ios-sdk/releases/latest', status: 200, checked: '2026-08-13'}
+- {url: 'https://api.github.com/repos/attentive-mobile/attentive-android-sdk/releases/latest', status: 200, checked: '2026-08-13'}

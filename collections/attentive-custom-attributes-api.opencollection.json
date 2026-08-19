@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Attentive Access Token Custom Attributes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Attributes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Custom Attributes for a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.attentivemobile.com/v1/attributes/custom",
+            "params": [
+              {
+                "name": "phone",
+                "value": "",
+                "type": "query",
+                "description": "A user’s phone number in E.164 format. The '+' sign in the phone number must be encoded in the URL query parameter as '%2B'\n"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "A user's email\n"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+              "accessTokenUrl": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Make a call to this endpoint to retrieve all custom attribute data associated with a user. You can query this endpoint by either phone or email.\n\n**Note: You must include a single query parameter, phone or email. Including both will result in a 400 error.**\n"
+        },
+        {
+          "info": {
+            "name": "Custom Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.attentivemobile.com/v1/attributes/custom",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+              "accessTokenUrl": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Make a call to this endpoint for any attribute-based data. There are no limits to the amount of custom attributes that can be created. Note that you can create net-new properties with this API, however, it cannot be used to create new values for an existing UI-created property name. If a property name is created through the Attentive platform, all possible property values must also be defined in the platform. For example, if a property has possible values of \"Adult, Teen, Children's\", those are "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,14 +1,29 @@
-generated: '2026-07-18'
-method: derived
-status: candidate
-source: openapi/attentive-v1-openapi.yaml, openapi/attentive-v2-openapi.yaml
-note: 'No official Attentive MCP server was found. Candidate tool list derived from
-  externally-documented OpenAPI operations (x-external) so an MCP wrapper can be forged.
-  status: candidate.'
+generated: '2026-08-13'
+method: probed
+status: published
+source: https://docs.attentive.com/mcp
+note: >-
+  UPDATED 2026-08-13. A live remote MCP endpoint answers on Attentive's own docs host at
+  https://docs.attentive.com/mcp. It speaks MCP JSON-RPC: POST tools/list returns
+  {"jsonrpc":"2.0","error":{"code":-32001,"message":"Authorization required"}} (HTTP 401) and
+  GET returns the plain-text body "This URL can only be accessed with a MCP client." So the
+  surface is real and reachable, but the live tool list is AUTH-GATED and could not be read
+  anonymously. ATTRIBUTION CAVEAT: this endpoint is served by the ReadMe documentation
+  platform (x-render-origin-server: Render), which exposes the hosted project's API reference
+  as MCP tools; the same 401 shape appears on other ReadMe-hosted developer portals, and
+  docs.readme.com/mcp itself answers 200 with generic docs tools. It is therefore a
+  platform-provided MCP surface on Attentive's domain, gated by Attentive's own API token -
+  NOT an Attentive-built first-party server. The tools[] list below remains DERIVED from the
+  OpenAPI operations (one candidate tool per operationId) and is not the server's real
+  tools/list response.
 server:
   name: attentive
   transport: http
-  url: null
+  url: https://docs.attentive.com/mcp
+  platform: ReadMe (docs.attentive.com is Attentive's ReadMe-hosted developer portal)
+  provider_built: false
+  tools_list: auth-gated
+  probed: '2026-08-13'
 tools:
 - name: getMe
   description: Me
@@ -77,8 +92,7 @@ tools:
   description: Me
   source_operation: openapi/attentive-v2-openapi.yaml#getMeV2
 - name: postUserAttributes
-  description: Create or update a single user with attributes, subscriptions, and
-    identifiers
+  description: Create or update a single user with attributes, subscriptions, and identifiers
   source_operation: openapi/attentive-v2-openapi.yaml#postUserAttributes
 - name: getBulkJobStatus
   description: Retrieve the status of a bulk ingestion job
@@ -107,3 +121,36 @@ tools:
 - name: deleteSegmentByExternalId
   description: Archive segment by external ID
   source_operation: openapi/attentive-v2-openapi.yaml#deleteSegmentByExternalId
+deployment:
+  mode: remote
+  endpoint: https://docs.attentive.com/mcp
+  install: null
+  package: null
+  auth: api-key
+  verified: probed
+  tools: 32
+  tools_note: >-
+    32 is the count of DERIVED candidate tools below (one per OpenAPI operationId), not the
+    count the server returns - tools/list is auth-gated (HTTP 401, JSON-RPC -32001).
+  checked: '2026-08-13'
+  source: live POST/GET probe of https://docs.attentive.com/mcp
+x-evidence:
+- url: https://docs.attentive.com/mcp
+  method: POST
+  body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  http_status: 401
+  response: '{"jsonrpc":"2.0","error":{"code":-32001,"message":"Authorization required"},"id":null}'
+  checked: '2026-08-13'
+- url: https://docs.attentive.com/mcp
+  method: GET
+  http_status: 200
+  response: This URL can only be accessed with a MCP client.
+  checked: '2026-08-13'
+- url: https://mcp.attentive.com/mcp
+  method: POST
+  http_status: 404
+  checked: '2026-08-13'
+- url: https://api.attentivemobile.com/mcp
+  method: POST
+  http_status: 404
+  checked: '2026-08-13'

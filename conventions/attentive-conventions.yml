@@ -30,3 +30,20 @@ async_jobs:
 identifiers:
   subscriber_lookup: phone (E.164) or email; either may be used as the query key on subscriber endpoints.
   external_ids: Shopify id, Klaviyo id, client user identifier, custom identifiers via Identity API.
+surfaces:
+  # Added 2026-08-13: Attentive projects one core onto three surfaces. See mcp/attentive-tool-crosswalk.yml.
+  rest:
+    base: https://api.attentivemobile.com/v1
+    versions: [v1, v2]
+    ref: openapi/
+  graphql:
+    endpoint: https://api.attentivemobile.com/v1/graphql
+    status: beta
+    auth: same application token as REST; fields and mutations gated by app scopes
+    pagination: Relay cursor connections (first / after) on usersExperimental
+    introspection: open (anonymous introspection returned the full 104-type schema on 2026-08-13)
+    ref: graphql/attentive-graphql.yml
+  mcp:
+    endpoint: https://docs.attentive.com/mcp
+    auth: api-key (tools/list returns JSON-RPC -32001 "Authorization required" anonymously)
+    ref: mcp/attentive-mcp.yml

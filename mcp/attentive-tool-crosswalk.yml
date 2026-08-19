@@ -1,0 +1,181 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  graphql/attentive.graphql (anonymous introspection of https://api.attentivemobile.com/v1/graphql,
+  2026-08-13), openapi/*.yml (18 refined specs), mcp/attentive-mcp.yml
+note: >-
+  Attentive projects one data core onto three surfaces: REST (v1 + v2), GraphQL (beta), and a
+  remote MCP endpoint on the docs host. The REST and GraphQL surfaces are NOT identical - GraphQL
+  covers only the subscriber/event/webhook core (10 mutations, 3 root query fields) while REST
+  additionally carries OAuth token exchange, bulk ingestion, segments, product catalog, privacy
+  requests and identity resolution. Conversely GraphQL exposes a filtered user search
+  (usersExperimental) with no public REST equivalent. The MCP tool set could not be read
+  (tools/list is auth-gated), so the MCP column below is the DERIVED candidate tool list from
+  mcp/attentive-mcp.yml, mapped 1:1 to its backing operationId - confidence is marked accordingly.
+surfaces:
+  openapi:
+    path: openapi/
+    files: 18
+    operations: 31
+    gated: false
+  graphql:
+    endpoint: https://api.attentivemobile.com/v1/graphql
+    sdl: graphql/attentive.graphql
+    introspection: open (anonymous introspection returned 104 types on 2026-08-13)
+    execution_gated: true
+    note: Schema is readable anonymously; executing fields/mutations needs an app token plus scopes.
+  mcp:
+    url: https://docs.attentive.com/mcp
+    gated: true
+    note: >-
+      tools/list returns HTTP 401 / JSON-RPC -32001 "Authorization required". Platform-provided
+      (ReadMe) MCP surface on Attentive's docs domain, not an Attentive-built server.
+coverage:
+  rest_operations_total: 31
+  rest_operations_unique: 28
+  graphql_root_fields: 13
+  graphql_fields_bound_to_rest: 12
+  graphql_only: 3
+  mcp_candidate_tools: 32
+  mcp_tools_bound_to_rest: 32
+  mcp_tools_verified_live: 0
+crosswalk:
+- tool: subscribe
+  binding: graphql-mutation
+  category: subscribers
+  graphql: "Mutation.subscribe(SubscribeInput): SubscribePayload"
+  rest: [addSubscriptions]
+  mcp: [addSubscriptions]
+  confidence: high
+  note: Same opt-in contract; REST POST /subscriptions.
+- tool: unsubscribe
+  binding: graphql-mutation
+  category: subscribers
+  graphql: "Mutation.unsubscribe(UnsubscribeInput): UnsubscribePayload"
+  rest: [unsubscribeSubscriptions]
+  mcp: [unsubscribeSubscriptions]
+  confidence: high
+- tool: setCustomAttributes
+  binding: graphql-mutation
+  category: attributes
+  graphql: "Mutation.setCustomAttributes(SetCustomAttributesInput): SetCustomAttributesPayload"
+  rest: [postCustomAttributes]
+  mcp: [postCustomAttributes]
+  confidence: high
+- tool: createCustomEvent
+  binding: graphql-mutation
+  category: events
+  graphql: "Mutation.createCustomEvent(CreateCustomEventInput): CreateCustomEventPayload"
+  rest: [postCustomEvents]
+  mcp: [postCustomEvents]
+  confidence: high
+- tool: productViewEvent
+  binding: graphql-mutation
+  category: ecommerce
+  graphql: "Mutation.productViewEvent(...): SendProductViewEventPayload"
+  rest: [postProductViewEvents]
+  mcp: [postProductViewEvents]
+  confidence: high
+- tool: addToCartEvent
+  binding: graphql-mutation
+  category: ecommerce
+  graphql: "Mutation.addToCartEvent(...): SendAddProductToCartEventPayload"
+  rest: [postAddToCartEvents]
+  mcp: [postAddToCartEvents]
+  confidence: high
+- tool: productPurchaseEvent
+  binding: graphql-mutation
+  category: ecommerce
+  graphql: "Mutation.productPurchaseEvent(...): SendProductPurchaseEventPayload"
+  rest: [postPurchaseEvents]
+  mcp: [postPurchaseEvents]
+  confidence: high
+- tool: createWebhook
+  binding: graphql-mutation
+  category: webhooks
+  graphql: "Mutation.createWebhook(CreateWebhookInput): CreateWebhookPayload"
+  rest: [createWebhook]
+  mcp: [createWebhook]
+  confidence: high
+- tool: updateWebhook
+  binding: graphql-mutation
+  category: webhooks
+  graphql: "Mutation.updateWebhook(UpdateWebhookInput): UpdateWebhookPayload"
+  rest: [updateWebhook]
+  mcp: [updateWebhook]
+  confidence: high
+- tool: deleteWebhook
+  binding: graphql-mutation
+  category: webhooks
+  graphql: "Mutation.deleteWebhook(DeleteWebhookInput): DeleteWebhookPayload"
+  rest: [deleteWebhook]
+  mcp: [deleteWebhook]
+  confidence: high
+  note: >-
+    GraphQL names this "delete"; the docs page for the same operation is titled "Disable a
+    webhook" (docs.attentive.com/reference/webhooks-delete).
+- tool: viewer.installedApplication
+  binding: graphql-query
+  category: auth
+  graphql: "Query.viewer.installedApplication: InstalledApplication"
+  rest: [getMe, getMeV2]
+  mcp: [getMe, getMeV2]
+  confidence: medium
+  note: >-
+    Both answer "who is this token"; the GraphQL form returns the installed application plus
+    installerCompany, the REST /me forms return the account identity only.
+- tool: installedApplication.webhooks
+  binding: graphql-query
+  category: webhooks
+  graphql: "InstalledApplication.webhooks: \"[Webhook!]\""
+  rest: [getWebhooks]
+  mcp: [getWebhooks]
+  confidence: high
+- tool: company.user
+  binding: graphql-query
+  category: subscribers
+  graphql: "Company.user(phone, email): User"
+  rest: [getSubscriptions, getCustomAttributes]
+  mcp: [getSubscriptions, getCustomAttributes]
+  confidence: medium
+  note: >-
+    One GraphQL field fans out to two REST reads - the User type carries both subscription
+    eligibility and custom attributes, which REST splits across /subscriptions and
+    /attributes/custom.
+graphql_only:
+- field: Company.usersExperimental(filter, first, after)
+  type: UsersExperimentalConnection
+  reason: >-
+    Relay-paginated, filterable user search (ListUsersFilter supports subscription-opt-in,
+    location, click-event, purchase-event and attribute predicates). No public REST operation
+    lists or filters users; REST can only look one user up by phone or email.
+- field: Query.node(id)
+  reason: Relay global object identification; no REST analogue.
+- field: Query.nodes(ids)
+  reason: Relay batch object identification; no REST analogue.
+mcp_only: []
+rest_only:
+- capability: OAuth token exchange
+  operations: [createTokenViaAuthorizationCode]
+  reason: Authorization-code exchange happens before a GraphQL session exists.
+- capability: Bulk ingestion
+  operations: [postBulkUserAttributes, postBulkSegmentMembers, deleteBulkSegmentMembers, getBulkJobStatus]
+  reason: Asynchronous batch surface (up to 10,000 members / 256 payloads per request); no GraphQL equivalent.
+- capability: Segments
+  operations: [createSegment, listSegments, getSegmentByExternalId, patchSegmentByExternalId, deleteSegmentByExternalId]
+  reason: Segments (open beta) are REST-only.
+- capability: Single-user upsert (v2)
+  operations: [postUserAttributes]
+  reason: Combined attributes + subscriptions + identifiers upsert exists only on REST v2.
+- capability: Product catalog
+  operations: [postUpload, getUploads, lookupUpload]
+  reason: Presigned-S3 upload flow; not modelled in the graph.
+- capability: Offers / discount codes
+  operations: [createCoupons]
+  reason: REST-only, and gated behind an Attentive-side feature enablement.
+- capability: Privacy requests
+  operations: [addDeleteRequest, getDeleteRequest]
+  reason: CCPA/GDPR deletion requests are REST-only.
+- capability: Identity resolution
+  operations: [identify]
+  reason: Client/custom identifier association is REST-only.

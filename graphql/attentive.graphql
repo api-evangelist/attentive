@@ -1,0 +1,966 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+enum CadenceComparator {
+  CADENCE_COMPARATOR_UNKNOWN
+  CADENCE_COMPARATOR_LATEST
+}
+
+"The currency in ISO 4217 format."
+enum CurrencyCode {
+  CURRENCY_UNKNOWN
+  AUD
+  CAD
+  GBP
+  USD
+  AED
+  AFN
+  ALL
+  AMD
+  ANG
+  AOA
+  ARS
+  AWG
+  AZN
+  BAM
+  BBD
+  BDT
+  BGN
+  BHD
+  BIF
+  BMD
+  BND
+  BOB
+  BOV
+  BRL
+  BSD
+  BTN
+  BWP
+  BYN
+  BZD
+  CDF
+  CHE
+  CHF
+  CHW
+  CLF
+  CLP
+  CNY
+  COP
+  COU
+  CRC
+  CUC
+  CUP
+  CVE
+  CZK
+  DJF
+  DKK
+  DOP
+  DZD
+  EGP
+  ERN
+  ETB
+  EUR
+  FJD
+  FKP
+  GEL
+  GHS
+  GIP
+  GMD
+  GNF
+  GTQ
+  GYD
+  HKD
+  HNL
+  HRK
+  HTG
+  HUF
+  IDR
+  ILS
+  INR
+  IQD
+  IRR
+  ISK
+  JMD
+  JOD
+  JPY
+  KES
+  KGS
+  KHR
+  KMF
+  KPW
+  KRW
+  KWD
+  KYD
+  KZT
+  LAK
+  LBP
+  LKR
+  LRD
+  LSL
+  LYD
+  MAD
+  MDL
+  MGA
+  MKD
+  MMK
+  MNT
+  MOP
+  MRU
+  MUR
+  MVR
+  MWK
+  MXN
+  MXV
+  MYR
+  MZN
+  NAD
+  NGN
+  NIO
+  NOK
+  NPR
+  NZD
+  OMR
+  PAB
+  PEN
+  PGK
+  PHP
+  PKR
+  PLN
+  PYG
+  QAR
+  RON
+  RSD
+  RUB
+  RWF
+  SAR
+  SBD
+  SCR
+  SDG
+  SEK
+  SGD
+  SHP
+  SLE
+  SLL
+  SOS
+  SRD
+  SSP
+  STN
+  SVC
+  SYP
+  SZL
+  THB
+  TJS
+  TMT
+  TND
+  TOP
+  TRY
+  TTD
+  TWD
+  TZS
+  UAH
+  UGX
+  USN
+  UYI
+  UYU
+  UYW
+  UZS
+  VED
+  VES
+  VND
+  VUV
+  WST
+  XAF
+  XAG
+  XAU
+  XBA
+  XBB
+  XBC
+  XBD
+  XCD
+  XDR
+  XOF
+  XPD
+  XPF
+  XPT
+  XSU
+  XTS
+  XUA
+  XXX
+  YER
+  ZAR
+  ZMW
+  ZWL
+  XCG
+}
+
+enum FilterOperation {
+  FILTER_OPERATION_AND
+  FILTER_OPERATION_OR
+}
+
+enum HasVerb {
+  HAS_VERB_UNKNOWN
+  HAS_VERB_HAS
+  HAS_VERB_HAS_NOT
+}
+
+enum IneligibilityReason {
+  INELIGIBILITY_REASON_UNKNOWN
+  INELIGIBILITY_REASON_OPTED_OUT
+  INELIGIBILITY_REASON_NOT_FULLY_OPTED_IN
+  INELIGIBILITY_REASON_AUTO_SUPPRESSED
+  INELIGIBILITY_REASON_USER_SUPPRESSED
+  INELIGIBILITY_REASON_KNOWN_LITIGATOR
+}
+
+enum IsVerb {
+  IS_VERB_UNKNOWN
+  IS_VERB_IS
+  IS_VERB_IS_NOT
+}
+
+enum StringComparator {
+  STRING_COMPARATOR_UNKNOWN
+  STRING_COMPARATOR_EQUALS
+  STRING_COMPARATOR_IN
+  STRING_COMPARATOR_LIKE
+}
+
+"Channel of subscription."
+enum SubscriptionChannel {
+  CHANNEL_UNKNOWN
+  CHANNEL_TEXT
+  CHANNEL_EMAIL
+  CHANNEL_PUSH
+}
+
+"Type of subscription."
+enum SubscriptionType {
+  TYPE_UNKNOWN
+  TYPE_MARKETING
+  TYPE_TRANSACTIONAL
+  TYPE_CHECKOUT_ABANDONED
+}
+
+enum TimeComparator {
+  TIME_COMPARATOR_UNKNOWN
+  TIME_COMPARATOR_BEFORE
+  TIME_COMPARATOR_AFTER
+  TIME_COMPARATOR_WITHIN
+  TIME_COMPARATOR_DAY_OF
+  TIME_COMPARATOR_BETWEEN
+  TIME_COMPARATOR_OVER_ALL_TIME
+  TIME_COMPARATOR_MONTH_OF
+}
+
+enum UserSearchEvent {
+  USER_SEARCH_EVENT_ADD_TO_CART
+  USER_SEARCH_EVENT_CHECKOUT_STARTED
+  USER_SEARCH_EVENT_ORDER_CONFIRMED
+  USER_SEARCH_EVENT_PURCHASE
+  USER_SEARCH_EVENT_CART_UPDATED
+  USER_SEARCH_EVENT_PRODUCT_VIEW
+  USER_SEARCH_EVENT_FULFILLMENT_AVAILABLE_FOR_PICKUP
+  USER_SEARCH_EVENT_FULFILLMENT_CANCELLED
+  USER_SEARCH_EVENT_FULFILLMENT_CREATED
+  USER_SEARCH_EVENT_FULFILLMENT_DELIVERED
+  USER_SEARCH_EVENT_FULFILLMENT_DELIVERY_ATTEMPT_FAILURE
+  USER_SEARCH_EVENT_FULFILLMENT_OUT_FOR_DELIVERY
+  USER_SEARCH_EVENT_FULFILLMENT_IN_TRANSIT
+  USER_SEARCH_EVENT_FULFILLMENT_DELIVERY_EXCEPTION
+  USER_SEARCH_EVENT_FULFILLMENT_PENDING
+  USER_SEARCH_EVENT_ORDER_CANCELLED
+  USER_SEARCH_EVENT_REFUND_FAILED
+  USER_SEARCH_EVENT_REFUND_SUCCEEDED
+  USER_SEARCH_EVENT_CUSTOM_EVENT
+  USER_SEARCH_EVENT_ORDER_SUBSCRIPTION_CREATED
+  USER_SEARCH_EVENT_ORDER_SUBSCRIPTION_CHARGE_SCHEDULED
+  USER_SEARCH_EVENT_ORDER_SUBSCRIPTION_CHARGE_FAILED
+  USER_SEARCH_EVENT_ORDER_SUBSCRIPTION_SKIPPED
+  USER_SEARCH_EVENT_CHECKOUT_ABANDONED
+  USER_SEARCH_EVENT_CHECKOUT_UPDATED
+  USER_SEARCH_EVENT_PAGE_VIEW
+  USER_SEARCH_EVENT_SUBSCRIPTION_SUPPRESSED
+}
+
+enum UserStatus {
+  UNKNOWN
+  ANY
+  ELIGIBLE
+  INELIGIBLE
+  OPTED_OUT
+  NOT_YET_JOINED
+  SUPPRESSED
+  AUTO_SUPPRESSED
+  USER_SUPPRESSED
+}
+
+enum WellKnownPropertyType {
+  WELL_KNOWN_PROPERTY_TYPES_UNKNOWN
+  WELL_KNOWN_PROPERTY_FIRST_NAME
+  WELL_KNOWN_PROPERTY_LAST_NAME
+  WELL_KNOWN_PROPERTY_FULL_NAME
+  WELL_KNOWN_PROPERTY_LOCALE
+  WELL_KNOWN_PROPERTY_MAIL_EXCHANGE
+  WELL_KNOWN_PROPERTY_LANGUAGE
+  WELL_KNOWN_PROPERTY_IS_LITIGIOUS
+  WELL_KNOWN_PROPERTY_DEVICE_TYPE
+  WELL_KNOWN_PROPERTY_OPERATING_SYSTEM
+  WELL_KNOWN_PROPERTY_MOBILE_DEVICE
+  WELL_KNOWN_PROPERTY_TMP_NO_LINK_CLICK_TRACKING_CONSENT
+  WELL_KNOWN_PROPERTY_TMP_NO_PIXEL_TRACKING_CONSENT
+  WELL_KNOWN_PROPERTY_ZIP
+  WELL_KNOWN_PROPERTY_CITY
+  WELL_KNOWN_PROPERTY_REGION
+  WELL_KNOWN_PROPERTY_COUNTRY
+  WELL_KNOWN_PROPERTY_TIMEZONE
+  WELL_KNOWN_PROPERTY_AREA_CODE
+  WELL_KNOWN_PROPERTY_CONVERSATIONAL_STATE
+  WELL_KNOWN_PROPERTY_TYPES_SMS_CHURN_PROBABILITY
+  WELL_KNOWN_PROPERTY_TYPES_ESTIMATED_LIFETIME_VALUE
+  WELL_KNOWN_PROPERTY_TYPES_BESTSELLER_RECOMMENDATION
+  WELL_KNOWN_PROPERTY_TYPES_CATEGORY_BESTSELLER_LAST_PURCHASED
+  WELL_KNOWN_PROPERTY_TYPES_IS_PART_OF_AI_JOURNEY
+  WELL_KNOWN_PROPERTY_TYPES_SALESFORCE_SERVICE_CLOUD_CONTACT_ID
+  WELL_KNOWN_PROPERTY_TYPES_MAILCHIMP_MEMBER_RATING
+  WELL_KNOWN_PROPERTY_TYPES_KLAVIYO_LAST_EMAIL_OPEN
+  WELL_KNOWN_PROPERTY_TYPES_NOTIFY_WHEN_BACK_IN_STOCK
+  WELL_KNOWN_PROPERTY_TYPES_YOTPO_PRODUCT_REVIEWS
+}
+
+input CadenceCondition {
+  comparator: CadenceComparator!
+}
+
+"Request message for creating a custom event."
+input CreateCustomEventInput {
+  "The type of event. This name is case sensitive. "Order shipped" and "Order Shipped" would be considered different event types."
+  type: String!
+  "Any metadata associated with the event. Object keys are expected to be strings, and cannot contain any of the following special characters: single quote ', double quote ", curly braces { }, square brackets [ ], backslash \, comma ,. Object values can be any type. Note that both object keys and object values are case sensitive. For example, "deliverydate" and "DeliveryDate" would be considered different event properties. For URLs that are provided as a value, Attentive will automatically shorten the link with your brand's link shortener. For example, https://mysite.com/. Note that Attentive can only shorten URLs that are 1,024 characters or fewer."
+  properties: JSON!
+  "A unique identifier representing this specific event. A UUID is recommended."
+  externalEventId: String
+  "Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant Journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called."
+  occurredAt: DateTime
+  "User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive."
+  user: EventUserInput!
+}
+
+"Create webhook request input."
+input CreateWebhookInput {
+  "The destination url of the webhook."
+  url: String!
+  "The list of events this webhook is subscribed to."
+  events: [String!]
+}
+
+"Delete webhook request input."
+input DeleteWebhookInput {
+  "Id of the webhook to delete."
+  id: ID!
+}
+
+"Product details."
+input EcommerceProductInput {
+  "ID for the product."
+  productId: String!
+  "ID for the product variant."
+  productVariantId: String!
+  "Image for the product."
+  productImage: String
+  "Name for the product."
+  productName: String
+  "Prices for the product."
+  productPrices: [MoneyInput!]
+  "Quantity of the product."
+  quantity: Long
+}
+
+input EventPropertiesFilter {
+  propertyName: String!
+  stringCondition: StringCondition
+}
+
+input EventUserCustomIdentifierInput {
+  name: String!
+  value: String!
+}
+
+input EventUserExternalIdentifiersInput {
+  clientUserId: String
+  customIdentifiers: [EventUserCustomIdentifierInput!]
+}
+
+input EventUserInput {
+  phone: String
+  email: String
+  externalIdentifiers: EventUserExternalIdentifiersInput
+}
+
+input EventVisitorInput {
+  "Phone number of the user associated with the action. E.164 format is required. This field is required if email is not provided."
+  phone: String
+  "Email of the user associated with the action. This field is required if phone is not provided."
+  email: String
+}
+
+"External Identifiers for a user."
+input ExternalCustomIdentifiersInput {
+  "External identifier name."
+  name: String!
+  "External identifier value."
+  value: String!
+}
+
+"External Identifiers for a user."
+input ExternalIdentifiersForSubscribeInput {
+  "Client user ID."
+  clientUserId: String
+  "Shopify ID."
+  shopifyId: String
+  "Klaviyo ID."
+  klaviyoId: String
+  "Custom identifiers."
+  customIdentifiers: [ExternalCustomIdentifiersInput!]
+}
+
+input ListUsersClickEventFilter {
+  hasVerb: HasVerb!
+  timeCondition: TimeCondition!
+}
+
+input ListUsersFilter {
+  status: UserStatus
+  purchaseEventFilter: PurchaseEventFilter
+  location: ListUsersLocationFilter
+  clickEventFilter: ListUsersClickEventFilter
+  subscriptionOptInCompletedFilter: ListUsersSubscriptionOptInCompletedFilter
+  segmentId: ID
+  searchFilter: UserSearchFilter
+  isNotSegmentMember: Boolean
+}
+
+input ListUsersLocationFilter {
+  isVerb: IsVerb!
+  isoCodes: [String!]
+}
+
+input ListUsersSubscriptionOptInCompletedFilter {
+  hasVerb: HasVerb!
+  timeCondition: TimeCondition!
+}
+
+"Locale of the user."
+input LocaleForSubscribeInput {
+  "Two-letter language code of the locale. (ISO 639-1 alpha 2)[https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes] is required. Example=en"
+  language: String!
+  "Two-letter country code of the locale. (ISO 3166-1 alpha 2)[https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2] is required. Example=US"
+  country: String!
+}
+
+"The price and currency of the product."
+input MoneyInput {
+  "The price of the product."
+  amount: String!
+  "The currency used for the price in ISO 4217 format."
+  currency: CurrencyCode
+}
+
+input PurchaseEventFilter {
+  hasVerb: HasVerb!
+  timeCondition: TimeCondition!
+}
+
+input SearchAttributeFilter {
+  wellKnownPropertyFilter: WellKnownPropertyFilter
+}
+
+input SearchEventFilter {
+  isNot: Boolean!
+  event: UserSearchEvent!
+  timeCondition: TimeCondition
+  eventPropertiesFilter: [EventPropertiesFilter!]
+  cadenceCondition: CadenceCondition
+}
+
+input SearchPropertyFilter {
+  eventFilter: SearchEventFilter
+  attributeFilter: SearchAttributeFilter
+}
+
+"Add product to cart event input."
+input SendAddProductToCartEventInput {
+  "Timestamp of when the action occurred in ISO 8601 format. If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called."
+  occurredAt: DateTime
+  "User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive."
+  visitor: EventVisitorInput!
+  "Detailed information about the products in this request."
+  products: [EcommerceProductInput!]
+}
+
+"Product purchase event input."
+input SendProductPurchaseEventInput {
+  "Timestamp of when the action occurred in ISO 8601 format. If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called."
+  occurredAt: DateTime
+  "User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive."
+  visitor: EventVisitorInput!
+  "Detailed information about the products in this request."
+  products: [EcommerceProductInput!]
+}
+
+"Product view event input."
+input SendProductViewEventInput {
+  "Timestamp of when the action occurred in ISO 8601 format. If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called."
+  occurredAt: DateTime
+  "User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive."
+  visitor: EventVisitorInput!
+  "Detailed information about the products in this request."
+  products: [EcommerceProductInput!]
+}
+
+"Request message for setting custom attributes."
+input SetCustomAttributesInput {
+  "Any metadata associated with the attribute. Object keys and values are expected to be strings. Both object keys and object values are case sensitive. "Favorite color" and "Favorite Color" would be considered different custom attributes."
+  properties: JSON!
+  "User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive."
+  user: EventUserInput!
+}
+
+input StringCondition {
+  comparator: StringComparator!
+  values: [String!]
+  isNot: Boolean
+}
+
+"Subscribe mutation input."
+input SubscribeInput {
+  "User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive."
+  user: UserInput!
+  "External Identifiers for a user."
+  externalIdentifiers: ExternalIdentifiersForSubscribeInput
+  "The unique identifier of the sign-up source. This can be found in the Sign-up Units tab of the Attentive platform in the ID column for any API sign-up method. Or, you can contact our White Glove team (whiteglove@attentivemobile.com) or your Client Strategy Manager at Attentive to request a sign-up source for either marketing or transactional opt-ins. Our team will review API opt-in units with [compliance in mind](https://docs.attentivemobile.com/pages/legal-docs/legal-disclosure-language/). This field is not required if both locale and subscription type are provided."
+  signupSourceId: String
+  "The locale of the user. This field is required if sign source id is omitted."
+  locale: LocaleForSubscribeInput
+  "Type of subscription. This field is required if sign source id is omitted."
+  type: SubscriptionType
+  "Opt in subscriber silently (do not send a Reply Y to subscribe text). NOTE: This property is disabled by default. We strongly recommend maintaining the double opt-in flow. The double opt in serves a couple of important purposes from a legal/compliance perspective. Contact your dedicated Client Strategy Manager (CSM) or our whiteglove@attentivemobile.com team to enable it. If wanting to skip legal/reply y language, set this to be true. We will not send reply y message or legal message to subscribers added with this flag set to true."
+  singleOptIn: Boolean
+}
+
+"Type and channel of a subscription."
+input SubscriptionInput {
+  "Type of subscription."
+  type: SubscriptionType!
+  "Channel of subscription."
+  channel: SubscriptionChannel!
+}
+
+input TimeCondition {
+  comparator: TimeComparator!
+  time: DateTime
+  endTime: DateTime
+}
+
+"Unsubscribe mutation input."
+input UnsubscribeInput {
+  "User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive."
+  user: UserInput!
+  "Subscriptions."
+  subscriptions: [SubscriptionInput!]
+  "Optional notification properties to override."
+  notification: UnsubscribeNotificationInput
+}
+
+"Unsubscribe notification details."
+input UnsubscribeNotificationInput {
+  "Standard language tags as defined by the ISO. Currently only supports en-US and fr-CA. Case sensitive, must match exactly."
+  language: String
+  "Whether or not notification is disabled."
+  disabled: Boolean
+}
+
+input UpdateWebhookInput {
+  "The id of the webhook to update."
+  id: ID!
+  "The destination url of the webhook."
+  url: String!
+  "The list of events this webhook is subscribed to."
+  events: [String!]
+  "(optional) Disable the webhook endpoint if set to true."
+  disabled: Boolean!
+}
+
+"User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive."
+input UserInput {
+  "A user's email we use to fetch subscription eligibility. Example: email=test@gmail.com"
+  email: String
+  "A user's phone number we use to fetch subscription eligibility. Example: phone=+13115552368"
+  phone: String
+}
+
+input UserSearchFilter {
+  operation: FilterOperation!
+  propertyFilters: [SearchPropertyFilter!]
+}
+
+input WellKnownPropertyFilter {
+  type: WellKnownPropertyType
+  stringCondition: StringCondition
+}
+
+interface Node {
+  id: ID!
+}
+
+"Application details."
+type Application implements Node {
+  "Name of the application."
+  name: String!
+  "ID of the application."
+  id: ID!
+}
+
+"Company details."
+type Company implements Node {
+  "ID of the company."
+  id: ID!
+  "Name of the company."
+  name: String!
+  "User associated with this company."
+  user(phone: String, email: String): User
+  "Users associated with this company."
+  usersExperimental(filter: ListUsersFilter, first: Int, after: String): UsersExperimentalConnection
+}
+
+"Response message to a request for creating a custom event."
+type CreateCustomEventPayload {
+  "The type of event."
+  type: String!
+  "Timestamp of when the action occurred."
+  occurredAt: DateTime!
+  "A unique identifier representing this specific event."
+  externalEventId: String!
+  "User associated with the action."
+  user: EventUser!
+  "Any metadata associated with the event."
+  properties: JSON!
+}
+
+"Response to createWebhook mutation."
+type CreateWebhookPayload {
+  "Webhook details."
+  webhook: Webhook!
+}
+
+"Response to deleteWebhook mutation."
+type DeleteWebhookPayload {
+  "True if webhook was deleted."
+  deleted: Boolean!
+}
+
+"Destination email."
+type DestinationEmail {
+  "Value of destination email."
+  value: String!
+}
+
+"Destination phone."
+type DestinationPhone {
+  "Value of destination phone."
+  value: String!
+}
+
+"Destination push token."
+type DestinationPushToken {
+  "Value of destination push token."
+  value: String!
+}
+
+"Product details."
+type EcommerceProduct {
+  "A unique identifier for the product variant (i.e. "Medium Blue T-Shirt"). If you are providing a [Google Shopping Feed](https://support.google.com/merchants/answer/7052112?hl=en), this should be [id](https://support.google.com/merchants/answer/6324405). If you are using Shopify, this should be Shopify product Variant ID."
+  productVariantId: String!
+  "A link to the image of the product. The image should not be larger than 500kb. This image will be used when sending MMS text messages."
+  productImage: String
+  "A unique identifier for the product (i.e. "T-Shirt"). If you are providing a [Google Shopping Feed](https://support.google.com/merchants/answer/7052112?hl=en), this should be [item_group_id](https://support.google.com/merchants/answer/6324507). If you don't have an item_group_id in your feed, use [id](https://support.google.com/merchants/answer/6324405). If you are using [Shopify](https://help.shopify.com/en/manual/products), this should be Shopify product ID."
+  productId: String!
+  "The name of the product. This should be in a format that could be used directly in a message."
+  productName: String
+  "The prices and currencies of the product."
+  productPrices: [Money!]!
+  "The number of products."
+  quantity: Long
+}
+
+"Eligibility information."
+type Eligibility {
+  "Reason for ineligibility."
+  ineligibilityReason: IneligibilityReason
+  "True if eligible, false if not eligible."
+  isEligible: Boolean!
+}
+
+type EventUser {
+  externalIdentifiers: EventUserExternalIdentifiers
+  phone: String
+  email: String
+}
+
+type EventUserCustomIdentifier {
+  name: String!
+  value: String!
+}
+
+type EventUserExternalIdentifiers {
+  customIdentifiers: [EventUserCustomIdentifier!]!
+  clientUserId: String
+}
+
+type EventVisitor {
+  "Phone number of the user associated with the action. E.164 format is required. This field is required if email is not provided."
+  phone: String
+  "Email of the user associated with the action. This field is required if phone is not provided."
+  email: String
+}
+
+"External Identifiers for a user."
+type ExternalCustomIdentifiers {
+  "External identifier name."
+  name: String!
+  "External identifier value."
+  value: String!
+}
+
+"External Identifiers for a user."
+type ExternalIdentifiersForSubscribe {
+  "Shopify ID."
+  shopifyId: String
+  "Custom identifiers."
+  customIdentifiers: [ExternalCustomIdentifiers!]!
+  "Client user ID."
+  clientUserId: String
+  "Klaviyo ID."
+  klaviyoId: String
+}
+
+"Installed application details."
+type InstalledApplication implements Node {
+  "The ID of the installed Application."
+  id: ID!
+  "The application which was installed"
+  application: Application
+  "The company this application was installed in"
+  installerCompany: Company
+  "Webhook details for this installed application."
+  webhooks: [Webhook!]
+}
+
+"Make an API call to this mutation to list existing webhooks."
+type ListWebhookResponse {
+  "Webhook details."
+  webhooks: [Webhook!]!
+}
+
+"The price and currency of the product."
+type Money {
+  "The currency used for the price in ISO 4217 format."
+  currency: CurrencyCode
+  "The price of the product."
+  amount: String!
+}
+
+type Mutation {
+  "Use the Custom Events mutation to send user actions to use in the Attentive Segment Builder and Journey Builder. This data cannot contain any sensitive or special categories of information as defined in applicable data protection and privacy laws, including the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA). See a list of specific categories of data you cannot share with Attentive [here](https://docs.attentivemobile.com/pages/legal-docs/pi-disclaimer/). Make a call to this mutation for any event-based data representing user actions."
+  createCustomEvent(input: CreateCustomEventInput!): CreateCustomEventPayload
+  "Make an API call to this mutation to remove a webhook."
+  deleteWebhook(input: DeleteWebhookInput!): DeleteWebhookPayload
+  "Make an API call to this endpoint to update a webhook."
+  updateWebhook(input: UpdateWebhookInput!): UpdateWebhookPayload
+  "Make a call to this mutation when a user views a product."
+  productViewEvent(input: SendProductViewEventInput!): SendProductViewEventPayload
+  "Make a call to this mutation when a user generates an order or purchase."
+  productPurchaseEvent(input: SendProductPurchaseEventInput!): SendProductPurchaseEventPayload
+  "Use the Custom Attributes mutation to apply customizable data or characteristics to each of your subscribers. You can then build segments based on that information to send targeted campaigns and journeys. Make a call to this endpoint for any attribute-based data. There are no limits to the amount of custom attributes that can be created. Note that you can create net-new properties with this API, however, it cannot be used to create new values for an existing UI-created property name. If a property name is created through the Attentive platform, all possible property values must also be defined in the platform."
+  setCustomAttributes(input: SetCustomAttributesInput!): SetCustomAttributesPayload
+  "Make a call to this mutation when a user adds a product to their shopping cart."
+  addToCartEvent(input: SendAddProductToCartEventInput!): SendAddProductToCartEventPayload
+  "Make an API call to this mutation to subscribe to a webhook. Events are a collection of strings of the following types: `email.subscribed`, `sms.subscribed`, `email.unsubscribed`, `sms.sent`, `sms.message_link_click`, `custom_attribute.set`. Event types are case sensitive. All events included will be sent to the URL."
+  createWebhook(input: CreateWebhookInput!): CreateWebhookPayload
+  "Make a call to this mutation to unsubscribe a user from a subscription type or channel. If no subscriptions are present in the request, the user is unsubscribed from all subscriptions. If subscriptions are present in the request, the user is unsubscribed from the requested type or channel combination. By default, if a subscription exists, but the user is already unsubscribed, it records the attempt to unsubscribe the subscription again. For TEXT subscriptions, a message is sent to the person indicating that they are unsubscribed."
+  unsubscribe(input: UnsubscribeInput!): UnsubscribePayload
+  "Make a call to this mutation to opt-in a user to a subscription. Note that a legal disclosure is required when a user is opted-in programmatically. Requests must contain either a sign up source id or both a locale and a subscription type. For transactional messages, you must include a transactional opt-in unit. By default, if a subscription already exists, it will try and record the attempt to create the subscription again. For TEXT subscriptions, this will result in a message being sent to the person indicating that they are already subscribed."
+  subscribe(input: SubscribeInput!): SubscribePayload
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  startCursor: String!
+  endCursor: String!
+  hasPreviousPage: Boolean!
+}
+
+type Query {
+  node(id: ID!): Node
+  nodes(ids: [ID!]!): [Node]!
+  viewer: Viewer
+}
+
+"Response to the AddToCartEvent mutation."
+type SendAddProductToCartEventPayload {
+  "Timestamp of when the action occurred in ISO 8601 format. If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called."
+  occurredAt: DateTime
+  "Detailed information about the products in this request."
+  products: [EcommerceProduct!]!
+  "User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive."
+  visitor: EventVisitor!
+}
+
+"Response to productPurchaseEvent mutation."
+type SendProductPurchaseEventPayload {
+  "Detailed information about the products in this request."
+  products: [EcommerceProduct!]!
+  "User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive."
+  visitor: EventVisitor!
+  "Timestamp of when the action occurred in ISO 8601 format. If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called."
+  occurredAt: DateTime
+}
+
+"Response to the ProductViewEvent mutation."
+type SendProductViewEventPayload {
+  "Detailed information about the products in this request."
+  products: [EcommerceProduct!]!
+  "Timestamp of when the action occurred in ISO 8601 format. If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called."
+  occurredAt: DateTime
+  "User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive."
+  visitor: EventVisitor!
+}
+
+"Response message to a request for setting custom attributes."
+type SetCustomAttributesPayload {
+  "User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive."
+  user: EventUser!
+  "Any metadata associated with the attribute."
+  properties: JSON!
+}
+
+"Response to subscribe mutation."
+type SubscribePayload {
+  "External Identifiers for a user."
+  externalIdentifiers: ExternalIdentifiersForSubscribe
+  "Subscribe results."
+  subscribeResults: [Subscription!]!
+}
+
+"Subscription details."
+type Subscription {
+  "Destination address for subscription."
+  destinationAddress: DestinationAddress
+  "Channel for subscription."
+  channel: SubscriptionChannel!
+  "Type of subscription."
+  type: SubscriptionType!
+  "Timestamp of when the subscription was created."
+  created: DateTime
+}
+
+"Subscription connection details."
+type SubscriptionConnection {
+  "Subscription eligibility details."
+  subscriptionEligibilities: [SubscriptionEligibility!]!
+  "Sign up date timestamp."
+  signupDate: DateTime
+}
+
+"Subscription eligibility information."
+type SubscriptionEligibility {
+  "Subscription details."
+  subscription: Subscription!
+  "Eligibility information."
+  eligibility: Eligibility!
+}
+
+"Response for unsubscribe mutation."
+type UnsubscribePayload {
+  "Unsubscribe subscription results."
+  unsubscribeResults: [Subscription!]!
+}
+
+"Response for updateWebhook mutation."
+type UpdateWebhookPayload {
+  "Webhook details."
+  webhook: Webhook!
+}
+
+"User details."
+type User implements Node {
+  "City for this user."
+  city: String! @deprecated(reason: "deprecated")
+  "The associated company for this user"
+  company: Company
+  "Subscribed phone number for this user."
+  subscribedPhone: String!
+  "Last name for this user."
+  lastName: String!
+  "Email for this user."
+  email: String!
+  "State for this user."
+  state: String! @deprecated(reason: "deprecated")
+  "Zip code for this user."
+  zipcode: String! @deprecated(reason: "deprecated")
+  "Country for this user."
+  country: String! @deprecated(reason: "deprecated")
+  "Timezone for this user."
+  timezone: String! @deprecated(reason: "deprecated")
+  "ID for this user."
+  id: ID!
+  "First name for this user."
+  firstName: String!
+  "SubscriptionConnections associated with this user."
+  subscriptions: SubscriptionConnection
+}
+
+type UserEdge {
+  user: User! @deprecated(reason: "deprecated")
+  node: User!
+  cursor: String!
+}
+
+type UsersExperimentalConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge!]!
+}
+
+"Viewer details"
+type Viewer {
+  "Installed application details."
+  installedApplication: InstalledApplication
+}
+
+"Webhook details."
+type Webhook implements Node {
+  "Timestamp of when the webhook was disabled."
+  disabledAt: DateTime
+  "The list of events this webhook is subscribed to."
+  events: [String!]!
+  "Id of the webhook."
+  id: ID!
+  "The destination url of the webhook."
+  url: String!
+}
+
+"A slightly refined version of RFC-3339 compliant DateTime Scalar"
+scalar DateTime
+
+"An empty object with no fields, mapping to com.google.protobuf.Empty"
+scalar Empty
+
+"A JSON scalar"
+scalar JSON
+
+"A 64-bit signed integer"
+scalar Long
+
+union DestinationAddress = DestinationEmail | DestinationPhone | DestinationPushToken

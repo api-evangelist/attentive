@@ -1,0 +1,61 @@
+generated: '2026-08-13'
+method: probed
+source: https://api.attentivemobile.com/v1/graphql
+docs: https://docs.attentive.com/reference/graphql-introduction
+spec_type: GraphQL SDL
+file: attentive.graphql
+note: >-
+  Attentive's GraphQL API (beta) is served at POST https://api.attentivemobile.com/v1/graphql.
+  Full introspection succeeded ANONYMOUSLY on 2026-08-13 (no Authorization header) and returned
+  104 types; the SDL in attentive.graphql was printed verbatim from that introspection result.
+  Executing real queries still requires an Attentive application token and the scopes attached
+  to the app - only the schema itself is open.
+endpoint:
+  url: https://api.attentivemobile.com/v1/graphql
+  method: POST
+  introspection: open
+  introspection_checked: '2026-08-13'
+  auth: Bearer application token (same token as the REST API); fields and mutations are gated by app scopes
+schema:
+  types: 104
+  query_type: Query
+  mutation_type: Mutation
+  subscription_type: null
+  query_fields: [node, nodes, viewer]
+  mutation_fields:
+  - subscribe
+  - unsubscribe
+  - setCustomAttributes
+  - createCustomEvent
+  - productViewEvent
+  - addToCartEvent
+  - productPurchaseEvent
+  - createWebhook
+  - updateWebhook
+  - deleteWebhook
+  entry_points:
+  - path: viewer.installedApplication
+    returns: InstalledApplication
+    note: Identity of the calling app; the GraphQL equivalent of the REST getMe test-auth call.
+  - path: viewer.installedApplication.installerCompany.user(phone|email)
+    returns: User
+    note: Single-user lookup by phone or email.
+  - path: viewer.installedApplication.installerCompany.usersExperimental(filter, first, after)
+    returns: UsersExperimentalConnection
+    note: >-
+      Relay-style filtered user search. No public REST equivalent exists - this is a
+      GraphQL-only capability (see mcp/attentive-tool-crosswalk.yml graphql_only[]).
+  - path: viewer.installedApplication.webhooks
+    returns: "[Webhook!]"
+    note: Equivalent to REST getWebhooks.
+x-evidence:
+  fetched: '2026-08-13'
+  url: https://api.attentivemobile.com/v1/graphql
+  http_status: 200
+  request: 'POST {"query":"query IntrospectionQuery { __schema { ... } }"} with no Authorization header'
+  content_type: application/json
+x-observation: >-
+  Anonymous introspection is enabled on a production endpoint. That is a deliberate discovery
+  convenience for a beta API, and it is also a public disclosure of the whole internal graph
+  (including experimental fields such as usersExperimental). Recorded as an observation, not a
+  vulnerability finding.

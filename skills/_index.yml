@@ -1,4 +1,4 @@
-generated: '2026-07-18'
+generated: '2026-08-13'
 method: generated
 skills:
 - file: attentive-android-sdk-AGENTS.md
@@ -23,3 +23,12 @@ skills:
   method: generated
   api: openapi/attentive-v1-openapi.yaml
   operations: [getWebhooks, createWebhook, updateWebhook, deleteWebhook]
+- file: attentive-graphql-subscriber-graph.md
+  name: Query and mutate the Attentive subscriber graph over GraphQL
+  method: generated
+  api: graphql/attentive.graphql
+  source: anonymous introspection of https://api.attentivemobile.com/v1/graphql (2026-08-13)
+  operations: [viewer, subscribe, unsubscribe, setCustomAttributes, createCustomEvent, createWebhook, updateWebhook, deleteWebhook]
+  note: >-
+    Grounded in the live GraphQL schema, including the usersExperimental filtered search that has
+    no REST equivalent. Cross-links conventions/, rate-limits/ and errors/.

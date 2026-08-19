@@ -1,0 +1,442 @@
+{
+  "item": [
+    {
+      "id": "5dc17ef9-d992-4ef7-a77d-444cc1daa8ca",
+      "name": "Custom Events",
+      "description": {
+        "content": "Use the Custom Events API to send user actions to use in the Attentive Segment Builder and Journey Builder for both email and text messages. This data cannot contain any sensitive or special categories of information as defined in applicable data protection and privacy laws, including the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA). See a list of specific categories of data you cannot share with Attentive [here](https://docs.attentivemobile.com/pages/legal-docs/pi-disclaimer/).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6c140595-9533-4176-b750-972232b9dcc9",
+          "name": "Custom Events",
+          "request": {
+            "name": "Custom Events",
+            "description": {
+              "content": "Make a call to this endpoint for any event-based data representing user actions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                "custom"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"<string>\"\n  },\n  \"externalEventId\": \"<string>\",\n  \"occurredAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f254fec5-4e90-4e0e-9392-a24d940c41d2",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"Order Shipped\",\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"https://cdn.example.com/images/sample-image.jpg\",\n    \"orderStatusURL\": \"https://example.com/orderstatus/54321\",\n    \"delivery_date\": \"May 10\",\n    \"Order Id\": \"54321\",\n    \"products\": [\n      \"productId1\",\n      \"productId2\"\n    ],\n    \"shipment\": {\n      \"carrier\": \"fedex\",\n      \"trackingNumber\": \"12345\"\n    }\n  },\n  \"externalEventId\": \"37fb97a9-6cfd-4983-bd65-68d104d53b70\",\n  \"occurredAt\": \"2021-03-30T14:38:29.000Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "537ef931-9a4e-474a-8c61-46dddc996e4e",
+              "name": "Invalid parameter in request query or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"Order Shipped\",\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"https://cdn.example.com/images/sample-image.jpg\",\n    \"orderStatusURL\": \"https://example.com/orderstatus/54321\",\n    \"delivery_date\": \"May 10\",\n    \"Order Id\": \"54321\",\n    \"products\": [\n      \"productId1\",\n      \"productId2\"\n    ],\n    \"shipment\": {\n      \"carrier\": \"fedex\",\n      \"trackingNumber\": \"12345\"\n    }\n  },\n  \"externalEventId\": \"37fb97a9-6cfd-4983-bd65-68d104d53b70\",\n  \"occurredAt\": \"2021-03-30T14:38:29.000Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ac76aad1-c22f-427d-a2bd-067f8c45bd90",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"Order Shipped\",\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"https://cdn.example.com/images/sample-image.jpg\",\n    \"orderStatusURL\": \"https://example.com/orderstatus/54321\",\n    \"delivery_date\": \"May 10\",\n    \"Order Id\": \"54321\",\n    \"products\": [\n      \"productId1\",\n      \"productId2\"\n    ],\n    \"shipment\": {\n      \"carrier\": \"fedex\",\n      \"trackingNumber\": \"12345\"\n    }\n  },\n  \"externalEventId\": \"37fb97a9-6cfd-4983-bd65-68d104d53b70\",\n  \"occurredAt\": \"2021-03-30T14:38:29.000Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0de855ac-c59f-43da-a2b0-c8e725f91f3d",
+              "name": "Access Denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"Order Shipped\",\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"https://cdn.example.com/images/sample-image.jpg\",\n    \"orderStatusURL\": \"https://example.com/orderstatus/54321\",\n    \"delivery_date\": \"May 10\",\n    \"Order Id\": \"54321\",\n    \"products\": [\n      \"productId1\",\n      \"productId2\"\n    ],\n    \"shipment\": {\n      \"carrier\": \"fedex\",\n      \"trackingNumber\": \"12345\"\n    }\n  },\n  \"externalEventId\": \"37fb97a9-6cfd-4983-bd65-68d104d53b70\",\n  \"occurredAt\": \"2021-03-30T14:38:29.000Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e0937cf4-8aaf-435f-9718-63244a48b5ef",
+              "name": "The specified resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"Order Shipped\",\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"https://cdn.example.com/images/sample-image.jpg\",\n    \"orderStatusURL\": \"https://example.com/orderstatus/54321\",\n    \"delivery_date\": \"May 10\",\n    \"Order Id\": \"54321\",\n    \"products\": [\n      \"productId1\",\n      \"productId2\"\n    ],\n    \"shipment\": {\n      \"carrier\": \"fedex\",\n      \"trackingNumber\": \"12345\"\n    }\n  },\n  \"externalEventId\": \"37fb97a9-6cfd-4983-bd65-68d104d53b70\",\n  \"occurredAt\": \"2021-03-30T14:38:29.000Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f361823-7415-4ccd-bb07-6404c05e62c7",
+              "name": "The user has sent too many requests in a given amount of time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"Order Shipped\",\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"https://cdn.example.com/images/sample-image.jpg\",\n    \"orderStatusURL\": \"https://example.com/orderstatus/54321\",\n    \"delivery_date\": \"May 10\",\n    \"Order Id\": \"54321\",\n    \"products\": [\n      \"productId1\",\n      \"productId2\"\n    ],\n    \"shipment\": {\n      \"carrier\": \"fedex\",\n      \"trackingNumber\": \"12345\"\n    }\n  },\n  \"externalEventId\": \"37fb97a9-6cfd-4983-bd65-68d104d53b70\",\n  \"occurredAt\": \"2021-03-30T14:38:29.000Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef1cc703-5b0c-4588-8dff-bcdd5865b6ba",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"Order Shipped\",\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"properties\": {\n    \"mediaUrl\": \"https://cdn.example.com/images/sample-image.jpg\",\n    \"orderStatusURL\": \"https://example.com/orderstatus/54321\",\n    \"delivery_date\": \"May 10\",\n    \"Order Id\": \"54321\",\n    \"products\": [\n      \"productId1\",\n      \"productId2\"\n    ],\n    \"shipment\": {\n      \"carrier\": \"fedex\",\n      \"trackingNumber\": \"12345\"\n    }\n  },\n  \"externalEventId\": \"37fb97a9-6cfd-4983-bd65-68d104d53b70\",\n  \"occurredAt\": \"2021-03-30T14:38:29.000Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.attentivemobile.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "16fa8775-2a96-4cb8-8f52-799d273b7e80",
+    "name": "Attentive Access Token Custom Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+      "type": "text/plain"
+    }
+  }
+}

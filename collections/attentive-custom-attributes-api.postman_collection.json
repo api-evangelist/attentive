@@ -1,0 +1,858 @@
+{
+  "item": [
+    {
+      "id": "b8fb0324-9458-4daa-9a30-7c683e7a5696",
+      "name": "Custom Attributes",
+      "description": {
+        "content": "Use the Custom Attributes API to apply customizable data or characteristics to each of your subscribers. This API will either create a new custom attribute if it doesn't already exist or update an existing one with the new value provided. You can then build segments based on that information to send targeted campaigns and journeys. This data cannot contain any sensitive or special categories of information as defined in applicable data protection and privacy laws, including the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA). See a list of specific categories of data you cannot share with Attentive [here](https://docs.attentivemobile.com/pages/legal-docs/pi-disclaimer/).\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4a27bb4c-c2d5-42c7-966d-423b411c1be9",
+          "name": "Custom Attributes",
+          "request": {
+            "name": "Custom Attributes",
+            "description": {
+              "content": "Make a call to this endpoint for any attribute-based data. There are no limits to the amount of custom attributes that can be created. Note that you can create net-new properties with this API, however, it cannot be used to create new values for an existing UI-created property name. If a property name is created through the Attentive platform, all possible property values must also be defined in the platform. For example, if a property has possible values of \"Adult, Teen, Children's\", those are the only values that will be accepted through the API. This does not apply for properties with the type \"Custom input\", for example: Full Name. Also, please note that the API does not support arrays. For example, attempting to pass an array such as '[\"chicago\", \"new york\"]' for an attribute like 'favorite_city' will result in a 400 error.\n\n**Note : The maximum length for an attribute name is 200 characters.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "attributes",
+                "custom"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"properties\": \"<object>\",\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "54199198-1f6f-4ef9-bcbd-04ecafecfe46",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"age\": \"24\",\n    \"birthday\": \"1986-11-16\",\n    \"sign up\": \"2021-04-23T16:04:33Z\",\n    \"favorite team\": \"Minnesota Vikings\",\n    \"Gift card balance\": \"50.89\",\n    \"VIP\": \"TRUE\"\n  },\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "82e5a419-13c2-4f48-9531-1f1d929a1f6b",
+              "name": "Invalid parameter in request query or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"age\": \"24\",\n    \"birthday\": \"1986-11-16\",\n    \"sign up\": \"2021-04-23T16:04:33Z\",\n    \"favorite team\": \"Minnesota Vikings\",\n    \"Gift card balance\": \"50.89\",\n    \"VIP\": \"TRUE\"\n  },\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1645d12c-497c-435f-bd2c-1d7690fe9540",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"age\": \"24\",\n    \"birthday\": \"1986-11-16\",\n    \"sign up\": \"2021-04-23T16:04:33Z\",\n    \"favorite team\": \"Minnesota Vikings\",\n    \"Gift card balance\": \"50.89\",\n    \"VIP\": \"TRUE\"\n  },\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0a1d987d-3f8d-4cbf-842a-d1d26c51cd7a",
+              "name": "Access Denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"age\": \"24\",\n    \"birthday\": \"1986-11-16\",\n    \"sign up\": \"2021-04-23T16:04:33Z\",\n    \"favorite team\": \"Minnesota Vikings\",\n    \"Gift card balance\": \"50.89\",\n    \"VIP\": \"TRUE\"\n  },\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6a38ca95-b58e-4b61-abff-65b1e9c6954d",
+              "name": "The specified resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"age\": \"24\",\n    \"birthday\": \"1986-11-16\",\n    \"sign up\": \"2021-04-23T16:04:33Z\",\n    \"favorite team\": \"Minnesota Vikings\",\n    \"Gift card balance\": \"50.89\",\n    \"VIP\": \"TRUE\"\n  },\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7ccd6e97-38d3-496e-a916-39fb1f2f1336",
+              "name": "The user has sent too many requests in a given amount of time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"age\": \"24\",\n    \"birthday\": \"1986-11-16\",\n    \"sign up\": \"2021-04-23T16:04:33Z\",\n    \"favorite team\": \"Minnesota Vikings\",\n    \"Gift card balance\": \"50.89\",\n    \"VIP\": \"TRUE\"\n  },\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "665df814-4010-4eeb-b826-d2d8bbcdf18e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"age\": \"24\",\n    \"birthday\": \"1986-11-16\",\n    \"sign up\": \"2021-04-23T16:04:33Z\",\n    \"favorite team\": \"Minnesota Vikings\",\n    \"Gift card balance\": \"50.89\",\n    \"VIP\": \"TRUE\"\n  },\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\",\n    \"externalIdentifiers\": {\n      \"clientUserId\": \"<string>\",\n      \"customIdentifiers\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d4b4f1d-7cee-4f50-8339-ccd8c9e09c2a",
+          "name": "Get Custom Attributes for a User",
+          "request": {
+            "name": "Get Custom Attributes for a User",
+            "description": {
+              "content": "Make a call to this endpoint to retrieve all custom attribute data associated with a user. You can query this endpoint by either phone or email.\n\n**Note: You must include a single query parameter, phone or email. Including both will result in a 400 error.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "attributes",
+                "custom"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "phone",
+                  "value": "<string>",
+                  "description": "A user’s phone number in E.164 format. The '+' sign in the phone number must be encoded in the URL query parameter as '%2B'\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "A user's email\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "08fc16c9-7682-465c-aa3f-3c78279bd6ff",
+              "name": "Successfully accepted get custom attributes request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "+13115552368"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@gmail.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"value\": \"string\",\n    \"name\": \"favoriteColor\"\n  },\n  {\n    \"value\": \"string\",\n    \"name\": \"favoriteColor\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba513098-1db0-4c4b-8292-977734d0159a",
+              "name": "Invalid parameter in request query or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "+13115552368"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@gmail.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bb720dc8-75ca-4f8b-b6e4-ed0d4d3ad0dc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "+13115552368"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@gmail.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e6f1d93-6659-40ee-93c1-82fceac37b46",
+              "name": "Access Denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "+13115552368"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@gmail.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7d4908cc-41de-48f5-bc00-a289400a7096",
+              "name": "The specified resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "+13115552368"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@gmail.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "27569748-c4ca-4c91-a4cf-9157ced7cc6a",
+              "name": "The user has sent too many requests in a given amount of time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "+13115552368"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@gmail.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "471242a3-c705-4aec-905e-2e879f42503a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attributes",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "+13115552368"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@gmail.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.attentivemobile.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "64d72e18-24e7-4ace-a1ba-bc6564af4a80",
+    "name": "Attentive Access Token Custom Attributes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+      "type": "text/plain"
+    }
+  }
+}

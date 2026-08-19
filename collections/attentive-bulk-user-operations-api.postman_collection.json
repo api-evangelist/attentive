@@ -1,0 +1,496 @@
+{
+  "item": [
+    {
+      "id": "d66ad064-1187-4726-91e8-23659a74c5ce",
+      "name": "Bulk User Operations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5879767d-15cd-4722-ae18-bfcf53d59e3d",
+          "name": "Bulk User Attributes",
+          "request": {
+            "name": "Bulk User Attributes",
+            "description": {
+              "content": "This endpoint allows clients to submit multiple user attribute updates in bulk, accepting up to 256 payloads per request. Each request is validated, and a unique batch ID is returned for tracking the status of the batch.\n\nScopes Required: [attributes:all, subscriptions:all]\n\nDefault Rate Limit: 100 requests per second\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "bulk",
+                "user",
+                "attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"demographic\": {\n          \"language\": \"<string>\",\n          \"dateOfBirth\": \"<date>\",\n          \"age\": \"<integer>\",\n          \"organization\": \"<string>\",\n          \"title\": \"<string>\",\n          \"website\": \"<string>\"\n        },\n        \"location\": {\n          \"address1\": \"<string>\",\n          \"address2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\",\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\",\n          \"country\": \"<string>\",\n          \"region\": \"<string>\",\n          \"timezone\": \"<string>\"\n        },\n        \"locale\": {\n          \"language\": \"<string>\",\n          \"country\": \"<string>\"\n        },\n        \"custom\": {\n          \"key_0\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"singleOptIn\": \"<boolean>\"\n        },\n        {\n          \"signUpSourceId\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"singleOptIn\": \"<boolean>\"\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\",\n        \"shopifyId\": \"<string>\",\n        \"klaviyoId\": \"<string>\",\n        \"clientUserId\": \"<string>\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8043fa8c-6137-484f-a264-9f9348dc57ee",
+              "name": "The bulk job request was successfully received and accepted for asynchronous processing. The response includes a batchJobId to track the status of the job, along with a confirmation message. Processing has not yet completed, please use the job status endpoint to monitor progress and retrieve results once available.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "user",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"John\",\n        \"lastName\": \"Smith\",\n        \"demographic\": {\n          \"language\": \"English/American\",\n          \"dateOfBirth\": \"2022-11-08\",\n          \"age\": 29,\n          \"organization\": \"Acme Sports\",\n          \"title\": \"Mr\",\n          \"website\": \"http://johnsmith.com\"\n        },\n        \"location\": {\n          \"address1\": \"456 Elm Avenue\",\n          \"address2\": \"Suite 300\",\n          \"city\": \"Brooklyn\",\n          \"state\": \"NY\",\n          \"zip\": \"11222\",\n          \"latitude\": \"40.730610\",\n          \"longitude\": \"-73.935242\",\n          \"country\": \"US\",\n          \"region\": \"AU-NSW\",\n          \"timezone\": \"EST\"\n        },\n        \"locale\": {\n          \"language\": \"French\",\n          \"country\": \"CA\"\n        },\n        \"custom\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"string\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": true\n        },\n        {\n          \"signUpSourceId\": \"string\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": true\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"jsmith@attentive.com\",\n        \"phone\": \"+15008675309\",\n        \"shopifyId\": \"345678901\",\n        \"klaviyoId\": \"a1b2c3d4e5f6a7b8c9d0e1f2\",\n        \"clientUserId\": \"freeform-client-id\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"loyalty_points_id\",\n            \"value\": \"ADFK4D7D\"\n          },\n          {\n            \"key\": \"loyalty_points_id\",\n            \"value\": \"ADFK4D7D\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"batchJobId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44aed982-01b9-4e05-ba35-42dbcaef077f",
+              "name": "Invalid parameter in request query or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "user",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"John\",\n        \"lastName\": \"Smith\",\n        \"demographic\": {\n          \"language\": \"English/American\",\n          \"dateOfBirth\": \"2022-11-08\",\n          \"age\": 29,\n          \"organization\": \"Acme Sports\",\n          \"title\": \"Mr\",\n          \"website\": \"http://johnsmith.com\"\n        },\n        \"location\": {\n          \"address1\": \"456 Elm Avenue\",\n          \"address2\": \"Suite 300\",\n          \"city\": \"Brooklyn\",\n          \"state\": \"NY\",\n          \"zip\": \"11222\",\n          \"latitude\": \"40.730610\",\n          \"longitude\": \"-73.935242\",\n          \"country\": \"US\",\n          \"region\": \"AU-NSW\",\n          \"timezone\": \"EST\"\n        },\n        \"locale\": {\n          \"language\": \"French\",\n          \"country\": \"CA\"\n        },\n        \"custom\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"string\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": true\n        },\n        {\n          \"signUpSourceId\": \"string\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": true\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"jsmith@attentive.com\",\n        \"phone\": \"+15008675309\",\n        \"shopifyId\": \"345678901\",\n        \"klaviyoId\": \"a1b2c3d4e5f6a7b8c9d0e1f2\",\n        \"clientUserId\": \"freeform-client-id\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"loyalty_points_id\",\n            \"value\": \"ADFK4D7D\"\n          },\n          {\n            \"key\": \"loyalty_points_id\",\n            \"value\": \"ADFK4D7D\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "031891a9-61e0-4815-bec4-712348163ff2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "user",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"John\",\n        \"lastName\": \"Smith\",\n        \"demographic\": {\n          \"language\": \"English/American\",\n          \"dateOfBirth\": \"2022-11-08\",\n          \"age\": 29,\n          \"organization\": \"Acme Sports\",\n          \"title\": \"Mr\",\n          \"website\": \"http://johnsmith.com\"\n        },\n        \"location\": {\n          \"address1\": \"456 Elm Avenue\",\n          \"address2\": \"Suite 300\",\n          \"city\": \"Brooklyn\",\n          \"state\": \"NY\",\n          \"zip\": \"11222\",\n          \"latitude\": \"40.730610\",\n          \"longitude\": \"-73.935242\",\n          \"country\": \"US\",\n          \"region\": \"AU-NSW\",\n          \"timezone\": \"EST\"\n        },\n        \"locale\": {\n          \"language\": \"French\",\n          \"country\": \"CA\"\n        },\n        \"custom\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"string\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": true\n        },\n        {\n          \"signUpSourceId\": \"string\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": true\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"jsmith@attentive.com\",\n        \"phone\": \"+15008675309\",\n        \"shopifyId\": \"345678901\",\n        \"klaviyoId\": \"a1b2c3d4e5f6a7b8c9d0e1f2\",\n        \"clientUserId\": \"freeform-client-id\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"loyalty_points_id\",\n            \"value\": \"ADFK4D7D\"\n          },\n          {\n            \"key\": \"loyalty_points_id\",\n            \"value\": \"ADFK4D7D\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "650590dc-6bf7-4f49-89d7-cf8758c1eb7e",
+              "name": "Access Denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "user",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"John\",\n        \"lastName\": \"Smith\",\n        \"demographic\": {\n          \"language\": \"English/American\",\n          \"dateOfBirth\": \"2022-11-08\",\n          \"age\": 29,\n          \"organization\": \"Acme Sports\",\n          \"title\": \"Mr\",\n          \"website\": \"http://johnsmith.com\"\n        },\n        \"location\": {\n          \"address1\": \"456 Elm Avenue\",\n          \"address2\": \"Suite 300\",\n          \"city\": \"Brooklyn\",\n          \"state\": \"NY\",\n          \"zip\": \"11222\",\n          \"latitude\": \"40.730610\",\n          \"longitude\": \"-73.935242\",\n          \"country\": \"US\",\n          \"region\": \"AU-NSW\",\n          \"timezone\": \"EST\"\n        },\n        \"locale\": {\n          \"language\": \"French\",\n          \"country\": \"CA\"\n        },\n        \"custom\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"string\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": true\n        },\n        {\n          \"signUpSourceId\": \"string\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": true\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"jsmith@attentive.com\",\n        \"phone\": \"+15008675309\",\n        \"shopifyId\": \"345678901\",\n        \"klaviyoId\": \"a1b2c3d4e5f6a7b8c9d0e1f2\",\n        \"clientUserId\": \"freeform-client-id\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"loyalty_points_id\",\n            \"value\": \"ADFK4D7D\"\n          },\n          {\n            \"key\": \"loyalty_points_id\",\n            \"value\": \"ADFK4D7D\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa31967a-b68c-41f1-9d43-0ecefeec4c83",
+              "name": "The specified resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "user",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"John\",\n        \"lastName\": \"Smith\",\n        \"demographic\": {\n          \"language\": \"English/American\",\n          \"dateOfBirth\": \"2022-11-08\",\n          \"age\": 29,\n          \"organization\": \"Acme Sports\",\n          \"title\": \"Mr\",\n          \"website\": \"http://johnsmith.com\"\n        },\n        \"location\": {\n          \"address1\": \"456 Elm Avenue\",\n          \"address2\": \"Suite 300\",\n          \"city\": \"Brooklyn\",\n          \"state\": \"NY\",\n          \"zip\": \"11222\",\n          \"latitude\": \"40.730610\",\n          \"longitude\": \"-73.935242\",\n          \"country\": \"US\",\n          \"region\": \"AU-NSW\",\n          \"timezone\": \"EST\"\n        },\n        \"locale\": {\n          \"language\": \"French\",\n          \"country\": \"CA\"\n        },\n        \"custom\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"string\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": true\n        },\n        {\n          \"signUpSourceId\": \"string\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": true\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"jsmith@attentive.com\",\n        \"phone\": \"+15008675309\",\n        \"shopifyId\": \"345678901\",\n        \"klaviyoId\": \"a1b2c3d4e5f6a7b8c9d0e1f2\",\n        \"clientUserId\": \"freeform-client-id\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"loyalty_points_id\",\n            \"value\": \"ADFK4D7D\"\n          },\n          {\n            \"key\": \"loyalty_points_id\",\n            \"value\": \"ADFK4D7D\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9e26faf3-4f3a-4b61-bfe2-42bede83ee0a",
+              "name": "The user has sent too many requests in a given amount of time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "user",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"John\",\n        \"lastName\": \"Smith\",\n        \"demographic\": {\n          \"language\": \"English/American\",\n          \"dateOfBirth\": \"2022-11-08\",\n          \"age\": 29,\n          \"organization\": \"Acme Sports\",\n          \"title\": \"Mr\",\n          \"website\": \"http://johnsmith.com\"\n        },\n        \"location\": {\n          \"address1\": \"456 Elm Avenue\",\n          \"address2\": \"Suite 300\",\n          \"city\": \"Brooklyn\",\n          \"state\": \"NY\",\n          \"zip\": \"11222\",\n          \"latitude\": \"40.730610\",\n          \"longitude\": \"-73.935242\",\n          \"country\": \"US\",\n          \"region\": \"AU-NSW\",\n          \"timezone\": \"EST\"\n        },\n        \"locale\": {\n          \"language\": \"French\",\n          \"country\": \"CA\"\n        },\n        \"custom\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"string\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": true\n        },\n        {\n          \"signUpSourceId\": \"string\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": true\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"jsmith@attentive.com\",\n        \"phone\": \"+15008675309\",\n        \"shopifyId\": \"345678901\",\n        \"klaviyoId\": \"a1b2c3d4e5f6a7b8c9d0e1f2\",\n        \"clientUserId\": \"freeform-client-id\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"loyalty_points_id\",\n            \"value\": \"ADFK4D7D\"\n          },\n          {\n            \"key\": \"loyalty_points_id\",\n            \"value\": \"ADFK4D7D\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d4bb8fe4-59ea-4060-a574-94c89a02fb3f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "user",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"attributes\": {\n        \"firstName\": \"John\",\n        \"lastName\": \"Smith\",\n        \"demographic\": {\n          \"language\": \"English/American\",\n          \"dateOfBirth\": \"2022-11-08\",\n          \"age\": 29,\n          \"organization\": \"Acme Sports\",\n          \"title\": \"Mr\",\n          \"website\": \"http://johnsmith.com\"\n        },\n        \"location\": {\n          \"address1\": \"456 Elm Avenue\",\n          \"address2\": \"Suite 300\",\n          \"city\": \"Brooklyn\",\n          \"state\": \"NY\",\n          \"zip\": \"11222\",\n          \"latitude\": \"40.730610\",\n          \"longitude\": \"-73.935242\",\n          \"country\": \"US\",\n          \"region\": \"AU-NSW\",\n          \"timezone\": \"EST\"\n        },\n        \"locale\": {\n          \"language\": \"French\",\n          \"country\": \"CA\"\n        },\n        \"custom\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        }\n      },\n      \"subscriptions\": [\n        {\n          \"signUpSourceId\": \"string\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": true\n        },\n        {\n          \"signUpSourceId\": \"string\",\n          \"channel\": \"TEXT\",\n          \"singleOptIn\": true\n        }\n      ],\n      \"identifiers\": {\n        \"email\": \"jsmith@attentive.com\",\n        \"phone\": \"+15008675309\",\n        \"shopifyId\": \"345678901\",\n        \"klaviyoId\": \"a1b2c3d4e5f6a7b8c9d0e1f2\",\n        \"clientUserId\": \"freeform-client-id\",\n        \"customIdentifiers\": [\n          {\n            \"key\": \"loyalty_points_id\",\n            \"value\": \"ADFK4D7D\"\n          },\n          {\n            \"key\": \"loyalty_points_id\",\n            \"value\": \"ADFK4D7D\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.attentivemobile.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "440ae8eb-8b7d-4f2a-acc9-b99bd8ca0bfe",
+    "name": "Attentive Access Token Bulk User Operations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+      "type": "text/plain"
+    }
+  }
+}

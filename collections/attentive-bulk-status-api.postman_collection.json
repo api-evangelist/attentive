@@ -1,0 +1,141 @@
+{
+  "item": [
+    {
+      "id": "5f26d47f-014c-4185-bd2b-b659f0a4167e",
+      "name": "Bulk Status",
+      "description": {
+        "content": "Endpoints for managing bulk data ingestion jobs. Use these endpoints to monitor the processing status asynchronously.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e79d0e95-a87c-45cb-a89b-07e72ada93fb",
+          "name": "Retrieve the status of a bulk ingestion job",
+          "request": {
+            "name": "Retrieve the status of a bulk ingestion job",
+            "description": {
+              "content": "Checks the status of a bulk ingestion job identified by bulkJobId. This endpoint returns the current state of the job (e.g. `PENDING`, `IN_PROGRESS`, `COMPLETED`, `FAILED`) along with metadata such as timestamps and error messages if applicable.\n\nIf the job has completed successfully, the response includes a downloadable link to a `.jsonl` (JSON Lines) file containing a record of each request and its corresponding response. User's can audit results or process downstream outcomes of the bulk operation. You can fetch requests up to 2 weeks old.\n\nScopes Required: No Additional scopes required.\n\nDefault Rate Limit: 100 requests per second\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "bulk",
+                "job",
+                ":bulkJobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bulkJobId",
+                  "description": "(Required) id of the bulk job"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f968f21-123b-4d2e-9340-ce3a413746ab",
+              "name": "Returns the status of the bulk job",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "job",
+                    ":bulkJobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bulkJobId",
+                      "description": "(Required) id of the bulk job"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bulkJobId\": \"string\",\n  \"status\": \"string\",\n  \"totalRecords\": 8381,\n  \"url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.attentivemobile.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2b65e13e-80df-4710-b5d5-60a529532e17",
+    "name": "Attentive Access Token Bulk Status API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+      "type": "text/plain"
+    }
+  }
+}

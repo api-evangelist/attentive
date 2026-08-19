@@ -1,0 +1,250 @@
+{
+  "item": [
+    {
+      "id": "b20862c8-9d80-4254-a100-a5e33938c57e",
+      "name": "Identity",
+      "description": {
+        "content": "Use the Identity API to manage user identifiers. With this API, you can programmatically add a client user identifier or custom identifier(s) to a user.\nYou should only use clientUserId and customIdentifiers to send Attentive your system-assigned unique identifiers (even when testing).\n\nNotes:\n  - Sending duplicate values could lead to unintentionally bridging users together.\n  - Don't use customIdentifiers to send attributes (e.g., first name, last name). To send those types of attributes,\n    use our [Custom Attributes API](https://docs.attentivemobile.com/openapi/reference/tag/Custom-Attributes/).\n  - Avoid sending null values or empty strings. If you don't have a valid identifier, you should omit the field\n    from the payload.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3a78beb7-7e47-4971-9257-98aa6a5e7f7c",
+          "name": "Add a client user identifier or custom identifier(s) to a user",
+          "request": {
+            "name": "Add a client user identifier or custom identifier(s) to a user",
+            "description": {
+              "content": "Make a call to this endpoint to associate a client user identifier or custom identifier(s) with other identifiers. A client user or custom identifier needs to be accompanied by at least one other identifier of the following types: phone, email, shopify id, klaviyo id, client user identifier, or custom identifier.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identity-resolution",
+                "user-identifiers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"shopifyId\": \"<string>\",\n  \"klaviyoId\": \"<string>\",\n  \"clientUserId\": \"<string>\",\n  \"customIdentifiers\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1cd8b63-5059-4ff2-97ed-7ba90297d316",
+              "name": "Request processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-resolution",
+                    "user-identifiers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"+13115552368\",\n  \"email\": \"sample-email@attentivemobile.com\",\n  \"shopifyId\": \"<string>\",\n  \"klaviyoId\": \"0123456789ABCDEFGHIJKLMNOP\",\n  \"clientUserId\": \"123456\",\n  \"customIdentifiers\": [\n    {\n      \"name\": \"loyaltyId\",\n      \"value\": \"1122334455\"\n    },\n    {\n      \"name\": \"loyaltyId\",\n      \"value\": \"1122334455\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2d00a906-06f8-4e8e-920a-52afe5a79b22",
+              "name": "Invalid parameter in request query or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-resolution",
+                    "user-identifiers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"+13115552368\",\n  \"email\": \"sample-email@attentivemobile.com\",\n  \"shopifyId\": \"<string>\",\n  \"klaviyoId\": \"0123456789ABCDEFGHIJKLMNOP\",\n  \"clientUserId\": \"123456\",\n  \"customIdentifiers\": [\n    {\n      \"name\": \"loyaltyId\",\n      \"value\": \"1122334455\"\n    },\n    {\n      \"name\": \"loyaltyId\",\n      \"value\": \"1122334455\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "af28562a-839c-4139-908b-cb78dcc57eba",
+              "name": "The user has sent too many requests in a given amount of time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identity-resolution",
+                    "user-identifiers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"+13115552368\",\n  \"email\": \"sample-email@attentivemobile.com\",\n  \"shopifyId\": \"<string>\",\n  \"klaviyoId\": \"0123456789ABCDEFGHIJKLMNOP\",\n  \"clientUserId\": \"123456\",\n  \"customIdentifiers\": [\n    {\n      \"name\": \"loyaltyId\",\n      \"value\": \"1122334455\"\n    },\n    {\n      \"name\": \"loyaltyId\",\n      \"value\": \"1122334455\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.attentivemobile.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9167a0c7-cf19-4b02-92b8-e6a410c8ae0f",
+    "name": "Attentive Access Token Identity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+      "type": "text/plain"
+    }
+  }
+}

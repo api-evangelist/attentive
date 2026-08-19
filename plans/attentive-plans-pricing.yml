@@ -1,0 +1,70 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Attentive
+providerId: attentive
+generated: '2026-08-13'
+created: '2026-08-13'
+modified: '2026-08-13'
+method: searched
+source: https://www.attentive.com/pricing
+tags:
+- Pricing
+- Plans
+- SMS Marketing
+- Email Marketing
+- Martech
+plan_count: 0
+description: >-
+  Attentive publishes NO prices. The pricing page names a set of channel packages and AI
+  add-on packages but attaches no dollar figure, no currency, no billing period and no
+  included quota to any of them: every package routes to a "Get a demo" / contact-sales
+  form. Attentive states pricing is "tailored to your business needs based on your message
+  volume, subscriber list size, number of channels, and AI products selected", and that
+  customers "only pay for what you actually use - no credit system required", with discounts
+  for bundling channels or premium AI products. There is no self-serve signup, no free tier
+  and no published API-usage pricing - the APIs are included with a platform contract rather
+  than metered separately.
+notes: >-
+  plan_count is 0 because zero PRICED plans are published, not because the page is empty.
+  The named packages below are recorded with price null so the shape of the commercial
+  offer is captured honestly. API rate limits are published separately and are captured in
+  rate-limits/attentive-rate-limits.yml - they are technical limits, not plan entitlements.
+sources:
+- https://www.attentive.com/pricing
+plans:
+- id: attentive-channel-package
+  name: Channel Packages
+  type: usage
+  price: null
+  currency: null
+  period: null
+  description: >-
+    Usage-based channel bundles priced on list size and messages sent. Published
+    combinations: SMS + Email + RCS + Push; SMS + Email; SMS/MMS/RCS only.
+  entries: []
+- id: attentive-ai-add-ons
+  name: AI Add-Ons
+  type: subscription
+  price: null
+  currency: null
+  period: monthly
+  description: >-
+    Flat monthly add-on packages layered on a channel package - AI Pro, AI Grow and
+    AI Journeys (billed pay-per-click). AI Essentials is described as included.
+  entries: []
+- id: attentive-enterprise
+  name: Enterprise
+  type: custom
+  price: null
+  currency: null
+  period: null
+  description: >-
+    All channels plus the complete AI suite with dedicated support and onboarding.
+    Custom pricing, contact sales.
+  entries: []
+x-evidence:
+- url: https://www.attentive.com/pricing
+  status: 200
+  checked: '2026-08-13'
+  finding: named packages, zero published prices

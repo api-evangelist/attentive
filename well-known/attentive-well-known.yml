@@ -1,7 +1,12 @@
-generated: '2026-07-18'
-method: searched
+generated: '2026-08-13'
+method: probed
 source: live probes of /.well-known/ on Attentive hosts
-note: No /.well-known/ discovery documents were served (all 404). Recorded for auditability; no canonical pointer emitted.
+note: >-
+  No /.well-known/ discovery document is served on any Attentive host - every path 404s,
+  including both A2A agent-card paths and the OAuth/MCP discovery paths on the docs host that
+  fronts the remote MCP endpoint. Recorded for auditability; NO WellKnown, SecurityTxt or
+  AgentCard pointer is emitted, because a recorded absence must never be scored as a presence.
+  Re-probed 2026-08-13 (previous probe 2026-07-18) and the result is unchanged.
 hosts:
 - host: https://api.attentivemobile.com
   documents:
@@ -10,11 +15,29 @@ hosts:
   - {path: /.well-known/oauth-authorization-server, status: 404}
   - {path: /.well-known/api-catalog, status: 404}
   - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404, checked: '2026-08-13'}
+  - {path: /.well-known/agent.json, status: 404, checked: '2026-08-13'}
 - host: https://www.attentive.com
   documents:
   - {path: /.well-known/security.txt, status: 404}
   - {path: /.well-known/openid-configuration, status: 404}
   - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404, checked: '2026-08-13', body: 'HTML: "Invalid .well-known request"'}
+  - {path: /.well-known/agent.json, status: 404, checked: '2026-08-13', body: 'HTML: "Invalid .well-known request"'}
 - host: https://docs.attentive.com
   documents:
   - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404, checked: '2026-08-13', body: HTML docs shell}
+  - {path: /.well-known/agent.json, status: 404, checked: '2026-08-13', body: HTML docs shell}
+  - {path: /.well-known/oauth-protected-resource, status: 404, checked: '2026-08-13'}
+  - {path: /.well-known/oauth-protected-resource/mcp, status: 404, checked: '2026-08-13'}
+  - {path: /.well-known/oauth-authorization-server, status: 404, checked: '2026-08-13'}
+  - {path: /.well-known/mcp.json, status: 404, checked: '2026-08-13', body: HTML docs shell}
+related_findings:
+- >-
+  The remote MCP endpoint at https://docs.attentive.com/mcp advertises no OAuth metadata at any
+  RFC 8414 / MCP discovery path - it answers tools/list with a bare JSON-RPC -32001
+  "Authorization required". See mcp/attentive-mcp.yml.
+- >-
+  The GraphQL endpoint at https://api.attentivemobile.com/v1/graphql answers full anonymous
+  introspection despite no discovery document advertising it. See graphql/attentive-graphql.yml.

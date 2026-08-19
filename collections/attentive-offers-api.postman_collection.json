@@ -1,0 +1,426 @@
+{
+  "item": [
+    {
+      "id": "bf4ee58b-098d-468d-957c-d154a41598ff",
+      "name": "Offers",
+      "description": {
+        "content": "You can use the Offers API to add discount codes to an existing offer. <br> <h2> Create an offer </h2>  <ol> <li> Navigate to the [Offers](https://ui.attentivemobile.com/offers) page. </li> <li> Click **+ Create offer** in the top-right corner. </li> <li> On the **Choose an offer type** window, select **Unique discount codes** </li> <li> Enter a unique name for your offer in the **Discount name** field. </li> <li> Choose the **Distribution window**. <br> **Note**: If you include start and end dates in your API call, the distribution window automatically updates to **Custom time period**. </li> <li> **Click Create.** </li> <li> Click back into the offer and retrieve the numeric ID at the end of the URL string. This is the ID you will need for the POST </li> </ol>",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4d5a4513-af79-4e2a-8f3a-e237cf01cead",
+          "name": "Add discount codes",
+          "request": {
+            "name": "Add discount codes",
+            "description": {
+              "content": "Note: Once the offer(s) has been created, please reach out to an Attentive team member to enable this API feature for you\n\nMake a call to this asynchronous endpoint to create new discount codes in an existing offer.\n<h2>Validation rules</h2>\n<ul>\n<li>Maximum of 200,000 discount codes per request.</li>\n<li><code>distributionStart</code> must be before <code>distributionStop</code>, in UTC ISO format (e.g., <code>2023-02-14T21:29:25Z</code>).</li>\n<li>Date ranges must not overlap with ranges from previous uploads to the same offer. Uploading to an existing range is allowed.</li>\n<li>All uploads in an offer must use the same distribution type. If previous uploads include expiration dates, new uploads must also include them, and vice versa.</li>\n<li>The offer (coupon pool) must exist and belong to your account.</li>\n</ul>\n<h2>Sync behavior</h2>\nCheck the status on the offer to monitor progress. If it still says <strong>SYNCING</strong>, the uploads may not be ready yet.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coupons",
+                "coupon-pool",
+                ":coupon-pool-id",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "coupon-pool-id",
+                  "description": "(Required) The ID created under \"Create an Offer\""
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"distributionStart\": \"<string>\",\n  \"distributionStop\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "673360ec-9195-4468-bdc9-f1b3e88b3ecb",
+              "name": "Accepted. Check the Attentive [Offers](https://ui.attentivemobile.com/offers) page to make sure that there are no errors and the remaining code count is accurate.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coupons",
+                    "coupon-pool",
+                    ":coupon-pool-id",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "coupon-pool-id",
+                      "description": "(Required) The ID created under \"Create an Offer\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"codes\": [\n    \"code1\",\n    \"code2\",\n    \"code3\",\n    \"code4\",\n    \"code5\"\n  ],\n  \"distributionStart\": \"2023-02-14T21:29:25Z\",\n  \"distributionStop\": \"2023-02-15T21:29:25Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e8cbd714-c425-428c-bfdf-6ccbc389ee33",
+              "name": "Invalid parameter in request query or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coupons",
+                    "coupon-pool",
+                    ":coupon-pool-id",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "coupon-pool-id",
+                      "description": "(Required) The ID created under \"Create an Offer\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"codes\": [\n    \"code1\",\n    \"code2\",\n    \"code3\",\n    \"code4\",\n    \"code5\"\n  ],\n  \"distributionStart\": \"2023-02-14T21:29:25Z\",\n  \"distributionStop\": \"2023-02-15T21:29:25Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"id\": 1889,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acc39539-076b-44c7-9c38-d4a30650b7a2",
+              "name": "Access Denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coupons",
+                    "coupon-pool",
+                    ":coupon-pool-id",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "coupon-pool-id",
+                      "description": "(Required) The ID created under \"Create an Offer\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"codes\": [\n    \"code1\",\n    \"code2\",\n    \"code3\",\n    \"code4\",\n    \"code5\"\n  ],\n  \"distributionStart\": \"2023-02-14T21:29:25Z\",\n  \"distributionStop\": \"2023-02-15T21:29:25Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"id\": 1889,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c731950-92e6-4f07-8766-10ce92d25593",
+              "name": "Bad Request. Invalid parameter in request query or body. The following scenarios will cause a 400 response: \nA) Including distributionStart and distributionStop dates that overlap with the distributionStart and distributionStop dates from a previous call, \nB) Including distributionStart and distributionStop dates in an offer that has a distribution window of “Never expire” or “Time to live”, \nC) Excluding distributionStart and distributionStop dates in an offer that has a distribution window of “Custom time period”, D) Including a distributionStart value that is after the distributionStop value\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coupons",
+                    "coupon-pool",
+                    ":coupon-pool-id",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "coupon-pool-id",
+                      "description": "(Required) The ID created under \"Create an Offer\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"codes\": [\n    \"code1\",\n    \"code2\",\n    \"code3\",\n    \"code4\",\n    \"code5\"\n  ],\n  \"distributionStart\": \"2023-02-14T21:29:25Z\",\n  \"distributionStop\": \"2023-02-15T21:29:25Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"id\": 1889,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b1a7c1c-44c5-4841-8a53-bbeb58359432",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coupons",
+                    "coupon-pool",
+                    ":coupon-pool-id",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "coupon-pool-id",
+                      "description": "(Required) The ID created under \"Create an Offer\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"codes\": [\n    \"code1\",\n    \"code2\",\n    \"code3\",\n    \"code4\",\n    \"code5\"\n  ],\n  \"distributionStart\": \"2023-02-14T21:29:25Z\",\n  \"distributionStop\": \"2023-02-15T21:29:25Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"id\": 1889,\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.attentivemobile.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4ca6f151-13f9-4da9-952d-45502bf0cc09",
+    "name": "Attentive Access Token Offers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+      "type": "text/plain"
+    }
+  }
+}

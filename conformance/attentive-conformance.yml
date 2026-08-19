@@ -35,3 +35,19 @@ standards:
 - id: ccpa
   conforms: true
   evidence: CCPA listed in trust center; CCPA delete-request endpoints in the API.
+- id: graphql
+  conforms: true
+  evidence: >-
+    POST https://api.attentivemobile.com/v1/graphql answers a spec-compliant introspection query
+    (104 types, Query + Mutation root types); SDL captured at graphql/attentive.graphql (2026-08-13).
+- id: graphql-relay-cursor-connections
+  conforms: true
+  evidence: >-
+    Node/nodes root fields, PageInfo, and UsersExperimentalConnection (first/after) implement the
+    Relay Global Object Identification and Cursor Connections conventions.
+- id: mcp
+  conforms: partial
+  evidence: >-
+    https://docs.attentive.com/mcp speaks MCP JSON-RPC but requires authorization (-32001) and
+    publishes no /.well-known/oauth-protected-resource or oauth-authorization-server metadata, so
+    the MCP authorization spec's discovery flow is not satisfied.

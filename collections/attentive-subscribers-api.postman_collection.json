@@ -1,0 +1,1259 @@
+{
+  "item": [
+    {
+      "id": "b6a05fe2-58b9-402c-9b86-59cededd6213",
+      "name": "Subscribers",
+      "description": {
+        "content": "Use the Subscribers API to manage subscriptions. With this API, you can programmatically subscribe and unsubscribe users from subscriptions.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0b7973b4-1c60-4458-afa6-88243ffe1ee9",
+          "name": "Subscribe user",
+          "request": {
+            "name": "Subscribe user",
+            "description": {
+              "content": "Make a call to this endpoint to opt-in a user to a subscription. \n\nNotes:\n- A legal disclosure is required when a user is opted-in programmatically.\n    - For marketing messages, required [legal language](https://docs.attentivemobile.com/pages/legal-docs/legal-disclosure-language/) must be included.\n\n    - For transactional messages, you must include a [transactional opt-in unit](https://docs.attentivemobile.com/pages/legal-docs/legal-transactional/).\n  \n- By default, if a subscription already exists, it will try and record the attempt to create the subscription again. For TEXT subscriptions, this will result in a message being sent to the person indicating that they are already subscribed.\n- Requests to opt-in subscribers must either contain a) a sign-up source id or b) both a locale and a subscription type.\n    - The unique identifier of a sign-up source can be found in the Sign-up Units tab of the Attentive platform in the ID column. \n    If this value is provided in the request, then this sign-up unit will be used for opting in the user in the request.\n\n    - Callers of this endpoint have the option to omit `signUpSourceId` and, instead, provide both a `locale` and a `subscriptionType` (see below for field details). \n    Given the locale and subscription type, Attentive will resolve any matching API opt-in units. To opt-in a user to a subscription without a `signUpSourceId` and exclusively based on locale and subscription type,\n    there must be exactly one API sign-up unit that matches the provided locale and subscription type. Conversely, requests that contain a locale and a subscription type\n    that do not have a corresponding sign-up unit or that have multiple matching sign-up units will receive a `400` response and will not opt a user into a subscription.\n\n- Phone numbers must be submitted in [e164 format](https://en.wikipedia.org/wiki/E.164).\n    - valid examples: `+19148440001`, `+442071838750`, `+551155256325`\n    - invalid examples: `19148440001`, `+1---914---844---0001`, `1 () 914 844 0001`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"signUpSourceId\": \"<string>\",\n  \"externalIdentifiers\": {\n    \"clientUserId\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"locale\": {\n    \"language\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"subscriptionType\": \"<string>\",\n  \"singleOptIn\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "71b9d1ab-583a-47ce-ae45-a1b606c6d5c0",
+              "name": "Accepted a create subscription(s) request. The response body will contain info about which subscription(s) already exist, and which subscription(s) will be created (asynchronously).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"signUpSourceId\": \"<string>\",\n  \"externalIdentifiers\": {\n    \"clientUserId\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"locale\": {\n    \"language\": \"en\",\n    \"country\": \"US\"\n  },\n  \"subscriptionType\": \"<string>\",\n  \"singleOptIn\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"externalIdentifiers\": {\n    \"clientUserId\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"subscriptionResponses\": [\n    {\n      \"subscription\": {\n        \"type\": \"TRANSACTIONAL\",\n        \"channel\": \"EMAIL\"\n      },\n      \"subscriptionCreationStatus\": \"NEWLY_CREATED\"\n    },\n    {\n      \"subscription\": {\n        \"type\": \"CHECKOUT_ABANDONED\",\n        \"channel\": \"EMAIL\"\n      },\n      \"subscriptionCreationStatus\": \"NEWLY_CREATED\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5dfd3f1c-3aa3-40e5-9d79-5755250a184f",
+              "name": "Invalid parameter in request query or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"signUpSourceId\": \"<string>\",\n  \"externalIdentifiers\": {\n    \"clientUserId\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"locale\": {\n    \"language\": \"en\",\n    \"country\": \"US\"\n  },\n  \"subscriptionType\": \"<string>\",\n  \"singleOptIn\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "267f991a-e307-4875-9c94-613f4d113846",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"signUpSourceId\": \"<string>\",\n  \"externalIdentifiers\": {\n    \"clientUserId\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"locale\": {\n    \"language\": \"en\",\n    \"country\": \"US\"\n  },\n  \"subscriptionType\": \"<string>\",\n  \"singleOptIn\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2cbdd89f-c3a0-4586-ab76-c76d47aa5400",
+              "name": "Access Denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"signUpSourceId\": \"<string>\",\n  \"externalIdentifiers\": {\n    \"clientUserId\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"locale\": {\n    \"language\": \"en\",\n    \"country\": \"US\"\n  },\n  \"subscriptionType\": \"<string>\",\n  \"singleOptIn\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "498a7815-fbb5-475c-a4fb-5e6b24766985",
+              "name": "The specified resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"signUpSourceId\": \"<string>\",\n  \"externalIdentifiers\": {\n    \"clientUserId\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"locale\": {\n    \"language\": \"en\",\n    \"country\": \"US\"\n  },\n  \"subscriptionType\": \"<string>\",\n  \"singleOptIn\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b03f8300-c0c0-488e-a035-64c10ff86248",
+              "name": "The user has sent too many requests in a given amount of time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"signUpSourceId\": \"<string>\",\n  \"externalIdentifiers\": {\n    \"clientUserId\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"locale\": {\n    \"language\": \"en\",\n    \"country\": \"US\"\n  },\n  \"subscriptionType\": \"<string>\",\n  \"singleOptIn\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b0bc0185-bd15-4f39-b66d-1f464300b06c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"signUpSourceId\": \"<string>\",\n  \"externalIdentifiers\": {\n    \"clientUserId\": \"<string>\",\n    \"shopifyId\": \"<string>\",\n    \"klaviyoId\": \"<string>\",\n    \"customIdentifiers\": [\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"locale\": {\n    \"language\": \"en\",\n    \"country\": \"US\"\n  },\n  \"subscriptionType\": \"<string>\",\n  \"singleOptIn\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e708b0fa-2957-474f-90d8-d1b627a5ed49",
+          "name": "Get subscription eligibility for a user",
+          "request": {
+            "name": "Get subscription eligibility for a user",
+            "description": {
+              "content": "Make a call to this endpoint to list all subscription types and channels a user is subscribed to. You can query for a subscriber using either their phone number or email. One of the query parameters is required in order to look up a subscriber. As an example, you can use this endpoint to check if a subscriber is eligible to receive SMS or email campaigns, and then send them a message based on that eligibility.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "phone",
+                  "value": "<string>",
+                  "description": "A user's phone number we use to fetch subscription eligibility."
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "A user's email we use to fetch subscription eligibility."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "82c22665-efc9-4a8c-a077-3092d08f7909",
+              "name": "Successfully accepted get subscriptions request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "%2B13115552368"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@gmail.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subscriptionEligibilities\": [\n    {\n      \"subscription\": {\n        \"type\": \"MARKETING\",\n        \"channel\": \"EMAIL\"\n      },\n      \"eligibility\": {\n        \"isEligible\": false\n      }\n    },\n    {\n      \"subscription\": {\n        \"type\": \"TRANSACTIONAL\",\n        \"channel\": \"EMAIL\"\n      },\n      \"eligibility\": {\n        \"isEligible\": true\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f98818b2-785c-4bbe-839a-20f17cb7680d",
+              "name": "Invalid parameter in request query or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "%2B13115552368"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@gmail.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "584ee0ef-710b-4567-8188-a3a5f37cbc4e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "%2B13115552368"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@gmail.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "24d0a5f9-d441-459b-ad2b-2e28bafe9d26",
+              "name": "Access Denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "%2B13115552368"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@gmail.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "70fadfb0-0a19-4605-93f9-0f28afebade9",
+              "name": "The specified resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "%2B13115552368"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@gmail.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7ffcfbaf-14b9-4d38-b912-dd11bc5b1599",
+              "name": "The user has sent too many requests in a given amount of time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "%2B13115552368"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@gmail.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e3dab254-731b-4b8a-8dde-d0fc647d7cad",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "%2B13115552368"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@gmail.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bdda0f55-6401-4c3f-8a3d-8cdf0ac4944a",
+          "name": "Unsubscribe subscriptions for a user",
+          "request": {
+            "name": "Unsubscribe subscriptions for a user",
+            "description": {
+              "content": "Make a call to this endpoint to unsubscribe a user from a subscription type or channel. If no subscriptions\nare present in the request, the user is unsubscribed from all subscriptions. If subscriptions are present\nin the request, the user is unsubscribed from the requested type or channel combination. By default, if a\nsubscription exists, but the user is already unsubscribed, it records the attempt to unsubscribe the\nsubscription again. For TEXT subscriptions, a message is sent to the person indicating that they are\nunsubscribed.\n\nFor the user object, the email data point determines which email subscriptions a user has and the phone data point \ndetermines which text (or sms) subscriptions a user has. Passing in an email does not locate, nor unsubscribe, \na user from any sms subscriptions. Similarly, passing in a phone does not locate, nor unsubscribe, a user from any email subscriptions.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                "unsubscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "attributes:write subscriptions:write events:write ecommerce:write segments:write segments:read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.attentivemobile.com/v1/authorization-codes/tokens"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"subscriptions\": [\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    }\n  ],\n  \"notification\": {\n    \"language\": \"<string>\",\n    \"disabled\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6f5fa152-56b1-4577-afa2-956cf4629fed",
+              "name": "Accepted an unsubscribe subscription(s) request. The response body will contain info about which subscription(s) are already unsubscribed, and which subscription(s) will be unsubscribed (asynchronously).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"subscriptions\": [\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    }\n  ],\n  \"notification\": {\n    \"language\": \"<string>\",\n    \"disabled\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"subscriptionResponses\": [\n    {\n      \"subscription\": {\n        \"type\": \"<string>\",\n        \"channel\": \"<string>\"\n      },\n      \"subscriptionUnsubscribeStatus\": \"NEWLY_UNSUBSCRIBED\"\n    },\n    {\n      \"subscription\": {\n        \"type\": \"<string>\",\n        \"channel\": \"<string>\"\n      },\n      \"subscriptionUnsubscribeStatus\": \"PREVIOUSLY_UNSUBSCRIBED\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf233fd0-b6b0-4bd6-a73b-8c04dcebad9e",
+              "name": "Invalid parameter in request query or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"subscriptions\": [\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    }\n  ],\n  \"notification\": {\n    \"language\": \"<string>\",\n    \"disabled\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f33da1a5-e518-4055-9073-cee84fd83bbc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"subscriptions\": [\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    }\n  ],\n  \"notification\": {\n    \"language\": \"<string>\",\n    \"disabled\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5fdd85ce-63e9-432b-af28-8b0c178d5eeb",
+              "name": "Access Denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"subscriptions\": [\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    }\n  ],\n  \"notification\": {\n    \"language\": \"<string>\",\n    \"disabled\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "403c1fdb-5a6b-4ab8-925d-bdaadd67da31",
+              "name": "The specified resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"subscriptions\": [\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    }\n  ],\n  \"notification\": {\n    \"language\": \"<string>\",\n    \"disabled\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "569aac13-8267-4317-836d-1bec147d1c45",
+              "name": "The user has sent too many requests in a given amount of time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"subscriptions\": [\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    }\n  ],\n  \"notification\": {\n    \"language\": \"<string>\",\n    \"disabled\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "608fc9ec-9621-4a93-9d75-aa81550fb281",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"phone\": \"+13115552368\",\n    \"email\": \"test@gmail.com\"\n  },\n  \"subscriptions\": [\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"channel\": \"<string>\"\n    }\n  ],\n  \"notification\": {\n    \"language\": \"<string>\",\n    \"disabled\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.attentivemobile.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f4199b37-041b-4df4-85c6-92146db9d579",
+    "name": "Attentive Access Token Subscribers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+      "type": "text/plain"
+    }
+  }
+}

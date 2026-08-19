@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Attentive Access Token Product Catalog API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Product Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "View Recent Catalog Uploads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.attentivemobile.com/v1/product-catalog/uploads",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+              "accessTokenUrl": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Make a call to this endpoint to list recent catalog uploads with their statuses to gain visibility into the ingestion workflow in order of creation. See the POST of this endpoint for details.\n`Expires` indicates how long you can wait before uploading the product catalog file. If the catalog upload expires, then we will no longer process the file that you upload and you will need to initiate  a new catalog upload.\n"
+        },
+        {
+          "info": {
+            "name": "Upload Product Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.attentivemobile.com/v1/product-catalog/uploads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+              "accessTokenUrl": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Make a call to this endpoint to start sending Attentive your full or partial product catalog.\nThe process starts with a POST to this endpoint, where you will receive a pre-signed AWS S3 URL. You can\nuse any language's http request libraries for uploading a file via HTTP. Here's how to do it with `curl` as an example\n\n\n```\ncurl --upload-file ${fileNameLocally} ${presignedURL}\n```\n\n\nand here's an example in Python\n```python\nimport requests\nwith open(filepath, 'rb') as f:\n    r = requests.put(uploa"
+        },
+        {
+          "info": {
+            "name": "Lookup Product Catalog Ingestion",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.attentivemobile.com/v1/product-catalog/uploads/:uploadId",
+            "params": [
+              {
+                "name": "uploadId",
+                "value": "",
+                "type": "path",
+                "description": "The upload ID returned from a previous call"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://ui-devel.attentivemobile.com/integrations/oauth-install?client_id={clientId}&redirect_uri={redirectUri}&scope={scope}",
+              "accessTokenUrl": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Lookup Product Catalog Ingestion"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

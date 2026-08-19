@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Attentive Access Token User Properties API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Properties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create or update a single user with attributes, subscriptions, and identifiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.attentivemobile.com/v1/v2/user/attributes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates or updates a single user record, including associated attributes, subscriptions, and identifiers. If a user with the provided identifiers already exists, their information will be updated; otherwise, a new user will be created.\n\nThere is a limit of 100 of custom attributes that can be created. If intending to update an existing attribute, the name of the key must match the name of the existing attribute. If an existing attribute does not exist, a new attribute will be created with the gi"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

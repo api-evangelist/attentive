@@ -1,0 +1,951 @@
+{
+  "item": [
+    {
+      "id": "56ec0490-3a8d-4570-b7e5-7093890950b2",
+      "name": "Bulk Segment Operations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b0902143-3010-4633-bc8c-af8c47bf5261",
+          "name": "Add Bulk Segment Members",
+          "request": {
+            "name": "Add Bulk Segment Members",
+            "description": {
+              "content": "Add members to a segment in bulk. This endpoint accepts 1 to 10,000 members per request. Members are identified by email, phone number, and/or client user ID. The request is validated, queued for asynchronous processing, and a unique batch job ID is returned for tracking the status.\n\n**Request Limits:**\n- Minimum: 1 member per request\n- Maximum: 10,000 members per request\n- At least one identifier (email, phone, or clientUserId) required per member\n\n**Processing:**\n- Jobs are processed asynchronously\n- Use the batch job ID to check status via `GET /v2/bulk/job/{bulkJobId}`\n- Results available as downloadable `.jsonl` file when completed\n\nScopes Required: [segments:all]\n\nDefault Rate Limit: 100 requests per second\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "bulk",
+                "segments",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1c168b8c-df52-43e0-a9f2-bf6178e6e605",
+              "name": "The bulk job request was successfully received and accepted for asynchronous processing. The response includes a batchJobId to track the status of the job, along with a confirmation message. Processing has not yet completed, please use the job status endpoint to monitor progress and retrieve results once available.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "segments",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"loyalty_gold_2025\",\n  \"members\": [\n    {\n      \"email\": \"customer1@example.com\",\n      \"phone\": \"+14155551234\"\n    },\n    {\n      \"email\": \"customer2@example.com\",\n      \"clientUserId\": \"user-abc-123\"\n    },\n    {\n      \"phone\": \"+14155555678\",\n      \"clientUserId\": \"user-xyz-789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Bulk segment member add job successfully submitted\",\n  \"batchJobId\": \"550e8400-e29b-41d4-a716-446655440000\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8eaa1c4-5622-44c7-9d56-a9809fbcc57e",
+              "name": "Invalid parameter in request query or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "segments",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"loyalty_gold_2025\",\n  \"members\": [\n    {\n      \"email\": \"customer1@example.com\",\n      \"phone\": \"+14155551234\"\n    },\n    {\n      \"email\": \"customer2@example.com\",\n      \"clientUserId\": \"user-abc-123\"\n    },\n    {\n      \"phone\": \"+14155555678\",\n      \"clientUserId\": \"user-xyz-789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "73df4d1c-49b4-4a63-aea3-303ffe7855e4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "segments",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"loyalty_gold_2025\",\n  \"members\": [\n    {\n      \"email\": \"customer1@example.com\",\n      \"phone\": \"+14155551234\"\n    },\n    {\n      \"email\": \"customer2@example.com\",\n      \"clientUserId\": \"user-abc-123\"\n    },\n    {\n      \"phone\": \"+14155555678\",\n      \"clientUserId\": \"user-xyz-789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2cbc7d2f-e8ab-4987-af41-bdf4338fed76",
+              "name": "Access Denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "segments",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"loyalty_gold_2025\",\n  \"members\": [\n    {\n      \"email\": \"customer1@example.com\",\n      \"phone\": \"+14155551234\"\n    },\n    {\n      \"email\": \"customer2@example.com\",\n      \"clientUserId\": \"user-abc-123\"\n    },\n    {\n      \"phone\": \"+14155555678\",\n      \"clientUserId\": \"user-xyz-789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78408da2-0be3-4e3f-bee3-d9dbc09fc828",
+              "name": "The specified resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "segments",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"loyalty_gold_2025\",\n  \"members\": [\n    {\n      \"email\": \"customer1@example.com\",\n      \"phone\": \"+14155551234\"\n    },\n    {\n      \"email\": \"customer2@example.com\",\n      \"clientUserId\": \"user-abc-123\"\n    },\n    {\n      \"phone\": \"+14155555678\",\n      \"clientUserId\": \"user-xyz-789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c07f6fbb-9e4d-46eb-af35-fd27994a87ab",
+              "name": "The user has sent too many requests in a given amount of time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "segments",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"loyalty_gold_2025\",\n  \"members\": [\n    {\n      \"email\": \"customer1@example.com\",\n      \"phone\": \"+14155551234\"\n    },\n    {\n      \"email\": \"customer2@example.com\",\n      \"clientUserId\": \"user-abc-123\"\n    },\n    {\n      \"phone\": \"+14155555678\",\n      \"clientUserId\": \"user-xyz-789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "11fe2548-fcb2-4deb-8561-d3fe7d9da5aa",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "segments",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"loyalty_gold_2025\",\n  \"members\": [\n    {\n      \"email\": \"customer1@example.com\",\n      \"phone\": \"+14155551234\"\n    },\n    {\n      \"email\": \"customer2@example.com\",\n      \"clientUserId\": \"user-abc-123\"\n    },\n    {\n      \"phone\": \"+14155555678\",\n      \"clientUserId\": \"user-xyz-789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d6ac1b15-fe4c-48ba-8760-e3c8ad5b5967",
+          "name": "Remove Bulk Segment Members",
+          "request": {
+            "name": "Remove Bulk Segment Members",
+            "description": {
+              "content": "Remove members from a segment in bulk. This endpoint accepts 1 to 10,000 members per request. Members are identified by email, phone number, and/or client user ID. The request is validated, queued for asynchronous processing, and a unique batch job ID is returned for tracking the status.\n\n**Request Limits:**\n- Minimum: 1 member per request\n- Maximum: 10,000 members per request\n- At least one identifier (email, phone, or clientUserId) required per member\n\n**Processing:**\n- Jobs are processed asynchronously\n- Use the batch job ID to check status via `GET /v2/bulk/job/{bulkJobId}`\n- Results available as downloadable `.jsonl` file when completed\n\nScopes Required: [segments:all]\n\nDefault Rate Limit: 100 requests per second\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "bulk",
+                "segments",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalId\": \"<string>\",\n  \"members\": [\n    {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\",\n      \"clientUserId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "75676ea9-c9ca-409f-88e1-62cacccf8536",
+              "name": "The bulk job request was successfully received and accepted for asynchronous processing. The response includes a batchJobId to track the status of the job, along with a confirmation message. Processing has not yet completed, please use the job status endpoint to monitor progress and retrieve results once available.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "segments",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"loyalty_gold_2025\",\n  \"members\": [\n    {\n      \"email\": \"former.customer1@example.com\",\n      \"phone\": \"+14155551234\"\n    },\n    {\n      \"email\": \"former.customer2@example.com\",\n      \"clientUserId\": \"user-def-456\"\n    },\n    {\n      \"phone\": \"+14155559999\",\n      \"clientUserId\": \"user-ghi-789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Bulk segment member removal job successfully submitted\",\n  \"batchJobId\": \"660f9511-f3ac-52e5-b827-557766551111\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2eb19478-1664-47ea-8bad-951805bdff5d",
+              "name": "Invalid parameter in request query or body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "segments",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"loyalty_gold_2025\",\n  \"members\": [\n    {\n      \"email\": \"former.customer1@example.com\",\n      \"phone\": \"+14155551234\"\n    },\n    {\n      \"email\": \"former.customer2@example.com\",\n      \"clientUserId\": \"user-def-456\"\n    },\n    {\n      \"phone\": \"+14155559999\",\n      \"clientUserId\": \"user-ghi-789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a643a045-f51d-49af-b810-e7d356b377c2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "segments",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"loyalty_gold_2025\",\n  \"members\": [\n    {\n      \"email\": \"former.customer1@example.com\",\n      \"phone\": \"+14155551234\"\n    },\n    {\n      \"email\": \"former.customer2@example.com\",\n      \"clientUserId\": \"user-def-456\"\n    },\n    {\n      \"phone\": \"+14155559999\",\n      \"clientUserId\": \"user-ghi-789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ac1f4bab-2004-478b-8e3a-f36ea15abd85",
+              "name": "Access Denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "segments",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"loyalty_gold_2025\",\n  \"members\": [\n    {\n      \"email\": \"former.customer1@example.com\",\n      \"phone\": \"+14155551234\"\n    },\n    {\n      \"email\": \"former.customer2@example.com\",\n      \"clientUserId\": \"user-def-456\"\n    },\n    {\n      \"phone\": \"+14155559999\",\n      \"clientUserId\": \"user-ghi-789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "756f26a6-145e-4e86-a542-d786cf538450",
+              "name": "The specified resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "segments",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"loyalty_gold_2025\",\n  \"members\": [\n    {\n      \"email\": \"former.customer1@example.com\",\n      \"phone\": \"+14155551234\"\n    },\n    {\n      \"email\": \"former.customer2@example.com\",\n      \"clientUserId\": \"user-def-456\"\n    },\n    {\n      \"phone\": \"+14155559999\",\n      \"clientUserId\": \"user-ghi-789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "29ee0071-e193-44a3-904a-d9c08c6c28df",
+              "name": "The user has sent too many requests in a given amount of time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "segments",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"loyalty_gold_2025\",\n  \"members\": [\n    {\n      \"email\": \"former.customer1@example.com\",\n      \"phone\": \"+14155551234\"\n    },\n    {\n      \"email\": \"former.customer2@example.com\",\n      \"clientUserId\": \"user-def-456\"\n    },\n    {\n      \"phone\": \"+14155559999\",\n      \"clientUserId\": \"user-ghi-789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fb05242a-c587-4d4c-9920-f76f4641a0ee",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "bulk",
+                    "segments",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization for the request",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"loyalty_gold_2025\",\n  \"members\": [\n    {\n      \"email\": \"former.customer1@example.com\",\n      \"phone\": \"+14155551234\"\n    },\n    {\n      \"email\": \"former.customer2@example.com\",\n      \"clientUserId\": \"user-def-456\"\n    },\n    {\n      \"phone\": \"+14155559999\",\n      \"clientUserId\": \"user-ghi-789\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.attentivemobile.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6e1248ba-9bf9-4365-aebd-0ce8c163f1e0",
+    "name": "Attentive Access Token Bulk Segment Operations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).",
+      "type": "text/plain"
+    }
+  }
+}

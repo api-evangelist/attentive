@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Attentive Access Token Bulk Segment Operations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bulk Segment Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add Bulk Segment Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.attentivemobile.com/v1/v2/bulk/segments/members",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add members to a segment in bulk. This endpoint accepts 1 to 10,000 members per request. Members are identified by email, phone number, and/or client user ID. The request is validated, queued for asynchronous processing, and a unique batch job ID is returned for tracking the status.\n\n**Request Limits:**\n- Minimum: 1 member per request\n- Maximum: 10,000 members per request\n- At least one identifier (email, phone, or clientUserId) required per member\n\n**Processing:**\n- Jobs are processed asynchron"
+        },
+        {
+          "info": {
+            "name": "Remove Bulk Segment Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.attentivemobile.com/v1/v2/bulk/segments/members",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove members from a segment in bulk. This endpoint accepts 1 to 10,000 members per request. Members are identified by email, phone number, and/or client user ID. The request is validated, queued for asynchronous processing, and a unique batch job ID is returned for tracking the status.\n\n**Request Limits:**\n- Minimum: 1 member per request\n- Maximum: 10,000 members per request\n- At least one identifier (email, phone, or clientUserId) required per member\n\n**Processing:**\n- Jobs are processed asyn"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
