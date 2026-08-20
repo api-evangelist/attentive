@@ -40,6 +40,16 @@ created: '2026-07-17'
 modified: '2026-08-13'
 tags:
 - Company
+- MarTech
+- SMS Marketing
+- Email Marketing
+- E-Commerce
+- Marketing Automation
+- Subscribers
+- Webhook
+- Customer Engagement
+tags_raw:
+- Company
 - Martech
 - SMS Marketing
 - Email Marketing
@@ -137,6 +147,8 @@ apis:
   humanURL: https://docs.attentive.com/openapi/reference/overview/
   baseURL: https://api.attentivemobile.com/v1
   tags:
+  - E-Commerce
+  tags_raw:
   - eCommerce
   properties:
   - type: OpenAPI
@@ -534,6 +546,8 @@ apis:
   humanURL: https://docs.attentive.com/openapi/reference/overview/
   baseURL: https://api.attentivemobile.com/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
@@ -550,6 +564,11 @@ apis:
   humanURL: https://docs.attentive.com/reference/graphql-introduction
   baseURL: https://api.attentivemobile.com/v1/graphql
   tags:
+  - GraphQL
+  - Subscribers
+  - Event
+  - Webhook
+  tags_raw:
   - GraphQL
   - Subscribers
   - Events
