@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: "1.0"
-  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
-  title: Attentive Access Token Custom Events API
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or api@attentivemobile.com.
+  title: Attentive Custom Events API
+  version: ''
 servers:
 - url: https://api.attentivemobile.com/v1
   description: Attentive API
@@ -10,7 +10,7 @@ security:
 - bearerAuth: []
 tags:
 - name: Custom Events
-  description: Use the Custom Events API to send user actions to use in the Attentive Segment Builder and Journey Builder for both email and text messages. This data cannot contain any sensitive or special categories of information as defined in applicable data protection and privacy laws, including the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA). See a list of specific categories of data you cannot share with Attentive [here](https://docs.attentivemobile.com/pages/legal-docs/pi-disclaimer/).
+  description: Use the Custom Events API to send user actions to use in the Attentive Segment Builder and Journey Builder for both email and text messages. This data cannot contain any sensitive or special categories of information as defined in applicable data protection and privacy laws, including the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA). See a list of specific categories of data you cannot share with Attentive here.
   x-beta: false
 paths:
   /events/custom:
@@ -51,6 +51,19 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
+  responses:
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    InternalError:
+      description: Internal Server Error
+    Unauthorized:
+      description: Unauthorized
+    NotFound:
+      description: The specified resource was not found
+    AccessDenied:
+      description: Access Denied
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
   schemas:
     ExternalIdentifiers:
       type: object
@@ -75,6 +88,26 @@ components:
                 type: string
               value:
                 type: string
+    EventUser:
+      type: object
+      description: 'User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
+
+        Phone, email, or an external identifier (clientUserId or another custom identifier) are required
+
+        '
+      properties:
+        phone:
+          type: string
+          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if either email or an externalIdentifier is not provided.
+          example: '+13115552368'
+        email:
+          type: string
+          description: Email of the user associated with the action. This field is required if either phone or an externalIdentifier is not provided.
+          example: test@gmail.com
+        externalIdentifiers:
+          $ref: '#/components/schemas/ExternalIdentifiers'
+      additionalProperties: false
+      minProperties: 1
     CustomEventsRequest:
       type: object
       properties:
@@ -171,39 +204,6 @@ components:
       required:
       - type
       - user
-    EventUser:
-      type: object
-      description: 'User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
-
-        Phone, email, or an external identifier (clientUserId or another custom identifier) are required
-
-        '
-      properties:
-        phone:
-          type: string
-          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if either email or an externalIdentifier is not provided.
-          example: '+13115552368'
-        email:
-          type: string
-          description: Email of the user associated with the action. This field is required if either phone or an externalIdentifier is not provided.
-          example: test@gmail.com
-        externalIdentifiers:
-          $ref: '#/components/schemas/ExternalIdentifiers'
-      additionalProperties: false
-      minProperties: 1
-  responses:
-    InternalError:
-      description: Internal Server Error
-    InvalidParameter:
-      description: Invalid parameter in request query or body
-    Unauthorized:
-      description: Unauthorized
-    NotFound:
-      description: The specified resource was not found
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
-    AccessDenied:
-      description: Access Denied
   securitySchemes:
     bearerAuth:
       type: http

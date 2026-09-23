@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: "1.0"
-  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
-  title: Attentive Access Token Offers API
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or api@attentivemobile.com.
+  title: Attentive Offers API
+  version: ''
 servers:
 - url: https://api.attentivemobile.com/v1
   description: Attentive API
@@ -10,7 +10,7 @@ security:
 - bearerAuth: []
 tags:
 - name: Offers
-  description: 'You can use the Offers API to add discount codes to an existing offer. <br> <h2> Create an offer </h2>  <ol> <li> Navigate to the [Offers](https://ui.attentivemobile.com/offers) page. </li> <li> Click **+ Create offer** in the top-right corner. </li> <li> On the **Choose an offer type** window, select **Unique discount codes** </li> <li> Enter a unique name for your offer in the **Discount name** field. </li> <li> Choose the **Distribution window**. <br> **Note**: If you include start and end dates in your API call, the distribution window automatically updates to **Custom time period**. </li> <li> **Click Create.** </li> <li> Click back into the offer and retrieve the numeric ID at the end of the URL string. This is the ID you will need for the POST </li> </ol>'
+  description: You can use the Offers API to add discount codes to an existing offer.
   x-beta: true
 paths:
   /coupons/coupon-pool/{coupon-pool-id}/create:
@@ -23,25 +23,29 @@ paths:
 
         Make a call to this asynchronous endpoint to create new discount codes in an existing offer.
 
-        <h2>Validation rules</h2>
 
-        <ul>
+        Validation rules
 
-        <li>Maximum of 200,000 discount codes per request.</li>
 
-        <li><code>distributionStart</code> must be before <code>distributionStop</code>, in UTC ISO format (e.g., <code>2023-02-14T21:29:25Z</code>).</li>
+        Maximum of 200,000 discount codes per request.
 
-        <li>Date ranges must not overlap with ranges from previous uploads to the same offer. Uploading to an existing range is allowed.</li>
 
-        <li>All uploads in an offer must use the same distribution type. If previous uploads include expiration dates, new uploads must also include them, and vice versa.</li>
+        distributionStart must be before distributionStop, in UTC ISO format (e.g., 2023-02-14T21:29:25Z).
 
-        <li>The offer (coupon pool) must exist and belong to your account.</li>
 
-        </ul>
+        Date ranges must not overlap with ranges from previous uploads to the same offer. Uploading to an existing range is allowed.
 
-        <h2>Sync behavior</h2>
 
-        Check the status on the offer to monitor progress. If it still says <strong>SYNCING</strong>, the uploads may not be ready yet.'
+        All uploads in an offer must use the same distribution type. If previous uploads include expiration dates, new uploads must also include them, and vice versa.
+
+
+        The offer (coupon pool) must exist and belong to your account.
+
+
+        Sync behavior
+
+
+        Check the status on the offer to monitor progress. If it still says SYNCING, the uploads may not be ready yet.'
       operationId: createCoupons
       x-external: true
       security:
@@ -74,6 +78,13 @@ paths:
           $ref: '#/components/responses/InternalError1'
 components:
   schemas:
+    ErrorResponseDto:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDto'
     ErrorDto:
       type: object
       required:
@@ -111,16 +122,15 @@ components:
           type: string
           description: Timestamp at which point the discount codes become invalid for distribution within Attentive messages. Must be in valid UTC ISO format.
           example: '2023-02-15T21:29:25Z'
-    ErrorResponseDto:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDto'
   responses:
     AccessDenied1:
       description: Access Denied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
+    DetailedBadRequest:
+      description: "Bad Request. Invalid parameter in request query or body. The following scenarios will cause a 400 response: \nA) Including distributionStart and distributionStop dates that overlap with the distributionStart and distributionStop dates from a previous call, \nB) Including distributionStart and distributionStop dates in an offer that has a distribution window of “Never expire” or “Time to live”, \nC) Excluding distributionStart and distributionStop dates in an offer that has a distribution window of “Custom time period”, D) Including a distributionStart value that is after the distributionStop value\n"
       content:
         application/json:
           schema:
@@ -133,12 +143,6 @@ components:
             $ref: '#/components/schemas/ErrorResponseDto'
     InvalidParameter1:
       description: Invalid parameter in request query or body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
-    DetailedBadRequest:
-      description: "Bad Request. Invalid parameter in request query or body. The following scenarios will cause a 400 response: \nA) Including distributionStart and distributionStop dates that overlap with the distributionStart and distributionStop dates from a previous call, \nB) Including distributionStart and distributionStop dates in an offer that has a distribution window of “Never expire” or “Time to live”, \nC) Excluding distributionStart and distributionStop dates in an offer that has a distribution window of “Custom time period”, D) Including a distributionStart value that is after the distributionStop value\n"
       content:
         application/json:
           schema:

@@ -1,20 +1,16 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: "1.0"
-  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
-  title: Attentive Access Token User Properties API
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or api@attentivemobile.com.
+  title: Attentive API V2 User Properties API
+  version: 2.0.0
 servers:
-- url: https://api.attentivemobile.com/v1
-  description: Attentive API
+- url: https://api.attentivemobile.com/
+  description: Attentive API V2
 security:
 - bearerAuth: []
 tags:
 - name: User Properties
-  description: 'This API will either create a new user if it doesn''t already exist or update an existing one with the attributes provided. You can then use these attributes as macros in messages or build segments to send targeted campaigns and journeys.
-
-    This data cannot contain any sensitive or special categories of information as defined in applicable data protection and privacy laws, including the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA). See a list of specific categories of data you cannot share with Attentive [here](https://docs.attentivemobile.com/pages/legal-docs/pi-disclaimer/).
-
-    '
+  description: This API will either create a new user if it doesn't already exist or update an existing one with the attributes provided.
   x-beta: true
 paths:
   /v2/user/attributes:
@@ -31,12 +27,10 @@ paths:
       description: 'Creates or updates a single user record, including associated attributes, subscriptions, and identifiers. If a user with the provided identifiers already exists, their information will be updated; otherwise, a new user will be created.
 
 
-        There is a limit of 100 of custom attributes that can be created. If intending to update an existing attribute, the name of the key must match the name of the existing attribute. If an existing attribute does not exist, a new attribute will be created with the given key as the name. Attributes with enumerated values must have a value that matches an existing enum value; new enum values will not be created.  Attempting to pass custom attributes as an array or a map such as `["New York City]` or `{"favorite city": "Boston"}` will result in a 400 error.
+        There is a limit of 100 of custom attributes that can be created. If intending to update an existing attribute, the name of the key must match the name of the existing attribute. If an existing attribute does not exist, a new attribute will be created with the given key as the name. Attributes with enumerated values must have a value that matches an existing enum value; new enum values will not be created. Attempting to pass custom attributes as an array or a map such as `["New York City]` or `{"favorite city": "Boston"}` will result in a 400 error.
 
 
-        Default Rate Limit: 150 requests per second
-
-        '
+        Default Rate Limit: 150 requests per second'
       operationId: postUserAttributes
       tags:
       - User Properties
@@ -66,19 +60,6 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
-  responses:
-    InternalError:
-      description: Internal Server Error
-    InvalidParameter:
-      description: Invalid parameter in request query or body
-    Unauthorized:
-      description: Unauthorized
-    NotFound:
-      description: The specified resource was not found
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
-    AccessDenied:
-      description: Access Denied
   schemas:
     CustomIdentifier:
       type: object
@@ -294,6 +275,19 @@ components:
           description: 'A message with the result of the request.
 
             '
+  responses:
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    InternalError:
+      description: Internal Server Error
+    Unauthorized:
+      description: Unauthorized
+    NotFound:
+      description: The specified resource was not found
+    AccessDenied:
+      description: Access Denied
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
   securitySchemes:
     bearerAuth:
       type: http

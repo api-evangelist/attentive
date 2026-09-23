@@ -1,18 +1,16 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: "1.0"
-  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
-  title: Attentive Access Token Bulk Status API
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or api@attentivemobile.com.
+  title: Attentive API V2 Bulk Status API
+  version: 2.0.0
 servers:
-- url: https://api.attentivemobile.com/v1
-  description: Attentive API
+- url: https://api.attentivemobile.com/
+  description: Attentive API V2
 security:
 - bearerAuth: []
 tags:
 - name: Bulk Status
-  description: 'Endpoints for managing bulk data ingestion jobs. Use these endpoints to monitor the processing status asynchronously.
-
-    '
+  description: Endpoints for managing bulk data ingestion jobs. Use these endpoints to monitor the processing status asynchronously.
   x-beta: true
 paths:
   /v2/bulk/job/{bulkJobId}:
@@ -32,9 +30,7 @@ paths:
         Scopes Required: No Additional scopes required.
 
 
-        Default Rate Limit: 100 requests per second
-
-        '
+        Default Rate Limit: 100 requests per second'
       tags:
       - Bulk Status
       parameters:

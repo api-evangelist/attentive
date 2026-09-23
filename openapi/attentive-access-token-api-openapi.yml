@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: "1.0"
-  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or api@attentivemobile.com.
   title: Attentive Access Token API
+  version: ''
 servers:
 - url: https://api.attentivemobile.com/v1
   description: Attentive API
@@ -10,9 +10,7 @@ security:
 - bearerAuth: []
 tags:
 - name: Access Token
-  description: 'Public applications must authenticate using the OAuth 2.0 specification to use Attentive’s API resources. Attentive uses OAuth 2.0’s authorization code grant flow to issue access tokens on behalf of users. When an application is installed on our platform, an authorization code is generated automatically. This authorization code must be exchanged for an access token to authenticate grant and control permissions for your application.
-
-    '
+  description: Public applications must authenticate using the OAuth 2.0 specification to use Attentive’s API resources. Attentive uses OAuth 2.0’s authorization code grant flow to issue access tokens on behalf of users. When an application is installed on our platform, an authorization code is generated automatically. This authorization code must be exchanged for an access token to authenticate grant and control permissions for your application.
 paths:
   /authorization-codes/tokens:
     x-external: true

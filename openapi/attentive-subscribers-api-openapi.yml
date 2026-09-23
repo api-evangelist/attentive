@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: "1.0"
-  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
-  title: Attentive Access Token Subscribers API
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or api@attentivemobile.com.
+  title: Attentive Subscribers API
+  version: ''
 servers:
 - url: https://api.attentivemobile.com/v1
   description: Attentive API
@@ -10,9 +10,7 @@ security:
 - bearerAuth: []
 tags:
 - name: Subscribers
-  description: 'Use the Subscribers API to manage subscriptions. With this API, you can programmatically subscribe and unsubscribe users from subscriptions.
-
-    '
+  description: Use the Subscribers API to manage subscriptions. With this API, you can programmatically subscribe and unsubscribe users from subscriptions.
   x-beta: false
 paths:
   /subscriptions:
@@ -23,7 +21,42 @@ paths:
       - OAuthFlow:
         - subscriptions:write
       summary: Subscribe user
-      description: "Make a call to this endpoint to opt-in a user to a subscription. \n\nNotes:\n- A legal disclosure is required when a user is opted-in programmatically.\n    - For marketing messages, required [legal language](https://docs.attentivemobile.com/pages/legal-docs/legal-disclosure-language/) must be included.\n\n    - For transactional messages, you must include a [transactional opt-in unit](https://docs.attentivemobile.com/pages/legal-docs/legal-transactional/).\n  \n- By default, if a subscription already exists, it will try and record the attempt to create the subscription again. For TEXT subscriptions, this will result in a message being sent to the person indicating that they are already subscribed.\n- Requests to opt-in subscribers must either contain a) a sign-up source id or b) both a locale and a subscription type.\n    - The unique identifier of a sign-up source can be found in the Sign-up Units tab of the Attentive platform in the ID column. \n    If this value is provided in the request, then this sign-up unit will be used for opting in the user in the request.\n\n    - Callers of this endpoint have the option to omit `signUpSourceId` and, instead, provide both a `locale` and a `subscriptionType` (see below for field details). \n    Given the locale and subscription type, Attentive will resolve any matching API opt-in units. To opt-in a user to a subscription without a `signUpSourceId` and exclusively based on locale and subscription type,\n    there must be exactly one API sign-up unit that matches the provided locale and subscription type. Conversely, requests that contain a locale and a subscription type\n    that do not have a corresponding sign-up unit or that have multiple matching sign-up units will receive a `400` response and will not opt a user into a subscription.\n\n- Phone numbers must be submitted in [e164 format](https://en.wikipedia.org/wiki/E.164).\n    - valid examples: `+19148440001`, `+442071838750`, `+551155256325`\n    - invalid examples: `19148440001`, `+1---914---844---0001`, `1 () 914 844 0001`\n"
+      description: 'Make a call to this endpoint to opt-in a user to a subscription.
+
+
+        Notes:
+
+        - A legal disclosure is required when a user is opted-in programmatically.
+
+        - For marketing messages, required legal language must be included.
+
+
+        - For transactional messages, you must include a transactional opt-in unit.
+
+
+        - By default, if a subscription already exists, it will try and record the attempt to create the subscription again. For TEXT subscriptions, this will result in a message being sent to the person indicating that they are already subscribed.
+
+        - Requests to opt-in subscribers must either contain a) a sign-up source id or b) both a locale and a subscription type.
+
+        - The unique identifier of a sign-up source can be found in the Sign-up Units tab of the Attentive platform in the ID column.
+
+        If this value is provided in the request, then this sign-up unit will be used for opting in the user in the request.
+
+
+        - Callers of this endpoint have the option to omit `signUpSourceId` and, instead, provide both a `locale` and a `subscriptionType` (see below for field details).
+
+        Given the locale and subscription type, Attentive will resolve any matching API opt-in units. To opt-in a user to a subscription without a `signUpSourceId` and exclusively based on locale and subscription type,
+
+        there must be exactly one API sign-up unit that matches the provided locale and subscription type. Conversely, requests that contain a locale and a subscription type
+
+        that do not have a corresponding sign-up unit or that have multiple matching sign-up units will receive a `400` response and will not opt a user into a subscription.
+
+
+        - Phone numbers must be submitted in e164 format.
+
+        - valid examples: `+19148440001`, `+442071838750`, `+551155256325`
+
+        - invalid examples: `19148440001`, `+1---914---844---0001`, `1 () 914 844 0001`'
       operationId: addSubscriptions
       tags:
       - Subscribers
@@ -59,9 +92,7 @@ paths:
       - OAuthFlow:
         - subscriptions:read
       summary: Get subscription eligibility for a user
-      description: 'Make a call to this endpoint to list all subscription types and channels a user is subscribed to. You can query for a subscriber using either their phone number or email. One of the query parameters is required in order to look up a subscriber. As an example, you can use this endpoint to check if a subscriber is eligible to receive SMS or email campaigns, and then send them a message based on that eligibility.
-
-        '
+      description: Make a call to this endpoint to list all subscription types and channels a user is subscribed to. You can query for a subscriber using either their phone number or email. One of the query parameters is required in order to look up a subscriber. As an example, you can use this endpoint to check if a subscriber is eligible to receive SMS or email campaigns, and then send them a message based on that eligibility.
       operationId: getSubscriptions
       tags:
       - Subscribers
@@ -105,7 +136,24 @@ paths:
       - OAuthFlow:
         - subscriptions:write
       summary: Unsubscribe subscriptions for a user
-      description: "Make a call to this endpoint to unsubscribe a user from a subscription type or channel. If no subscriptions\nare present in the request, the user is unsubscribed from all subscriptions. If subscriptions are present\nin the request, the user is unsubscribed from the requested type or channel combination. By default, if a\nsubscription exists, but the user is already unsubscribed, it records the attempt to unsubscribe the\nsubscription again. For TEXT subscriptions, a message is sent to the person indicating that they are\nunsubscribed.\n\nFor the user object, the email data point determines which email subscriptions a user has and the phone data point \ndetermines which text (or sms) subscriptions a user has. Passing in an email does not locate, nor unsubscribe, \na user from any sms subscriptions. Similarly, passing in a phone does not locate, nor unsubscribe, a user from any email subscriptions.\n"
+      description: 'Make a call to this endpoint to unsubscribe a user from a subscription type or channel. If no subscriptions
+
+        are present in the request, the user is unsubscribed from all subscriptions. If subscriptions are present
+
+        in the request, the user is unsubscribed from the requested type or channel combination. By default, if a
+
+        subscription exists, but the user is already unsubscribed, it records the attempt to unsubscribe the
+
+        subscription again. For TEXT subscriptions, a message is sent to the person indicating that they are
+
+        unsubscribed.
+
+
+        For the user object, the email data point determines which email subscriptions a user has and the phone data point
+
+        determines which text (or sms) subscriptions a user has. Passing in an email does not locate, nor unsubscribe,
+
+        a user from any sms subscriptions. Similarly, passing in a phone does not locate, nor unsubscribe, a user from any email subscriptions.'
       operationId: unsubscribeSubscriptions
       tags:
       - Subscribers
@@ -136,6 +184,14 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   schemas:
+    UnsubscribeSubscriptionResponseDto:
+      type: object
+      description: A subscription and a status indicating whether the subscription for this particular user was newly unsubscribed or was previously unsubscribed (i.e. already opted-out)
+      properties:
+        subscription:
+          $ref: '#/components/schemas/SubscriptionDto'
+        subscriptionUnsubscribeStatus:
+          $ref: '#/components/schemas/SubscriptionUnsubscribeStatus'
     NewExternalIdentifierDto:
       type: object
       description: External Identifiers for a user
@@ -177,21 +233,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomIdentifierDto'
-    EligibilityDto:
+    SubscriptionEligibilityDto:
       type: object
-      description: A user's eligibility to receive messages for a subscription.
+      description: A subscription and a boolean indicating whether the user is eligible to receive messages for that subscription.
       properties:
-        isEligible:
-          type: boolean
-          description: A boolean representing a user's eligibility to receive messages for a subscription.
-    GetSubscriptionsResponseDto:
-      type: object
-      description: A list of the subscriptions that a subscriber is eligible to receive messages for.
-      properties:
-        subscriptionEligibilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubscriptionEligibilityDto'
+        subscription:
+          $ref: '#/components/schemas/SubscriptionDto'
+        eligibility:
+          $ref: '#/components/schemas/EligibilityDto'
     UnsubscribeSubscriptionsRequestDto:
       type: object
       properties:
@@ -205,17 +254,44 @@ components:
           $ref: '#/components/schemas/NotificationConfigDto'
       required:
       - user
-    AddSubscriptionsResponseDto:
+    UserDto1:
       type: object
+      description: User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
       properties:
-        user:
-          $ref: '#/components/schemas/UserDto1'
-        externalIdentifiers:
-          $ref: '#/components/schemas/NewExternalIdentifierDto'
-        subscriptionResponses:
+        phone:
+          type: string
+          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if email is not provided.
+          example: '+13115552368'
+        email:
+          type: string
+          description: Email of the user associated with the action. This field is required if phone is not provided.
+          example: test@gmail.com
+    GetSubscriptionsResponseDto:
+      type: object
+      description: A list of the subscriptions that a subscriber is eligible to receive messages for.
+      properties:
+        subscriptionEligibilities:
           type: array
           items:
-            $ref: '#/components/schemas/AddSubscriptionResponseDto'
+            $ref: '#/components/schemas/SubscriptionEligibilityDto'
+    NotificationConfigDto:
+      type: object
+      description: Optional notification properties to override
+      properties:
+        language:
+          type: string
+          description: Standard language tags as defined by the ISO. Currently only supports en-US and fr-CA. Case sensitive, must match exactly.
+        disabled:
+          type: boolean
+          description: A boolean representing if a user should not receive a confirmation message upon unsubscribing. Assumed false by default.
+    CustomIdentifierDto:
+      type: object
+      description: Namespaced custom identifier and value
+      properties:
+        name:
+          type: string
+        value:
+          type: string
     UnsubscribeSubscriptionsResponseDto:
       type: object
       properties:
@@ -225,11 +301,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UnsubscribeSubscriptionResponseDto'
-    SubscriptionCreationStatus:
-      type: string
-      enum:
-      - NEWLY_CREATED
-      - PREVIOUSLY_CREATED
+    AddSubscriptionResponseDto:
+      type: object
+      description: A subscription and a status indicating whether the subscription for this particular user was newly created or was previously created (i.e. already existed)
+      properties:
+        subscription:
+          $ref: '#/components/schemas/SubscriptionDto'
+        subscriptionCreationStatus:
+          $ref: '#/components/schemas/SubscriptionCreationStatus'
     LocaleDto:
       type: object
       properties:
@@ -241,6 +320,29 @@ components:
           type: string
           description: Two-letter country code of the locale. [ISO-3166-1 alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) is required. Values are case sensitive and must match exactly.
           example: US
+    EligibilityDto:
+      type: object
+      description: A user's eligibility to receive messages for a subscription.
+      properties:
+        isEligible:
+          type: boolean
+          description: A boolean representing a user's eligibility to receive messages for a subscription.
+    AddSubscriptionsResponseDto:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserDto1'
+        externalIdentifiers:
+          $ref: '#/components/schemas/NewExternalIdentifierDto'
+        subscriptionResponses:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddSubscriptionResponseDto'
+    SubscriptionUnsubscribeStatus:
+      type: string
+      enum:
+      - NEWLY_UNSUBSCRIBED
+      - PREVIOUSLY_UNSUBSCRIBED
     AddSubscriptionsRequestDto:
       type: object
       properties:
@@ -263,29 +365,6 @@ components:
           description: "Opt in subscriber silently (do not send a Reply Y to subscribe text).\n\nNOTE: This property is disabled (set to false) by default. We strongly recommend maintaining the standard \ndouble opt-in flow, as it serves important legal and compliance purposes. If you want to enable single opt-in, \nwe encourage you to speak with your dedicated Client Strategy Manager (CSM) or our White Glove team \n(whiteglove@attentivemobile.com) before you enable it. If this property is set to true, subscribers will be \nadded without receiving the initial “Reply Y” confirmation text message. This setting bypasses only the \n“Reply Y” message. The mandatory legal message will still be sent.\n"
       required:
       - user
-    SubscriptionUnsubscribeStatus:
-      type: string
-      enum:
-      - NEWLY_UNSUBSCRIBED
-      - PREVIOUSLY_UNSUBSCRIBED
-    NotificationConfigDto:
-      type: object
-      description: Optional notification properties to override
-      properties:
-        language:
-          type: string
-          description: Standard language tags as defined by the ISO. Currently only supports en-US and fr-CA. Case sensitive, must match exactly.
-        disabled:
-          type: boolean
-          description: A boolean representing if a user should not receive a confirmation message upon unsubscribing. Assumed false by default.
-    UnsubscribeSubscriptionResponseDto:
-      type: object
-      description: A subscription and a status indicating whether the subscription for this particular user was newly unsubscribed or was previously unsubscribed (i.e. already opted-out)
-      properties:
-        subscription:
-          $ref: '#/components/schemas/SubscriptionDto'
-        subscriptionUnsubscribeStatus:
-          $ref: '#/components/schemas/SubscriptionUnsubscribeStatus'
     SubscriptionDto:
       type: object
       description: A type and channel combination.
@@ -301,55 +380,24 @@ components:
           enum:
           - TEXT
           - EMAIL
-    AddSubscriptionResponseDto:
-      type: object
-      description: A subscription and a status indicating whether the subscription for this particular user was newly created or was previously created (i.e. already existed)
-      properties:
-        subscription:
-          $ref: '#/components/schemas/SubscriptionDto'
-        subscriptionCreationStatus:
-          $ref: '#/components/schemas/SubscriptionCreationStatus'
-    CustomIdentifierDto:
-      type: object
-      description: Namespaced custom identifier and value
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-    UserDto1:
-      type: object
-      description: User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
-      properties:
-        phone:
-          type: string
-          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if email is not provided.
-          example: '+13115552368'
-        email:
-          type: string
-          description: Email of the user associated with the action. This field is required if phone is not provided.
-          example: test@gmail.com
-    SubscriptionEligibilityDto:
-      type: object
-      description: A subscription and a boolean indicating whether the user is eligible to receive messages for that subscription.
-      properties:
-        subscription:
-          $ref: '#/components/schemas/SubscriptionDto'
-        eligibility:
-          $ref: '#/components/schemas/EligibilityDto'
+    SubscriptionCreationStatus:
+      type: string
+      enum:
+      - NEWLY_CREATED
+      - PREVIOUSLY_CREATED
   responses:
-    NotFound:
-      description: The specified resource was not found
-    InvalidParameter:
-      description: Invalid parameter in request query or body
     InternalError:
       description: Internal Server Error
     Unauthorized:
       description: Unauthorized
     TooManyRequests:
       description: The user has sent too many requests in a given amount of time
+    NotFound:
+      description: The specified resource was not found
     AccessDenied:
       description: Access Denied
+    InvalidParameter:
+      description: Invalid parameter in request query or body
   securitySchemes:
     bearerAuth:
       type: http

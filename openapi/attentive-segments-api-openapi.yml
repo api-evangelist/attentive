@@ -1,31 +1,16 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: "1.0"
-  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
-  title: Attentive Access Token Segments API
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or api@attentivemobile.com.
+  title: Attentive API V2 Segments API
+  version: 2.0.0
 servers:
-- url: https://api.attentivemobile.com/v1
-  description: Attentive API
+- url: https://api.attentivemobile.com/
+  description: Attentive API V2
 security:
 - bearerAuth: []
 tags:
 - name: Segments
-  description: 'Endpoints for submitting bulk segment member additions and removals. Use these endpoints to manage segment memberships in bulk and monitor the processing status asynchronously.
-
-
-    ## Processing Times
-
-
-    The Bulk API processes jobs with the following targets:
-
-    - **Standard Processing**: The first 10,000 records per day per customer typically complete within 4 hours of request acceptance.
-
-    - **High-Volume Processing**: Additional records beyond 10,000 per day typically complete within 12 hours.
-
-
-    **Note**: For jobs with more than 1 million records, processing times may vary.
-
-    '
+  description: Endpoints for submitting bulk segment member additions and removals.
   x-beta: true
 paths:
   /v2/bulk/segments/members:
@@ -63,9 +48,7 @@ paths:
         Scopes Required: [segments:all]
 
 
-        Default Rate Limit: 100 requests per second
-
-        '
+        Default Rate Limit: 100 requests per second'
       operationId: postBulkSegmentMembers
       parameters:
       - name: Authorization
@@ -164,9 +147,7 @@ paths:
         Scopes Required: [segments:all]
 
 
-        Default Rate Limit: 100 requests per second
-
-        '
+        Default Rate Limit: 100 requests per second'
       operationId: deleteBulkSegmentMembers
       parameters:
       - name: Authorization
@@ -250,9 +231,7 @@ paths:
         Scopes Required: [segments:Write]
 
 
-        Default Rate Limit: 100 requests per second
-
-        '
+        Default Rate Limit: 100 requests per second'
       operationId: createSegment
       tags:
       - Segments
@@ -293,9 +272,7 @@ paths:
         Scopes Required: [segments:Read OR segments:Write]
 
 
-        Default Rate Limit: 100 requests per second
-
-        '
+        Default Rate Limit: 100 requests per second'
       operationId: listSegments
       tags:
       - Segments
@@ -373,9 +350,7 @@ paths:
         Scopes Required: [segments:Read OR segments:Write]
 
 
-        Default Rate Limit: 100 requests per second
-
-        '
+        Default Rate Limit: 100 requests per second'
       operationId: getSegmentByExternalId
       tags:
       - Segments
@@ -420,9 +395,7 @@ paths:
         Scopes Required: [segments:Write]
 
 
-        Default Rate Limit: 100 requests per second
-
-        '
+        Default Rate Limit: 100 requests per second'
       operationId: patchSegmentByExternalId
       tags:
       - Segments
@@ -475,9 +448,7 @@ paths:
         Scopes Required: [segments:Write]
 
 
-        Default Rate Limit: 100 requests per second
-
-        '
+        Default Rate Limit: 100 requests per second'
       operationId: deleteSegmentByExternalId
       tags:
       - Segments
@@ -505,18 +476,18 @@ paths:
           description: Internal server error
 components:
   responses:
-    InternalError:
-      description: Internal Server Error
     InvalidParameter:
       description: Invalid parameter in request query or body
+    InternalError:
+      description: Internal Server Error
     Unauthorized:
       description: Unauthorized
     NotFound:
       description: The specified resource was not found
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
     AccessDenied:
       description: Access Denied
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
   schemas:
     SegmentResponse:
       type: object
@@ -573,34 +544,6 @@ components:
           clientUserId: user-abc-123
         - phone: '+14155555678'
           clientUserId: user-xyz-789
-    BulkSuccessResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: 'A human-readable message confirming that the bulk job was successfully submitted.
-
-            '
-        batchJobId:
-          type: string
-          description: 'A unique identifier representing the submitted batch job. Use this ID to query the job''s status, retrieve results, or diagnose any errors related to the job. This ID is returned upon successful job submission and required for all follow-up actions related to the batch.
-
-            '
-    PatchSegmentRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the segment. If provided, cannot be empty or whitespace only and must be at most 240 characters. Leading and trailing whitespace will be trimmed. At least one field (name or description) must be provided for PATCH.
-          example: Loyalty Gold Members Updated
-          minLength: 1
-          maxLength: 240
-        description:
-          type: string
-          description: The description of the segment. If provided, cannot be empty or whitespace only, must be at least 2 characters, and at most 500 characters. Leading and trailing whitespace will be trimmed. At least one field (name or description) must be provided for PATCH.
-          example: Updated description
-          minLength: 2
-          maxLength: 500
     CreateSegmentResponse:
       type: object
       properties:
@@ -616,29 +559,36 @@ components:
           type: string
           description: The description of the segment
           example: Customers with gold loyalty status
-    CreateSegmentRequest:
+    ListSegmentsResponse:
       type: object
-      required:
-      - name
       properties:
-        name:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SegmentResponse'
+        cursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for pagination (null if no more results)
+          example: eyJpZCI6MTIzNDU2fQ==
+        hasMore:
+          type: boolean
+          description: Whether there are more results available
+          example: false
+    BulkSuccessResponse:
+      type: object
+      properties:
+        message:
           type: string
-          description: The name of the segment. Cannot be empty or whitespace only. Leading and trailing whitespace will be trimmed.
-          example: Loyalty Gold Members
-          minLength: 1
-          maxLength: 240
-        description:
+          description: 'A human-readable message confirming that the bulk job was successfully submitted.
+
+            '
+        batchJobId:
           type: string
-          description: Optional description of the segment. If not provided, defaults to "Manual Segment Upload Public API V2". When provided, cannot be empty or whitespace only and must be at least 2 characters. Leading and trailing whitespace will be trimmed.
-          example: Customers with gold loyalty status
-          minLength: 2
-          maxLength: 500
-        externalId:
-          type: string
-          description: Auto generated if not supplied. Optional externalId set on the segment. Cannot be empty or whitespace only. Leading and trailing whitespace will be trimmed.
-          example: SEG_abc123def456
-          minLength: 1
-          maxLength: 255
+          description: 'A unique identifier representing the submitted batch job. Use this ID to query the job''s status, retrieve results, or diagnose any errors related to the job. This ID is returned upon successful job submission and required for all follow-up actions related to the batch.
+
+            '
     SegmentMember:
       type: object
       description: 'A segment member identified by one or more of: email, phone, or clientUserId. At least one identifier must be provided. Multiple identifiers can be provided to increase matching accuracy.
@@ -678,22 +628,44 @@ components:
         email: loyalty.member@example.com
         phone: '+14155551234'
         clientUserId: cust-789-xyz
-    ListSegmentsResponse:
+    CreateSegmentRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The name of the segment. Cannot be empty or whitespace only. Leading and trailing whitespace will be trimmed.
+          example: Loyalty Gold Members
+          minLength: 1
+          maxLength: 240
+        description:
+          type: string
+          description: Optional description of the segment. If not provided, defaults to "Manual Segment Upload Public API V2". When provided, cannot be empty or whitespace only and must be at least 2 characters. Leading and trailing whitespace will be trimmed.
+          example: Customers with gold loyalty status
+          minLength: 2
+          maxLength: 500
+        externalId:
+          type: string
+          description: Auto generated if not supplied. Optional externalId set on the segment. Cannot be empty or whitespace only. Leading and trailing whitespace will be trimmed.
+          example: SEG_abc123def456
+          minLength: 1
+          maxLength: 255
+    PatchSegmentRequest:
       type: object
       properties:
-        segments:
-          type: array
-          items:
-            $ref: '#/components/schemas/SegmentResponse'
-        cursor:
+        name:
           type: string
-          description: Cursor for pagination (null if no more results)
-          nullable: true
-          example: eyJpZCI6MTIzNDU2fQ==
-        hasMore:
-          type: boolean
-          description: Whether there are more results available
-          example: false
+          description: The name of the segment. If provided, cannot be empty or whitespace only and must be at most 240 characters. Leading and trailing whitespace will be trimmed. At least one field (name or description) must be provided for PATCH.
+          example: Loyalty Gold Members Updated
+          minLength: 1
+          maxLength: 240
+        description:
+          type: string
+          description: The description of the segment. If provided, cannot be empty or whitespace only, must be at least 2 characters, and at most 500 characters. Leading and trailing whitespace will be trimmed. At least one field (name or description) must be provided for PATCH.
+          example: Updated description
+          minLength: 2
+          maxLength: 500
   securitySchemes:
     bearerAuth:
       type: http

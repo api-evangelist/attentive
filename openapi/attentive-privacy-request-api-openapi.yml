@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: "1.0"
-  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
-  title: Attentive Access Token Privacy Request API
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or api@attentivemobile.com.
+  title: Attentive Privacy Request API
+  version: ''
 servers:
 - url: https://api.attentivemobile.com/v1
   description: Attentive API
@@ -10,16 +10,9 @@ security:
 - bearerAuth: []
 tags:
 - name: Privacy Request
-  description: 'You can use the Privacy Request API in order to comply with [California Consumer Privacy Act](https://epic.org/california-consumer-privacy-act-ccpa/)
+  description: 'You can use the Privacy Request API in order to comply with California Consumer Privacy Act
 
-    deletion requests through Attentive. For more information, you can review [Attentive’s FAQs for CCPA](https://attentivemobile.atlassian.net/wiki/download/attachments/629309474/Attentive%20FAQs%20for%20CCPA.pdf?version=4&modificationDate=1585845052142&cacheVersion=1&api=v2)
-
-    or the [Important Notice Regarding the CCPA of 2018](https://attentivemobile.atlassian.net/wiki/download/attachments/629309474/Important%20Notice%20Regarding%20the%20California%20Consumer%20Privacy%20Act%20of%202018%20(CCPA).pdf?version=1&modificationDate=1579115568586&cacheVersion=1&api=v2).
-
-
-    If you submit an email address or phone number that matches a user for the identified Company or Brand, Attentive will process your deletion request for the matching user(s) only. A user''s data may not be deleted if it does not match at least one of the data elements you submitted in the request (email address or phone number). Attentive may reach out to you if we require additional instructions to process your request.
-
-    '
+    deletion requests through Attentive.'
   x-beta: false
 paths:
   /privacy/delete-request:
@@ -27,9 +20,7 @@ paths:
       x-external: true
       x-emits-event: true
       summary: Add a deletion request
-      description: 'Make a call to this endpoint to create a new privacy deletion request. This will delete a subscriber within thirty days, provided the call was successful. Use the GET endpoint with the id returned to confirm deletion.
-
-        '
+      description: Make a call to this endpoint to create a new privacy deletion request. This will delete a subscriber within thirty days, provided the call was successful. Use the GET endpoint with the id returned to confirm deletion.
       security:
       - OAuthFlow:
         - privacy_requests:write
@@ -122,11 +113,26 @@ components:
       description: Unauthorized
     NotFound:
       description: The specified resource was not found
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
     AccessDenied:
       description: Access Denied
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
   schemas:
+    PrivacyRequestAddDeleteEventDto:
+      type: object
+      properties:
+        subjectEmail:
+          type: string
+          description: Email of a subscriber. Only required if __subjectPhone__ is empty.
+        subjectPhone:
+          type: string
+          description: Phone of a subscriber. Only required if __subjectEmail__ is empty.
+        requestMsg:
+          type: string
+          description: An optional message for an audit trail.
+        clientUserId:
+          type: string
+          description: ClientUserId of a subscriber. Only required if __subjectEmail__ and __subjectPhone__ is empty.
     PrivacyRequestErrorDto:
       type: object
       properties:
@@ -163,21 +169,6 @@ components:
         processingEndDateTime:
           type: string
           description: Timestamp of when processing of the request completed.
-    PrivacyRequestAddDeleteEventDto:
-      type: object
-      properties:
-        subjectEmail:
-          type: string
-          description: Email of a subscriber. Only required if __subjectPhone__ is empty.
-        subjectPhone:
-          type: string
-          description: Phone of a subscriber. Only required if __subjectEmail__ is empty.
-        requestMsg:
-          type: string
-          description: An optional message for an audit trail.
-        clientUserId:
-          type: string
-          description: ClientUserId of a subscriber. Only required if __subjectEmail__ and __subjectPhone__ is empty.
   securitySchemes:
     bearerAuth:
       type: http

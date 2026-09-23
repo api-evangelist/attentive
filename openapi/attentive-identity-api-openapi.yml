@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: "1.0"
-  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
-  title: Attentive Access Token Identity API
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or api@attentivemobile.com.
+  title: Attentive Identity API
+  version: ''
 servers:
 - url: https://api.attentivemobile.com/v1
   description: Attentive API
@@ -10,7 +10,7 @@ security:
 - bearerAuth: []
 tags:
 - name: Identity
-  description: "Use the Identity API to manage user identifiers. With this API, you can programmatically add a client user identifier or custom identifier(s) to a user.\nYou should only use clientUserId and customIdentifiers to send Attentive your system-assigned unique identifiers (even when testing).\n\nNotes:\n  - Sending duplicate values could lead to unintentionally bridging users together.\n  - Don't use customIdentifiers to send attributes (e.g., first name, last name). To send those types of attributes,\n    use our [Custom Attributes API](https://docs.attentivemobile.com/openapi/reference/tag/Custom-Attributes/).\n  - Avoid sending null values or empty strings. If you don't have a valid identifier, you should omit the field\n    from the payload.\n"
+  description: Use the Identity API to manage user identifiers.
   x-beta: true
 paths:
   /identity-resolution/user-identifiers:
@@ -21,9 +21,7 @@ paths:
       - OAuthFlow:
         - identity:write
       summary: Add a client user identifier or custom identifier(s) to a user
-      description: 'Make a call to this endpoint to associate a client user identifier or custom identifier(s) with other identifiers. A client user or custom identifier needs to be accompanied by at least one other identifier of the following types: phone, email, shopify id, klaviyo id, client user identifier, or custom identifier.
-
-        '
+      description: 'Make a call to this endpoint to associate a client user identifier or custom identifier(s) with other identifiers. A client user or custom identifier needs to be accompanied by at least one other identifier of the following types: phone, email, shopify id, klaviyo id, client user identifier, or custom identifier.'
       operationId: identify
       tags:
       - Identity

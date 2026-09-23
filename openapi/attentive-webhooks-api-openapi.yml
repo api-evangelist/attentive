@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: "1.0"
-  description: For any questions, reach out to your Attentive point of contact (if applicable) or [api@attentivemobile.com](mailto:api@attentivemobile.com).
-  title: Attentive Access Token Webhooks API
+  description: For any questions, reach out to your Attentive point of contact (if applicable) or api@attentivemobile.com.
+  title: Attentive Webhooks API
+  version: ''
 servers:
 - url: https://api.attentivemobile.com/v1
   description: Attentive API
@@ -74,9 +74,7 @@ paths:
         Event types are case sensitive.
 
 
-        All events included will be sent to the URL.
-
-        '
+        All events included will be sent to the URL.'
       operationId: createWebhook
       tags:
       - Webhooks
@@ -177,6 +175,17 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
+  responses:
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    InternalError:
+      description: Internal Server Error
+    Unauthorized:
+      description: Unauthorized
+    AccessDenied:
+      description: Access Denied
+    NotFound:
+      description: The specified resource was not found
   schemas:
     UpdateWebhookRequestDto:
       type: object
@@ -196,54 +205,7 @@ components:
         disabled:
           type: boolean
           description: (optional) Disable the webhook endpoint if set to true.
-    GetWebhooksResponseDto:
-      type: object
-      properties:
-        webhooks:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetWebhookResponseDto'
-    CreateWebhookRequestDto:
-      type: object
-      properties:
-        url:
-          type: string
-          description: The destination url of the webhook
-          example: https://example.com/webhooks
-        events:
-          type: array
-          items:
-            type: string
-          description: The list of events this webhook is subscribed to
-          example:
-          - sms.sent
-          - phone.subscribed
     CreateWebhookResponseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The id of the installed webhook
-          example: MjU6Q29tcGFueUFwcGxpY2F0aW9uV2ViaG9vazIy
-        url:
-          type: string
-          description: The destination url of the webhook
-          example: https://example.com/webhooks
-        events:
-          type: array
-          items:
-            type: string
-          description: The list of events this webhook is subscribed to
-          example:
-          - sms.sent
-          - phone.subscribed
-        type:
-          type: string
-          description: The type of webhook; can be either `INSTALLED` or `CREATOR`
-        disabledAt:
-          type: string
-          description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
-    UpdateWebhookResponseDto:
       type: object
       properties:
         id:
@@ -297,17 +259,53 @@ components:
         disabledAt:
           type: string
           description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
-  responses:
-    InternalError:
-      description: Internal Server Error
-    InvalidParameter:
-      description: Invalid parameter in request query or body
-    Unauthorized:
-      description: Unauthorized
-    NotFound:
-      description: The specified resource was not found
-    AccessDenied:
-      description: Access Denied
+    UpdateWebhookResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the installed webhook
+          example: MjU6Q29tcGFueUFwcGxpY2F0aW9uV2ViaG9vazIy
+        url:
+          type: string
+          description: The destination url of the webhook
+          example: https://example.com/webhooks
+        events:
+          type: array
+          items:
+            type: string
+          description: The list of events this webhook is subscribed to
+          example:
+          - sms.sent
+          - phone.subscribed
+        type:
+          type: string
+          description: The type of webhook; can be either `INSTALLED` or `CREATOR`
+        disabledAt:
+          type: string
+          description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
+    GetWebhooksResponseDto:
+      type: object
+      properties:
+        webhooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetWebhookResponseDto'
+    CreateWebhookRequestDto:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The destination url of the webhook
+          example: https://example.com/webhooks
+        events:
+          type: array
+          items:
+            type: string
+          description: The list of events this webhook is subscribed to
+          example:
+          - sms.sent
+          - phone.subscribed
   securitySchemes:
     bearerAuth:
       type: http
