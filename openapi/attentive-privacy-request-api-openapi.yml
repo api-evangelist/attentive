@@ -111,34 +111,13 @@ components:
       description: Internal Server Error
     Unauthorized:
       description: Unauthorized
-    NotFound:
-      description: The specified resource was not found
-    AccessDenied:
-      description: Access Denied
     TooManyRequests:
       description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+    NotFound:
+      description: The specified resource was not found
   schemas:
-    PrivacyRequestAddDeleteEventDto:
-      type: object
-      properties:
-        subjectEmail:
-          type: string
-          description: Email of a subscriber. Only required if __subjectPhone__ is empty.
-        subjectPhone:
-          type: string
-          description: Phone of a subscriber. Only required if __subjectEmail__ is empty.
-        requestMsg:
-          type: string
-          description: An optional message for an audit trail.
-        clientUserId:
-          type: string
-          description: ClientUserId of a subscriber. Only required if __subjectEmail__ and __subjectPhone__ is empty.
-    PrivacyRequestErrorDto:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error Message
     PrivacyRequestDto:
       type: object
       properties:
@@ -169,6 +148,27 @@ components:
         processingEndDateTime:
           type: string
           description: Timestamp of when processing of the request completed.
+    PrivacyRequestErrorDto:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error Message
+    PrivacyRequestAddDeleteEventDto:
+      type: object
+      properties:
+        subjectEmail:
+          type: string
+          description: Email of a subscriber. Only required if __subjectPhone__ is empty.
+        subjectPhone:
+          type: string
+          description: Phone of a subscriber. Only required if __subjectEmail__ is empty.
+        requestMsg:
+          type: string
+          description: An optional message for an audit trail.
+        clientUserId:
+          type: string
+          description: ClientUserId of a subscriber. Only required if __subjectEmail__ and __subjectPhone__ is empty.
   securitySchemes:
     bearerAuth:
       type: http

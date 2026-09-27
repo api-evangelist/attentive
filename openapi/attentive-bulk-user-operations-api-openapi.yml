@@ -69,24 +69,20 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
+  responses:
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    InternalError:
+      description: Internal Server Error
+    Unauthorized:
+      description: Unauthorized
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+    NotFound:
+      description: The specified resource was not found
   schemas:
-    CustomIdentifier:
-      type: object
-      description: 'An object containing custom identifiers to associate with an incoming user
-
-        '
-      properties:
-        key:
-          type: string
-          description: The name of the custom identifier.
-          example: loyalty_points_id
-        value:
-          type: string
-          description: The value of the custom identifier.
-          example: ADFK4D7D
-      required:
-      - key
-      - value
     UserAttributes:
       properties:
         users:
@@ -109,6 +105,23 @@ components:
           description: 'A unique identifier representing the submitted batch job. Use this ID to query the job''s status, retrieve results, or diagnose any errors related to the job. This ID is returned upon successful job submission and required for all follow-up actions related to the batch.
 
             '
+    CustomIdentifier:
+      type: object
+      description: 'An object containing custom identifiers to associate with an incoming user
+
+        '
+      properties:
+        key:
+          type: string
+          description: The name of the custom identifier.
+          example: loyalty_points_id
+        value:
+          type: string
+          description: The value of the custom identifier.
+          example: ADFK4D7D
+      required:
+      - key
+      - value
     CreateUserAttributesRequestDtoV21:
       type: object
       properties:
@@ -290,19 +303,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/CustomIdentifier'
-  responses:
-    InvalidParameter:
-      description: Invalid parameter in request query or body
-    InternalError:
-      description: Internal Server Error
-    Unauthorized:
-      description: Unauthorized
-    NotFound:
-      description: The specified resource was not found
-    AccessDenied:
-      description: Access Denied
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
   securitySchemes:
     bearerAuth:
       type: http

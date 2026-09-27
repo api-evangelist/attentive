@@ -186,33 +186,13 @@ components:
       description: Internal Server Error
     Unauthorized:
       description: Unauthorized
-    NotFound:
-      description: The specified resource was not found
-    AccessDenied:
-      description: Access Denied
     TooManyRequests:
       description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+    NotFound:
+      description: The specified resource was not found
   schemas:
-    CatalogUploadRequest:
-      type: object
-      properties:
-        validateOnly:
-          type: boolean
-          description: If set to true, then data will not ingest and only validate the file.
-          default: false
-    CatalogUploadErrorResponse:
-      type: object
-      properties:
-        errorType:
-          type: string
-          description: The class of validation error
-        errorMessage:
-          type: string
-          description: Detailed validation error message
-        lineNum:
-          type: integer
-          format: int64
-          description: The line number for the given validation error in your file/catalog upload
     CatalogUploadResponse:
       type: object
       properties:
@@ -253,6 +233,26 @@ components:
           description: 'Flag for avoiding saving the data. If set to `true`, the data will not be saved by Attentive. Useful for testing the validation
 
             '
+    CatalogUploadRequest:
+      type: object
+      properties:
+        validateOnly:
+          type: boolean
+          description: If set to true, then data will not ingest and only validate the file.
+          default: false
+    CatalogUploadErrorResponse:
+      type: object
+      properties:
+        errorType:
+          type: string
+          description: The class of validation error
+        errorMessage:
+          type: string
+          description: Detailed validation error message
+        lineNum:
+          type: integer
+          format: int64
+          description: The line number for the given validation error in your file/catalog upload
   securitySchemes:
     bearerAuth:
       type: http

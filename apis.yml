@@ -63,6 +63,7 @@ tags:
 - Subscribers
 - Webhook
 - Customer Engagement
+- SMS
 tags_raw:
 - Company
 - Martech
@@ -73,6 +74,7 @@ tags_raw:
 - Subscribers
 - Webhooks
 - Customer Engagement
+- SMS
 apis:
 - aid: attentive:attentive-access-token-api
   name: Attentive Access Token API

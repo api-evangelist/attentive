@@ -60,6 +60,19 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
+  responses:
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    InternalError:
+      description: Internal Server Error
+    Unauthorized:
+      description: Unauthorized
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+    NotFound:
+      description: The specified resource was not found
   schemas:
     CustomIdentifier:
       type: object
@@ -78,6 +91,22 @@ components:
       required:
       - key
       - value
+    Success:
+      type: object
+      description: 'A successful response.
+
+        '
+      properties:
+        success:
+          type: boolean
+          description: 'Indicates whether the request was successful.
+
+            '
+        message:
+          type: string
+          description: 'A message with the result of the request.
+
+            '
     CreateUserAttributesRequestDtoV2:
       type: object
       properties:
@@ -259,35 +288,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/CustomIdentifier'
-    Success:
-      type: object
-      description: 'A successful response.
-
-        '
-      properties:
-        success:
-          type: boolean
-          description: 'Indicates whether the request was successful.
-
-            '
-        message:
-          type: string
-          description: 'A message with the result of the request.
-
-            '
-  responses:
-    InvalidParameter:
-      description: Invalid parameter in request query or body
-    InternalError:
-      description: Internal Server Error
-    Unauthorized:
-      description: Unauthorized
-    NotFound:
-      description: The specified resource was not found
-    AccessDenied:
-      description: Access Denied
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
   securitySchemes:
     bearerAuth:
       type: http

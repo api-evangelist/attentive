@@ -39,6 +39,11 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  responses:
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    InvalidParameter:
+      description: Invalid parameter in request query or body
   schemas:
     CustomIdentifierDto1:
       type: object
@@ -82,11 +87,6 @@ components:
           items:
             $ref: '#/components/schemas/CustomIdentifierDto1'
           description: Custom identifier(s) to be associated with a user through a phone, email, shopify id, klaviyo id, client user identifier, or another custom identifier. There is a 100 character limit.
-  responses:
-    InvalidParameter:
-      description: Invalid parameter in request query or body
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
   securitySchemes:
     bearerAuth:
       type: http

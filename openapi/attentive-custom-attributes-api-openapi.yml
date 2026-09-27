@@ -110,36 +110,13 @@ components:
       description: Internal Server Error
     Unauthorized:
       description: Unauthorized
-    NotFound:
-      description: The specified resource was not found
-    AccessDenied:
-      description: Access Denied
     TooManyRequests:
       description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+    NotFound:
+      description: The specified resource was not found
   schemas:
-    ExternalIdentifiers:
-      type: object
-      description: 'clientUserId or another custom identifier.  This field is required if either phone or email is not provided.
-
-
-        If using an external identifier instead of phone or email, the external identifier must first be associated with a phone or email using the Identity API.
-
-        '
-      properties:
-        clientUserId:
-          type: string
-          description: (optional) Your primary ID for a user
-        customIdentifiers:
-          type: array
-          description: (optional) Namespaced custom identifiers and their values.
-          items:
-            type: object
-            title: ExternalIdentifiersCustomIdentifiers
-            properties:
-              name:
-                type: string
-              value:
-                type: string
     EventUser:
       type: object
       description: 'User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
@@ -197,6 +174,29 @@ components:
         required:
         - attribute
         - value
+    ExternalIdentifiers:
+      type: object
+      description: 'clientUserId or another custom identifier.  This field is required if either phone or email is not provided.
+
+
+        If using an external identifier instead of phone or email, the external identifier must first be associated with a phone or email using the Identity API.
+
+        '
+      properties:
+        clientUserId:
+          type: string
+          description: (optional) Your primary ID for a user
+        customIdentifiers:
+          type: array
+          description: (optional) Namespaced custom identifiers and their values.
+          items:
+            type: object
+            title: ExternalIdentifiersCustomIdentifiers
+            properties:
+              name:
+                type: string
+              value:
+                type: string
   securitySchemes:
     bearerAuth:
       type: http

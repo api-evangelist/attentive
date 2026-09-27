@@ -49,12 +49,12 @@ components:
       description: Internal Server Error
     Unauthorized:
       description: Unauthorized
-    NotFound:
-      description: The specified resource was not found
-    AccessDenied:
-      description: Access Denied
     TooManyRequests:
       description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+    NotFound:
+      description: The specified resource was not found
   schemas:
     GetMeResponseDtoV2:
       type: object

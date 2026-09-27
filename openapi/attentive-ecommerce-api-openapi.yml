@@ -116,27 +116,40 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
+  responses:
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    InternalError:
+      description: Internal Server Error
+    Unauthorized:
+      description: Unauthorized
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+    NotFound:
+      description: The specified resource was not found
   schemas:
-    ProductViewRequest:
+    EventUser:
       type: object
-      properties:
-        items:
-          type: array
-          description: List of items viewed.
-          items:
-            $ref: '#/components/schemas/ProductRequest'
-        occurredAt:
-          type: string
-          format: date-time
-          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
+      description: 'User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
 
-            '
-          example: 2021-03-30T14:38:29+0000
-        user:
-          $ref: '#/components/schemas/EventUser'
-      required:
-      - items
-      - user
+        Phone, email, or an external identifier (clientUserId or another custom identifier) are required
+
+        '
+      properties:
+        phone:
+          type: string
+          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if either email or an externalIdentifier is not provided.
+          example: '+13115552368'
+        email:
+          type: string
+          description: Email of the user associated with the action. This field is required if either phone or an externalIdentifier is not provided.
+          example: test@gmail.com
+        externalIdentifiers:
+          $ref: '#/components/schemas/ExternalIdentifiers'
+      additionalProperties: false
+      minProperties: 1
     ProductRequest:
       type: object
       properties:
@@ -205,49 +218,6 @@ components:
       required:
       - items
       - user
-    ExternalIdentifiers:
-      type: object
-      description: 'clientUserId or another custom identifier.  This field is required if either phone or email is not provided.
-
-
-        If using an external identifier instead of phone or email, the external identifier must first be associated with a phone or email using the Identity API.
-
-        '
-      properties:
-        clientUserId:
-          type: string
-          description: (optional) Your primary ID for a user
-        customIdentifiers:
-          type: array
-          description: (optional) Namespaced custom identifiers and their values.
-          items:
-            type: object
-            title: ExternalIdentifiersCustomIdentifiers
-            properties:
-              name:
-                type: string
-              value:
-                type: string
-    EventUser:
-      type: object
-      description: 'User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
-
-        Phone, email, or an external identifier (clientUserId or another custom identifier) are required
-
-        '
-      properties:
-        phone:
-          type: string
-          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if either email or an externalIdentifier is not provided.
-          example: '+13115552368'
-        email:
-          type: string
-          description: Email of the user associated with the action. This field is required if either phone or an externalIdentifier is not provided.
-          example: test@gmail.com
-        externalIdentifiers:
-          $ref: '#/components/schemas/ExternalIdentifiers'
-      additionalProperties: false
-      minProperties: 1
     SalesChannel:
       type: object
       properties:
@@ -262,12 +232,12 @@ components:
           - OTHER
           - ''
           description: The type of sales channel.
-    AddToCartRequest:
+    ProductViewRequest:
       type: object
       properties:
         items:
           type: array
-          description: List of items added to cart.
+          description: List of items viewed.
           items:
             $ref: '#/components/schemas/ProductRequest'
         occurredAt:
@@ -296,19 +266,49 @@ components:
           default: USD
       required:
       - value
-  responses:
-    InvalidParameter:
-      description: Invalid parameter in request query or body
-    InternalError:
-      description: Internal Server Error
-    Unauthorized:
-      description: Unauthorized
-    NotFound:
-      description: The specified resource was not found
-    AccessDenied:
-      description: Access Denied
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
+    AddToCartRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          description: List of items added to cart.
+          items:
+            $ref: '#/components/schemas/ProductRequest'
+        occurredAt:
+          type: string
+          format: date-time
+          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
+
+            '
+          example: 2021-03-30T14:38:29+0000
+        user:
+          $ref: '#/components/schemas/EventUser'
+      required:
+      - items
+      - user
+    ExternalIdentifiers:
+      type: object
+      description: 'clientUserId or another custom identifier.  This field is required if either phone or email is not provided.
+
+
+        If using an external identifier instead of phone or email, the external identifier must first be associated with a phone or email using the Identity API.
+
+        '
+      properties:
+        clientUserId:
+          type: string
+          description: (optional) Your primary ID for a user
+        customIdentifiers:
+          type: array
+          description: (optional) Namespaced custom identifiers and their values.
+          items:
+            type: object
+            title: ExternalIdentifiersCustomIdentifiers
+            properties:
+              name:
+                type: string
+              value:
+                type: string
   securitySchemes:
     bearerAuth:
       type: http

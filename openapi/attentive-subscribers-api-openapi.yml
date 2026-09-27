@@ -183,7 +183,75 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
+  responses:
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+    InternalError:
+      description: Internal Server Error
+    NotFound:
+      description: The specified resource was not found
   schemas:
+    UnsubscribeSubscriptionsRequestDto:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserDto1'
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionDto'
+        notification:
+          $ref: '#/components/schemas/NotificationConfigDto'
+      required:
+      - user
+    AddSubscriptionResponseDto:
+      type: object
+      description: A subscription and a status indicating whether the subscription for this particular user was newly created or was previously created (i.e. already existed)
+      properties:
+        subscription:
+          $ref: '#/components/schemas/SubscriptionDto'
+        subscriptionCreationStatus:
+          $ref: '#/components/schemas/SubscriptionCreationStatus'
+    GetSubscriptionsResponseDto:
+      type: object
+      description: A list of the subscriptions that a subscriber is eligible to receive messages for.
+      properties:
+        subscriptionEligibilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionEligibilityDto'
+    SubscriptionEligibilityDto:
+      type: object
+      description: A subscription and a boolean indicating whether the user is eligible to receive messages for that subscription.
+      properties:
+        subscription:
+          $ref: '#/components/schemas/SubscriptionDto'
+        eligibility:
+          $ref: '#/components/schemas/EligibilityDto'
+    NotificationConfigDto:
+      type: object
+      description: Optional notification properties to override
+      properties:
+        language:
+          type: string
+          description: Standard language tags as defined by the ISO. Currently only supports en-US and fr-CA. Case sensitive, must match exactly.
+        disabled:
+          type: boolean
+          description: A boolean representing if a user should not receive a confirmation message upon unsubscribing. Assumed false by default.
+    CustomIdentifierDto:
+      type: object
+      description: Namespaced custom identifier and value
+      properties:
+        name:
+          type: string
+        value:
+          type: string
     UnsubscribeSubscriptionResponseDto:
       type: object
       description: A subscription and a status indicating whether the subscription for this particular user was newly unsubscribed or was previously unsubscribed (i.e. already opted-out)
@@ -192,6 +260,80 @@ components:
           $ref: '#/components/schemas/SubscriptionDto'
         subscriptionUnsubscribeStatus:
           $ref: '#/components/schemas/SubscriptionUnsubscribeStatus'
+    AddSubscriptionsRequestDto:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserDto1'
+        signUpSourceId:
+          type: string
+          description: "The unique identifier of the sign-up source. This can be found in the Sign-up Units tab of the Attentive platform in the ID column for any API sign-up method.\nThis field is required if locale is not present. \n\nOr, you can contact our White Glove team (whiteglove@attentivemobile.com)\nor your Client Strategy Manager at Attentive to request a sign-up source for either marketing or\ntransactional opt-ins. Our team will review API opt-in units with\n[compliance in mind](https://docs.attentivemobile.com/pages/legal-docs/legal-disclosure-language/).\n"
+        externalIdentifiers:
+          $ref: '#/components/schemas/NewExternalIdentifierDto'
+        locale:
+          $ref: '#/components/schemas/LocaleDto'
+        subscriptionType:
+          type: string
+          enum:
+          - MARKETING
+          - TRANSACTIONAL
+        singleOptIn:
+          type: boolean
+          description: "Opt in subscriber silently (do not send a Reply Y to subscribe text).\n\nNOTE: This property is disabled (set to false) by default. We strongly recommend maintaining the standard \ndouble opt-in flow, as it serves important legal and compliance purposes. If you want to enable single opt-in, \nwe encourage you to speak with your dedicated Client Strategy Manager (CSM) or our White Glove team \n(whiteglove@attentivemobile.com) before you enable it. If this property is set to true, subscribers will be \nadded without receiving the initial “Reply Y” confirmation text message. This setting bypasses only the \n“Reply Y” message. The mandatory legal message will still be sent.\n"
+      required:
+      - user
+    UnsubscribeSubscriptionsResponseDto:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserDto1'
+        subscriptionResponses:
+          type: array
+          items:
+            $ref: '#/components/schemas/UnsubscribeSubscriptionResponseDto'
+    AddSubscriptionsResponseDto:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserDto1'
+        externalIdentifiers:
+          $ref: '#/components/schemas/NewExternalIdentifierDto'
+        subscriptionResponses:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddSubscriptionResponseDto'
+    UserDto1:
+      type: object
+      description: User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
+      properties:
+        phone:
+          type: string
+          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if email is not provided.
+          example: '+13115552368'
+        email:
+          type: string
+          description: Email of the user associated with the action. This field is required if phone is not provided.
+          example: test@gmail.com
+    SubscriptionUnsubscribeStatus:
+      type: string
+      enum:
+      - NEWLY_UNSUBSCRIBED
+      - PREVIOUSLY_UNSUBSCRIBED
+    SubscriptionDto:
+      type: object
+      description: A type and channel combination.
+      properties:
+        type:
+          type: string
+          enum:
+          - MARKETING
+          - TRANSACTIONAL
+          - CHECKOUT_ABANDONED
+        channel:
+          type: string
+          enum:
+          - TEXT
+          - EMAIL
     NewExternalIdentifierDto:
       type: object
       description: External Identifiers for a user
@@ -233,82 +375,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomIdentifierDto'
-    SubscriptionEligibilityDto:
+    EligibilityDto:
       type: object
-      description: A subscription and a boolean indicating whether the user is eligible to receive messages for that subscription.
+      description: A user's eligibility to receive messages for a subscription.
       properties:
-        subscription:
-          $ref: '#/components/schemas/SubscriptionDto'
-        eligibility:
-          $ref: '#/components/schemas/EligibilityDto'
-    UnsubscribeSubscriptionsRequestDto:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/UserDto1'
-        subscriptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubscriptionDto'
-        notification:
-          $ref: '#/components/schemas/NotificationConfigDto'
-      required:
-      - user
-    UserDto1:
-      type: object
-      description: User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
-      properties:
-        phone:
-          type: string
-          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if email is not provided.
-          example: '+13115552368'
-        email:
-          type: string
-          description: Email of the user associated with the action. This field is required if phone is not provided.
-          example: test@gmail.com
-    GetSubscriptionsResponseDto:
-      type: object
-      description: A list of the subscriptions that a subscriber is eligible to receive messages for.
-      properties:
-        subscriptionEligibilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubscriptionEligibilityDto'
-    NotificationConfigDto:
-      type: object
-      description: Optional notification properties to override
-      properties:
-        language:
-          type: string
-          description: Standard language tags as defined by the ISO. Currently only supports en-US and fr-CA. Case sensitive, must match exactly.
-        disabled:
+        isEligible:
           type: boolean
-          description: A boolean representing if a user should not receive a confirmation message upon unsubscribing. Assumed false by default.
-    CustomIdentifierDto:
-      type: object
-      description: Namespaced custom identifier and value
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-    UnsubscribeSubscriptionsResponseDto:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/UserDto1'
-        subscriptionResponses:
-          type: array
-          items:
-            $ref: '#/components/schemas/UnsubscribeSubscriptionResponseDto'
-    AddSubscriptionResponseDto:
-      type: object
-      description: A subscription and a status indicating whether the subscription for this particular user was newly created or was previously created (i.e. already existed)
-      properties:
-        subscription:
-          $ref: '#/components/schemas/SubscriptionDto'
-        subscriptionCreationStatus:
-          $ref: '#/components/schemas/SubscriptionCreationStatus'
+          description: A boolean representing a user's eligibility to receive messages for a subscription.
     LocaleDto:
       type: object
       properties:
@@ -320,84 +393,11 @@ components:
           type: string
           description: Two-letter country code of the locale. [ISO-3166-1 alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) is required. Values are case sensitive and must match exactly.
           example: US
-    EligibilityDto:
-      type: object
-      description: A user's eligibility to receive messages for a subscription.
-      properties:
-        isEligible:
-          type: boolean
-          description: A boolean representing a user's eligibility to receive messages for a subscription.
-    AddSubscriptionsResponseDto:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/UserDto1'
-        externalIdentifiers:
-          $ref: '#/components/schemas/NewExternalIdentifierDto'
-        subscriptionResponses:
-          type: array
-          items:
-            $ref: '#/components/schemas/AddSubscriptionResponseDto'
-    SubscriptionUnsubscribeStatus:
-      type: string
-      enum:
-      - NEWLY_UNSUBSCRIBED
-      - PREVIOUSLY_UNSUBSCRIBED
-    AddSubscriptionsRequestDto:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/UserDto1'
-        signUpSourceId:
-          type: string
-          description: "The unique identifier of the sign-up source. This can be found in the Sign-up Units tab of the Attentive platform in the ID column for any API sign-up method.\nThis field is required if locale is not present. \n\nOr, you can contact our White Glove team (whiteglove@attentivemobile.com)\nor your Client Strategy Manager at Attentive to request a sign-up source for either marketing or\ntransactional opt-ins. Our team will review API opt-in units with\n[compliance in mind](https://docs.attentivemobile.com/pages/legal-docs/legal-disclosure-language/).\n"
-        externalIdentifiers:
-          $ref: '#/components/schemas/NewExternalIdentifierDto'
-        locale:
-          $ref: '#/components/schemas/LocaleDto'
-        subscriptionType:
-          type: string
-          enum:
-          - MARKETING
-          - TRANSACTIONAL
-        singleOptIn:
-          type: boolean
-          description: "Opt in subscriber silently (do not send a Reply Y to subscribe text).\n\nNOTE: This property is disabled (set to false) by default. We strongly recommend maintaining the standard \ndouble opt-in flow, as it serves important legal and compliance purposes. If you want to enable single opt-in, \nwe encourage you to speak with your dedicated Client Strategy Manager (CSM) or our White Glove team \n(whiteglove@attentivemobile.com) before you enable it. If this property is set to true, subscribers will be \nadded without receiving the initial “Reply Y” confirmation text message. This setting bypasses only the \n“Reply Y” message. The mandatory legal message will still be sent.\n"
-      required:
-      - user
-    SubscriptionDto:
-      type: object
-      description: A type and channel combination.
-      properties:
-        type:
-          type: string
-          enum:
-          - MARKETING
-          - TRANSACTIONAL
-          - CHECKOUT_ABANDONED
-        channel:
-          type: string
-          enum:
-          - TEXT
-          - EMAIL
     SubscriptionCreationStatus:
       type: string
       enum:
       - NEWLY_CREATED
       - PREVIOUSLY_CREATED
-  responses:
-    InternalError:
-      description: Internal Server Error
-    Unauthorized:
-      description: Unauthorized
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
-    NotFound:
-      description: The specified resource was not found
-    AccessDenied:
-      description: Access Denied
-    InvalidParameter:
-      description: Invalid parameter in request query or body
   securitySchemes:
     bearerAuth:
       type: http
