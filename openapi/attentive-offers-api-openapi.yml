@@ -78,12 +78,6 @@ paths:
           $ref: '#/components/responses/InternalError1'
 components:
   responses:
-    InternalError1:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponseDto'
     AccessDenied1:
       description: Access Denied
       content:
@@ -96,6 +90,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponseDto'
+    InternalError1:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseDto'
     DetailedBadRequest:
       description: "Bad Request. Invalid parameter in request query or body. The following scenarios will cause a 400 response: \nA) Including distributionStart and distributionStop dates that overlap with the distributionStart and distributionStop dates from a previous call, \nB) Including distributionStart and distributionStop dates in an offer that has a distribution window of “Never expire” or “Time to live”, \nC) Excluding distributionStart and distributionStop dates in an offer that has a distribution window of “Custom time period”, D) Including a distributionStart value that is after the distributionStop value\n"
       content:
@@ -103,6 +103,19 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponseDto'
   schemas:
+    ErrorDto:
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique error id, mapping to service logs
+        message:
+          type: string
+          description: API response error message
     ErrorResponseDto:
       type: object
       required:
@@ -134,19 +147,6 @@ components:
           type: string
           description: Timestamp at which point the discount codes become invalid for distribution within Attentive messages. Must be in valid UTC ISO format.
           example: '2023-02-15T21:29:25Z'
-    ErrorDto:
-      type: object
-      required:
-      - id
-      - message
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique error id, mapping to service logs
-        message:
-          type: string
-          description: API response error message
   securitySchemes:
     bearerAuth:
       type: http

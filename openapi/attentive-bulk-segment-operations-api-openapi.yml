@@ -215,18 +215,18 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   responses:
-    InvalidParameter:
-      description: Invalid parameter in request query or body
-    InternalError:
-      description: Internal Server Error
-    Unauthorized:
-      description: Unauthorized
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
-    AccessDenied:
-      description: Access Denied
     NotFound:
       description: The specified resource was not found
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
+    InternalError:
+      description: Internal Server Error
+    AccessDenied:
+      description: Access Denied
   schemas:
     SegmentMembers:
       type: object

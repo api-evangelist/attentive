@@ -117,18 +117,18 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   responses:
-    InvalidParameter:
-      description: Invalid parameter in request query or body
-    InternalError:
-      description: Internal Server Error
-    Unauthorized:
-      description: Unauthorized
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
-    AccessDenied:
-      description: Access Denied
     NotFound:
       description: The specified resource was not found
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
+    InternalError:
+      description: Internal Server Error
+    AccessDenied:
+      description: Access Denied
   schemas:
     EventUser:
       type: object
@@ -150,6 +150,107 @@ components:
           $ref: '#/components/schemas/ExternalIdentifiers'
       additionalProperties: false
       minProperties: 1
+    Price:
+      type: object
+      properties:
+        value:
+          type: number
+          description: The price of the product.
+          example: 19.99
+        currency:
+          type: string
+          description: The currency used for the price in [ISO 4217 format](https://www.iso.org/iso-4217-currency-codes.html).
+          example: USD
+          default: USD
+      required:
+      - value
+    ExternalIdentifiers:
+      type: object
+      description: 'clientUserId or another custom identifier.  This field is required if either phone or email is not provided.
+
+
+        If using an external identifier instead of phone or email, the external identifier must first be associated with a phone or email using the Identity API.
+
+        '
+      properties:
+        clientUserId:
+          type: string
+          description: (optional) Your primary ID for a user
+        customIdentifiers:
+          type: array
+          description: (optional) Namespaced custom identifiers and their values.
+          items:
+            type: object
+            title: ExternalIdentifiersCustomIdentifiers
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+    ProductViewRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          description: List of items viewed.
+          items:
+            $ref: '#/components/schemas/ProductRequest'
+        occurredAt:
+          type: string
+          format: date-time
+          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
+
+            '
+          example: 2021-03-30T14:38:29+0000
+        user:
+          $ref: '#/components/schemas/EventUser'
+      required:
+      - items
+      - user
+    AddToCartRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          description: List of items added to cart.
+          items:
+            $ref: '#/components/schemas/ProductRequest'
+        occurredAt:
+          type: string
+          format: date-time
+          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
+
+            '
+          example: 2021-03-30T14:38:29+0000
+        user:
+          $ref: '#/components/schemas/EventUser'
+      required:
+      - items
+      - user
+    PurchaseRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          description: List of items purchased.
+          items:
+            $ref: '#/components/schemas/ProductRequest'
+        orderId:
+          type: string
+        salesChannel:
+          $ref: '#/components/schemas/SalesChannel'
+        occurredAt:
+          type: string
+          format: date-time
+          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
+
+            '
+          example: 2021-03-30T14:38:29+0000
+        user:
+          $ref: '#/components/schemas/EventUser'
+      required:
+      - items
+      - user
     ProductRequest:
       type: object
       properties:
@@ -194,30 +295,6 @@ components:
       - productId
       - productVariantId
       - price
-    PurchaseRequest:
-      type: object
-      properties:
-        items:
-          type: array
-          description: List of items purchased.
-          items:
-            $ref: '#/components/schemas/ProductRequest'
-        orderId:
-          type: string
-        salesChannel:
-          $ref: '#/components/schemas/SalesChannel'
-        occurredAt:
-          type: string
-          format: date-time
-          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
-
-            '
-          example: 2021-03-30T14:38:29+0000
-        user:
-          $ref: '#/components/schemas/EventUser'
-      required:
-      - items
-      - user
     SalesChannel:
       type: object
       properties:
@@ -232,83 +309,6 @@ components:
           - OTHER
           - ''
           description: The type of sales channel.
-    ProductViewRequest:
-      type: object
-      properties:
-        items:
-          type: array
-          description: List of items viewed.
-          items:
-            $ref: '#/components/schemas/ProductRequest'
-        occurredAt:
-          type: string
-          format: date-time
-          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
-
-            '
-          example: 2021-03-30T14:38:29+0000
-        user:
-          $ref: '#/components/schemas/EventUser'
-      required:
-      - items
-      - user
-    Price:
-      type: object
-      properties:
-        value:
-          type: number
-          description: The price of the product.
-          example: 19.99
-        currency:
-          type: string
-          description: The currency used for the price in [ISO 4217 format](https://www.iso.org/iso-4217-currency-codes.html).
-          example: USD
-          default: USD
-      required:
-      - value
-    AddToCartRequest:
-      type: object
-      properties:
-        items:
-          type: array
-          description: List of items added to cart.
-          items:
-            $ref: '#/components/schemas/ProductRequest'
-        occurredAt:
-          type: string
-          format: date-time
-          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
-
-            '
-          example: 2021-03-30T14:38:29+0000
-        user:
-          $ref: '#/components/schemas/EventUser'
-      required:
-      - items
-      - user
-    ExternalIdentifiers:
-      type: object
-      description: 'clientUserId or another custom identifier.  This field is required if either phone or email is not provided.
-
-
-        If using an external identifier instead of phone or email, the external identifier must first be associated with a phone or email using the Identity API.
-
-        '
-      properties:
-        clientUserId:
-          type: string
-          description: (optional) Your primary ID for a user
-        customIdentifiers:
-          type: array
-          description: (optional) Namespaced custom identifiers and their values.
-          items:
-            type: object
-            title: ExternalIdentifiersCustomIdentifiers
-            properties:
-              name:
-                type: string
-              value:
-                type: string
   securitySchemes:
     bearerAuth:
       type: http

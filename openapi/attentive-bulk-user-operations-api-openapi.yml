@@ -69,42 +69,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
-  responses:
-    InvalidParameter:
-      description: Invalid parameter in request query or body
-    InternalError:
-      description: Internal Server Error
-    Unauthorized:
-      description: Unauthorized
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
-    AccessDenied:
-      description: Access Denied
-    NotFound:
-      description: The specified resource was not found
   schemas:
-    UserAttributes:
-      properties:
-        users:
-          type: array
-          description: Array of user attribute records to submit (up to 256 users).
-          minItems: 1
-          maxItems: 256
-          items:
-            $ref: '#/components/schemas/CreateUserAttributesRequestDtoV21'
-    BulkSuccessResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: 'A human-readable message confirming that the bulk job was successfully submitted.
-
-            '
-        batchJobId:
-          type: string
-          description: 'A unique identifier representing the submitted batch job. Use this ID to query the job''s status, retrieve results, or diagnose any errors related to the job. This ID is returned upon successful job submission and required for all follow-up actions related to the batch.
-
-            '
     CustomIdentifier:
       type: object
       description: 'An object containing custom identifiers to associate with an incoming user
@@ -122,6 +87,28 @@ components:
       required:
       - key
       - value
+    BulkSuccessResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: 'A human-readable message confirming that the bulk job was successfully submitted.
+
+            '
+        batchJobId:
+          type: string
+          description: 'A unique identifier representing the submitted batch job. Use this ID to query the job''s status, retrieve results, or diagnose any errors related to the job. This ID is returned upon successful job submission and required for all follow-up actions related to the batch.
+
+            '
+    UserAttributes:
+      properties:
+        users:
+          type: array
+          description: Array of user attribute records to submit (up to 256 users).
+          minItems: 1
+          maxItems: 256
+          items:
+            $ref: '#/components/schemas/CreateUserAttributesRequestDtoV21'
     CreateUserAttributesRequestDtoV21:
       type: object
       properties:
@@ -303,6 +290,19 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/CustomIdentifier'
+  responses:
+    NotFound:
+      description: The specified resource was not found
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
+    InternalError:
+      description: Internal Server Error
+    AccessDenied:
+      description: Access Denied
   securitySchemes:
     bearerAuth:
       type: http
