@@ -1,30 +1,28 @@
-# Kin Score artifact — attentive — 2026-09-01T210448
+# Kin Score artifact — attentive — 2026-09-24T090406
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: attentive
-  schema_version: 0.18.0
-  scored_at: '2026-09-01'
-  run_ts: 2026-09-01T210448
-  composite: 69.3
+  schema_version: 0.22.0
+  scored_at: '2026-09-24'
+  run_ts: 2026-09-24T090406
+  composite: 75.8
   band: exemplar
   facets:
-    discoverability: 51.9
+    discoverability: 70.4
     contract_quality: 63.2
-    governance: 4.5
-    operational_transparency: 84.2
-    developer_ergonomics: 58.9
-    commercial_clarity: 92.1
     contract_governance: 4.5
+    operational_transparency: 84.2
+    developer_ergonomics: 55.4
     access_clarity: 92.1
   agent_readiness:
-    score: 34.2
+    score: 30.8
     band: agent-ready
     dimensions:
       spec_presence: true
       agentic_access: false
       reversibility_documented: false
-      mcp_server: documented
+      mcp_server: false
       auth_clarity: bearer
       idempotency: false
       error_semantics: documented
