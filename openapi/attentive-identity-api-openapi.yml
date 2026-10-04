@@ -39,11 +39,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  responses:
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
-    InvalidParameter:
-      description: Invalid parameter in request query or body
   schemas:
     IdentifyRequestDto:
       type: object
@@ -87,6 +82,11 @@ components:
       required:
       - name
       - value
+  responses:
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    InvalidParameter:
+      description: Invalid parameter in request query or body
   securitySchemes:
     bearerAuth:
       type: http

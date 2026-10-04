@@ -42,6 +42,19 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
+  responses:
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+    InternalError:
+      description: Internal Server Error
+    NotFound:
+      description: The specified resource was not found
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
   schemas:
     GetMeResponseDto:
       type: object
@@ -66,19 +79,6 @@ components:
           type: string
           description: The installer company ID
           example: MDc6Q29tcGFueTI
-  responses:
-    NotFound:
-      description: The specified resource was not found
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
-    InvalidParameter:
-      description: Invalid parameter in request query or body
-    Unauthorized:
-      description: Unauthorized
-    InternalError:
-      description: Internal Server Error
-    AccessDenied:
-      description: Access Denied
   securitySchemes:
     bearerAuth:
       type: http

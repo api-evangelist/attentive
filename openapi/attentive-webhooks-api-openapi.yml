@@ -176,6 +176,96 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   schemas:
+    UpdateWebhookRequestDto:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The destination url of the webhook
+          example: https://example.com/webhooks
+        events:
+          type: array
+          items:
+            type: string
+          description: The list of events this webhook is subscribed to
+          example:
+          - sms.sent
+          - phone.subscribed
+        disabled:
+          type: boolean
+          description: (optional) Disable the webhook endpoint if set to true.
+    CreateWebhookRequestDto:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The destination url of the webhook
+          example: https://example.com/webhooks
+        events:
+          type: array
+          items:
+            type: string
+          description: The list of events this webhook is subscribed to
+          example:
+          - sms.sent
+          - phone.subscribed
+    GetWebhooksResponseDto:
+      type: object
+      properties:
+        webhooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetWebhookResponseDto'
+    UpdateWebhookResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the installed webhook
+          example: MjU6Q29tcGFueUFwcGxpY2F0aW9uV2ViaG9vazIy
+        url:
+          type: string
+          description: The destination url of the webhook
+          example: https://example.com/webhooks
+        events:
+          type: array
+          items:
+            type: string
+          description: The list of events this webhook is subscribed to
+          example:
+          - sms.sent
+          - phone.subscribed
+        type:
+          type: string
+          description: The type of webhook; can be either `INSTALLED` or `CREATOR`
+        disabledAt:
+          type: string
+          description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
+    CreateWebhookResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the installed webhook
+          example: MjU6Q29tcGFueUFwcGxpY2F0aW9uV2ViaG9vazIy
+        url:
+          type: string
+          description: The destination url of the webhook
+          example: https://example.com/webhooks
+        events:
+          type: array
+          items:
+            type: string
+          description: The list of events this webhook is subscribed to
+          example:
+          - sms.sent
+          - phone.subscribed
+        type:
+          type: string
+          description: The type of webhook; can be either `INSTALLED` or `CREATOR`
+        disabledAt:
+          type: string
+          description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
     GetWebhookResponseDto:
       type: object
       properties:
@@ -205,107 +295,17 @@ components:
         disabledAt:
           type: string
           description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
-    UpdateWebhookResponseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The id of the installed webhook
-          example: MjU6Q29tcGFueUFwcGxpY2F0aW9uV2ViaG9vazIy
-        url:
-          type: string
-          description: The destination url of the webhook
-          example: https://example.com/webhooks
-        events:
-          type: array
-          items:
-            type: string
-          description: The list of events this webhook is subscribed to
-          example:
-          - sms.sent
-          - phone.subscribed
-        type:
-          type: string
-          description: The type of webhook; can be either `INSTALLED` or `CREATOR`
-        disabledAt:
-          type: string
-          description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
-    UpdateWebhookRequestDto:
-      type: object
-      properties:
-        url:
-          type: string
-          description: The destination url of the webhook
-          example: https://example.com/webhooks
-        events:
-          type: array
-          items:
-            type: string
-          description: The list of events this webhook is subscribed to
-          example:
-          - sms.sent
-          - phone.subscribed
-        disabled:
-          type: boolean
-          description: (optional) Disable the webhook endpoint if set to true.
-    GetWebhooksResponseDto:
-      type: object
-      properties:
-        webhooks:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetWebhookResponseDto'
-    CreateWebhookRequestDto:
-      type: object
-      properties:
-        url:
-          type: string
-          description: The destination url of the webhook
-          example: https://example.com/webhooks
-        events:
-          type: array
-          items:
-            type: string
-          description: The list of events this webhook is subscribed to
-          example:
-          - sms.sent
-          - phone.subscribed
-    CreateWebhookResponseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The id of the installed webhook
-          example: MjU6Q29tcGFueUFwcGxpY2F0aW9uV2ViaG9vazIy
-        url:
-          type: string
-          description: The destination url of the webhook
-          example: https://example.com/webhooks
-        events:
-          type: array
-          items:
-            type: string
-          description: The list of events this webhook is subscribed to
-          example:
-          - sms.sent
-          - phone.subscribed
-        type:
-          type: string
-          description: The type of webhook; can be either `INSTALLED` or `CREATOR`
-        disabledAt:
-          type: string
-          description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
   responses:
+    AccessDenied:
+      description: Access Denied
+    InternalError:
+      description: Internal Server Error
+    Unauthorized:
+      description: Unauthorized
     NotFound:
       description: The specified resource was not found
     InvalidParameter:
       description: Invalid parameter in request query or body
-    Unauthorized:
-      description: Unauthorized
-    InternalError:
-      description: Internal Server Error
-    AccessDenied:
-      description: Access Denied
   securitySchemes:
     bearerAuth:
       type: http

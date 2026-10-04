@@ -60,6 +60,19 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
+  responses:
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+    InternalError:
+      description: Internal Server Error
+    NotFound:
+      description: The specified resource was not found
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
   schemas:
     CustomIdentifier:
       type: object
@@ -78,22 +91,6 @@ components:
       required:
       - key
       - value
-    Success:
-      type: object
-      description: 'A successful response.
-
-        '
-      properties:
-        success:
-          type: boolean
-          description: 'Indicates whether the request was successful.
-
-            '
-        message:
-          type: string
-          description: 'A message with the result of the request.
-
-            '
     CreateUserAttributesRequestDtoV2:
       type: object
       properties:
@@ -275,19 +272,22 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/CustomIdentifier'
-  responses:
-    NotFound:
-      description: The specified resource was not found
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
-    InvalidParameter:
-      description: Invalid parameter in request query or body
-    Unauthorized:
-      description: Unauthorized
-    InternalError:
-      description: Internal Server Error
-    AccessDenied:
-      description: Access Denied
+    Success:
+      type: object
+      description: 'A successful response.
+
+        '
+      properties:
+        success:
+          type: boolean
+          description: 'Indicates whether the request was successful.
+
+            '
+        message:
+          type: string
+          description: 'A message with the result of the request.
+
+            '
   securitySchemes:
     bearerAuth:
       type: http

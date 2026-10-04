@@ -215,19 +215,58 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   responses:
-    NotFound:
-      description: The specified resource was not found
     TooManyRequests:
       description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+    InternalError:
+      description: Internal Server Error
+    NotFound:
+      description: The specified resource was not found
     InvalidParameter:
       description: Invalid parameter in request query or body
     Unauthorized:
       description: Unauthorized
-    InternalError:
-      description: Internal Server Error
-    AccessDenied:
-      description: Access Denied
   schemas:
+    SegmentMember:
+      type: object
+      description: 'A segment member identified by one or more of: email, phone, or clientUserId. At least one identifier must be provided. Multiple identifiers can be provided to increase matching accuracy.
+
+        '
+      properties:
+        email:
+          type: string
+          format: email
+          description: 'The member''s email address. Use this to identify users by their email. At least one of email, phone, or clientUserId must be provided.
+
+            '
+          example: user1@example.com
+        phone:
+          type: string
+          description: 'The member''s phone number in E.164 format (e.g., +14155551234). At least one of email, phone, or clientUserId must be provided.
+
+
+            **E.164 Format Requirements:**
+
+            - Must start with ''+''
+
+            - Include country code
+
+            - No spaces, dashes, or parentheses
+
+            '
+          example: '+14155551234'
+        clientUserId:
+          type: string
+          description: 'Your system''s unique identifier for this user. Use this when you want to identify users by your own internal ID system. At least one of email, phone, or clientUserId must be provided. Maximum 100 characters.
+
+            '
+          maxLength: 100
+          example: client-user-123
+      example:
+        email: loyalty.member@example.com
+        phone: '+14155551234'
+        clientUserId: cust-789-xyz
     SegmentMembers:
       type: object
       required:
@@ -271,45 +310,6 @@ components:
           description: 'A unique identifier representing the submitted batch job. Use this ID to query the job''s status, retrieve results, or diagnose any errors related to the job. This ID is returned upon successful job submission and required for all follow-up actions related to the batch.
 
             '
-    SegmentMember:
-      type: object
-      description: 'A segment member identified by one or more of: email, phone, or clientUserId. At least one identifier must be provided. Multiple identifiers can be provided to increase matching accuracy.
-
-        '
-      properties:
-        email:
-          type: string
-          format: email
-          description: 'The member''s email address. Use this to identify users by their email. At least one of email, phone, or clientUserId must be provided.
-
-            '
-          example: user1@example.com
-        phone:
-          type: string
-          description: 'The member''s phone number in E.164 format (e.g., +14155551234). At least one of email, phone, or clientUserId must be provided.
-
-
-            **E.164 Format Requirements:**
-
-            - Must start with ''+''
-
-            - Include country code
-
-            - No spaces, dashes, or parentheses
-
-            '
-          example: '+14155551234'
-        clientUserId:
-          type: string
-          description: 'Your system''s unique identifier for this user. Use this when you want to identify users by your own internal ID system. At least one of email, phone, or clientUserId must be provided. Maximum 100 characters.
-
-            '
-          maxLength: 100
-          example: client-user-123
-      example:
-        email: loyalty.member@example.com
-        phone: '+14155551234'
-        clientUserId: cust-789-xyz
   securitySchemes:
     bearerAuth:
       type: http

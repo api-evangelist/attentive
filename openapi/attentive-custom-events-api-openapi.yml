@@ -52,62 +52,19 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   responses:
-    NotFound:
-      description: The specified resource was not found
     TooManyRequests:
       description: The user has sent too many requests in a given amount of time
+    AccessDenied:
+      description: Access Denied
+    InternalError:
+      description: Internal Server Error
+    NotFound:
+      description: The specified resource was not found
     InvalidParameter:
       description: Invalid parameter in request query or body
     Unauthorized:
       description: Unauthorized
-    InternalError:
-      description: Internal Server Error
-    AccessDenied:
-      description: Access Denied
   schemas:
-    EventUser:
-      type: object
-      description: 'User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
-
-        Phone, email, or an external identifier (clientUserId or another custom identifier) are required
-
-        '
-      properties:
-        phone:
-          type: string
-          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if either email or an externalIdentifier is not provided.
-          example: '+13115552368'
-        email:
-          type: string
-          description: Email of the user associated with the action. This field is required if either phone or an externalIdentifier is not provided.
-          example: test@gmail.com
-        externalIdentifiers:
-          $ref: '#/components/schemas/ExternalIdentifiers'
-      additionalProperties: false
-      minProperties: 1
-    ExternalIdentifiers:
-      type: object
-      description: 'clientUserId or another custom identifier.  This field is required if either phone or email is not provided.
-
-
-        If using an external identifier instead of phone or email, the external identifier must first be associated with a phone or email using the Identity API.
-
-        '
-      properties:
-        clientUserId:
-          type: string
-          description: (optional) Your primary ID for a user
-        customIdentifiers:
-          type: array
-          description: (optional) Namespaced custom identifiers and their values.
-          items:
-            type: object
-            title: ExternalIdentifiersCustomIdentifiers
-            properties:
-              name:
-                type: string
-              value:
-                type: string
     CustomEventsRequest:
       type: object
       properties:
@@ -204,6 +161,49 @@ components:
       required:
       - type
       - user
+    EventUser:
+      type: object
+      description: 'User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
+
+        Phone, email, or an external identifier (clientUserId or another custom identifier) are required
+
+        '
+      properties:
+        phone:
+          type: string
+          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if either email or an externalIdentifier is not provided.
+          example: '+13115552368'
+        email:
+          type: string
+          description: Email of the user associated with the action. This field is required if either phone or an externalIdentifier is not provided.
+          example: test@gmail.com
+        externalIdentifiers:
+          $ref: '#/components/schemas/ExternalIdentifiers'
+      additionalProperties: false
+      minProperties: 1
+    ExternalIdentifiers:
+      type: object
+      description: 'clientUserId or another custom identifier.  This field is required if either phone or email is not provided.
+
+
+        If using an external identifier instead of phone or email, the external identifier must first be associated with a phone or email using the Identity API.
+
+        '
+      properties:
+        clientUserId:
+          type: string
+          description: (optional) Your primary ID for a user
+        customIdentifiers:
+          type: array
+          description: (optional) Namespaced custom identifiers and their values.
+          items:
+            type: object
+            title: ExternalIdentifiersCustomIdentifiers
+            properties:
+              name:
+                type: string
+              value:
+                type: string
   securitySchemes:
     bearerAuth:
       type: http
