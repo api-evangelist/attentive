@@ -603,6 +603,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/attentive-capability-edges.yml
+  name: Attentive Business Capability Map
 - type: Overlay
   url: overlays/attentive-v1-overlay.yaml
 - type: PostmanWorkspace
