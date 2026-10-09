@@ -68,3 +68,31 @@ x-evidence:
   status: 200
   checked: '2026-08-13'
   finding: named packages, zero published prices
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  - negotiated
+  - subscription
+  units: []
+  plans:
+  - name: Channel Packages
+    access: other
+    model: metered
+    model_how: stated
+    units: []
+    periods: []
+  - name: AI Add-Ons
+    access: other
+    model: subscription
+    model_how: stated
+    units: []
+    periods:
+    - month
+  - name: Enterprise
+    access: negotiated
+    model: negotiated
+    model_how: stated
+    units: []
+    periods: []
