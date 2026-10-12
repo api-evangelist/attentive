@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/attentive/integrations
+- https://n8n.io/integrations/attentive/
+- https://composio.dev/toolkits/attentive
+- https://monid.ai/tools/attentive
+checked:
+- https://composio.dev/toolkits/attentive
+- https://monid.ai/tools/attentive
+- https://n8n.io/integrations/attentive/
+- https://zapier.com/apps/attentive/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
