@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/attentive/integrations
 - https://n8n.io/integrations/attentive/
@@ -7,10 +7,39 @@ source:
 - https://monid.ai/tools/attentive
 checked:
 - https://composio.dev/toolkits/attentive
+- https://hightouch.com/docs/destinations/attentive
 - https://monid.ai/tools/attentive
 - https://n8n.io/integrations/attentive/
 - https://zapier.com/apps/attentive/integrations
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: Hightouch
+  partner: hightouch
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/attentive
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - attentive
+      status: released
+      sync_types:
+      - Custom Attributes
+      - Custom Events
+      - Identity
+      - Message
+      - Subscribers
+      sync_modes:
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
 templates: []
