@@ -78,19 +78,6 @@ paths:
           $ref: '#/components/responses/InternalError1'
 components:
   schemas:
-    ErrorDto:
-      type: object
-      required:
-      - id
-      - message
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique error id, mapping to service logs
-        message:
-          type: string
-          description: API response error message
     CreateCouponsDto:
       type: object
       required:
@@ -122,15 +109,28 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDto'
+    ErrorDto:
+      type: object
+      required:
+      - id
+      - message
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique error id, mapping to service logs
+        message:
+          type: string
+          description: API response error message
   responses:
-    InternalError1:
-      description: Internal Server Error
+    InvalidParameter1:
+      description: Invalid parameter in request query or body
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponseDto'
-    InvalidParameter1:
-      description: Invalid parameter in request query or body
+    InternalError1:
+      description: Internal Server Error
       content:
         application/json:
           schema:

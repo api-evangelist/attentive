@@ -117,6 +117,26 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   schemas:
+    ProductViewRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          description: List of items viewed.
+          items:
+            $ref: '#/components/schemas/ProductRequest'
+        occurredAt:
+          type: string
+          format: date-time
+          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
+
+            '
+          example: 2021-03-30T14:38:29+0000
+        user:
+          $ref: '#/components/schemas/EventUser'
+      required:
+      - items
+      - user
     SalesChannel:
       type: object
       properties:
@@ -131,50 +151,6 @@ components:
           - OTHER
           - ''
           description: The type of sales channel.
-    EventUser:
-      type: object
-      description: 'User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
-
-        Phone, email, or an external identifier (clientUserId or another custom identifier) are required
-
-        '
-      properties:
-        phone:
-          type: string
-          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if either email or an externalIdentifier is not provided.
-          example: '+13115552368'
-        email:
-          type: string
-          description: Email of the user associated with the action. This field is required if either phone or an externalIdentifier is not provided.
-          example: test@gmail.com
-        externalIdentifiers:
-          $ref: '#/components/schemas/ExternalIdentifiers'
-      additionalProperties: false
-      minProperties: 1
-    PurchaseRequest:
-      type: object
-      properties:
-        items:
-          type: array
-          description: List of items purchased.
-          items:
-            $ref: '#/components/schemas/ProductRequest'
-        orderId:
-          type: string
-        salesChannel:
-          $ref: '#/components/schemas/SalesChannel'
-        occurredAt:
-          type: string
-          format: date-time
-          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
-
-            '
-          example: 2021-03-30T14:38:29+0000
-        user:
-          $ref: '#/components/schemas/EventUser'
-      required:
-      - items
-      - user
     ExternalIdentifiers:
       type: object
       description: 'clientUserId or another custom identifier.  This field is required if either phone or email is not provided.
@@ -232,26 +208,6 @@ components:
           default: USD
       required:
       - value
-    ProductViewRequest:
-      type: object
-      properties:
-        items:
-          type: array
-          description: List of items viewed.
-          items:
-            $ref: '#/components/schemas/ProductRequest'
-        occurredAt:
-          type: string
-          format: date-time
-          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
-
-            '
-          example: 2021-03-30T14:38:29+0000
-        user:
-          $ref: '#/components/schemas/EventUser'
-      required:
-      - items
-      - user
     ProductRequest:
       type: object
       properties:
@@ -296,15 +252,59 @@ components:
       - productId
       - productVariantId
       - price
+    EventUser:
+      type: object
+      description: 'User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
+
+        Phone, email, or an external identifier (clientUserId or another custom identifier) are required
+
+        '
+      properties:
+        phone:
+          type: string
+          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if either email or an externalIdentifier is not provided.
+          example: '+13115552368'
+        email:
+          type: string
+          description: Email of the user associated with the action. This field is required if either phone or an externalIdentifier is not provided.
+          example: test@gmail.com
+        externalIdentifiers:
+          $ref: '#/components/schemas/ExternalIdentifiers'
+      additionalProperties: false
+      minProperties: 1
+    PurchaseRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          description: List of items purchased.
+          items:
+            $ref: '#/components/schemas/ProductRequest'
+        orderId:
+          type: string
+        salesChannel:
+          $ref: '#/components/schemas/SalesChannel'
+        occurredAt:
+          type: string
+          format: date-time
+          description: 'Timestamp of when the action occurred in [ISO 8601 format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#date.and.time.format.examples). If the timestamp is older than 12 hours, it will not trigger any relevant journeys. If no timestamp is provided, it is assumed the event occurred when the endpoint is called.
+
+            '
+          example: 2021-03-30T14:38:29+0000
+        user:
+          $ref: '#/components/schemas/EventUser'
+      required:
+      - items
+      - user
   responses:
     TooManyRequests:
       description: The user has sent too many requests in a given amount of time
+    NotFound:
+      description: The specified resource was not found
     AccessDenied:
       description: Access Denied
     InternalError:
       description: Internal Server Error
-    NotFound:
-      description: The specified resource was not found
     InvalidParameter:
       description: Invalid parameter in request query or body
     Unauthorized:

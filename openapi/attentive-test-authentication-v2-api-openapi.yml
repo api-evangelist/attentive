@@ -45,12 +45,12 @@ components:
   responses:
     TooManyRequests:
       description: The user has sent too many requests in a given amount of time
+    NotFound:
+      description: The specified resource was not found
     AccessDenied:
       description: Access Denied
     InternalError:
       description: Internal Server Error
-    NotFound:
-      description: The specified resource was not found
     InvalidParameter:
       description: Invalid parameter in request query or body
     Unauthorized:

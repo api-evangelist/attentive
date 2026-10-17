@@ -475,20 +475,47 @@ paths:
         '500':
           description: Internal server error
 components:
-  responses:
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
-    AccessDenied:
-      description: Access Denied
-    InternalError:
-      description: Internal Server Error
-    NotFound:
-      description: The specified resource was not found
-    InvalidParameter:
-      description: Invalid parameter in request query or body
-    Unauthorized:
-      description: Unauthorized
   schemas:
+    PatchSegmentRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the segment. If provided, cannot be empty or whitespace only and must be at most 240 characters. Leading and trailing whitespace will be trimmed. At least one field (name or description) must be provided for PATCH.
+          example: Loyalty Gold Members Updated
+          minLength: 1
+          maxLength: 240
+        description:
+          type: string
+          description: The description of the segment. If provided, cannot be empty or whitespace only, must be at least 2 characters, and at most 500 characters. Leading and trailing whitespace will be trimmed. At least one field (name or description) must be provided for PATCH.
+          example: Updated description
+          minLength: 2
+          maxLength: 500
+    SegmentResponse:
+      type: object
+      properties:
+        externalId:
+          type: string
+          description: The external segment ID (client-facing identifier)
+          example: loyalty_gold_2025
+        name:
+          type: string
+          description: The name of the segment
+          example: Loyalty Gold Members
+        description:
+          type: string
+          description: The description of the segment
+          example: Customers with gold loyalty status
+        created:
+          type: string
+          format: date-time
+          description: When the segment was created (ISO 8601 format)
+          example: '2025-01-30T12:00:00Z'
+        updated:
+          type: string
+          format: date-time
+          description: When the segment was last updated (ISO 8601 format)
+          example: '2025-01-30T12:00:00Z'
     ListSegmentsResponse:
       type: object
       properties:
@@ -506,6 +533,74 @@ components:
           type: boolean
           description: Whether there are more results available
           example: false
+    CreateSegmentResponse:
+      type: object
+      properties:
+        externalId:
+          type: string
+          description: The external segment ID (client-facing identifier)
+          example: loyalty_gold_2025
+        name:
+          type: string
+          description: The name of the segment
+          example: Loyalty Gold Members
+        description:
+          type: string
+          description: The description of the segment
+          example: Customers with gold loyalty status
+    CreateSegmentRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The name of the segment. Cannot be empty or whitespace only. Leading and trailing whitespace will be trimmed.
+          example: Loyalty Gold Members
+          minLength: 1
+          maxLength: 240
+        description:
+          type: string
+          description: Optional description of the segment. If not provided, defaults to "Manual Segment Upload Public API V2". When provided, cannot be empty or whitespace only and must be at least 2 characters. Leading and trailing whitespace will be trimmed.
+          example: Customers with gold loyalty status
+          minLength: 2
+          maxLength: 500
+        externalId:
+          type: string
+          description: Auto generated if not supplied. Optional externalId set on the segment. Cannot be empty or whitespace only. Leading and trailing whitespace will be trimmed.
+          example: SEG_abc123def456
+          minLength: 1
+          maxLength: 255
+    SegmentMembers:
+      type: object
+      required:
+      - externalId
+      - members
+      properties:
+        externalId:
+          type: string
+          description: 'The external ID of the segment. This is the client-provided unique identifier for the segment, as defined when creating the segment via the Segment API.
+
+            '
+          example: loyalty_gold_2025
+        members:
+          type: array
+          description: 'Array of segment members to add or remove. Each member must have at least one identifier (email, phone, or clientUserId). Minimum 1 member, maximum 10,000 members per request.
+
+            '
+          minItems: 1
+          maxItems: 10000
+          items:
+            $ref: '#/components/schemas/SegmentMember'
+      example:
+        externalId: loyalty_gold_2025
+        members:
+        - email: customer1@example.com
+          phone: '+14155551234'
+        - email: customer2@example.com
+          clientUserId: user-abc-123
+        - phone: '+14155555678'
+          clientUserId: user-xyz-789
     SegmentMember:
       type: object
       description: 'A segment member identified by one or more of: email, phone, or clientUserId. At least one identifier must be provided. Multiple identifiers can be provided to increase matching accuracy.
@@ -545,61 +640,6 @@ components:
         email: loyalty.member@example.com
         phone: '+14155551234'
         clientUserId: cust-789-xyz
-    SegmentResponse:
-      type: object
-      properties:
-        externalId:
-          type: string
-          description: The external segment ID (client-facing identifier)
-          example: loyalty_gold_2025
-        name:
-          type: string
-          description: The name of the segment
-          example: Loyalty Gold Members
-        description:
-          type: string
-          description: The description of the segment
-          example: Customers with gold loyalty status
-        created:
-          type: string
-          format: date-time
-          description: When the segment was created (ISO 8601 format)
-          example: '2025-01-30T12:00:00Z'
-        updated:
-          type: string
-          format: date-time
-          description: When the segment was last updated (ISO 8601 format)
-          example: '2025-01-30T12:00:00Z'
-    SegmentMembers:
-      type: object
-      required:
-      - externalId
-      - members
-      properties:
-        externalId:
-          type: string
-          description: 'The external ID of the segment. This is the client-provided unique identifier for the segment, as defined when creating the segment via the Segment API.
-
-            '
-          example: loyalty_gold_2025
-        members:
-          type: array
-          description: 'Array of segment members to add or remove. Each member must have at least one identifier (email, phone, or clientUserId). Minimum 1 member, maximum 10,000 members per request.
-
-            '
-          minItems: 1
-          maxItems: 10000
-          items:
-            $ref: '#/components/schemas/SegmentMember'
-      example:
-        externalId: loyalty_gold_2025
-        members:
-        - email: customer1@example.com
-          phone: '+14155551234'
-        - email: customer2@example.com
-          clientUserId: user-abc-123
-        - phone: '+14155555678'
-          clientUserId: user-xyz-789
     BulkSuccessResponse:
       type: object
       properties:
@@ -613,59 +653,19 @@ components:
           description: 'A unique identifier representing the submitted batch job. Use this ID to query the job''s status, retrieve results, or diagnose any errors related to the job. This ID is returned upon successful job submission and required for all follow-up actions related to the batch.
 
             '
-    CreateSegmentRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: The name of the segment. Cannot be empty or whitespace only. Leading and trailing whitespace will be trimmed.
-          example: Loyalty Gold Members
-          minLength: 1
-          maxLength: 240
-        description:
-          type: string
-          description: Optional description of the segment. If not provided, defaults to "Manual Segment Upload Public API V2". When provided, cannot be empty or whitespace only and must be at least 2 characters. Leading and trailing whitespace will be trimmed.
-          example: Customers with gold loyalty status
-          minLength: 2
-          maxLength: 500
-        externalId:
-          type: string
-          description: Auto generated if not supplied. Optional externalId set on the segment. Cannot be empty or whitespace only. Leading and trailing whitespace will be trimmed.
-          example: SEG_abc123def456
-          minLength: 1
-          maxLength: 255
-    PatchSegmentRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the segment. If provided, cannot be empty or whitespace only and must be at most 240 characters. Leading and trailing whitespace will be trimmed. At least one field (name or description) must be provided for PATCH.
-          example: Loyalty Gold Members Updated
-          minLength: 1
-          maxLength: 240
-        description:
-          type: string
-          description: The description of the segment. If provided, cannot be empty or whitespace only, must be at least 2 characters, and at most 500 characters. Leading and trailing whitespace will be trimmed. At least one field (name or description) must be provided for PATCH.
-          example: Updated description
-          minLength: 2
-          maxLength: 500
-    CreateSegmentResponse:
-      type: object
-      properties:
-        externalId:
-          type: string
-          description: The external segment ID (client-facing identifier)
-          example: loyalty_gold_2025
-        name:
-          type: string
-          description: The name of the segment
-          example: Loyalty Gold Members
-        description:
-          type: string
-          description: The description of the segment
-          example: Customers with gold loyalty status
+  responses:
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    NotFound:
+      description: The specified resource was not found
+    AccessDenied:
+      description: Access Denied
+    InternalError:
+      description: Internal Server Error
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
   securitySchemes:
     bearerAuth:
       type: http

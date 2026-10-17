@@ -217,17 +217,47 @@ components:
   responses:
     TooManyRequests:
       description: The user has sent too many requests in a given amount of time
+    NotFound:
+      description: The specified resource was not found
     AccessDenied:
       description: Access Denied
     InternalError:
       description: Internal Server Error
-    NotFound:
-      description: The specified resource was not found
     InvalidParameter:
       description: Invalid parameter in request query or body
     Unauthorized:
       description: Unauthorized
   schemas:
+    SegmentMembers:
+      type: object
+      required:
+      - externalId
+      - members
+      properties:
+        externalId:
+          type: string
+          description: 'The external ID of the segment. This is the client-provided unique identifier for the segment, as defined when creating the segment via the Segment API.
+
+            '
+          example: loyalty_gold_2025
+        members:
+          type: array
+          description: 'Array of segment members to add or remove. Each member must have at least one identifier (email, phone, or clientUserId). Minimum 1 member, maximum 10,000 members per request.
+
+            '
+          minItems: 1
+          maxItems: 10000
+          items:
+            $ref: '#/components/schemas/SegmentMember'
+      example:
+        externalId: loyalty_gold_2025
+        members:
+        - email: customer1@example.com
+          phone: '+14155551234'
+        - email: customer2@example.com
+          clientUserId: user-abc-123
+        - phone: '+14155555678'
+          clientUserId: user-xyz-789
     SegmentMember:
       type: object
       description: 'A segment member identified by one or more of: email, phone, or clientUserId. At least one identifier must be provided. Multiple identifiers can be provided to increase matching accuracy.
@@ -267,36 +297,6 @@ components:
         email: loyalty.member@example.com
         phone: '+14155551234'
         clientUserId: cust-789-xyz
-    SegmentMembers:
-      type: object
-      required:
-      - externalId
-      - members
-      properties:
-        externalId:
-          type: string
-          description: 'The external ID of the segment. This is the client-provided unique identifier for the segment, as defined when creating the segment via the Segment API.
-
-            '
-          example: loyalty_gold_2025
-        members:
-          type: array
-          description: 'Array of segment members to add or remove. Each member must have at least one identifier (email, phone, or clientUserId). Minimum 1 member, maximum 10,000 members per request.
-
-            '
-          minItems: 1
-          maxItems: 10000
-          items:
-            $ref: '#/components/schemas/SegmentMember'
-      example:
-        externalId: loyalty_gold_2025
-        members:
-        - email: customer1@example.com
-          phone: '+14155551234'
-        - email: customer2@example.com
-          clientUserId: user-abc-123
-        - phone: '+14155555678'
-          clientUserId: user-xyz-789
     BulkSuccessResponse:
       type: object
       properties:

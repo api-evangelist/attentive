@@ -176,6 +176,38 @@ paths:
           $ref: '#/components/responses/InternalError'
 components:
   schemas:
+    GetWebhooksResponseDto:
+      type: object
+      properties:
+        webhooks:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetWebhookResponseDto'
+    CreateWebhookResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the installed webhook
+          example: MjU6Q29tcGFueUFwcGxpY2F0aW9uV2ViaG9vazIy
+        url:
+          type: string
+          description: The destination url of the webhook
+          example: https://example.com/webhooks
+        events:
+          type: array
+          items:
+            type: string
+          description: The list of events this webhook is subscribed to
+          example:
+          - sms.sent
+          - phone.subscribed
+        type:
+          type: string
+          description: The type of webhook; can be either `INSTALLED` or `CREATOR`
+        disabledAt:
+          type: string
+          description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
     UpdateWebhookRequestDto:
       type: object
       properties:
@@ -209,63 +241,6 @@ components:
           example:
           - sms.sent
           - phone.subscribed
-    GetWebhooksResponseDto:
-      type: object
-      properties:
-        webhooks:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetWebhookResponseDto'
-    UpdateWebhookResponseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The id of the installed webhook
-          example: MjU6Q29tcGFueUFwcGxpY2F0aW9uV2ViaG9vazIy
-        url:
-          type: string
-          description: The destination url of the webhook
-          example: https://example.com/webhooks
-        events:
-          type: array
-          items:
-            type: string
-          description: The list of events this webhook is subscribed to
-          example:
-          - sms.sent
-          - phone.subscribed
-        type:
-          type: string
-          description: The type of webhook; can be either `INSTALLED` or `CREATOR`
-        disabledAt:
-          type: string
-          description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
-    CreateWebhookResponseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The id of the installed webhook
-          example: MjU6Q29tcGFueUFwcGxpY2F0aW9uV2ViaG9vazIy
-        url:
-          type: string
-          description: The destination url of the webhook
-          example: https://example.com/webhooks
-        events:
-          type: array
-          items:
-            type: string
-          description: The list of events this webhook is subscribed to
-          example:
-          - sms.sent
-          - phone.subscribed
-        type:
-          type: string
-          description: The type of webhook; can be either `INSTALLED` or `CREATOR`
-        disabledAt:
-          type: string
-          description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
     GetWebhookResponseDto:
       type: object
       properties:
@@ -295,17 +270,42 @@ components:
         disabledAt:
           type: string
           description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
+    UpdateWebhookResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the installed webhook
+          example: MjU6Q29tcGFueUFwcGxpY2F0aW9uV2ViaG9vazIy
+        url:
+          type: string
+          description: The destination url of the webhook
+          example: https://example.com/webhooks
+        events:
+          type: array
+          items:
+            type: string
+          description: The list of events this webhook is subscribed to
+          example:
+          - sms.sent
+          - phone.subscribed
+        type:
+          type: string
+          description: The type of webhook; can be either `INSTALLED` or `CREATOR`
+        disabledAt:
+          type: string
+          description: (optional) Date (YYYY-MM-DD hh:mm:ss) of when the webhook was deleted if it was deleted
   responses:
+    NotFound:
+      description: The specified resource was not found
     AccessDenied:
       description: Access Denied
     InternalError:
       description: Internal Server Error
-    Unauthorized:
-      description: Unauthorized
-    NotFound:
-      description: The specified resource was not found
     InvalidParameter:
       description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
   securitySchemes:
     bearerAuth:
       type: http

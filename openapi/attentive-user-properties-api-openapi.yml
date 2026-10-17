@@ -60,20 +60,23 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
 components:
-  responses:
-    TooManyRequests:
-      description: The user has sent too many requests in a given amount of time
-    AccessDenied:
-      description: Access Denied
-    InternalError:
-      description: Internal Server Error
-    NotFound:
-      description: The specified resource was not found
-    InvalidParameter:
-      description: Invalid parameter in request query or body
-    Unauthorized:
-      description: Unauthorized
   schemas:
+    Success:
+      type: object
+      description: 'A successful response.
+
+        '
+      properties:
+        success:
+          type: boolean
+          description: 'Indicates whether the request was successful.
+
+            '
+        message:
+          type: string
+          description: 'A message with the result of the request.
+
+            '
     CustomIdentifier:
       type: object
       description: 'An object containing custom identifiers to associate with an incoming user
@@ -272,22 +275,19 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/CustomIdentifier'
-    Success:
-      type: object
-      description: 'A successful response.
-
-        '
-      properties:
-        success:
-          type: boolean
-          description: 'Indicates whether the request was successful.
-
-            '
-        message:
-          type: string
-          description: 'A message with the result of the request.
-
-            '
+  responses:
+    TooManyRequests:
+      description: The user has sent too many requests in a given amount of time
+    NotFound:
+      description: The specified resource was not found
+    AccessDenied:
+      description: Access Denied
+    InternalError:
+      description: Internal Server Error
+    InvalidParameter:
+      description: Invalid parameter in request query or body
+    Unauthorized:
+      description: Unauthorized
   securitySchemes:
     bearerAuth:
       type: http

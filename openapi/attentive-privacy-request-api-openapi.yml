@@ -109,21 +109,15 @@ components:
   responses:
     TooManyRequests:
       description: The user has sent too many requests in a given amount of time
+    NotFound:
+      description: The specified resource was not found
     AccessDenied:
       description: Access Denied
     InternalError:
       description: Internal Server Error
-    NotFound:
-      description: The specified resource was not found
     Unauthorized:
       description: Unauthorized
   schemas:
-    PrivacyRequestErrorDto:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error Message
     PrivacyRequestAddDeleteEventDto:
       type: object
       properties:
@@ -169,6 +163,12 @@ components:
         processingEndDateTime:
           type: string
           description: Timestamp of when processing of the request completed.
+    PrivacyRequestErrorDto:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error Message
   securitySchemes:
     bearerAuth:
       type: http

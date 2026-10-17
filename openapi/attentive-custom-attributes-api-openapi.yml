@@ -106,57 +106,17 @@ components:
   responses:
     TooManyRequests:
       description: The user has sent too many requests in a given amount of time
+    NotFound:
+      description: The specified resource was not found
     AccessDenied:
       description: Access Denied
     InternalError:
       description: Internal Server Error
-    NotFound:
-      description: The specified resource was not found
     InvalidParameter:
       description: Invalid parameter in request query or body
     Unauthorized:
       description: Unauthorized
   schemas:
-    EventUser:
-      type: object
-      description: 'User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
-
-        Phone, email, or an external identifier (clientUserId or another custom identifier) are required
-
-        '
-      properties:
-        phone:
-          type: string
-          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if either email or an externalIdentifier is not provided.
-          example: '+13115552368'
-        email:
-          type: string
-          description: Email of the user associated with the action. This field is required if either phone or an externalIdentifier is not provided.
-          example: test@gmail.com
-        externalIdentifiers:
-          $ref: '#/components/schemas/ExternalIdentifiers'
-      additionalProperties: false
-      minProperties: 1
-    CustomAttributesRequest:
-      type: object
-      properties:
-        properties:
-          type: object
-          description: 'Any metadata associated with the attribute. Object keys are expected to be strings. Object values can be any type. The key will be assigned a type corresponding to the type seen of the first value. For example, if ''Age'' is passed with the first value of ''24'', ''Age'' will be typed as a ''Number''. There is no need to pass strings in double quotes. Both object keys and object values are case sensitive. "Favorite color" and "Favorite Color" would be considered different custom attributes.
-
-            '
-          example:
-            age: '24'
-            birthday: '1986-11-16'
-            sign up: '2021-04-23T16:04:33Z'
-            favorite team: Minnesota Vikings
-            Gift card balance: '50.89'
-            VIP: 'TRUE'
-        user:
-          $ref: '#/components/schemas/EventUser'
-      required:
-      - properties
-      - user
     ExternalIdentifiers:
       type: object
       description: 'clientUserId or another custom identifier.  This field is required if either phone or email is not provided.
@@ -180,6 +140,46 @@ components:
                 type: string
               value:
                 type: string
+    CustomAttributesRequest:
+      type: object
+      properties:
+        properties:
+          type: object
+          description: 'Any metadata associated with the attribute. Object keys are expected to be strings. Object values can be any type. The key will be assigned a type corresponding to the type seen of the first value. For example, if ''Age'' is passed with the first value of ''24'', ''Age'' will be typed as a ''Number''. There is no need to pass strings in double quotes. Both object keys and object values are case sensitive. "Favorite color" and "Favorite Color" would be considered different custom attributes.
+
+            '
+          example:
+            age: '24'
+            birthday: '1986-11-16'
+            sign up: '2021-04-23T16:04:33Z'
+            favorite team: Minnesota Vikings
+            Gift card balance: '50.89'
+            VIP: 'TRUE'
+        user:
+          $ref: '#/components/schemas/EventUser'
+      required:
+      - properties
+      - user
+    EventUser:
+      type: object
+      description: 'User associated with the action. Note that this is a visitor to the site and does not need to be actively subscribed to Attentive.
+
+        Phone, email, or an external identifier (clientUserId or another custom identifier) are required
+
+        '
+      properties:
+        phone:
+          type: string
+          description: Phone number of the user associated with the action. [E.164 format](https://en.wikipedia.org/wiki/E.164) is required. This field is required if either email or an externalIdentifier is not provided.
+          example: '+13115552368'
+        email:
+          type: string
+          description: Email of the user associated with the action. This field is required if either phone or an externalIdentifier is not provided.
+          example: test@gmail.com
+        externalIdentifiers:
+          $ref: '#/components/schemas/ExternalIdentifiers'
+      additionalProperties: false
+      minProperties: 1
     GetCustomAttributesResponse:
       type: array
       items:
