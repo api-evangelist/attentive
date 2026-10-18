@@ -39,5 +39,5 @@
     - connectors/applications/attentive
     vendor_link: https://www.attentive.com/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
