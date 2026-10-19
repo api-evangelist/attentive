@@ -6,12 +6,19 @@ source:
 - https://composio.dev/toolkits/attentive
 - https://monid.ai/tools/attentive
 checked:
+- https://api.nuget.org/v3
 - https://composio.dev/toolkits/attentive
+- https://crates.io/api/v1
 - https://fivetran.com/docs-sitemap.xml
 - https://fivetran.com/docs/connectors/partner-built-program
 - https://hightouch.com/docs/destinations/attentive
 - https://monid.ai/tools/attentive
 - https://n8n.io/integrations/attentive/
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 - https://zapier.com/apps/attentive/integrations
 summary: null
 marketplace_apps: []
@@ -69,5 +76,65 @@ edges:
     vendor_link: https://www.attentive.com/
     builder: Fivetran
   detected_by: sweep-data-integration.py
+  first_seen: '2026-10-18'
+- partner_name: Maven Central
+  partner: maven-central
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Java/JVM)
+  evidence: https://central.sonatype.com/artifact/com.attentive/attentive-android-sdk
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: Maven Central (public registry JSON)
+    spec_file: null
+    language: Java/JVM
+    packages:
+    - name: com.attentive:attentive-android-sdk
+      version: 2.3.3
+      released: '2026-10-16'
+      released_field: lastUpdated
+      lapsed: false
+      page: https://central.sonatype.com/artifact/com.attentive/attentive-android-sdk
+      repo_leg: github-org:attentive-mobile
+      publisher_leg: groupId:attentive.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@attentive-mobile/attentive-react-native-sdk
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@attentive-mobile/attentive-react-native-sdk'
+      version: 2.2.0
+      released: '2026-10-02'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@attentive-mobile/attentive-react-native-sdk
+      repo_leg: github-org:attentive-mobile
+      publisher_leg: org:attentive-mobile
+      matched_by: github-org
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
   first_seen: '2026-10-18'
 templates: []
