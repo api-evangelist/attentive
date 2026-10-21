@@ -116,3 +116,16 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: attentive-salesforce-commerce-cloud-own
+  label: Salesforce Commerce Cloud (own)
+  partner: salesforce-commerce-cloud
+  partner_name: Salesforce Commerce Cloud (own)
+  category: eCommerce, marketing, marketingAutomation
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FR4zUUAT
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null

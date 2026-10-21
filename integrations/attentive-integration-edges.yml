@@ -21,6 +21,7 @@ checked:
 - https://rubygems.org/api/v1
 - https://zapier.com/apps/attentive/integrations
 - zendesk/integrations/zendesk-integration-edges.yml
+- salesforce-commerce-cloud/integrations/salesforce-commerce-cloud-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
@@ -155,4 +156,22 @@ edges:
   detected: '2026-10-20'
   detected_by: mirror-platform-listings.py
   category: Messaging
+- partner_name: Salesforce Commerce Cloud (own)
+  partner: salesforce-commerce-cloud
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FR4zUUAT
+  mirror_of: salesforce-commerce-cloud/integrations/salesforce-commerce-cloud-integration-edges.yml
+  apps:
+  - Attentive SMS for Marketing Cloud
+  - Attentive Cartridge for Salesforce B2C Commerce
+  listing_count: 2
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: eCommerce, marketing, marketingAutomation
 templates: []
