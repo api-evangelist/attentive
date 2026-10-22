@@ -30,6 +30,7 @@ checked:
 - https://slack.com/marketplace
 - salesforce-marketing-cloud/integrations/salesforce-marketing-cloud-integration-edges.yml
 - salesforce/integrations/salesforce-integration-edges.yml
+- adobe-commerce/integrations/adobe-commerce-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
@@ -262,4 +263,21 @@ edges:
   detected: '2026-10-21'
   detected_by: mirror-platform-listings.py
   category: eCommerce
+- partner_name: Adobe Commerce (own)
+  partner: adobe-commerce
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://commercemarketplace.adobe.com/attentivemobile-magento2.html
+  mirror_of: adobe-commerce/integrations/adobe-commerce-integration-edges.yml
+  apps:
+  - Attentive SMS Marketing
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Adobe Commerce Marketplace extension
 templates: []
